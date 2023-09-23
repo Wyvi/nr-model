@@ -16,8 +16,8 @@ for reference.
 See the `examples/model.yaml` file for a skeleton of a repository 
 which uses nr metadata document model. An even easier way is to use the
 [nrp](https://narodni-repozitar.github.io/developer-docs/docs/technology/invenio/nrp-toolchain/) 
-command to generate a documents-compatible repository. See the same pages to get help
-about the model contents.
+command to generate a documents- or data- compatible repository. 
+See the same pages to get help about the model contents.
 
 ## Branches
 
