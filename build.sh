@@ -83,7 +83,7 @@ test_builder_plugin() {
   cd "$base_dir/packages/oarepo-model-builder-nr"
 
   create_builder_test_venv
-  "$MODEL_BUILDER_TEST_VENV"/bin/oarepo-compile-model --output-directory tests/model tests/model.yaml
+  "$MODEL_BUILDER_TEST_VENV"/bin/oarepo-compile-model --output-directory tests/model ../../examples/model.yaml
 }
 
 #endregion
