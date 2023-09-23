@@ -51,4 +51,4 @@ and update the content of the `version` file to reflect the new version as
 builds correctly. 
 
 Push your changes to GitHub, then mark the branch as the default branch.
-Then create a new GitHub release.
+Finally, create a new GitHub release.
