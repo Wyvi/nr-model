@@ -1,0 +1,47 @@
+# Copyright (c) 2022, 2023 NTK, CESNET
+#
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
+record:
+  use: "nr-documents#DocumentModel"
+  module: 
+    qualified: nr_metadata.documents
+plugins:
+  builder:
+    disable: 
+    - script_sample_data
+    - invenio_cli_setup_cfg
+    - invenio_ext_setup_cfg
+    - invenio_record_jsonschemas_setup_cfg
+    - invenio_record_metadata_alembic_setup_cfg
+    - invenio_record_metadata_models_setup_cfg
+    - invenio_record_resource_setup_cfg
+    - invenio_record_search_setup_cfg
+    - invenio_i18n
+    - invenio_i18n_setup_cfg
+    - invenio_layout_setup_cfg
+    - ui-layout
+    - invenio_tests_conftest
+    - oarepo_model_builder_setup_cfg
+    - invenio_tests_resource
+    - invenio_tests_service
+    - test_utils
+
+settings:
+  i18n-languages: ['cs', 'en']
+  supported-langs: 
+    cs: 
+      text: 
+        analyzer: czech
+      # sort: 
+      #   type: icu_collation_keyword
+      keyword: 
+        type: keyword
+    en: 
+      text: {}
+      # analyzer: en        
+      # sort: 
+      #   type: icu_collation_keyword
+      keyword: 
+        type: keyword

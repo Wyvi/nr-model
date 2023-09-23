@@ -1,0 +1,21 @@
+record:
+  module:
+    qualified: test_rec
+  extend: nr-documents#DocumentModel
+plugins:
+  builder:
+    disable:
+    - script_sample_data
+runtime-dependencies:
+  nr-metadata: 2.0.0
+  nr-vocabularies: 1.0.0
+settings:
+  i18n-languages:
+  - cs
+  - en
+  supported-langs:
+    cs:
+      text:
+        analyzer: czech
+    en:
+      text: {}
