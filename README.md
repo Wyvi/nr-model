@@ -2,8 +2,8 @@
 
 This github project generates:
 
-    * `nr-metadata` - runtime support containing marshmallow, serializers, ... for NR metadata (documents and data)
-    * `oarepo-model-builder-nr` - a plugin for oarepo-model-builder to generate 
+* `nr-metadata` - runtime support containing marshmallow, serializers, ... for NR metadata (documents and data)
+* `oarepo-model-builder-nr` - a plugin for oarepo-model-builder to generate 
 
 ## Usage
 
