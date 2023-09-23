@@ -36,11 +36,17 @@ run `build.sh`, push to the branch and create a new github release.
 
 ## Updating model
 
-To update model version, at first create a new branch with name `aa.bb`, `aa.bb` meaning
-the new version of the model. Mark that branch a default inside github.
-The initial version is `2.0`, so a version with a minor
-change should be `2.1`, version with a major change is `3.0`.
+To update the model version, start by creating a new branch with the name 
+`aa.bb`, where `aa.bb` represents the new model version. 
 
-Then introduce your changes to files within the `model` directory and change
-the contents of `version` file to `aa.bb.0`. Finally run `build.sh` to make
-sure everything builds, push to github and run a new github release.
+Set this branch as the default branch on GitHub. 
+If the current version is `2.0` and your changes are minor, 
+the new version should be `2.1`, while major changes warrant 
+a version bump to `3.0`.
+
+Next, make your modifications to the files within the model directory, 
+and update the content of the `version` file to reflect the new version as 
+`aa.bb.0`. Afterward, execute the `build.sh` script to ensure that everything 
+builds correctly. 
+
+Push your changes to GitHub, and then create a new GitHub release.
