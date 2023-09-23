@@ -62,7 +62,7 @@ jobs:
           skip_existing: true
           user: __token__
           password: ${{ secrets.PYPI_PASSWORD }}
-          path: nr_metadata_dist
+          packages-dir: nr_metadata_dist
 
       - name: Publish omb-nr package
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
@@ -71,4 +71,4 @@ jobs:
           skip_existing: true
           user: __token__
           password: ${{ secrets.PYPI_PASSWORD }}
-          path: omb_nr_dist
+          packages-dir: omb_nr_dist
