@@ -5,6 +5,12 @@ This github project generates:
 * `nr-metadata` - runtime support containing marshmallow, serializers, ... for NR metadata (documents and data)
 * `oarepo-model-builder-nr` - a plugin for oarepo-model-builder to generate 
 
+## Incompatible changes
+
+None yet. If you introduce any incompatible changes (vs previous major version),
+enumerate them here and link the readme file from the previous major version
+for reference.
+
 ## Usage
 
 See the `examples/model.yaml` file for a skeleton of a repository 
