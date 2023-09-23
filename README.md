@@ -50,5 +50,5 @@ and update the content of the `version` file to reflect the new version as
 `aa.bb.0`. Afterward, execute the `build.sh` script to ensure that everything 
 builds correctly. 
 
-Push your changes to GitHub, and mark the branch as the default branch.
+Push your changes to GitHub, then mark the branch as the default branch.
 Then create a new GitHub release.
