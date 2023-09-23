@@ -310,21 +310,6 @@
             "extra-code": "",
             "generate": true
         },
-        "multilingual-dumper": {
-            "generate": true,
-            "module": "nr_metadata.common.records.multilingual_dumper",
-            "class": "nr_metadata.common.records.multilingual_dumper.MultilingualSearchDumper",
-            "base-classes": [
-                "MultilingualDumper"
-            ],
-            "extra-code": "",
-            "extensions": [],
-            "imports": [
-                {
-                    "import": "oarepo_runtime.i18n.dumper.MultilingualDumper"
-                }
-            ]
-        },
         "mapping": {
             "generate": true,
             "alias": "common",
@@ -346,6 +331,21 @@
             "imports": [
                 {
                     "import": "invenio_records_permissions.RecordPermissionPolicy"
+                }
+            ]
+        },
+        "multilingual-dumper": {
+            "generate": true,
+            "module": "nr_metadata.common.records.multilingual_dumper",
+            "class": "nr_metadata.common.records.multilingual_dumper.MultilingualSearchDumper",
+            "base-classes": [
+                "MultilingualDumper"
+            ],
+            "extra-code": "",
+            "extensions": [],
+            "imports": [
+                {
+                    "import": "oarepo_runtime.i18n.dumper.MultilingualDumper"
                 }
             ]
         },

@@ -310,21 +310,6 @@
             "extra-code": "",
             "generate": true
         },
-        "multilingual-dumper": {
-            "generate": true,
-            "module": "nr_metadata.documents.records.multilingual_dumper",
-            "class": "nr_metadata.documents.records.multilingual_dumper.MultilingualSearchDumper",
-            "base-classes": [
-                "MultilingualDumper"
-            ],
-            "extra-code": "",
-            "extensions": [],
-            "imports": [
-                {
-                    "import": "oarepo_runtime.i18n.dumper.MultilingualDumper"
-                }
-            ]
-        },
         "mapping": {
             "generate": true,
             "alias": "documents",
@@ -346,6 +331,21 @@
             "imports": [
                 {
                     "import": "invenio_records_permissions.RecordPermissionPolicy"
+                }
+            ]
+        },
+        "multilingual-dumper": {
+            "generate": true,
+            "module": "nr_metadata.documents.records.multilingual_dumper",
+            "class": "nr_metadata.documents.records.multilingual_dumper.MultilingualSearchDumper",
+            "base-classes": [
+                "MultilingualDumper"
+            ],
+            "extra-code": "",
+            "extensions": [],
+            "imports": [
+                {
+                    "import": "oarepo_runtime.i18n.dumper.MultilingualDumper"
                 }
             ]
         },
@@ -765,6 +765,18 @@
                                 "title": {
                                     "type": "i18nStr",
                                     "required": true,
+                                    "marshmallow": {
+                                        "read": false,
+                                        "write": false,
+                                        "class": null,
+                                        "field-class": "I18nStrField",
+                                        "imports": [
+                                            {
+                                                "import": "oarepo_runtime.i18n.schema.I18nStrField"
+                                            }
+                                        ],
+                                        "generate": false
+                                    },
                                     "ui": {
                                         "marshmallow": {
                                             "read": false,
@@ -778,18 +790,6 @@
                                             ]
                                         },
                                         "detail": "multilingual"
-                                    },
-                                    "marshmallow": {
-                                        "read": false,
-                                        "write": false,
-                                        "class": null,
-                                        "field-class": "I18nStrField",
-                                        "imports": [
-                                            {
-                                                "import": "oarepo_runtime.i18n.schema.I18nStrField"
-                                            }
-                                        ],
-                                        "generate": false
                                     },
                                     "sample": {
                                         "skip": false

@@ -45,6 +45,9 @@ a version bump to `3.0`.
 
 Set this branch as the default branch on GitHub. 
 
+Rename files inside the `model` directory to include the correct version
+and change the model version inside the `build.sh` script.
+
 Next, make your modifications to the files within the model directory, 
 and update the content of the `version` file to reflect the new version as 
 `aa.bb.0`. Afterward, execute the `build.sh` script to ensure that everything 

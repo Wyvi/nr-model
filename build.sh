@@ -29,6 +29,7 @@ MODEL_VERSION=2.0
 
 MODEL_BUILDER_VENV="$base_dir/.venv-builder"
 TEST_VENV="$base_dir/.venv-tests"
+MODEL_BUILDER_TEST_BUILDER_VENV="$base_dir/.venv-builder-tests-builder"
 MODEL_BUILDER_TEST_VENV="$base_dir/.venv-builder-tests"
 
 # for debugging, set this to the local package dir
@@ -82,8 +83,11 @@ create_builder_plugin() {
 test_builder_plugin() {
   cd "$base_dir/packages/oarepo-model-builder-nr"
 
+  create_builder_test_builder_venv
+  "$MODEL_BUILDER_TEST_BUILDER_VENV"/bin/oarepo-compile-model --output-directory tests/model ../../examples/model.yaml
+
   create_builder_test_venv
-  "$MODEL_BUILDER_TEST_VENV"/bin/oarepo-compile-model --output-directory tests/model ../../examples/model.yaml
+  "$MODEL_BUILDER_TEST_VENV"/bin/pytest tests/test_import.py
 }
 
 #endregion
@@ -112,20 +116,29 @@ create_metadata_test_venv() {
   "$TEST_VENV"/bin/pip install -e '.[tests]'
 }
 
+create_builder_test_builder_venv() {
+  if [ "$NO_CLEAR" == "--no-clear" ] ; then
+    decho "Not clearing builder's virtual environment"
+  else
+    create_virtual_environment "$MODEL_BUILDER_TEST_BUILDER_VENV"
+
+    install_package "$MODEL_BUILDER_TEST_BUILDER_VENV" oarepo-model-builder
+    install_package "$MODEL_BUILDER_TEST_BUILDER_VENV" oarepo-model-builder-vocabularies
+    install_package "$MODEL_BUILDER_TEST_BUILDER_VENV" oarepo-model-builder-ui
+    install_package "$MODEL_BUILDER_TEST_BUILDER_VENV" oarepo-model-builder-multilingual
+  fi
+  "$MODEL_BUILDER_TEST_BUILDER_VENV"/bin/pip install dist/oarepo_model_builder_nr*.whl
+}
+
 create_builder_test_venv() {
   if [ "$NO_CLEAR" == "--no-clear" ] ; then
     decho "Not clearing builder's virtual environment"
   else
     create_virtual_environment "$MODEL_BUILDER_TEST_VENV"
-
-    install_package "$MODEL_BUILDER_TEST_VENV" oarepo-model-builder
-    install_package "$MODEL_BUILDER_TEST_VENV" oarepo-model-builder-vocabularies
-    install_package "$MODEL_BUILDER_TEST_VENV" oarepo-model-builder-ui
-    install_package "$MODEL_BUILDER_TEST_VENV" oarepo-model-builder-multilingual
   fi
-  "$MODEL_BUILDER_TEST_VENV"/bin/pip install dist/oarepo_model_builder_nr*.whl
+  "$MODEL_BUILDER_TEST_VENV"/bin/pip install ../nr-metadata/dist/*.tar.gz
+  "$MODEL_BUILDER_TEST_VENV"/bin/pip install -e "tests/model[tests]"
 }
-
 
 create_virtual_environment() {
   decho "creating virtual environment $1"
@@ -167,10 +180,10 @@ decho() {
 
 # region main
 
-#compile_nr_metadata
-#test_nr_metadata
-#build_nr_metadata
-#create_builder_plugin
+compile_nr_metadata
+test_nr_metadata
+build_nr_metadata
+create_builder_plugin
 test_builder_plugin
 
 #endregion
