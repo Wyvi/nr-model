@@ -23,7 +23,10 @@ See the same pages to get help about the model contents.
 
 Branches are always named "aa.bb" and denote the version of the contained metadata schema.
 
-## Updating package version
+## Updating package
+
+Package needs to be updated whenever the version of oarepo-model-builder and 
+other builder plugins changes and influences the generated files.
 
 The package version is always in the form of `aa.bb.ccc`, where `aa.bb` is the version
 of the metadata schema and `ccc` is the version of the python package.
@@ -31,7 +34,7 @@ of the metadata schema and `ccc` is the version of the python package.
 To rebuild python packages, increase the version number in `version` file,
 run `build.sh`, push to the branch and create a new github release.
 
-## Updating model version
+## Updating model
 
 To update model version, at first create a new branch with name `aa.bb`, `aa.bb` meaning
 the new version of the model. Mark that branch a default inside github.
