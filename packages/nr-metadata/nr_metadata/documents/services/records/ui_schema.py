@@ -80,7 +80,7 @@ class AccessRightsUISchema(
     nr_metadata.common.services.records.ui_schema_datatypes.NRAccessRightsVocabularyUISchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -100,7 +100,7 @@ class AffiliationsItemUISchema(
     nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -129,7 +129,7 @@ class CountryUISchema(
     nr_metadata.common.services.records.ui_schema_datatypes.NRCountryVocabularyUISchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -170,7 +170,7 @@ class FunderUISchema(
     nr_metadata.common.services.records.ui_schema_datatypes.NRFunderVocabularyUISchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -211,7 +211,7 @@ class ItemRelationTypeUISchema(
     nr_metadata.common.services.records.ui_schema_datatypes.NRItemRelationTypeVocabularyUISchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -224,7 +224,7 @@ class ItemResourceTypeUISchema(
     nr_metadata.common.services.records.ui_schema_datatypes.NRResourceTypeVocabularyUISchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -237,7 +237,7 @@ class LanguagesItemUISchema(
     nr_metadata.common.services.records.ui_schema_datatypes.NRLanguageVocabularyUISchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -248,7 +248,7 @@ class LanguagesItemUISchema(
 
 class NRDegreeGrantorUISchema(ma.Schema):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -270,7 +270,7 @@ class RightsItemUISchema(
     nr_metadata.common.services.records.ui_schema_datatypes.NRLicenseVocabularyUISchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -283,7 +283,7 @@ class RoleUISchema(
     nr_metadata.common.services.records.ui_schema_datatypes.NRAuthorityRoleVocabularyUISchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -303,7 +303,7 @@ class SubjectCategoriesItemUISchema(
     nr_metadata.common.services.records.ui_schema_datatypes.NRSubjectCategoryVocabularyUISchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 

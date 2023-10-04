@@ -134,7 +134,7 @@ class NRRelatedItemCreatorUISchema(ma.Schema):
 
 class NRAccessRightsVocabularyUISchema(ma.Schema):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -145,7 +145,7 @@ class NRAccessRightsVocabularyUISchema(ma.Schema):
 
 class NRAffiliationVocabularyUISchema(ma.Schema):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -158,7 +158,7 @@ class NRAffiliationVocabularyUISchema(ma.Schema):
 
 class NRAuthorityRoleVocabularyUISchema(ma.Schema):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -169,7 +169,7 @@ class NRAuthorityRoleVocabularyUISchema(ma.Schema):
 
 class NRCountryVocabularyUISchema(ma.Schema):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -189,7 +189,7 @@ class NRExternalLocationUISchema(ma.Schema):
 
 class NRFunderVocabularyUISchema(ma.Schema):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -209,7 +209,7 @@ class NRGeoLocationPointUISchema(ma.Schema):
 
 class NRItemRelationTypeVocabularyUISchema(ma.Schema):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -220,7 +220,7 @@ class NRItemRelationTypeVocabularyUISchema(ma.Schema):
 
 class NRLanguageVocabularyUISchema(ma.Schema):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -231,7 +231,7 @@ class NRLanguageVocabularyUISchema(ma.Schema):
 
 class NRLicenseVocabularyUISchema(ma.Schema):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -242,7 +242,7 @@ class NRLicenseVocabularyUISchema(ma.Schema):
 
 class NRResourceTypeVocabularyUISchema(ma.Schema):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -262,7 +262,7 @@ class NRSeriesUISchema(ma.Schema):
 
 class NRSubjectCategoryVocabularyUISchema(ma.Schema):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
