@@ -80,7 +80,7 @@ class AccessRightsSchema(
     nr_metadata.common.services.records.schema_datatypes.NRAccessRightsVocabularySchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -100,7 +100,7 @@ class AffiliationsItemSchema(
     nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -129,7 +129,7 @@ class CountrySchema(
     nr_metadata.common.services.records.schema_datatypes.NRCountryVocabularySchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -170,7 +170,7 @@ class FunderSchema(
     nr_metadata.common.services.records.schema_datatypes.NRFunderVocabularySchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -211,7 +211,7 @@ class ItemRelationTypeSchema(
     nr_metadata.common.services.records.schema_datatypes.NRItemRelationTypeVocabularySchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -224,7 +224,7 @@ class ItemResourceTypeSchema(
     nr_metadata.common.services.records.schema_datatypes.NRResourceTypeVocabularySchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -237,7 +237,7 @@ class LanguagesItemSchema(
     nr_metadata.common.services.records.schema_datatypes.NRLanguageVocabularySchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -248,7 +248,7 @@ class LanguagesItemSchema(
 
 class NRDegreeGrantorSchema(ma.Schema):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -270,7 +270,7 @@ class RightsItemSchema(
     nr_metadata.common.services.records.schema_datatypes.NRLicenseVocabularySchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -283,7 +283,7 @@ class RoleSchema(
     nr_metadata.common.services.records.schema_datatypes.NRAuthorityRoleVocabularySchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 
@@ -303,7 +303,7 @@ class SubjectCategoriesItemSchema(
     nr_metadata.common.services.records.schema_datatypes.NRSubjectCategoryVocabularySchema
 ):
     class Meta:
-        unknown = ma.RAISE
+        unknown = ma.INCLUDE
 
     _id = ma.fields.String(data_key="id", attribute="id")
 

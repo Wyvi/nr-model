@@ -31,24 +31,33 @@ other builder plugins changes and influences the generated files.
 The package version is always in the form of `aa.bb.ccc`, where `aa.bb` is the version
 of the metadata schema and `ccc` is the version of the python package.
 
-To rebuild python packages, increase the version number in `version` file,
-run `build.sh`, push to the branch and create a new github release.
+To rebuild python packages:
+
+- [ ] Create a development branch (named after the issue inside linear or github issue)
+- [ ] Implement your changes
+- [ ] Increase the version number in `version` file
+- [ ] Run `build.sh` (note - this has to be run after modification to the `version` file)
+- [ ] Create a merge request to the `aa.bb` branch
+- [ ] Create a new github release.
 
 ## Updating model
 
-To update the model version, start by creating a new branch with the name 
-`aa.bb`, where `aa.bb` represents the new model version. 
+To update the model version, 
+- [ ] start by creating a new branch with the name `aa.bb`, where `aa.bb` represents the new model version. 
 
-For example, if the current version is `2.0` and your changes are minor, 
-the new version should be `2.1`, while major changes warrant 
-a version bump to `3.0`.
+    For example, if the current version is `2.0` and your changes are minor, 
+    the new version should be `2.1`, while major changes warrant 
+    a version bump to `3.0`.
 
-Set this branch as the default branch on GitHub. 
+- [ ] Set this branch as the default branch on GitHub. 
 
-Next, make your modifications to the files within the model directory, 
-and update the content of the `version` file to reflect the new version as 
-`aa.bb.0`. Afterward, execute the `build.sh` script to ensure that everything 
-builds correctly. 
+- [ ] Rename files inside the `model` directory to include the correct version
+- [ ] Change the model version inside the `build.sh` script
 
-Push your changes to GitHub, then mark the branch as the default branch.
-Finally, create a new GitHub release.
+- [ ] Make your modifications to the files within the model directory 
+- [ ] Update the content of the `version` file to reflect the new version as 
+`aa.bb.0`
+- [ ] Execute the `build.sh` script to ensure that everything builds correctly 
+- [ ] Push your changes to GitHub
+- [ ] Mark the branch as the default branch
+- [ ] Create a new GitHub release.

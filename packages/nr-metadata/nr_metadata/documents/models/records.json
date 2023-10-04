@@ -148,6 +148,7 @@
         "resource-config": {
             "generate": true,
             "base-url": "/nr-metadata-documents/",
+            "base-html-url": "/nr-metadata-documents/",
             "config-key": "DOCUMENTS_RECORD_RESOURCE_CONFIG",
             "module": "nr_metadata.documents.resources.records.config",
             "class": "nr_metadata.documents.resources.records.config.DocumentsResourceConfig",
@@ -529,6 +530,7 @@
                                 ],
                                 "read": false,
                                 "write": false,
+                                "unknown": "INCLUDE",
                                 "generate": true,
                                 "class": "nr_metadata.documents.services.records.ui_schema.AccessRightsUISchema"
                             },
@@ -547,6 +549,7 @@
                             ],
                             "read": false,
                             "write": false,
+                            "unknown": "INCLUDE",
                             "generate": true,
                             "class": "nr_metadata.documents.services.records.schema.AccessRightsSchema"
                         },
@@ -890,6 +893,7 @@
                                                 ],
                                                 "read": false,
                                                 "write": false,
+                                                "unknown": "INCLUDE",
                                                 "generate": true,
                                                 "class": "nr_metadata.documents.services.records.ui_schema.AffiliationsItemUISchema"
                                             },
@@ -908,6 +912,7 @@
                                             ],
                                             "read": false,
                                             "write": false,
+                                            "unknown": "INCLUDE",
                                             "generate": true,
                                             "class": "nr_metadata.documents.services.records.schema.AffiliationsItemSchema"
                                         },
@@ -1312,6 +1317,7 @@
                                             ],
                                             "read": false,
                                             "write": false,
+                                            "unknown": "INCLUDE",
                                             "generate": true,
                                             "class": "nr_metadata.documents.services.records.ui_schema.RoleUISchema"
                                         },
@@ -1330,6 +1336,7 @@
                                         ],
                                         "read": false,
                                         "write": false,
+                                        "unknown": "INCLUDE",
                                         "generate": true,
                                         "class": "nr_metadata.documents.services.records.schema.RoleSchema"
                                     },
@@ -1497,6 +1504,7 @@
                                                 ],
                                                 "read": false,
                                                 "write": false,
+                                                "unknown": "INCLUDE",
                                                 "generate": false,
                                                 "class": "nr_metadata.documents.services.records.ui_schema.AffiliationsItemUISchema"
                                             },
@@ -1515,6 +1523,7 @@
                                             ],
                                             "read": false,
                                             "write": false,
+                                            "unknown": "INCLUDE",
                                             "generate": false,
                                             "class": "nr_metadata.documents.services.records.schema.AffiliationsItemSchema"
                                         },
@@ -2051,6 +2060,7 @@
                                                     ],
                                                     "read": false,
                                                     "write": false,
+                                                    "unknown": "INCLUDE",
                                                     "generate": true,
                                                     "class": "nr_metadata.documents.services.records.ui_schema.CountryUISchema"
                                                 },
@@ -2069,6 +2079,7 @@
                                                 ],
                                                 "read": false,
                                                 "write": false,
+                                                "unknown": "INCLUDE",
                                                 "generate": true,
                                                 "class": "nr_metadata.documents.services.records.schema.CountrySchema"
                                             },
@@ -2355,6 +2366,7 @@
                                             ],
                                             "read": false,
                                             "write": false,
+                                            "unknown": "INCLUDE",
                                             "generate": true,
                                             "class": "nr_metadata.documents.services.records.ui_schema.FunderUISchema"
                                         },
@@ -2373,6 +2385,7 @@
                                         ],
                                         "read": false,
                                         "write": false,
+                                        "unknown": "INCLUDE",
                                         "generate": true,
                                         "class": "nr_metadata.documents.services.records.schema.FunderSchema"
                                     },
@@ -2686,6 +2699,7 @@
                                     ],
                                     "read": false,
                                     "write": false,
+                                    "unknown": "INCLUDE",
                                     "generate": true,
                                     "class": "nr_metadata.documents.services.records.ui_schema.LanguagesItemUISchema"
                                 },
@@ -2704,6 +2718,7 @@
                                 ],
                                 "read": false,
                                 "write": false,
+                                "unknown": "INCLUDE",
                                 "generate": true,
                                 "class": "nr_metadata.documents.services.records.schema.LanguagesItemSchema"
                             },
@@ -3120,6 +3135,7 @@
                                                             ],
                                                             "read": false,
                                                             "write": false,
+                                                            "unknown": "INCLUDE",
                                                             "generate": false,
                                                             "class": "nr_metadata.documents.services.records.ui_schema.AffiliationsItemUISchema"
                                                         },
@@ -3138,6 +3154,7 @@
                                                         ],
                                                         "read": false,
                                                         "write": false,
+                                                        "unknown": "INCLUDE",
                                                         "generate": false,
                                                         "class": "nr_metadata.documents.services.records.schema.AffiliationsItemSchema"
                                                     },
@@ -3542,6 +3559,7 @@
                                                         ],
                                                         "read": false,
                                                         "write": false,
+                                                        "unknown": "INCLUDE",
                                                         "generate": false,
                                                         "class": "nr_metadata.documents.services.records.ui_schema.RoleUISchema"
                                                     },
@@ -3560,6 +3578,7 @@
                                                     ],
                                                     "read": false,
                                                     "write": false,
+                                                    "unknown": "INCLUDE",
                                                     "generate": false,
                                                     "class": "nr_metadata.documents.services.records.schema.RoleSchema"
                                                 },
@@ -3722,6 +3741,7 @@
                                                             ],
                                                             "read": false,
                                                             "write": false,
+                                                            "unknown": "INCLUDE",
                                                             "generate": false,
                                                             "class": "nr_metadata.documents.services.records.ui_schema.AffiliationsItemUISchema"
                                                         },
@@ -3740,6 +3760,7 @@
                                                         ],
                                                         "read": false,
                                                         "write": false,
+                                                        "unknown": "INCLUDE",
                                                         "generate": false,
                                                         "class": "nr_metadata.documents.services.records.schema.AffiliationsItemSchema"
                                                     },
@@ -4275,6 +4296,7 @@
                                             ],
                                             "read": false,
                                             "write": false,
+                                            "unknown": "INCLUDE",
                                             "generate": true,
                                             "class": "nr_metadata.documents.services.records.ui_schema.ItemRelationTypeUISchema"
                                         },
@@ -4293,6 +4315,7 @@
                                         ],
                                         "read": false,
                                         "write": false,
+                                        "unknown": "INCLUDE",
                                         "generate": true,
                                         "class": "nr_metadata.documents.services.records.schema.ItemRelationTypeSchema"
                                     },
@@ -4413,6 +4436,7 @@
                                             ],
                                             "read": false,
                                             "write": false,
+                                            "unknown": "INCLUDE",
                                             "generate": true,
                                             "class": "nr_metadata.documents.services.records.ui_schema.ItemResourceTypeUISchema"
                                         },
@@ -4431,6 +4455,7 @@
                                         ],
                                         "read": false,
                                         "write": false,
+                                        "unknown": "INCLUDE",
                                         "generate": true,
                                         "class": "nr_metadata.documents.services.records.schema.ItemResourceTypeSchema"
                                     },
@@ -4639,6 +4664,7 @@
                                 ],
                                 "read": false,
                                 "write": false,
+                                "unknown": "INCLUDE",
                                 "generate": false,
                                 "class": "nr_metadata.documents.services.records.ui_schema.ItemResourceTypeUISchema"
                             },
@@ -4657,6 +4683,7 @@
                             ],
                             "read": false,
                             "write": false,
+                            "unknown": "INCLUDE",
                             "generate": false,
                             "class": "nr_metadata.documents.services.records.schema.ItemResourceTypeSchema"
                         },
@@ -4785,6 +4812,7 @@
                                     ],
                                     "read": false,
                                     "write": false,
+                                    "unknown": "INCLUDE",
                                     "generate": true,
                                     "class": "nr_metadata.documents.services.records.ui_schema.RightsItemUISchema"
                                 },
@@ -4803,6 +4831,7 @@
                                 ],
                                 "read": false,
                                 "write": false,
+                                "unknown": "INCLUDE",
                                 "generate": true,
                                 "class": "nr_metadata.documents.services.records.schema.RightsItemSchema"
                             },
@@ -5020,6 +5049,7 @@
                                     ],
                                     "read": false,
                                     "write": false,
+                                    "unknown": "INCLUDE",
                                     "generate": true,
                                     "class": "nr_metadata.documents.services.records.ui_schema.SubjectCategoriesItemUISchema"
                                 },
@@ -5038,6 +5068,7 @@
                                 ],
                                 "read": false,
                                 "write": false,
+                                "unknown": "INCLUDE",
                                 "generate": true,
                                 "class": "nr_metadata.documents.services.records.schema.SubjectCategoriesItemSchema"
                             },
@@ -5501,6 +5532,7 @@
                                     "ui": {
                                         "marshmallow": {
                                             "class": "nr_metadata.documents.services.records.ui_schema.NRDegreeGrantorUISchema",
+                                            "unknown": "INCLUDE",
                                             "generate": true
                                         },
                                         "detail": "nr_degree_grantor",
@@ -5508,6 +5540,7 @@
                                     },
                                     "marshmallow": {
                                         "class": "nr_metadata.documents.services.records.schema.NRDegreeGrantorSchema",
+                                        "unknown": "INCLUDE",
                                         "generate": true
                                     },
                                     "keys": [
