@@ -1,11 +1,12 @@
 import re
 from functools import cached_property
 
-from nr_metadata.documents import config as config
+from nr_metadata.documents import config
 
 
 class DocumentsExt:
     def __init__(self, app=None):
+
         if app:
             self.init_app(app)
 

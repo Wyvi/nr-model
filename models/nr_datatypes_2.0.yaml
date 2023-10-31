@@ -380,9 +380,7 @@ NRSubject:
       ui:
         detail: string
         marshmallow:
-          field: I18nStrUIField()
-          imports:
-            - import: oarepo_runtime.i18n.ui_schema.I18nStrUIField
+          field: "{{oarepo_runtime.i18n.ui_schema.I18nStrUIField}}()"
     valueURI:
       type: url
       label.cs: Definice klíčového slova

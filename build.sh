@@ -35,6 +35,9 @@ MODEL_BUILDER_TEST_VENV="$base_dir/.venv-builder-tests"
 # for debugging, set this to the local package dir
 NO_CLEAR="$1"
 
+OAREPO_VERSION=${OAREPO_VERSION:-11}
+OAREPO_VERSION_MAX=$((OAREPO_VERSION+1))
+
 # region commands
 
 compile_nr_metadata() {
@@ -83,6 +86,10 @@ create_builder_plugin() {
 test_builder_plugin() {
   cd "$base_dir/packages/oarepo-model-builder-nr"
 
+  if [ -d tests/model ] ; then
+    rm -rf tests/model
+  fi
+
   create_builder_test_builder_venv
   "$MODEL_BUILDER_TEST_BUILDER_VENV"/bin/oarepo-compile-model --output-directory tests/model ../../examples/model.yaml
 
@@ -113,6 +120,7 @@ create_metadata_test_venv() {
   else
     create_virtual_environment "$TEST_VENV"
   fi
+  "$TEST_VENV"/bin/pip install "oarepo>=$OAREPO_VERSION,<$OAREPO_VERSION_MAX"
   "$TEST_VENV"/bin/pip install -e '.[tests]'
 }
 
@@ -136,6 +144,7 @@ create_builder_test_venv() {
   else
     create_virtual_environment "$MODEL_BUILDER_TEST_VENV"
   fi
+  "$MODEL_BUILDER_TEST_VENV"/bin/pip install "oarepo>=$OAREPO_VERSION,<$OAREPO_VERSION_MAX"
   "$MODEL_BUILDER_TEST_VENV"/bin/pip install ../nr-metadata/dist/*.tar.gz
   "$MODEL_BUILDER_TEST_VENV"/bin/pip install -e "tests/model[tests]"
 }

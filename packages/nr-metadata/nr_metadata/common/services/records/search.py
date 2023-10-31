@@ -6,6 +6,8 @@ from . import facets
 class CommonSearchOptions(InvenioSearchOptions):
     """CommonRecord search options."""
 
+    facet_groups = {}
+
     facets = {
         "_schema": facets._schema,
         "created": facets.created,
@@ -165,7 +167,4 @@ class CommonSearchOptions(InvenioSearchOptions):
         "metadata_version": facets.metadata_version,
         "updated": facets.updated,
         **getattr(InvenioSearchOptions, "facets", {}),
-    }
-    sort_options = {
-        **InvenioSearchOptions.sort_options,
     }

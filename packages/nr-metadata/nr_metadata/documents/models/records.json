@@ -2,14 +2,10 @@
     "model": {
         "type": "model",
         "marshmallow": {
-            "imports": [
-                {
-                    "import": "oarepo_runtime.marshmallow.BaseRecordSchema"
-                }
-            ],
+            "imports": [],
             "class": "nr_metadata.documents.services.records.schema.NRDocumentRecordSchema",
             "base-classes": [
-                "BaseRecordSchema"
+                "oarepo_runtime.marshmallow.BaseRecordSchema"
             ],
             "generate": true,
             "module": "nr_metadata.documents.services.records.schema",
@@ -18,14 +14,10 @@
         "searchable": true,
         "ui": {
             "marshmallow": {
-                "imports": [
-                    {
-                        "import": "oarepo_runtime.ui.marshmallow.InvenioUISchema"
-                    }
-                ],
+                "imports": [],
                 "class": "nr_metadata.documents.services.records.ui_schema.NRDocumentRecordUISchema",
                 "base-classes": [
-                    "InvenioUISchema"
+                    "oarepo_runtime.services.schema.ui.InvenioUISchema"
                 ],
                 "generate": true,
                 "module": "nr_metadata.documents.services.records.ui_schema",
@@ -69,14 +61,10 @@
             "extra-code": "",
             "class": "nr_metadata.documents.services.records.search.DocumentsSearchOptions",
             "base-classes": [
-                "InvenioSearchOptions"
+                "invenio_records_resources.services.SearchOptions{InvenioSearchOptions}"
             ],
-            "imports": [
-                {
-                    "import": "invenio_records_resources.services.SearchOptions",
-                    "alias": "InvenioSearchOptions"
-                }
-            ]
+            "imports": [],
+            "sort-options-field": "sort_options"
         },
         "config": {
             "generate": true,
@@ -119,14 +107,9 @@
             "module": "nr_metadata.documents.records.api",
             "class": "nr_metadata.documents.records.api.DocumentsRecord",
             "base-classes": [
-                "InvenioRecord"
+                "invenio_records_resources.records.api.Record{InvenioRecord}"
             ],
-            "imports": [
-                {
-                    "import": "invenio_records_resources.records.api.Record",
-                    "alias": "InvenioRecord"
-                }
-            ],
+            "imports": [],
             "extra-code": ""
         },
         "resource": {
@@ -137,13 +120,9 @@
             "proxy": "current_resource",
             "extra-code": "",
             "base-classes": [
-                "RecordResource"
+                "invenio_records_resources.resources.RecordResource"
             ],
-            "imports": [
-                {
-                    "import": "invenio_records_resources.resources.RecordResource"
-                }
-            ]
+            "imports": []
         },
         "resource-config": {
             "generate": true,
@@ -154,13 +133,9 @@
             "class": "nr_metadata.documents.resources.records.config.DocumentsResourceConfig",
             "extra-code": "",
             "base-classes": [
-                "RecordResourceConfig"
+                "invenio_records_resources.resources.RecordResourceConfig"
             ],
-            "imports": [
-                {
-                    "import": "invenio_records_resources.resources.RecordResourceConfig"
-                }
-            ]
+            "imports": []
         },
         "saved-model": {
             "file": "nr_metadata/documents/models/records.json",
@@ -170,10 +145,6 @@
         "proxy": {
             "module": "nr_metadata.documents.proxies",
             "generate": true
-        },
-        "translations": {
-            "module": "nr_metadata.documents.translations",
-            "alias": "documents"
         },
         "json-schema-settings": {
             "generate": true,
@@ -189,59 +160,40 @@
             "module": "nr_metadata.documents.records.api",
             "provider-class": "nr_metadata.documents.records.api.DocumentsIdProvider",
             "provider-base-classes": [
-                "RecordIdProviderV2"
+                "invenio_pidstore.providers.recordid_v2.RecordIdProviderV2"
             ],
-            "field-class": "PIDField",
-            "context-class": "PIDFieldContext",
+            "field-class": "invenio_records_resources.records.systemfields.pid.PIDField",
+            "context-class": "invenio_records_resources.records.systemfields.pid.PIDFieldContext",
             "field-args": [
                 "create=True"
             ],
-            "imports": [
-                {
-                    "import": "invenio_records_resources.records.systemfields.pid.PIDField"
-                },
-                {
-                    "import": "invenio_records_resources.records.systemfields.pid.PIDFieldContext"
-                },
-                {
-                    "import": "invenio_pidstore.providers.recordid_v2.RecordIdProviderV2"
-                }
-            ]
+            "imports": [],
+            "extra-code": ""
         },
         "record-dumper": {
             "generate": true,
-            "module": "nr_metadata.documents.records.dumper",
-            "class": "nr_metadata.documents.records.dumper.DocumentsDumper",
+            "module": "nr_metadata.documents.records.dumpers.dumper",
+            "class": "nr_metadata.documents.records.dumpers.dumper.DocumentsDumper",
             "base-classes": [
-                "SearchDumper"
+                "oarepo_runtime.records.dumpers.SearchDumper"
             ],
             "extra-code": "",
             "extensions": [
-                "MultilingualSearchDumper()"
+                "{{nr_metadata.documents.records.dumpers.multilingual.MultilingualSearchDumperExt}}()",
+                "{{nr_metadata.documents.records.dumpers.edtf.DocumentsEDTFIntervalDumperExt}}()"
             ],
-            "imports": [
-                {
-                    "import": "invenio_records.dumpers.SearchDumper"
-                }
-            ]
+            "imports": []
         },
         "record-metadata": {
             "generate": true,
             "module": "nr_metadata.documents.records.models",
             "class": "nr_metadata.documents.records.models.DocumentsMetadata",
             "base-classes": [
-                "db.Model",
-                "RecordMetadataBase"
+                "invenio_db.db{db.Model}",
+                "invenio_records.models.RecordMetadataBase"
             ],
             "extra-code": "",
-            "imports": [
-                {
-                    "import": "invenio_records.models.RecordMetadataBase"
-                },
-                {
-                    "import": "invenio_db.db"
-                }
-            ],
+            "imports": [],
             "table": "documents_metadata",
             "alias": "documents",
             "use-versioning": true,
@@ -255,20 +207,13 @@
             "extra-code": "",
             "service-id": "documents",
             "base-classes": [
-                "PermissionsPresetsConfigMixin",
-                "InvenioRecordServiceConfig"
+                "oarepo_runtime.config.service.PermissionsPresetsConfigMixin",
+                "invenio_records_resources.services.RecordServiceConfig{InvenioRecordServiceConfig}"
             ],
             "components": [
                 "DataComponent"
             ],
             "imports": [
-                {
-                    "import": "invenio_records_resources.services.RecordServiceConfig",
-                    "alias": "InvenioRecordServiceConfig"
-                },
-                {
-                    "import": "oarepo_runtime.config.service.PermissionsPresetsConfigMixin"
-                },
                 {
                     "import": "invenio_records_resources.services.records.components.DataComponent"
                 }
@@ -282,34 +227,36 @@
             "class": "nr_metadata.documents.services.records.service.DocumentsService",
             "extra-code": "",
             "base-classes": [
-                "InvenioRecordService"
+                "invenio_records_resources.services.RecordService{InvenioRecordService}"
             ],
-            "imports": [
-                {
-                    "import": "invenio_records_resources.services.RecordService",
-                    "alias": "InvenioRecordService"
-                }
-            ]
+            "imports": []
         },
         "json-serializer": {
             "module": "nr_metadata.documents.resources.records.ui",
             "class": "nr_metadata.documents.resources.records.ui.DocumentsUIJSONSerializer",
             "base-classes": [
-                "MarshmallowSerializer"
+                "oarepo_runtime.resources.LocalizedUIJSONSerializer"
             ],
-            "imports": [
-                {
-                    "import": "flask_resources.BaseListSchema"
-                },
-                {
-                    "import": "flask_resources.MarshmallowSerializer"
-                },
-                {
-                    "import": "flask_resources.serializers.JSONSerializer"
-                }
+            "imports": [],
+            "extra-code": "",
+            "generate": true,
+            "list_schema_cls": "flask_resources.BaseListSchema",
+            "format_serializer_cls": "flask_resources.serializers.JSONSerializer"
+        },
+        "translations": {
+            "module": "nr_metadata.documents.translations",
+            "alias": "documents"
+        },
+        "multilingual-dumper": {
+            "generate": true,
+            "module": "nr_metadata.documents.records.dumpers.multilingual",
+            "class": "nr_metadata.documents.records.dumpers.multilingual.MultilingualSearchDumperExt",
+            "base-classes": [
+                "oarepo_runtime.i18n.dumper.MultilingualDumper"
             ],
             "extra-code": "",
-            "generate": true
+            "extensions": [],
+            "imports": []
         },
         "mapping": {
             "generate": true,
@@ -327,28 +274,20 @@
             "module": "nr_metadata.documents.services.records.permissions",
             "class": "nr_metadata.documents.services.records.permissions.DocumentsPermissionPolicy",
             "base-classes": [
-                "RecordPermissionPolicy"
+                "invenio_records_permissions.RecordPermissionPolicy"
             ],
-            "imports": [
-                {
-                    "import": "invenio_records_permissions.RecordPermissionPolicy"
-                }
-            ]
+            "imports": []
         },
-        "multilingual-dumper": {
+        "edtf-interval-dumper": {
             "generate": true,
-            "module": "nr_metadata.documents.records.multilingual_dumper",
-            "class": "nr_metadata.documents.records.multilingual_dumper.MultilingualSearchDumper",
+            "module": "nr_metadata.documents.records.dumpers.edtf",
+            "class": "nr_metadata.documents.records.dumpers.edtf.DocumentsEDTFIntervalDumperExt",
             "base-classes": [
-                "MultilingualDumper"
+                "oarepo_runtime.records.dumpers.edtf_interval.EDTFIntervalDumperExt"
             ],
             "extra-code": "",
             "extensions": [],
-            "imports": [
-                {
-                    "import": "oarepo_runtime.i18n.dumper.MultilingualDumper"
-                }
-            ]
+            "imports": []
         },
         "sortable": [],
         "properties": {
@@ -431,9 +370,6 @@
                 "marshmallow": {
                     "imports": [
                         {
-                            "import": "oarepo_runtime.marshmallow.BaseRecordSchema"
-                        },
-                        {
                             "import": "nr_metadata.common.services.records.schema_common",
                             "alias": "nr_metadata.common.services.records.schema_common"
                         }
@@ -452,23 +388,13 @@
                         "marshmallow": {
                             "read": false,
                             "write": false,
-                            "field-class": "MultilingualField",
-                            "imports": [
-                                {
-                                    "import": "oarepo_runtime.i18n.schema.MultilingualField"
-                                }
-                            ]
+                            "field-class": "oarepo_runtime.i18n.schema.MultilingualField"
                         },
                         "ui": {
                             "marshmallow": {
                                 "read": false,
                                 "write": false,
-                                "field-class": "MultilingualUIField",
-                                "imports": [
-                                    {
-                                        "import": "oarepo_runtime.i18n.ui_schema.MultilingualUIField"
-                                    }
-                                ]
+                                "field-class": "oarepo_runtime.i18n.ui_schema.MultilingualUIField"
                             },
                             "detail": "multilingual"
                         },
@@ -478,24 +404,14 @@
                             "type": "i18nStr",
                             "marshmallow": {
                                 "class": null,
-                                "field-class": "I18nStrField",
-                                "imports": [
-                                    {
-                                        "import": "oarepo_runtime.i18n.schema.I18nStrField"
-                                    }
-                                ],
+                                "field-class": "oarepo_runtime.i18n.schema.I18nStrField",
                                 "generate": false
                             },
                             "ui": {
                                 "detail": "multilingual",
                                 "marshmallow": {
                                     "class": null,
-                                    "field-class": "I18nStrUIField",
-                                    "imports": [
-                                        {
-                                            "import": "oarepo_runtime.i18n.ui_schema.I18nStrUIField"
-                                        }
-                                    ]
+                                    "field-class": "oarepo_runtime.i18n.ui_schema.I18nStrUIField"
                                 }
                             },
                             "sample": {
@@ -580,13 +496,13 @@
                         "properties": {
                             "id": {
                                 "marshmallow": {
-                                    "field-class": "ma.fields.String",
+                                    "field-class": "marshmallow.fields.String",
                                     "validators": [],
                                     "imports": []
                                 },
                                 "ui": {
                                     "marshmallow": {
-                                        "field-class": "ma.fields.String",
+                                        "field-class": "marshmallow.fields.String",
                                         "validators": [],
                                         "imports": []
                                     }
@@ -606,25 +522,15 @@
                             "title": {
                                 "marshmallow": {
                                     "generate": false,
-                                    "field": "i18n_strings",
-                                    "field-class": "ma.fields.Nested",
+                                    "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                    "field-class": "marshmallow.fields.Nested",
                                     "validators": [],
-                                    "class": "invenio_vocabularies.services.records.schema.TitleSchema",
-                                    "imports": [
-                                        {
-                                            "import": "invenio_vocabularies.services.schema.i18n_strings"
-                                        }
-                                    ]
+                                    "class": "invenio_vocabularies.services.records.schema.TitleSchema"
                                 },
                                 "ui": {
                                     "marshmallow": {
-                                        "field": "VocabularyI18nStrUIField()",
-                                        "generate": false,
-                                        "imports": [
-                                            {
-                                                "import": "oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField"
-                                            }
-                                        ]
+                                        "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                        "generate": false
                                     }
                                 },
                                 "mapping": {
@@ -648,12 +554,12 @@
                                 "type": "keyword",
                                 "marshmallow": {
                                     "field-name": "_version",
-                                    "field-class": "ma.fields.String"
+                                    "field-class": "marshmallow.fields.String"
                                 },
                                 "ui": {
                                     "marshmallow": {
                                         "field-name": "_version",
-                                        "field-class": "ma.fields.String"
+                                        "field-class": "marshmallow.fields.String"
                                     }
                                 }
                             }
@@ -664,26 +570,13 @@
                         "marshmallow": {
                             "read": false,
                             "write": false,
-                            "field-class": "MultilingualField",
-                            "imports": [
-                                {
-                                    "import": "oarepo_runtime.i18n.schema.MultilingualField"
-                                }
-                            ]
+                            "field-class": "oarepo_runtime.i18n.schema.MultilingualField"
                         },
                         "ui": {
                             "marshmallow": {
                                 "read": false,
                                 "write": false,
-                                "imports": [
-                                    {
-                                        "import": "oarepo_runtime.i18n.ui_schema.MultilingualLocalizedUIField"
-                                    },
-                                    {
-                                        "import": "oarepo_runtime.i18n.ui_schema.MultilingualUIField"
-                                    }
-                                ],
-                                "field-class": "MultilingualLocalizedUIField"
+                                "field-class": "oarepo_runtime.i18n.ui_schema.MultilingualLocalizedUIField"
                             },
                             "detail": "string"
                         },
@@ -693,24 +586,14 @@
                             "type": "i18nStr",
                             "marshmallow": {
                                 "class": null,
-                                "field-class": "I18nStrField",
-                                "imports": [
-                                    {
-                                        "import": "oarepo_runtime.i18n.schema.I18nStrField"
-                                    }
-                                ],
+                                "field-class": "oarepo_runtime.i18n.schema.I18nStrField",
                                 "generate": false
                             },
                             "ui": {
                                 "detail": "multilingual",
                                 "marshmallow": {
                                     "class": null,
-                                    "field-class": "I18nStrUIField",
-                                    "imports": [
-                                        {
-                                            "import": "oarepo_runtime.i18n.ui_schema.I18nStrUIField"
-                                        }
-                                    ]
+                                    "field-class": "oarepo_runtime.i18n.ui_schema.I18nStrUIField"
                                 }
                             },
                             "sample": {
@@ -768,31 +651,21 @@
                                 "title": {
                                     "type": "i18nStr",
                                     "required": true,
-                                    "marshmallow": {
-                                        "read": false,
-                                        "write": false,
-                                        "class": null,
-                                        "field-class": "I18nStrField",
-                                        "imports": [
-                                            {
-                                                "import": "oarepo_runtime.i18n.schema.I18nStrField"
-                                            }
-                                        ],
-                                        "generate": false
-                                    },
                                     "ui": {
                                         "marshmallow": {
                                             "read": false,
                                             "write": false,
                                             "class": null,
-                                            "field-class": "I18nStrUIField",
-                                            "imports": [
-                                                {
-                                                    "import": "oarepo_runtime.i18n.ui_schema.I18nStrUIField"
-                                                }
-                                            ]
+                                            "field-class": "oarepo_runtime.i18n.ui_schema.I18nStrUIField"
                                         },
                                         "detail": "multilingual"
+                                    },
+                                    "marshmallow": {
+                                        "read": false,
+                                        "write": false,
+                                        "class": null,
+                                        "field-class": "oarepo_runtime.i18n.schema.I18nStrField",
+                                        "generate": false
                                     },
                                     "sample": {
                                         "skip": false
@@ -1015,13 +888,13 @@
                                         "properties": {
                                             "id": {
                                                 "marshmallow": {
-                                                    "field-class": "ma.fields.String",
+                                                    "field-class": "marshmallow.fields.String",
                                                     "validators": [],
                                                     "imports": []
                                                 },
                                                 "ui": {
                                                     "marshmallow": {
-                                                        "field-class": "ma.fields.String",
+                                                        "field-class": "marshmallow.fields.String",
                                                         "validators": [],
                                                         "imports": []
                                                     }
@@ -1041,25 +914,15 @@
                                             "title": {
                                                 "marshmallow": {
                                                     "generate": false,
-                                                    "field": "i18n_strings",
-                                                    "field-class": "ma.fields.Nested",
+                                                    "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                                    "field-class": "marshmallow.fields.Nested",
                                                     "validators": [],
-                                                    "class": "invenio_vocabularies.services.records.schema.TitleSchema",
-                                                    "imports": [
-                                                        {
-                                                            "import": "invenio_vocabularies.services.schema.i18n_strings"
-                                                        }
-                                                    ]
+                                                    "class": "invenio_vocabularies.services.records.schema.TitleSchema"
                                                 },
                                                 "ui": {
                                                     "marshmallow": {
-                                                        "field": "VocabularyI18nStrUIField()",
-                                                        "generate": false,
-                                                        "imports": [
-                                                            {
-                                                                "import": "oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField"
-                                                            }
-                                                        ]
+                                                        "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                                        "generate": false
                                                     }
                                                 },
                                                 "mapping": {
@@ -1153,12 +1016,12 @@
                                                 "type": "keyword",
                                                 "marshmallow": {
                                                     "field-name": "_version",
-                                                    "field-class": "ma.fields.String"
+                                                    "field-class": "marshmallow.fields.String"
                                                 },
                                                 "ui": {
                                                     "marshmallow": {
                                                         "field-name": "_version",
-                                                        "field-class": "ma.fields.String"
+                                                        "field-class": "marshmallow.fields.String"
                                                     }
                                                 }
                                             }
@@ -1361,13 +1224,13 @@
                                     "properties": {
                                         "id": {
                                             "marshmallow": {
-                                                "field-class": "ma.fields.String",
+                                                "field-class": "marshmallow.fields.String",
                                                 "validators": [],
                                                 "imports": []
                                             },
                                             "ui": {
                                                 "marshmallow": {
-                                                    "field-class": "ma.fields.String",
+                                                    "field-class": "marshmallow.fields.String",
                                                     "validators": [],
                                                     "imports": []
                                                 }
@@ -1387,25 +1250,15 @@
                                         "title": {
                                             "marshmallow": {
                                                 "generate": false,
-                                                "field": "i18n_strings",
-                                                "field-class": "ma.fields.Nested",
+                                                "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                                "field-class": "marshmallow.fields.Nested",
                                                 "validators": [],
-                                                "class": "invenio_vocabularies.services.records.schema.TitleSchema",
-                                                "imports": [
-                                                    {
-                                                        "import": "invenio_vocabularies.services.schema.i18n_strings"
-                                                    }
-                                                ]
+                                                "class": "invenio_vocabularies.services.records.schema.TitleSchema"
                                             },
                                             "ui": {
                                                 "marshmallow": {
-                                                    "field": "VocabularyI18nStrUIField()",
-                                                    "generate": false,
-                                                    "imports": [
-                                                        {
-                                                            "import": "oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField"
-                                                        }
-                                                    ]
+                                                    "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                                    "generate": false
                                                 }
                                             },
                                             "mapping": {
@@ -1429,12 +1282,12 @@
                                             "type": "keyword",
                                             "marshmallow": {
                                                 "field-name": "_version",
-                                                "field-class": "ma.fields.String"
+                                                "field-class": "marshmallow.fields.String"
                                             },
                                             "ui": {
                                                 "marshmallow": {
                                                     "field-name": "_version",
-                                                    "field-class": "ma.fields.String"
+                                                    "field-class": "marshmallow.fields.String"
                                                 }
                                             }
                                         }
@@ -1626,13 +1479,13 @@
                                         "properties": {
                                             "id": {
                                                 "marshmallow": {
-                                                    "field-class": "ma.fields.String",
+                                                    "field-class": "marshmallow.fields.String",
                                                     "validators": [],
                                                     "imports": []
                                                 },
                                                 "ui": {
                                                     "marshmallow": {
-                                                        "field-class": "ma.fields.String",
+                                                        "field-class": "marshmallow.fields.String",
                                                         "validators": [],
                                                         "imports": []
                                                     }
@@ -1652,25 +1505,15 @@
                                             "title": {
                                                 "marshmallow": {
                                                     "generate": false,
-                                                    "field": "i18n_strings",
-                                                    "field-class": "ma.fields.Nested",
+                                                    "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                                    "field-class": "marshmallow.fields.Nested",
                                                     "validators": [],
-                                                    "class": "invenio_vocabularies.services.records.schema.TitleSchema",
-                                                    "imports": [
-                                                        {
-                                                            "import": "invenio_vocabularies.services.schema.i18n_strings"
-                                                        }
-                                                    ]
+                                                    "class": "invenio_vocabularies.services.records.schema.TitleSchema"
                                                 },
                                                 "ui": {
                                                     "marshmallow": {
-                                                        "field": "VocabularyI18nStrUIField()",
-                                                        "generate": false,
-                                                        "imports": [
-                                                            {
-                                                                "import": "oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField"
-                                                            }
-                                                        ]
+                                                        "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                                        "generate": false
                                                     }
                                                 },
                                                 "mapping": {
@@ -1764,12 +1607,12 @@
                                                 "type": "keyword",
                                                 "marshmallow": {
                                                     "field-name": "_version",
-                                                    "field-class": "ma.fields.String"
+                                                    "field-class": "marshmallow.fields.String"
                                                 },
                                                 "ui": {
                                                     "marshmallow": {
                                                         "field-name": "_version",
-                                                        "field-class": "ma.fields.String"
+                                                        "field-class": "marshmallow.fields.String"
                                                     }
                                                 }
                                             }
@@ -2104,13 +1947,13 @@
                                             "properties": {
                                                 "id": {
                                                     "marshmallow": {
-                                                        "field-class": "ma.fields.String",
+                                                        "field-class": "marshmallow.fields.String",
                                                         "validators": [],
                                                         "imports": []
                                                     },
                                                     "ui": {
                                                         "marshmallow": {
-                                                            "field-class": "ma.fields.String",
+                                                            "field-class": "marshmallow.fields.String",
                                                             "validators": [],
                                                             "imports": []
                                                         }
@@ -2130,25 +1973,15 @@
                                                 "title": {
                                                     "marshmallow": {
                                                         "generate": false,
-                                                        "field": "i18n_strings",
-                                                        "field-class": "ma.fields.Nested",
+                                                        "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                                        "field-class": "marshmallow.fields.Nested",
                                                         "validators": [],
-                                                        "class": "invenio_vocabularies.services.records.schema.TitleSchema",
-                                                        "imports": [
-                                                            {
-                                                                "import": "invenio_vocabularies.services.schema.i18n_strings"
-                                                            }
-                                                        ]
+                                                        "class": "invenio_vocabularies.services.records.schema.TitleSchema"
                                                     },
                                                     "ui": {
                                                         "marshmallow": {
-                                                            "field": "VocabularyI18nStrUIField()",
-                                                            "generate": false,
-                                                            "imports": [
-                                                                {
-                                                                    "import": "oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField"
-                                                                }
-                                                            ]
+                                                            "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                                            "generate": false
                                                         }
                                                     },
                                                     "mapping": {
@@ -2172,12 +2005,12 @@
                                                     "type": "keyword",
                                                     "marshmallow": {
                                                         "field-name": "_version",
-                                                        "field-class": "ma.fields.String"
+                                                        "field-class": "marshmallow.fields.String"
                                                     },
                                                     "ui": {
                                                         "marshmallow": {
                                                             "field-name": "_version",
-                                                            "field-class": "ma.fields.String"
+                                                            "field-class": "marshmallow.fields.String"
                                                         }
                                                     }
                                                 }
@@ -2410,13 +2243,13 @@
                                     "properties": {
                                         "id": {
                                             "marshmallow": {
-                                                "field-class": "ma.fields.String",
+                                                "field-class": "marshmallow.fields.String",
                                                 "validators": [],
                                                 "imports": []
                                             },
                                             "ui": {
                                                 "marshmallow": {
-                                                    "field-class": "ma.fields.String",
+                                                    "field-class": "marshmallow.fields.String",
                                                     "validators": [],
                                                     "imports": []
                                                 }
@@ -2436,25 +2269,15 @@
                                         "title": {
                                             "marshmallow": {
                                                 "generate": false,
-                                                "field": "i18n_strings",
-                                                "field-class": "ma.fields.Nested",
+                                                "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                                "field-class": "marshmallow.fields.Nested",
                                                 "validators": [],
-                                                "class": "invenio_vocabularies.services.records.schema.TitleSchema",
-                                                "imports": [
-                                                    {
-                                                        "import": "invenio_vocabularies.services.schema.i18n_strings"
-                                                    }
-                                                ]
+                                                "class": "invenio_vocabularies.services.records.schema.TitleSchema"
                                             },
                                             "ui": {
                                                 "marshmallow": {
-                                                    "field": "VocabularyI18nStrUIField()",
-                                                    "generate": false,
-                                                    "imports": [
-                                                        {
-                                                            "import": "oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField"
-                                                        }
-                                                    ]
+                                                    "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                                    "generate": false
                                                 }
                                             },
                                             "mapping": {
@@ -2478,12 +2301,12 @@
                                             "type": "keyword",
                                             "marshmallow": {
                                                 "field-name": "_version",
-                                                "field-class": "ma.fields.String"
+                                                "field-class": "marshmallow.fields.String"
                                             },
                                             "ui": {
                                                 "marshmallow": {
                                                     "field-name": "_version",
-                                                    "field-class": "ma.fields.String"
+                                                    "field-class": "marshmallow.fields.String"
                                                 }
                                             }
                                         }
@@ -2581,6 +2404,7 @@
                                 "geoLocationPlace": {
                                     "type": "keyword",
                                     "required": true,
+                                    "description": "Free description of the location; ie. Atlantic Ocean",
                                     "marshmallow": {
                                         "read": false,
                                         "write": false
@@ -2590,8 +2414,7 @@
                                             "read": false,
                                             "write": false
                                         }
-                                    },
-                                    "description": "Free description of the location; ie. Atlantic Ocean"
+                                    }
                                 },
                                 "geoLocationPoint": {
                                     "type": "object",
@@ -2750,13 +2573,13 @@
                             "properties": {
                                 "id": {
                                     "marshmallow": {
-                                        "field-class": "ma.fields.String",
+                                        "field-class": "marshmallow.fields.String",
                                         "validators": [],
                                         "imports": []
                                     },
                                     "ui": {
                                         "marshmallow": {
-                                            "field-class": "ma.fields.String",
+                                            "field-class": "marshmallow.fields.String",
                                             "validators": [],
                                             "imports": []
                                         }
@@ -2776,25 +2599,15 @@
                                 "title": {
                                     "marshmallow": {
                                         "generate": false,
-                                        "field": "i18n_strings",
-                                        "field-class": "ma.fields.Nested",
+                                        "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                        "field-class": "marshmallow.fields.Nested",
                                         "validators": [],
-                                        "class": "invenio_vocabularies.services.records.schema.TitleSchema",
-                                        "imports": [
-                                            {
-                                                "import": "invenio_vocabularies.services.schema.i18n_strings"
-                                            }
-                                        ]
+                                        "class": "invenio_vocabularies.services.records.schema.TitleSchema"
                                     },
                                     "ui": {
                                         "marshmallow": {
-                                            "field": "VocabularyI18nStrUIField()",
-                                            "generate": false,
-                                            "imports": [
-                                                {
-                                                    "import": "oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField"
-                                                }
-                                            ]
+                                            "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                            "generate": false
                                         }
                                     },
                                     "mapping": {
@@ -2818,12 +2631,12 @@
                                     "type": "keyword",
                                     "marshmallow": {
                                         "field-name": "_version",
-                                        "field-class": "ma.fields.String"
+                                        "field-class": "marshmallow.fields.String"
                                     },
                                     "ui": {
                                         "marshmallow": {
                                             "field-name": "_version",
-                                            "field-class": "ma.fields.String"
+                                            "field-class": "marshmallow.fields.String"
                                         }
                                     }
                                 }
@@ -2835,23 +2648,13 @@
                         "marshmallow": {
                             "read": false,
                             "write": false,
-                            "field-class": "MultilingualField",
-                            "imports": [
-                                {
-                                    "import": "oarepo_runtime.i18n.schema.MultilingualField"
-                                }
-                            ]
+                            "field-class": "oarepo_runtime.i18n.schema.MultilingualField"
                         },
                         "ui": {
                             "marshmallow": {
                                 "read": false,
                                 "write": false,
-                                "field-class": "MultilingualUIField",
-                                "imports": [
-                                    {
-                                        "import": "oarepo_runtime.i18n.ui_schema.MultilingualUIField"
-                                    }
-                                ]
+                                "field-class": "oarepo_runtime.i18n.ui_schema.MultilingualUIField"
                             },
                             "detail": "multilingual"
                         },
@@ -2861,24 +2664,14 @@
                             "type": "i18nStr",
                             "marshmallow": {
                                 "class": null,
-                                "field-class": "I18nStrField",
-                                "imports": [
-                                    {
-                                        "import": "oarepo_runtime.i18n.schema.I18nStrField"
-                                    }
-                                ],
+                                "field-class": "oarepo_runtime.i18n.schema.I18nStrField",
                                 "generate": false
                             },
                             "ui": {
                                 "detail": "multilingual",
                                 "marshmallow": {
                                     "class": null,
-                                    "field-class": "I18nStrUIField",
-                                    "imports": [
-                                        {
-                                            "import": "oarepo_runtime.i18n.ui_schema.I18nStrUIField"
-                                        }
-                                    ]
+                                    "field-class": "oarepo_runtime.i18n.ui_schema.I18nStrUIField"
                                 }
                             },
                             "sample": {
@@ -3257,13 +3050,13 @@
                                                     "properties": {
                                                         "id": {
                                                             "marshmallow": {
-                                                                "field-class": "ma.fields.String",
+                                                                "field-class": "marshmallow.fields.String",
                                                                 "validators": [],
                                                                 "imports": []
                                                             },
                                                             "ui": {
                                                                 "marshmallow": {
-                                                                    "field-class": "ma.fields.String",
+                                                                    "field-class": "marshmallow.fields.String",
                                                                     "validators": [],
                                                                     "imports": []
                                                                 }
@@ -3283,25 +3076,15 @@
                                                         "title": {
                                                             "marshmallow": {
                                                                 "generate": false,
-                                                                "field": "i18n_strings",
-                                                                "field-class": "ma.fields.Nested",
+                                                                "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                                                "field-class": "marshmallow.fields.Nested",
                                                                 "validators": [],
-                                                                "class": "invenio_vocabularies.services.records.schema.TitleSchema",
-                                                                "imports": [
-                                                                    {
-                                                                        "import": "invenio_vocabularies.services.schema.i18n_strings"
-                                                                    }
-                                                                ]
+                                                                "class": "invenio_vocabularies.services.records.schema.TitleSchema"
                                                             },
                                                             "ui": {
                                                                 "marshmallow": {
-                                                                    "field": "VocabularyI18nStrUIField()",
-                                                                    "generate": false,
-                                                                    "imports": [
-                                                                        {
-                                                                            "import": "oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField"
-                                                                        }
-                                                                    ]
+                                                                    "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                                                    "generate": false
                                                                 }
                                                             },
                                                             "mapping": {
@@ -3395,12 +3178,12 @@
                                                             "type": "keyword",
                                                             "marshmallow": {
                                                                 "field-name": "_version",
-                                                                "field-class": "ma.fields.String"
+                                                                "field-class": "marshmallow.fields.String"
                                                             },
                                                             "ui": {
                                                                 "marshmallow": {
                                                                     "field-name": "_version",
-                                                                    "field-class": "ma.fields.String"
+                                                                    "field-class": "marshmallow.fields.String"
                                                                 }
                                                             }
                                                         }
@@ -3603,13 +3386,13 @@
                                                 "properties": {
                                                     "id": {
                                                         "marshmallow": {
-                                                            "field-class": "ma.fields.String",
+                                                            "field-class": "marshmallow.fields.String",
                                                             "validators": [],
                                                             "imports": []
                                                         },
                                                         "ui": {
                                                             "marshmallow": {
-                                                                "field-class": "ma.fields.String",
+                                                                "field-class": "marshmallow.fields.String",
                                                                 "validators": [],
                                                                 "imports": []
                                                             }
@@ -3629,25 +3412,15 @@
                                                     "title": {
                                                         "marshmallow": {
                                                             "generate": false,
-                                                            "field": "i18n_strings",
-                                                            "field-class": "ma.fields.Nested",
+                                                            "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                                            "field-class": "marshmallow.fields.Nested",
                                                             "validators": [],
-                                                            "class": "invenio_vocabularies.services.records.schema.TitleSchema",
-                                                            "imports": [
-                                                                {
-                                                                    "import": "invenio_vocabularies.services.schema.i18n_strings"
-                                                                }
-                                                            ]
+                                                            "class": "invenio_vocabularies.services.records.schema.TitleSchema"
                                                         },
                                                         "ui": {
                                                             "marshmallow": {
-                                                                "field": "VocabularyI18nStrUIField()",
-                                                                "generate": false,
-                                                                "imports": [
-                                                                    {
-                                                                        "import": "oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField"
-                                                                    }
-                                                                ]
+                                                                "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                                                "generate": false
                                                             }
                                                         },
                                                         "mapping": {
@@ -3671,12 +3444,12 @@
                                                         "type": "keyword",
                                                         "marshmallow": {
                                                             "field-name": "_version",
-                                                            "field-class": "ma.fields.String"
+                                                            "field-class": "marshmallow.fields.String"
                                                         },
                                                         "ui": {
                                                             "marshmallow": {
                                                                 "field-name": "_version",
-                                                                "field-class": "ma.fields.String"
+                                                                "field-class": "marshmallow.fields.String"
                                                             }
                                                         }
                                                     }
@@ -3863,13 +3636,13 @@
                                                     "properties": {
                                                         "id": {
                                                             "marshmallow": {
-                                                                "field-class": "ma.fields.String",
+                                                                "field-class": "marshmallow.fields.String",
                                                                 "validators": [],
                                                                 "imports": []
                                                             },
                                                             "ui": {
                                                                 "marshmallow": {
-                                                                    "field-class": "ma.fields.String",
+                                                                    "field-class": "marshmallow.fields.String",
                                                                     "validators": [],
                                                                     "imports": []
                                                                 }
@@ -3889,25 +3662,15 @@
                                                         "title": {
                                                             "marshmallow": {
                                                                 "generate": false,
-                                                                "field": "i18n_strings",
-                                                                "field-class": "ma.fields.Nested",
+                                                                "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                                                "field-class": "marshmallow.fields.Nested",
                                                                 "validators": [],
-                                                                "class": "invenio_vocabularies.services.records.schema.TitleSchema",
-                                                                "imports": [
-                                                                    {
-                                                                        "import": "invenio_vocabularies.services.schema.i18n_strings"
-                                                                    }
-                                                                ]
+                                                                "class": "invenio_vocabularies.services.records.schema.TitleSchema"
                                                             },
                                                             "ui": {
                                                                 "marshmallow": {
-                                                                    "field": "VocabularyI18nStrUIField()",
-                                                                    "generate": false,
-                                                                    "imports": [
-                                                                        {
-                                                                            "import": "oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField"
-                                                                        }
-                                                                    ]
+                                                                    "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                                                    "generate": false
                                                                 }
                                                             },
                                                             "mapping": {
@@ -4001,12 +3764,12 @@
                                                             "type": "keyword",
                                                             "marshmallow": {
                                                                 "field-name": "_version",
-                                                                "field-class": "ma.fields.String"
+                                                                "field-class": "marshmallow.fields.String"
                                                             },
                                                             "ui": {
                                                                 "marshmallow": {
                                                                     "field-name": "_version",
-                                                                    "field-class": "ma.fields.String"
+                                                                    "field-class": "marshmallow.fields.String"
                                                                 }
                                                             }
                                                         }
@@ -4283,6 +4046,7 @@
                                 "itemRelationType": {
                                     "type": "vocabulary",
                                     "vocabulary-type": "item-relation-types",
+                                    "description": "typ vztahu k původnímu popisovanému dok.",
                                     "ui": {
                                         "marshmallow": {
                                             "imports": [
@@ -4319,7 +4083,6 @@
                                         "generate": true,
                                         "class": "nr_metadata.documents.services.records.schema.ItemRelationTypeSchema"
                                     },
-                                    "description": "typ vztahu k původnímu popisovanému dok.",
                                     "label.cs": "Typ vazby",
                                     "label.en": "Relation type",
                                     "imports": [
@@ -4341,13 +4104,13 @@
                                     "properties": {
                                         "id": {
                                             "marshmallow": {
-                                                "field-class": "ma.fields.String",
+                                                "field-class": "marshmallow.fields.String",
                                                 "validators": [],
                                                 "imports": []
                                             },
                                             "ui": {
                                                 "marshmallow": {
-                                                    "field-class": "ma.fields.String",
+                                                    "field-class": "marshmallow.fields.String",
                                                     "validators": [],
                                                     "imports": []
                                                 }
@@ -4367,25 +4130,15 @@
                                         "title": {
                                             "marshmallow": {
                                                 "generate": false,
-                                                "field": "i18n_strings",
-                                                "field-class": "ma.fields.Nested",
+                                                "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                                "field-class": "marshmallow.fields.Nested",
                                                 "validators": [],
-                                                "class": "invenio_vocabularies.services.records.schema.TitleSchema",
-                                                "imports": [
-                                                    {
-                                                        "import": "invenio_vocabularies.services.schema.i18n_strings"
-                                                    }
-                                                ]
+                                                "class": "invenio_vocabularies.services.records.schema.TitleSchema"
                                             },
                                             "ui": {
                                                 "marshmallow": {
-                                                    "field": "VocabularyI18nStrUIField()",
-                                                    "generate": false,
-                                                    "imports": [
-                                                        {
-                                                            "import": "oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField"
-                                                        }
-                                                    ]
+                                                    "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                                    "generate": false
                                                 }
                                             },
                                             "mapping": {
@@ -4409,12 +4162,12 @@
                                             "type": "keyword",
                                             "marshmallow": {
                                                 "field-name": "_version",
-                                                "field-class": "ma.fields.String"
+                                                "field-class": "marshmallow.fields.String"
                                             },
                                             "ui": {
                                                 "marshmallow": {
                                                     "field-name": "_version",
-                                                    "field-class": "ma.fields.String"
+                                                    "field-class": "marshmallow.fields.String"
                                                 }
                                             }
                                         }
@@ -4485,13 +4238,13 @@
                                     "properties": {
                                         "id": {
                                             "marshmallow": {
-                                                "field-class": "ma.fields.String",
+                                                "field-class": "marshmallow.fields.String",
                                                 "validators": [],
                                                 "imports": []
                                             },
                                             "ui": {
                                                 "marshmallow": {
-                                                    "field-class": "ma.fields.String",
+                                                    "field-class": "marshmallow.fields.String",
                                                     "validators": [],
                                                     "imports": []
                                                 }
@@ -4511,25 +4264,15 @@
                                         "title": {
                                             "marshmallow": {
                                                 "generate": false,
-                                                "field": "i18n_strings",
-                                                "field-class": "ma.fields.Nested",
+                                                "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                                "field-class": "marshmallow.fields.Nested",
                                                 "validators": [],
-                                                "class": "invenio_vocabularies.services.records.schema.TitleSchema",
-                                                "imports": [
-                                                    {
-                                                        "import": "invenio_vocabularies.services.schema.i18n_strings"
-                                                    }
-                                                ]
+                                                "class": "invenio_vocabularies.services.records.schema.TitleSchema"
                                             },
                                             "ui": {
                                                 "marshmallow": {
-                                                    "field": "VocabularyI18nStrUIField()",
-                                                    "generate": false,
-                                                    "imports": [
-                                                        {
-                                                            "import": "oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField"
-                                                        }
-                                                    ]
+                                                    "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                                    "generate": false
                                                 }
                                             },
                                             "mapping": {
@@ -4553,12 +4296,12 @@
                                             "type": "keyword",
                                             "marshmallow": {
                                                 "field-name": "_version",
-                                                "field-class": "ma.fields.String"
+                                                "field-class": "marshmallow.fields.String"
                                             },
                                             "ui": {
                                                 "marshmallow": {
                                                     "field-name": "_version",
-                                                    "field-class": "ma.fields.String"
+                                                    "field-class": "marshmallow.fields.String"
                                                 }
                                             }
                                         }
@@ -4582,6 +4325,7 @@
                                 "itemTitle": {
                                     "type": "fulltext",
                                     "required": true,
+                                    "description": "název propojeného dokumentu",
                                     "marshmallow": {
                                         "read": false,
                                         "write": false
@@ -4592,7 +4336,6 @@
                                             "write": false
                                         }
                                     },
-                                    "description": "název propojeného dokumentu",
                                     "label.cs": "Název",
                                     "label.en": "Title"
                                 },
@@ -4713,13 +4456,13 @@
                         "properties": {
                             "id": {
                                 "marshmallow": {
-                                    "field-class": "ma.fields.String",
+                                    "field-class": "marshmallow.fields.String",
                                     "validators": [],
                                     "imports": []
                                 },
                                 "ui": {
                                     "marshmallow": {
-                                        "field-class": "ma.fields.String",
+                                        "field-class": "marshmallow.fields.String",
                                         "validators": [],
                                         "imports": []
                                     }
@@ -4739,25 +4482,15 @@
                             "title": {
                                 "marshmallow": {
                                     "generate": false,
-                                    "field": "i18n_strings",
-                                    "field-class": "ma.fields.Nested",
+                                    "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                    "field-class": "marshmallow.fields.Nested",
                                     "validators": [],
-                                    "class": "invenio_vocabularies.services.records.schema.TitleSchema",
-                                    "imports": [
-                                        {
-                                            "import": "invenio_vocabularies.services.schema.i18n_strings"
-                                        }
-                                    ]
+                                    "class": "invenio_vocabularies.services.records.schema.TitleSchema"
                                 },
                                 "ui": {
                                     "marshmallow": {
-                                        "field": "VocabularyI18nStrUIField()",
-                                        "generate": false,
-                                        "imports": [
-                                            {
-                                                "import": "oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField"
-                                            }
-                                        ]
+                                        "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                        "generate": false
                                     }
                                 },
                                 "mapping": {
@@ -4781,12 +4514,12 @@
                                 "type": "keyword",
                                 "marshmallow": {
                                     "field-name": "_version",
-                                    "field-class": "ma.fields.String"
+                                    "field-class": "marshmallow.fields.String"
                                 },
                                 "ui": {
                                     "marshmallow": {
                                         "field-name": "_version",
-                                        "field-class": "ma.fields.String"
+                                        "field-class": "marshmallow.fields.String"
                                     }
                                 }
                             }
@@ -4864,13 +4597,13 @@
                             "properties": {
                                 "id": {
                                     "marshmallow": {
-                                        "field-class": "ma.fields.String",
+                                        "field-class": "marshmallow.fields.String",
                                         "validators": [],
                                         "imports": []
                                     },
                                     "ui": {
                                         "marshmallow": {
-                                            "field-class": "ma.fields.String",
+                                            "field-class": "marshmallow.fields.String",
                                             "validators": [],
                                             "imports": []
                                         }
@@ -4890,25 +4623,15 @@
                                 "title": {
                                     "marshmallow": {
                                         "generate": false,
-                                        "field": "i18n_strings",
-                                        "field-class": "ma.fields.Nested",
+                                        "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                        "field-class": "marshmallow.fields.Nested",
                                         "validators": [],
-                                        "class": "invenio_vocabularies.services.records.schema.TitleSchema",
-                                        "imports": [
-                                            {
-                                                "import": "invenio_vocabularies.services.schema.i18n_strings"
-                                            }
-                                        ]
+                                        "class": "invenio_vocabularies.services.records.schema.TitleSchema"
                                     },
                                     "ui": {
                                         "marshmallow": {
-                                            "field": "VocabularyI18nStrUIField()",
-                                            "generate": false,
-                                            "imports": [
-                                                {
-                                                    "import": "oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField"
-                                                }
-                                            ]
+                                            "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                            "generate": false
                                         }
                                     },
                                     "mapping": {
@@ -4932,12 +4655,12 @@
                                     "type": "keyword",
                                     "marshmallow": {
                                         "field-name": "_version",
-                                        "field-class": "ma.fields.String"
+                                        "field-class": "marshmallow.fields.String"
                                     },
                                     "ui": {
                                         "marshmallow": {
                                             "field-name": "_version",
-                                            "field-class": "ma.fields.String"
+                                            "field-class": "marshmallow.fields.String"
                                         }
                                     }
                                 }
@@ -5093,13 +4816,13 @@
                             "properties": {
                                 "id": {
                                     "marshmallow": {
-                                        "field-class": "ma.fields.String",
+                                        "field-class": "marshmallow.fields.String",
                                         "validators": [],
                                         "imports": []
                                     },
                                     "ui": {
                                         "marshmallow": {
-                                            "field-class": "ma.fields.String",
+                                            "field-class": "marshmallow.fields.String",
                                             "validators": [],
                                             "imports": []
                                         }
@@ -5119,25 +4842,15 @@
                                 "title": {
                                     "marshmallow": {
                                         "generate": false,
-                                        "field": "i18n_strings",
-                                        "field-class": "ma.fields.Nested",
+                                        "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                        "field-class": "marshmallow.fields.Nested",
                                         "validators": [],
-                                        "class": "invenio_vocabularies.services.records.schema.TitleSchema",
-                                        "imports": [
-                                            {
-                                                "import": "invenio_vocabularies.services.schema.i18n_strings"
-                                            }
-                                        ]
+                                        "class": "invenio_vocabularies.services.records.schema.TitleSchema"
                                     },
                                     "ui": {
                                         "marshmallow": {
-                                            "field": "VocabularyI18nStrUIField()",
-                                            "generate": false,
-                                            "imports": [
-                                                {
-                                                    "import": "oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField"
-                                                }
-                                            ]
+                                            "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                            "generate": false
                                         }
                                     },
                                     "mapping": {
@@ -5161,12 +4874,12 @@
                                     "type": "keyword",
                                     "marshmallow": {
                                         "field-name": "_version",
-                                        "field-class": "ma.fields.String"
+                                        "field-class": "marshmallow.fields.String"
                                     },
                                     "ui": {
                                         "marshmallow": {
                                             "field-name": "_version",
-                                            "field-class": "ma.fields.String"
+                                            "field-class": "marshmallow.fields.String"
                                         }
                                     }
                                 }
@@ -5177,12 +4890,7 @@
                         "type": "array",
                         "ui": {
                             "marshmallow": {
-                                "imports": [
-                                    {
-                                        "import": "nr_metadata.ui_schema.subjects.NRSubjectListField"
-                                    }
-                                ],
-                                "field-class": "NRSubjectListField"
+                                "field-class": "nr_metadata.ui_schema.subjects.NRSubjectListField"
                             }
                         },
                         "label.cs": "Klíčová slova",
@@ -5242,27 +4950,14 @@
                                     "marshmallow": {
                                         "read": false,
                                         "write": false,
-                                        "field-class": "MultilingualField",
-                                        "imports": [
-                                            {
-                                                "import": "oarepo_runtime.i18n.schema.MultilingualField"
-                                            }
-                                        ]
+                                        "field-class": "oarepo_runtime.i18n.schema.MultilingualField"
                                     },
                                     "ui": {
                                         "marshmallow": {
                                             "read": false,
                                             "write": false,
-                                            "imports": [
-                                                {
-                                                    "import": "oarepo_runtime.i18n.ui_schema.I18nStrUIField"
-                                                },
-                                                {
-                                                    "import": "oarepo_runtime.i18n.ui_schema.MultilingualUIField"
-                                                }
-                                            ],
-                                            "field": "I18nStrUIField()",
-                                            "field-class": "MultilingualUIField"
+                                            "field": "{{oarepo_runtime.i18n.ui_schema.I18nStrUIField}}()",
+                                            "field-class": "oarepo_runtime.i18n.ui_schema.MultilingualUIField"
                                         },
                                         "detail": "string"
                                     },
@@ -5272,24 +4967,14 @@
                                         "type": "i18nStr",
                                         "marshmallow": {
                                             "class": null,
-                                            "field-class": "I18nStrField",
-                                            "imports": [
-                                                {
-                                                    "import": "oarepo_runtime.i18n.schema.I18nStrField"
-                                                }
-                                            ],
+                                            "field-class": "oarepo_runtime.i18n.schema.I18nStrField",
                                             "generate": false
                                         },
                                         "ui": {
                                             "detail": "multilingual",
                                             "marshmallow": {
                                                 "class": null,
-                                                "field-class": "I18nStrUIField",
-                                                "imports": [
-                                                    {
-                                                        "import": "oarepo_runtime.i18n.ui_schema.I18nStrUIField"
-                                                    }
-                                                ]
+                                                "field-class": "oarepo_runtime.i18n.ui_schema.I18nStrUIField"
                                             }
                                         },
                                         "sample": {
@@ -5436,23 +5121,13 @@
                         "marshmallow": {
                             "read": false,
                             "write": false,
-                            "field-class": "MultilingualField",
-                            "imports": [
-                                {
-                                    "import": "oarepo_runtime.i18n.schema.MultilingualField"
-                                }
-                            ]
+                            "field-class": "oarepo_runtime.i18n.schema.MultilingualField"
                         },
                         "ui": {
                             "marshmallow": {
                                 "read": false,
                                 "write": false,
-                                "field-class": "MultilingualUIField",
-                                "imports": [
-                                    {
-                                        "import": "oarepo_runtime.i18n.ui_schema.MultilingualUIField"
-                                    }
-                                ]
+                                "field-class": "oarepo_runtime.i18n.ui_schema.MultilingualUIField"
                             },
                             "detail": "multilingual"
                         },
@@ -5462,24 +5137,14 @@
                             "type": "i18nStr",
                             "marshmallow": {
                                 "class": null,
-                                "field-class": "I18nStrField",
-                                "imports": [
-                                    {
-                                        "import": "oarepo_runtime.i18n.schema.I18nStrField"
-                                    }
-                                ],
+                                "field-class": "oarepo_runtime.i18n.schema.I18nStrField",
                                 "generate": false
                             },
                             "ui": {
                                 "detail": "multilingual",
                                 "marshmallow": {
                                     "class": null,
-                                    "field-class": "I18nStrUIField",
-                                    "imports": [
-                                        {
-                                            "import": "oarepo_runtime.i18n.ui_schema.I18nStrUIField"
-                                        }
-                                    ]
+                                    "field-class": "oarepo_runtime.i18n.ui_schema.I18nStrUIField"
                                 }
                             },
                             "sample": {
@@ -5636,13 +5301,13 @@
                                     "properties": {
                                         "id": {
                                             "marshmallow": {
-                                                "field-class": "ma.fields.String",
+                                                "field-class": "marshmallow.fields.String",
                                                 "validators": [],
                                                 "imports": []
                                             },
                                             "ui": {
                                                 "marshmallow": {
-                                                    "field-class": "ma.fields.String",
+                                                    "field-class": "marshmallow.fields.String",
                                                     "validators": [],
                                                     "imports": []
                                                 }
@@ -5662,25 +5327,15 @@
                                         "title": {
                                             "marshmallow": {
                                                 "generate": false,
-                                                "field": "i18n_strings",
-                                                "field-class": "ma.fields.Nested",
+                                                "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                                "field-class": "marshmallow.fields.Nested",
                                                 "validators": [],
-                                                "class": "invenio_vocabularies.services.records.schema.TitleSchema",
-                                                "imports": [
-                                                    {
-                                                        "import": "invenio_vocabularies.services.schema.i18n_strings"
-                                                    }
-                                                ]
+                                                "class": "invenio_vocabularies.services.records.schema.TitleSchema"
                                             },
                                             "ui": {
                                                 "marshmallow": {
-                                                    "field": "VocabularyI18nStrUIField()",
-                                                    "generate": false,
-                                                    "imports": [
-                                                        {
-                                                            "import": "oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField"
-                                                        }
-                                                    ]
+                                                    "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                                    "generate": false
                                                 }
                                             },
                                             "mapping": {
@@ -5774,12 +5429,12 @@
                                             "type": "keyword",
                                             "marshmallow": {
                                                 "field-name": "_version",
-                                                "field-class": "ma.fields.String"
+                                                "field-class": "marshmallow.fields.String"
                                             },
                                             "ui": {
                                                 "marshmallow": {
                                                     "field-name": "_version",
-                                                    "field-class": "ma.fields.String"
+                                                    "field-class": "marshmallow.fields.String"
                                                 }
                                             }
                                         }
