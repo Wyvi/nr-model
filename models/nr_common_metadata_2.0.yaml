@@ -7,8 +7,6 @@ CommonMetadata:
   $id: CommonMetadata
   marshmallow:
     class: nr_metadata.common.services.records.schema_common.NRCommonMetadataSchema
-    imports:
-      - import: oarepo_runtime.marshmallow.BaseRecordSchema
   ui:
     marshmallow:
       class: nr_metadata.common.services.records.ui_schema_common.NRCommonMetadataUISchema
@@ -113,9 +111,7 @@ CommonMetadata:
       ^label.en: 'Keywords'
       ^ui:
         marshmallow:
-          field-class: NRSubjectListField
-          imports:
-            - import: nr_metadata.ui_schema.subjects.NRSubjectListField
+          field-class: nr_metadata.ui_schema.subjects.NRSubjectListField
 
       # subject by vocabularies or free-form keywords created by author(s)
       use: 'nr-datatypes#NRSubject'
@@ -219,9 +215,7 @@ CommonMetadata:
       ui:
         detail: string
         marshmallow:
-          field-class: MultilingualLocalizedUIField
-          imports:
-            - import: oarepo_runtime.i18n.ui_schema.MultilingualLocalizedUIField
+          field-class: oarepo_runtime.i18n.ui_schema.MultilingualLocalizedUIField
 
     series[]: # TODO: NRSeries
       # edice; tématicky sdružuje podobné věci, nemusí se jednat o pravou edici,

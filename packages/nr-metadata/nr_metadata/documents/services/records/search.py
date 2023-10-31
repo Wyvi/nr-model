@@ -6,6 +6,8 @@ from . import facets
 class DocumentsSearchOptions(InvenioSearchOptions):
     """DocumentsRecord search options."""
 
+    facet_groups = {}
+
     facets = {
         "_schema": facets._schema,
         "created": facets.created,
@@ -174,7 +176,4 @@ class DocumentsSearchOptions(InvenioSearchOptions):
         "syntheticFields_person": facets.syntheticFields_person,
         "updated": facets.updated,
         **getattr(InvenioSearchOptions, "facets", {}),
-    }
-    sort_options = {
-        **InvenioSearchOptions.sort_options,
     }

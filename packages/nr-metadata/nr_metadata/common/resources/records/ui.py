@@ -1,10 +1,11 @@
-from flask_resources import BaseListSchema, MarshmallowSerializer
+from flask_resources import BaseListSchema
 from flask_resources.serializers import JSONSerializer
+from oarepo_runtime.resources import LocalizedUIJSONSerializer
 
 from nr_metadata.common.services.records.ui_schema_common import NRCommonRecordUISchema
 
 
-class CommonUIJSONSerializer(MarshmallowSerializer):
+class CommonUIJSONSerializer(LocalizedUIJSONSerializer):
     """UI JSON serializer."""
 
     def __init__(self):

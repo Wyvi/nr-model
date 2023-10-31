@@ -1,14 +1,13 @@
 from invenio_pidstore.providers.recordid_v2 import RecordIdProviderV2
-from invenio_records.systemfields import ConstantField, RelationsField
+from invenio_records.systemfields import ConstantField
 from invenio_records_resources.records.api import Record as InvenioRecord
 from invenio_records_resources.records.systemfields import IndexField
 from invenio_records_resources.records.systemfields.pid import PIDField, PIDFieldContext
 from invenio_vocabularies.records.api import Vocabulary
 from oarepo_runtime.relations import PIDRelation, RelationsField
 
-from nr_metadata.common.records.dumper import CommonDumper
+from nr_metadata.common.records.dumpers.dumper import CommonDumper
 from nr_metadata.common.records.models import CommonMetadata
-from nr_metadata.common.records.multilingual_dumper import MultilingualSearchDumper
 
 
 class CommonIdProvider(RecordIdProviderV2):
@@ -24,8 +23,7 @@ class CommonRecord(InvenioRecord):
 
     pid = PIDField(provider=CommonIdProvider, context_cls=PIDFieldContext, create=True)
 
-    dumper_extensions = [MultilingualSearchDumper()]
-    dumper = CommonDumper(extensions=dumper_extensions)
+    dumper = CommonDumper()
 
     relations = RelationsField(
         accessRights=PIDRelation(
