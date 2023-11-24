@@ -1,9 +1,10 @@
 import marshmallow as ma
-from marshmallow import Schema
 from marshmallow import fields as ma_fields
 from marshmallow.fields import String
 from marshmallow.validate import OneOf
 from oarepo_runtime.i18n.ui_schema import I18nStrUIField
+from oarepo_runtime.services.schema.i18n_ui import I18nStrUIField
+from oarepo_runtime.services.schema.marshmallow import DictOnlySchema
 from oarepo_runtime.services.schema.ui import LocalizedEDTFInterval
 from oarepo_vocabularies.services.ui_schema import (
     HierarchyUISchema,
@@ -16,7 +17,7 @@ from nr_metadata.ui_schema.identifiers import (
 )
 
 
-class NREventUISchema(Schema):
+class NREventUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -29,7 +30,7 @@ class NREventUISchema(Schema):
     eventNameOriginal = ma_fields.String(required=True)
 
 
-class NRRelatedItemUISchema(Schema):
+class NRRelatedItemUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -64,7 +65,7 @@ class NRRelatedItemUISchema(Schema):
     itemYear = ma_fields.Integer()
 
 
-class NRFundingReferenceUISchema(Schema):
+class NRFundingReferenceUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -77,7 +78,7 @@ class NRFundingReferenceUISchema(Schema):
     projectName = ma_fields.String()
 
 
-class NRGeoLocationUISchema(Schema):
+class NRGeoLocationUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -86,7 +87,7 @@ class NRGeoLocationUISchema(Schema):
     geoLocationPoint = ma_fields.Nested(lambda: NRGeoLocationPointUISchema())
 
 
-class NRLocationUISchema(Schema):
+class NRLocationUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -95,7 +96,7 @@ class NRLocationUISchema(Schema):
     place = ma_fields.String(required=True)
 
 
-class NRRelatedItemContributorUISchema(Schema):
+class NRRelatedItemContributorUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -114,7 +115,7 @@ class NRRelatedItemContributorUISchema(Schema):
     role = ma_fields.Nested(lambda: NRAuthorityRoleVocabularyUISchema())
 
 
-class NRRelatedItemCreatorUISchema(Schema):
+class NRRelatedItemCreatorUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -131,7 +132,7 @@ class NRRelatedItemCreatorUISchema(Schema):
     nameType = ma_fields.String(validate=[OneOf(["Organizational", "Personal"])])
 
 
-class NRAccessRightsVocabularyUISchema(Schema):
+class NRAccessRightsVocabularyUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
 
@@ -142,7 +143,7 @@ class NRAccessRightsVocabularyUISchema(Schema):
     title = VocabularyI18nStrUIField()
 
 
-class NRAffiliationVocabularyUISchema(Schema):
+class NRAffiliationVocabularyUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
 
@@ -155,7 +156,7 @@ class NRAffiliationVocabularyUISchema(Schema):
     title = VocabularyI18nStrUIField()
 
 
-class NRAuthorityRoleVocabularyUISchema(Schema):
+class NRAuthorityRoleVocabularyUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
 
@@ -166,7 +167,7 @@ class NRAuthorityRoleVocabularyUISchema(Schema):
     title = VocabularyI18nStrUIField()
 
 
-class NRCountryVocabularyUISchema(Schema):
+class NRCountryVocabularyUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
 
@@ -177,7 +178,7 @@ class NRCountryVocabularyUISchema(Schema):
     title = VocabularyI18nStrUIField()
 
 
-class NRExternalLocationUISchema(Schema):
+class NRExternalLocationUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -186,7 +187,7 @@ class NRExternalLocationUISchema(Schema):
     externalLocationURL = ma_fields.String(required=True)
 
 
-class NRFunderVocabularyUISchema(Schema):
+class NRFunderVocabularyUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
 
@@ -197,7 +198,7 @@ class NRFunderVocabularyUISchema(Schema):
     title = VocabularyI18nStrUIField()
 
 
-class NRGeoLocationPointUISchema(Schema):
+class NRGeoLocationPointUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -206,7 +207,7 @@ class NRGeoLocationPointUISchema(Schema):
     pointLongitude = ma_fields.Float(required=True)
 
 
-class NRItemRelationTypeVocabularyUISchema(Schema):
+class NRItemRelationTypeVocabularyUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
 
@@ -217,7 +218,7 @@ class NRItemRelationTypeVocabularyUISchema(Schema):
     title = VocabularyI18nStrUIField()
 
 
-class NRLanguageVocabularyUISchema(Schema):
+class NRLanguageVocabularyUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
 
@@ -228,7 +229,7 @@ class NRLanguageVocabularyUISchema(Schema):
     title = VocabularyI18nStrUIField()
 
 
-class NRLicenseVocabularyUISchema(Schema):
+class NRLicenseVocabularyUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
 
@@ -239,7 +240,7 @@ class NRLicenseVocabularyUISchema(Schema):
     title = VocabularyI18nStrUIField()
 
 
-class NRResourceTypeVocabularyUISchema(Schema):
+class NRResourceTypeVocabularyUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
 
@@ -250,7 +251,7 @@ class NRResourceTypeVocabularyUISchema(Schema):
     title = VocabularyI18nStrUIField()
 
 
-class NRSeriesUISchema(Schema):
+class NRSeriesUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -259,7 +260,7 @@ class NRSeriesUISchema(Schema):
     seriesVolume = ma_fields.String()
 
 
-class NRSubjectCategoryVocabularyUISchema(Schema):
+class NRSubjectCategoryVocabularyUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
 
@@ -270,7 +271,7 @@ class NRSubjectCategoryVocabularyUISchema(Schema):
     title = VocabularyI18nStrUIField()
 
 
-class NRSubjectUISchema(Schema):
+class NRSubjectUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 

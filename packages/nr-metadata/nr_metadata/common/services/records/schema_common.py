@@ -4,8 +4,8 @@ from marshmallow import Schema
 from marshmallow import fields as ma_fields
 from marshmallow.validate import OneOf
 from marshmallow_utils.fields import TrimmedString
-from oarepo_runtime.i18n.schema import I18nStrField, MultilingualField
-from oarepo_runtime.marshmallow import BaseRecordSchema
+from oarepo_runtime.services.schema.i18n import I18nStrField, MultilingualField
+from oarepo_runtime.services.schema.marshmallow import BaseRecordSchema, DictOnlySchema
 from oarepo_runtime.services.schema.validation import CachedMultilayerEDTFValidator
 
 from nr_metadata.common.services.records.schema_datatypes import (
@@ -123,7 +123,7 @@ class NRCommonMetadataSchema(Schema):
     version = ma_fields.String()
 
 
-class AdditionalTitlesSchema(Schema):
+class AdditionalTitlesSchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -135,7 +135,7 @@ class AdditionalTitlesSchema(Schema):
     )
 
 
-class NRContributorSchema(Schema):
+class NRContributorSchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -154,7 +154,7 @@ class NRContributorSchema(Schema):
     role = ma_fields.Nested(lambda: NRAuthorityRoleVocabularySchema())
 
 
-class NRCreatorSchema(Schema):
+class NRCreatorSchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 

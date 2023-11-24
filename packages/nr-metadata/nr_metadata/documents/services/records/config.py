@@ -4,7 +4,8 @@ from invenio_records_resources.services import (
 )
 from invenio_records_resources.services import pagination_links
 from invenio_records_resources.services.records.components import DataComponent
-from oarepo_runtime.config.service import PermissionsPresetsConfigMixin
+from oarepo_runtime.services.config.service import PermissionsPresetsConfigMixin
+from oarepo_runtime.services.results import RecordList
 
 from nr_metadata.documents.records.api import DocumentsRecord
 from nr_metadata.documents.services.records.permissions import DocumentsPermissionPolicy
@@ -14,6 +15,8 @@ from nr_metadata.documents.services.records.search import DocumentsSearchOptions
 
 class DocumentsServiceConfig(PermissionsPresetsConfigMixin, InvenioRecordServiceConfig):
     """DocumentsRecord service config."""
+
+    result_list_cls = RecordList
 
     PERMISSIONS_PRESETS = ["everyone"]
 
@@ -41,6 +44,7 @@ class DocumentsServiceConfig(PermissionsPresetsConfigMixin, InvenioRecordService
     def links_item(self):
         return {
             "self": RecordLink("{+api}/nr-metadata-documents/{id}"),
+            "self_html": RecordLink("{+ui}/nr-metadata-documents/{id}"),
         }
 
     @property
