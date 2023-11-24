@@ -70,6 +70,7 @@ DocumentModel:
         institutions:
           type: taxonomy
           vocabulary-type: institutions
+          marshmallow:
             read: false
             write: false
         keywords_cs:
