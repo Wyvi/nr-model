@@ -68,8 +68,8 @@ DocumentModel:
             read: false
             write: false
         institutions:
-          type: keyword
-          marshmallow:
+          type: taxonomy
+          vocabulary-type: institutions
             read: false
             write: false
         keywords_cs:
@@ -82,6 +82,11 @@ DocumentModel:
           marshmallow:
             read: false
             write: false
+      marshmallow:
+        class: nr_metadata.documents.services.records.schema.NRDocumentSyntheticFieldsSchema
+      ui:
+        marshmallow:
+          class: nr_metadata.documents.services.records.ui_schema.NRDocumentSyntheticFieldsUISchema
 
     metadata:
       use: ['nr-documents#DocumentMetadata']
