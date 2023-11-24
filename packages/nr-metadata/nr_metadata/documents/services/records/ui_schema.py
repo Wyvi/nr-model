@@ -1,7 +1,7 @@
 import marshmallow as ma
-from marshmallow import Schema
 from marshmallow import fields as ma_fields
 from marshmallow.fields import String
+from oarepo_runtime.services.schema.marshmallow import DictOnlySchema
 from oarepo_runtime.services.schema.ui import InvenioUISchema, LocalizedDate
 from oarepo_vocabularies.services.ui_schema import (
     HierarchyUISchema,
@@ -50,7 +50,7 @@ class NRDocumentRecordUISchema(InvenioUISchema):
 
     metadata = ma_fields.Nested(lambda: NRDocumentMetadataUISchema())
 
-    syntheticFields = ma_fields.Nested(lambda: SyntheticFieldsUISchema())
+    syntheticFields = ma_fields.Nested(lambda: NRDocumentSyntheticFieldsUISchema())
 
 
 class NRDocumentMetadataUISchema(NRCommonMetadataUISchema):
@@ -79,7 +79,20 @@ class GeoLocationsItemUISchema(NRGeoLocationUISchema):
     geoLocationPoint = ma_fields.Nested(lambda: GeoLocationPointUISchema())
 
 
-class NRThesisUISchema(Schema):
+class NRDocumentSyntheticFieldsUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    institutions = ma_fields.Nested(lambda: InstitutionsUISchema())
+
+    keywords_cs = ma_fields.String()
+
+    keywords_en = ma_fields.String()
+
+    person = ma_fields.String()
+
+
+class NRThesisUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -194,6 +207,19 @@ class GeoLocationPointUISchema(NRGeoLocationPointUISchema):
         unknown = ma.RAISE
 
 
+class InstitutionsUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.INCLUDE
+
+    _id = String(data_key="id", attribute="id")
+
+    _version = String(data_key="@v", attribute="@v")
+
+    hierarchy = ma_fields.Nested(lambda: HierarchyUISchema())
+
+    title = VocabularyI18nStrUIField()
+
+
 class ItemContributorsItemUISchema(NRRelatedItemContributorUISchema):
     class Meta:
         unknown = ma.RAISE
@@ -237,7 +263,7 @@ class LanguagesItemUISchema(NRLanguageVocabularyUISchema):
     title = VocabularyI18nStrUIField()
 
 
-class NRDegreeGrantorUISchema(Schema):
+class NRDegreeGrantorUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
 
@@ -296,19 +322,6 @@ class SubjectCategoriesItemUISchema(NRSubjectCategoryVocabularyUISchema):
 class SubjectsItemUISchema(NRSubjectUISchema):
     class Meta:
         unknown = ma.RAISE
-
-
-class SyntheticFieldsUISchema(Schema):
-    class Meta:
-        unknown = ma.RAISE
-
-    institutions = ma_fields.String()
-
-    keywords_cs = ma_fields.String()
-
-    keywords_en = ma_fields.String()
-
-    person = ma_fields.String()
 
 
 class SystemIdentifiersItemUISchema(NRSystemIdentifierUISchema):

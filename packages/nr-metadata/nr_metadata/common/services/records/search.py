@@ -9,25 +9,17 @@ class CommonSearchOptions(InvenioSearchOptions):
     facet_groups = {}
 
     facets = {
-        "_schema": facets._schema,
-        "created": facets.created,
-        "_id": facets._id,
         "metadata_abstract_cs": facets.metadata_abstract_cs,
         "metadata_abstract_en": facets.metadata_abstract_en,
         "metadata_abstract_lang": facets.metadata_abstract_lang,
-        "metadata_abstract_value": facets.metadata_abstract_value,
         "metadata_accessRights": facets.metadata_accessRights,
         "metadata_accessibility_cs": facets.metadata_accessibility_cs,
         "metadata_accessibility_en": facets.metadata_accessibility_en,
         "metadata_accessibility_lang": facets.metadata_accessibility_lang,
-        "metadata_accessibility_value": facets.metadata_accessibility_value,
         "metadata_additionalTitles_title_cs": facets.metadata_additionalTitles_title_cs,
         "metadata_additionalTitles_title_en": facets.metadata_additionalTitles_title_en,
         "metadata_additionalTitles_title_lang": (
             facets.metadata_additionalTitles_title_lang
-        ),
-        "metadata_additionalTitles_title_value": (
-            facets.metadata_additionalTitles_title_value
         ),
         "metadata_additionalTitles_titleType": (
             facets.metadata_additionalTitles_titleType
@@ -79,7 +71,6 @@ class CommonSearchOptions(InvenioSearchOptions):
         "metadata_methods_cs": facets.metadata_methods_cs,
         "metadata_methods_en": facets.metadata_methods_en,
         "metadata_methods_lang": facets.metadata_methods_lang,
-        "metadata_methods_value": facets.metadata_methods_value,
         "metadata_objectIdentifiers_identifier": (
             facets.metadata_objectIdentifiers_identifier
         ),
@@ -152,7 +143,6 @@ class CommonSearchOptions(InvenioSearchOptions):
         "metadata_subjects_subject_cs": facets.metadata_subjects_subject_cs,
         "metadata_subjects_subject_en": facets.metadata_subjects_subject_en,
         "metadata_subjects_subject_lang": facets.metadata_subjects_subject_lang,
-        "metadata_subjects_subject_value": facets.metadata_subjects_subject_value,
         "metadata_subjects_subjectScheme": facets.metadata_subjects_subjectScheme,
         "metadata_subjects_valueURI": facets.metadata_subjects_valueURI,
         "metadata_systemIdentifiers_identifier": (
@@ -162,9 +152,6 @@ class CommonSearchOptions(InvenioSearchOptions):
         "metadata_technicalInfo_cs": facets.metadata_technicalInfo_cs,
         "metadata_technicalInfo_en": facets.metadata_technicalInfo_en,
         "metadata_technicalInfo_lang": facets.metadata_technicalInfo_lang,
-        "metadata_technicalInfo_value": facets.metadata_technicalInfo_value,
-        "metadata_title": facets.metadata_title,
         "metadata_version": facets.metadata_version,
-        "updated": facets.updated,
         **getattr(InvenioSearchOptions, "facets", {}),
     }

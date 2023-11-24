@@ -2,11 +2,9 @@ import marshmallow as ma
 from marshmallow import Schema
 from marshmallow import fields as ma_fields
 from marshmallow.validate import OneOf
-from oarepo_runtime.i18n.ui_schema import (
-    I18nStrUIField,
-    MultilingualLocalizedUIField,
-    MultilingualUIField,
-)
+from oarepo_runtime.i18n.ui_schema import MultilingualLocalizedUIField
+from oarepo_runtime.services.schema.i18n_ui import I18nStrUIField, MultilingualUIField
+from oarepo_runtime.services.schema.marshmallow import DictOnlySchema
 from oarepo_runtime.services.schema.ui import InvenioUISchema, LocalizedEDTF
 
 from nr_metadata.common.services.records.ui_schema_datatypes import (
@@ -117,7 +115,7 @@ class NRCommonMetadataUISchema(Schema):
     version = ma_fields.String()
 
 
-class AdditionalTitlesUISchema(Schema):
+class AdditionalTitlesUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -129,7 +127,7 @@ class AdditionalTitlesUISchema(Schema):
     )
 
 
-class NRContributorUISchema(Schema):
+class NRContributorUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -148,7 +146,7 @@ class NRContributorUISchema(Schema):
     role = ma_fields.Nested(lambda: NRAuthorityRoleVocabularyUISchema())
 
 
-class NRCreatorUISchema(Schema):
+class NRCreatorUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 

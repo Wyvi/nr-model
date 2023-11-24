@@ -1,9 +1,8 @@
 import marshmallow as ma
 from invenio_vocabularies.services.schema import i18n_strings
-from marshmallow import Schema
 from marshmallow import fields as ma_fields
 from marshmallow.fields import String
-from oarepo_runtime.marshmallow import BaseRecordSchema
+from oarepo_runtime.services.schema.marshmallow import BaseRecordSchema, DictOnlySchema
 from oarepo_runtime.services.schema.validation import validate_date
 from oarepo_vocabularies.services.schema import HierarchySchema
 
@@ -49,7 +48,7 @@ class NRDocumentRecordSchema(BaseRecordSchema):
 
     metadata = ma_fields.Nested(lambda: NRDocumentMetadataSchema())
 
-    syntheticFields = ma_fields.Nested(lambda: SyntheticFieldsSchema())
+    syntheticFields = ma_fields.Nested(lambda: NRDocumentSyntheticFieldsSchema())
 
 
 class NRDocumentMetadataSchema(NRCommonMetadataSchema):
@@ -80,7 +79,7 @@ class GeoLocationsItemSchema(NRGeoLocationSchema):
     geoLocationPoint = ma_fields.Nested(lambda: GeoLocationPointSchema())
 
 
-class NRThesisSchema(Schema):
+class NRThesisSchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -195,6 +194,19 @@ class GeoLocationPointSchema(NRGeoLocationPointSchema):
         unknown = ma.RAISE
 
 
+class InstitutionsSchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.INCLUDE
+
+    _id = String(data_key="id", attribute="id")
+
+    _version = String(data_key="@v", attribute="@v")
+
+    hierarchy = ma_fields.Nested(lambda: HierarchySchema())
+
+    title = i18n_strings
+
+
 class ItemContributorsItemSchema(NRRelatedItemContributorSchema):
     class Meta:
         unknown = ma.RAISE
@@ -238,7 +250,7 @@ class LanguagesItemSchema(NRLanguageVocabularySchema):
     title = i18n_strings
 
 
-class NRDegreeGrantorSchema(Schema):
+class NRDegreeGrantorSchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
 
@@ -249,6 +261,11 @@ class NRDegreeGrantorSchema(Schema):
     hierarchy = ma_fields.Nested(lambda: HierarchySchema())
 
     title = i18n_strings
+
+
+class NRDocumentSyntheticFieldsSchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
 
 
 class ObjectIdentifiersItemSchema(NRObjectIdentifierSchema):
@@ -295,11 +312,6 @@ class SubjectCategoriesItemSchema(NRSubjectCategoryVocabularySchema):
 
 
 class SubjectsItemSchema(NRSubjectSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class SyntheticFieldsSchema(Schema):
     class Meta:
         unknown = ma.RAISE
 

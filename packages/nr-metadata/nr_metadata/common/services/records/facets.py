@@ -2,18 +2,12 @@
 
 from flask_babelex import lazy_gettext as _
 from invenio_records_resources.services.records.facets import TermsFacet
-from oarepo_runtime.facets.date import DateTimeFacet
-from oarepo_runtime.facets.nested_facet import NestedLabeledFacet
+from oarepo_runtime.services.facets.date import DateTimeFacet
+from oarepo_runtime.services.facets.nested_facet import NestedLabeledFacet
 from oarepo_vocabularies.services.facets import (
     HierarchyVocabularyFacet,
     VocabularyFacet,
 )
-
-_schema = TermsFacet(field="$schema", label=_("$schema.label"))
-
-created = DateTimeFacet(field="created", label=_("created.label"))
-
-_id = TermsFacet(field="id", label=_("id.label"))
 
 metadata_abstract_cs = TermsFacet(
     field="metadata.abstract.cs.keyword", label=_("metadata/abstract.label")
@@ -27,14 +21,6 @@ metadata_abstract_lang = NestedLabeledFacet(
     path="metadata.abstract",
     nested_facet=TermsFacet(
         field="metadata.abstract.lang", label=_("metadata/abstract/lang.label")
-    ),
-)
-
-metadata_abstract_value = NestedLabeledFacet(
-    path="metadata.abstract",
-    nested_facet=TermsFacet(
-        field="metadata.abstract.value.keyword",
-        label=_("metadata/abstract/value.label"),
     ),
 )
 
@@ -60,14 +46,6 @@ metadata_accessibility_lang = NestedLabeledFacet(
     ),
 )
 
-metadata_accessibility_value = NestedLabeledFacet(
-    path="metadata.accessibility",
-    nested_facet=TermsFacet(
-        field="metadata.accessibility.value.keyword",
-        label=_("metadata/accessibility/value.label"),
-    ),
-)
-
 metadata_additionalTitles_title_cs = TermsFacet(
     field="metadata.additionalTitles.title.cs.keyword",
     label=_("metadata/additionalTitles/title.label"),
@@ -83,14 +61,6 @@ metadata_additionalTitles_title_lang = NestedLabeledFacet(
     nested_facet=TermsFacet(
         field="metadata.additionalTitles.title.lang",
         label=_("metadata/additionalTitles/title/lang.label"),
-    ),
-)
-
-metadata_additionalTitles_title_value = NestedLabeledFacet(
-    path="metadata.additionalTitles.title",
-    nested_facet=TermsFacet(
-        field="metadata.additionalTitles.title.value.keyword",
-        label=_("metadata/additionalTitles/title/value.label"),
     ),
 )
 
@@ -223,13 +193,6 @@ metadata_methods_lang = NestedLabeledFacet(
     path="metadata.methods",
     nested_facet=TermsFacet(
         field="metadata.methods.lang", label=_("metadata/methods/lang.label")
-    ),
-)
-
-metadata_methods_value = NestedLabeledFacet(
-    path="metadata.methods",
-    nested_facet=TermsFacet(
-        field="metadata.methods.value.keyword", label=_("metadata/methods/value.label")
     ),
 )
 
@@ -411,14 +374,6 @@ metadata_subjects_subject_lang = NestedLabeledFacet(
     ),
 )
 
-metadata_subjects_subject_value = NestedLabeledFacet(
-    path="metadata.subjects.subject",
-    nested_facet=TermsFacet(
-        field="metadata.subjects.subject.value.keyword",
-        label=_("metadata/subjects/subject/value.label"),
-    ),
-)
-
 metadata_subjects_subjectScheme = TermsFacet(
     field="metadata.subjects.subjectScheme",
     label=_("metadata/subjects/subjectScheme.label"),
@@ -454,20 +409,6 @@ metadata_technicalInfo_lang = NestedLabeledFacet(
     ),
 )
 
-metadata_technicalInfo_value = NestedLabeledFacet(
-    path="metadata.technicalInfo",
-    nested_facet=TermsFacet(
-        field="metadata.technicalInfo.value.keyword",
-        label=_("metadata/technicalInfo/value.label"),
-    ),
-)
-
-metadata_title = TermsFacet(
-    field="metadata.title.keyword", label=_("metadata/title.label")
-)
-
 metadata_version = TermsFacet(
     field="metadata.version", label=_("metadata/version.label")
 )
-
-updated = DateTimeFacet(field="updated", label=_("updated.label"))
