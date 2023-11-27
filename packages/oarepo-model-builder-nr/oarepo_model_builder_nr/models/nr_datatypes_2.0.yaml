@@ -380,7 +380,7 @@ NRSubject:
       ui:
         detail: string
         marshmallow:
-          field: "{{oarepo_runtime.i18n.ui_schema.I18nStrUIField}}()"
+          field: "{{oarepo_runtime.services.schema.i18n_ui.I18nStrUIField}}()"
     valueURI:
       type: url
       label.cs: Definice klíčového slova
