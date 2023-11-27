@@ -215,7 +215,7 @@ CommonMetadata:
       ui:
         detail: string
         marshmallow:
-          field-class: oarepo_runtime.i18n.ui_schema.MultilingualLocalizedUIField
+          field-class: oarepo_runtime.services.schema.i18n_ui.MultilingualLocalizedUIField
 
     series[]: # TODO: NRSeries
       # edice; tématicky sdružuje podobné věci, nemusí se jednat o pravou edici,
