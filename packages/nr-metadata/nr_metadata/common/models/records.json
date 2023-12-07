@@ -146,6 +146,10 @@
             "module": "nr_metadata.common.proxies",
             "generate": true
         },
+        "translations": {
+            "module": "nr_metadata.common.translations",
+            "alias": "common"
+        },
         "json-schema-settings": {
             "generate": true,
             "alias": "common",
@@ -179,8 +183,8 @@
             ],
             "extra-code": "",
             "extensions": [
-                "{{nr_metadata.common.records.dumpers.edtf.CommonEDTFIntervalDumperExt}}()",
-                "{{nr_metadata.common.records.dumpers.multilingual.MultilingualSearchDumperExt}}()"
+                "{{nr_metadata.common.records.dumpers.multilingual.MultilingualSearchDumperExt}}()",
+                "{{nr_metadata.common.records.dumpers.edtf.CommonEDTFIntervalDumperExt}}()"
             ],
             "imports": []
         },
@@ -239,9 +243,16 @@
             "list_schema_cls": "flask_resources.BaseListSchema",
             "format_serializer_cls": "flask_resources.serializers.JSONSerializer"
         },
-        "translations": {
-            "module": "nr_metadata.common.translations",
-            "alias": "common"
+        "multilingual-dumper": {
+            "generate": true,
+            "module": "nr_metadata.common.records.dumpers.multilingual",
+            "class": "nr_metadata.common.records.dumpers.multilingual.MultilingualSearchDumperExt",
+            "base-classes": [
+                "oarepo_runtime.records.dumpers.multilingual_dumper.MultilingualDumper"
+            ],
+            "extra-code": "",
+            "extensions": [],
+            "imports": []
         },
         "mapping": {
             "generate": true,
@@ -269,17 +280,6 @@
             "class": "nr_metadata.common.records.dumpers.edtf.CommonEDTFIntervalDumperExt",
             "base-classes": [
                 "oarepo_runtime.records.dumpers.edtf_interval.EDTFIntervalDumperExt"
-            ],
-            "extra-code": "",
-            "extensions": [],
-            "imports": []
-        },
-        "multilingual-dumper": {
-            "generate": true,
-            "module": "nr_metadata.common.records.dumpers.multilingual",
-            "class": "nr_metadata.common.records.dumpers.multilingual.MultilingualSearchDumperExt",
-            "base-classes": [
-                "oarepo_runtime.records.dumpers.multilingual_dumper.MultilingualDumper"
             ],
             "extra-code": "",
             "extensions": [],
@@ -2159,7 +2159,6 @@
                         "label.en": "Link to/from other resources:",
                         "items": {
                             "type": "object",
-                            "description": "linkdata, propojení přidružených dokumentů a datasetů.",
                             "ui": {
                                 "marshmallow": {
                                     "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRRelatedItemUISchema",
@@ -2171,6 +2170,7 @@
                                 "class": "nr_metadata.common.services.records.schema_datatypes.NRRelatedItemSchema",
                                 "generate": true
                             },
+                            "description": "linkdata, propojení přidružených dokumentů a datasetů.",
                             "label.cs": "Vazba na/z dalších zdrojů:",
                             "label.en": "Link to/from other resources:",
                             "properties": {
@@ -3061,7 +3061,6 @@
                                 "itemRelationType": {
                                     "type": "vocabulary",
                                     "vocabulary-type": "item-relation-types",
-                                    "description": "typ vztahu k původnímu popisovanému dok.",
                                     "ui": {
                                         "marshmallow": {
                                             "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRItemRelationTypeVocabularyUISchema",
@@ -3076,6 +3075,7 @@
                                         "unknown": "INCLUDE",
                                         "generate": true
                                     },
+                                    "description": "typ vztahu k původnímu popisovanému dok.",
                                     "label.cs": "Typ vazby",
                                     "label.en": "Relation type",
                                     "imports": [
