@@ -42,9 +42,12 @@ class SyntheticFieldsDumperExtension(SearchDumperExt):
         all_subjects = [
             item
             for subject in metadata.get("subjects", [])
-            for item in subject["subject"]
+            for item in subject.get("subject", [])
         ]
         for subject in all_subjects:
+            if "lang" not in subject or "value" not in subject["lang"]:
+                continue
+            
             if subject["lang"] == "cs":
                 data["syntheticFields"]["keywords_cs"].append(subject["value"])
 
