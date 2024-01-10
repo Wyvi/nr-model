@@ -273,7 +273,7 @@ class ObjectIdentifiersItemSchema(NRObjectIdentifierSchema):
         unknown = ma.RAISE
 
 
-class RightsItemSchema(NRLicenseVocabularySchema):
+class RightsSchema(NRLicenseVocabularySchema):
     class Meta:
         unknown = ma.INCLUDE
 

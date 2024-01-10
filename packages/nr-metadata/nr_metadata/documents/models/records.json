@@ -1787,6 +1787,24 @@
                         "label.cs": "Datum zveřejnění",
                         "label.en": "Date available"
                     },
+                    "dateIssued": {
+                        "type": "edtf",
+                        "ui": {
+                            "marshmallow": {
+                                "read": false,
+                                "write": false
+                            }
+                        },
+                        "marshmallow": {
+                            "read": false,
+                            "write": false
+                        },
+                        "sample": {
+                            "faker": "date"
+                        },
+                        "label.cs": "Datum vydání",
+                        "label.en": "Date issued"
+                    },
                     "dateModified": {
                         "type": "edtf",
                         "ui": {
@@ -4564,146 +4582,141 @@
                         }
                     },
                     "rights": {
-                        "type": "array",
-                        "label.cs": "Licence",
-                        "label.en": "License",
-                        "items": {
-                            "type": "vocabulary",
-                            "vocabulary-type": "licenses",
-                            "ui": {
-                                "marshmallow": {
-                                    "imports": [
-                                        {
-                                            "import": "nr_metadata.common.services.records.ui_schema_datatypes",
-                                            "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
-                                        }
-                                    ],
-                                    "base-classes": [
-                                        "nr_metadata.common.services.records.ui_schema_datatypes.NRLicenseVocabularyUISchema"
-                                    ],
-                                    "read": false,
-                                    "write": false,
-                                    "unknown": "INCLUDE",
-                                    "generate": true,
-                                    "class": "nr_metadata.documents.services.records.ui_schema.RightsItemUISchema"
-                                },
-                                "detail": "vocabulary_item",
-                                "edit": "vocabulary_item"
-                            },
+                        "type": "vocabulary",
+                        "vocabulary-type": "licenses",
+                        "ui": {
                             "marshmallow": {
                                 "imports": [
                                     {
-                                        "import": "nr_metadata.common.services.records.schema_datatypes",
-                                        "alias": "nr_metadata.common.services.records.schema_datatypes"
+                                        "import": "nr_metadata.common.services.records.ui_schema_datatypes",
+                                        "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
                                     }
                                 ],
                                 "base-classes": [
-                                    "nr_metadata.common.services.records.schema_datatypes.NRLicenseVocabularySchema"
+                                    "nr_metadata.common.services.records.ui_schema_datatypes.NRLicenseVocabularyUISchema"
                                 ],
                                 "read": false,
                                 "write": false,
                                 "unknown": "INCLUDE",
                                 "generate": true,
-                                "class": "nr_metadata.documents.services.records.schema.RightsItemSchema"
+                                "class": "nr_metadata.documents.services.records.ui_schema.RightsUISchema"
                             },
-                            "sample": [
-                                "CC BY",
-                                "CC BY-SA",
-                                "CC BY-NC",
-                                "CC BY-ND",
-                                "CC BY-NC-SA",
-                                "CC BY-NC-ND"
-                            ],
-                            "label.cs": "Licence",
-                            "label.en": "License",
+                            "detail": "vocabulary_item",
+                            "edit": "vocabulary_item"
+                        },
+                        "marshmallow": {
                             "imports": [
                                 {
-                                    "import": "invenio_vocabularies.records.api.Vocabulary"
+                                    "import": "nr_metadata.common.services.records.schema_datatypes",
+                                    "alias": "nr_metadata.common.services.records.schema_datatypes"
                                 }
                             ],
-                            "model": "vocabularies",
-                            "keys": [
-                                "id",
-                                "title"
+                            "base-classes": [
+                                "nr_metadata.common.services.records.schema_datatypes.NRLicenseVocabularySchema"
                             ],
-                            "pid-field": "Vocabulary.pid.with_type_ctx(\"licenses\")",
-                            "facets": {
-                                "args": [
-                                    "vocabulary='licenses'"
-                                ]
-                            },
-                            "properties": {
-                                "id": {
+                            "read": false,
+                            "write": false,
+                            "unknown": "INCLUDE",
+                            "generate": true,
+                            "class": "nr_metadata.documents.services.records.schema.RightsSchema"
+                        },
+                        "sample": [
+                            "CC BY",
+                            "CC BY-SA",
+                            "CC BY-NC",
+                            "CC BY-ND",
+                            "CC BY-NC-SA",
+                            "CC BY-NC-ND"
+                        ],
+                        "label.cs": "Licence",
+                        "label.en": "License",
+                        "imports": [
+                            {
+                                "import": "invenio_vocabularies.records.api.Vocabulary"
+                            }
+                        ],
+                        "model": "vocabularies",
+                        "keys": [
+                            "id",
+                            "title"
+                        ],
+                        "pid-field": "Vocabulary.pid.with_type_ctx(\"licenses\")",
+                        "facets": {
+                            "args": [
+                                "vocabulary='licenses'"
+                            ]
+                        },
+                        "properties": {
+                            "id": {
+                                "marshmallow": {
+                                    "field-class": "marshmallow.fields.String",
+                                    "validators": [],
+                                    "imports": []
+                                },
+                                "ui": {
                                     "marshmallow": {
                                         "field-class": "marshmallow.fields.String",
                                         "validators": [],
                                         "imports": []
-                                    },
-                                    "ui": {
-                                        "marshmallow": {
-                                            "field-class": "marshmallow.fields.String",
-                                            "validators": [],
-                                            "imports": []
-                                        }
-                                    },
-                                    "type": "keyword",
-                                    "mapping": {
-                                        "fields": {
-                                            "text": {
-                                                "type": "search_as_you_type"
-                                            }
-                                        }
-                                    },
-                                    "sample": {
-                                        "skip": true
                                     }
                                 },
-                                "title": {
+                                "type": "keyword",
+                                "mapping": {
+                                    "fields": {
+                                        "text": {
+                                            "type": "search_as_you_type"
+                                        }
+                                    }
+                                },
+                                "sample": {
+                                    "skip": true
+                                }
+                            },
+                            "title": {
+                                "marshmallow": {
+                                    "generate": false,
+                                    "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
+                                    "field-class": "marshmallow.fields.Nested",
+                                    "validators": [],
+                                    "class": "invenio_vocabularies.services.records.schema.TitleSchema"
+                                },
+                                "ui": {
                                     "marshmallow": {
-                                        "generate": false,
-                                        "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
-                                        "field-class": "marshmallow.fields.Nested",
-                                        "validators": [],
-                                        "class": "invenio_vocabularies.services.records.schema.TitleSchema"
-                                    },
-                                    "ui": {
-                                        "marshmallow": {
-                                            "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
-                                            "generate": false
-                                        }
-                                    },
-                                    "mapping": {
-                                        "dynamic": true,
-                                        "properties": {
-                                            "en": {
-                                                "type": "search_as_you_type",
-                                                "copy_to": "title_sort"
-                                            }
-                                        }
-                                    },
-                                    "type": "object",
-                                    "propertyNames": {
-                                        "pattern": "^[a-z]{2}$"
-                                    },
-                                    "additionalProperties": {
-                                        "type": "string"
+                                        "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
+                                        "generate": false
                                     }
                                 },
-                                "@v": {
-                                    "type": "keyword",
+                                "mapping": {
+                                    "dynamic": true,
+                                    "properties": {
+                                        "en": {
+                                            "type": "search_as_you_type",
+                                            "copy_to": "title_sort"
+                                        }
+                                    }
+                                },
+                                "type": "object",
+                                "propertyNames": {
+                                    "pattern": "^[a-z]{2}$"
+                                },
+                                "additionalProperties": {
+                                    "type": "string"
+                                }
+                            },
+                            "@v": {
+                                "type": "keyword",
+                                "marshmallow": {
+                                    "field-name": "_version",
+                                    "field-class": "marshmallow.fields.String"
+                                },
+                                "ui": {
                                     "marshmallow": {
                                         "field-name": "_version",
                                         "field-class": "marshmallow.fields.String"
-                                    },
-                                    "ui": {
-                                        "marshmallow": {
-                                            "field-name": "_version",
-                                            "field-class": "marshmallow.fields.String"
-                                        }
-                                    },
-                                    "facets": {
-                                        "facet": false
                                     }
+                                },
+                                "facets": {
+                                    "facet": false
                                 }
                             }
                         }

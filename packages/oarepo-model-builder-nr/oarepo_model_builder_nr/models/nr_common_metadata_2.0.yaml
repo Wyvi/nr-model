@@ -106,6 +106,17 @@ CommonMetadata:
       label.cs: Datum změny zdroje
       label.en: Date modified
 
+    dateIssued:
+      # The date the resource is publicly available in a repository.
+      #
+      # týká se dokumentu, nikoliv metadat!!!
+      # stejně jako pro data, budou se přes něj řídit přístupy - embargo
+      use: 'nr-datatypes#NRDate'
+      sample:
+        faker: date
+      label.cs: Datum vydání
+      label.en: Date issued
+
     subjects[]:
       ^label.cs: 'Klíčová slova'
       ^label.en: 'Keywords'
@@ -167,11 +178,11 @@ CommonMetadata:
       label.cs: Technické informace
       label.en: Technical information
 
-    rights[]:
+    rights:
       # Any license or copyright information for this resource. Taxonomy field.
       use: 'nr-datatypes#NRLicense'
-      ^label.cs: Licence
-      ^label.en: License
+      label.cs: Licence
+      label.en: License
       #^uniqueItems: true
 
     accessRights:

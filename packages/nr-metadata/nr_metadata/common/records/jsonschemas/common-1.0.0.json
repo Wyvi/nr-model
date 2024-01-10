@@ -244,6 +244,10 @@
                     "type": "string",
                     "format": "date-time"
                 },
+                "dateIssued": {
+                    "type": "string",
+                    "format": "date-time"
+                },
                 "dateModified": {
                     "type": "string",
                     "format": "date-time"
@@ -666,19 +670,16 @@
                     }
                 },
                 "rights": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string"
-                            },
-                            "title": {
-                                "type": "object"
-                            },
-                            "@v": {
-                                "type": "string"
-                            }
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "object"
+                        },
+                        "@v": {
+                            "type": "string"
                         }
                     }
                 },

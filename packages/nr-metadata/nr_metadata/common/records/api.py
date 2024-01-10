@@ -15,6 +15,7 @@ class CommonIdProvider(RecordIdProviderV2):
 
 
 class CommonRecord(InvenioRecord):
+
     model_cls = CommonMetadata
 
     schema = ConstantField("$schema", "local://common-1.0.0.json")

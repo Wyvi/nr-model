@@ -281,7 +281,7 @@ class ObjectIdentifiersItemUISchema(NRObjectIdentifierUISchema):
         unknown = ma.RAISE
 
 
-class RightsItemUISchema(NRLicenseVocabularyUISchema):
+class RightsUISchema(NRLicenseVocabularyUISchema):
     class Meta:
         unknown = ma.INCLUDE
 
