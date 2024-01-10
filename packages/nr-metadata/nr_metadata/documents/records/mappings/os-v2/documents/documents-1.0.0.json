@@ -394,6 +394,10 @@
                         "type": "date",
                         "format": "strict_date_time||strict_date_time_no_millis||strict_date||yyyy-MM||yyyy"
                     },
+                    "dateIssued": {
+                        "type": "date",
+                        "format": "strict_date_time||strict_date_time_no_millis||strict_date||yyyy-MM||yyyy"
+                    },
                     "dateModified": {
                         "type": "date",
                         "format": "strict_date_time||strict_date_time_no_millis||strict_date||yyyy-MM||yyyy"

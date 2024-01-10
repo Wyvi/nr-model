@@ -63,6 +63,8 @@ class NRCommonMetadataUISchema(Schema):
 
     dateAvailable = LocalizedEDTF()
 
+    dateIssued = LocalizedEDTF()
+
     dateModified = LocalizedEDTF()
 
     events = ma_fields.List(ma_fields.Nested(lambda: NREventUISchema()))
@@ -97,7 +99,7 @@ class NRCommonMetadataUISchema(Schema):
         lambda: NRResourceTypeVocabularyUISchema(), required=True
     )
 
-    rights = ma_fields.List(ma_fields.Nested(lambda: NRLicenseVocabularyUISchema()))
+    rights = ma_fields.Nested(lambda: NRLicenseVocabularyUISchema())
 
     series = ma_fields.List(ma_fields.Nested(lambda: NRSeriesUISchema()))
 

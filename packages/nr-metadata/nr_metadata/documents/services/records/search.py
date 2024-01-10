@@ -65,6 +65,7 @@ class DocumentsSearchOptions(InvenioSearchOptions):
         "metadata_creators_fullName": facets.metadata_creators_fullName,
         "metadata_creators_nameType": facets.metadata_creators_nameType,
         "metadata_dateAvailable": facets.metadata_dateAvailable,
+        "metadata_dateIssued": facets.metadata_dateIssued,
         "metadata_dateModified": facets.metadata_dateModified,
         "metadata_events_eventLocation_country": (
             facets.metadata_events_eventLocation_country

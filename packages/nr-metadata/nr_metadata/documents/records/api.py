@@ -15,6 +15,7 @@ class DocumentsIdProvider(RecordIdProviderV2):
 
 
 class DocumentsRecord(InvenioRecord):
+
     model_cls = DocumentsMetadata
 
     schema = ConstantField("$schema", "local://documents-1.0.0.json")

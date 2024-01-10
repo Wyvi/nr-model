@@ -64,6 +64,10 @@ class NRCommonMetadataSchema(Schema):
         validate=[CachedMultilayerEDTFValidator(types=(EDTFDate,))]
     )
 
+    dateIssued = TrimmedString(
+        validate=[CachedMultilayerEDTFValidator(types=(EDTFDate,))]
+    )
+
     dateModified = TrimmedString(
         validate=[CachedMultilayerEDTFValidator(types=(EDTFDate,))]
     )
@@ -102,7 +106,7 @@ class NRCommonMetadataSchema(Schema):
         lambda: NRResourceTypeVocabularySchema(), required=True
     )
 
-    rights = ma_fields.List(ma_fields.Nested(lambda: NRLicenseVocabularySchema()))
+    rights = ma_fields.Nested(lambda: NRLicenseVocabularySchema())
 
     series = ma_fields.List(ma_fields.Nested(lambda: NRSeriesSchema()))
 

@@ -18,6 +18,7 @@ class DocumentsExt:
             self.register_flask_extension(app)
 
     def register_flask_extension(self, app):
+
         app.extensions["nr_metadata.documents"] = self
 
     def init_config(self, app):
