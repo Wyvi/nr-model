@@ -182,7 +182,7 @@ create_virtual_environment() {
   if [ -d "$1" ] ; then
     rm -rf "$1"
   fi
-  python3.9 -m venv "$1"
+  python3 -m venv "$1"
 
   "$1"/bin/pip install -U setuptools pip wheel
 }
