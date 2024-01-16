@@ -82,11 +82,7 @@ class NRCommonMetadataSchema(Schema):
 
     geoLocations = ma_fields.List(ma_fields.Nested(lambda: NRGeoLocationSchema()))
 
-    languages = ma_fields.List(
-        ma_fields.Nested(lambda: NRLanguageVocabularySchema()),
-        required=True,
-        validate=[ma.validate.Length(min=1)],
-    )
+    languages = ma_fields.List(ma_fields.Nested(lambda: NRLanguageVocabularySchema()))
 
     methods = MultilingualField(I18nStrField())
 
@@ -135,7 +131,18 @@ class AdditionalTitlesSchema(DictOnlySchema):
 
     titleType = ma_fields.String(
         required=True,
-        validate=[OneOf(["translatedTitle", "alternativeTitle", "subtitle", "other"])],
+        validate=[
+            OneOf([
+                "translatedTitle",
+                "alternativeTitle",
+                "subtitle",
+                "other",
+                "translatedTitle",
+                "alternativeTitle",
+                "subtitle",
+                "other",
+            ])
+        ],
     )
 
 

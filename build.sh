@@ -58,6 +58,32 @@ compile_nr_metadata() {
       --include nr-documents="$base_dir/models/nr_documents_${MODEL_VERSION}.yaml"
   copy_version ../../version nr_metadata/version.py
   cp ../../README.md .
+
+  decho "Compilling nr-data"
+  "$MODEL_BUILDER_VENV"/bin/oarepo-compile-model nr-data.yaml -vvv \
+      --include nr-datatypes="$base_dir/models/nr_datatypes_${MODEL_VERSION}.yaml" \
+      --include nr-data="$base_dir/models/nr_data_${MODEL_VERSION}.yaml"
+  copy_version ../../version nr_metadata/version.py
+  cp ../../README.md .
+}
+
+compile_nr_data() {
+  cd "$base_dir/packages/nr-metadata"
+  create_builder_venv
+  rm -rf nr_metadata/common
+  rm -rf nr_metadata/data
+
+  decho "Compilling common metadata"
+  "$MODEL_BUILDER_VENV"/bin/oarepo-compile-model nr-metadata.yaml -vvv \
+      --include nr-common-metadata="$base_dir/models/nr_common_metadata_${MODEL_VERSION}.yaml" \
+      --include nr-datatypes="$base_dir/models/nr_datatypes_${MODEL_VERSION}.yaml"
+
+  decho "Compilling nr-data"
+  "$MODEL_BUILDER_VENV"/bin/oarepo-compile-model nr-data.yaml -vvv \
+      --include nr-datatypes="$base_dir/models/nr_datatypes_${MODEL_VERSION}.yaml" \
+      --include nr-data="$base_dir/models/nr_data_${MODEL_VERSION}.yaml"
+  copy_version ../../version nr_metadata/version.py
+  cp ../../README.md .
 }
 
 test_nr_metadata() {
@@ -111,6 +137,7 @@ create_builder_venv() {
     install_package "$MODEL_BUILDER_VENV" oarepo-model-builder-vocabularies
     install_package "$MODEL_BUILDER_VENV" oarepo-model-builder-ui
     install_package "$MODEL_BUILDER_VENV" oarepo-model-builder-multilingual
+    install_package "$MODEL_BUILDER_VENV" oarepo-model-builder-polymorphic
   fi
 }
 
@@ -134,6 +161,7 @@ create_builder_test_builder_venv() {
     install_package "$MODEL_BUILDER_TEST_BUILDER_VENV" oarepo-model-builder-vocabularies
     install_package "$MODEL_BUILDER_TEST_BUILDER_VENV" oarepo-model-builder-ui
     install_package "$MODEL_BUILDER_TEST_BUILDER_VENV" oarepo-model-builder-multilingual
+    install_package "$MODEL_BUILDER_TEST_BUILDER_VENV" oarepo-model-builder-polymorphic
   fi
   "$MODEL_BUILDER_TEST_BUILDER_VENV"/bin/pip install dist/oarepo_model_builder_nr*.whl
 }
@@ -154,7 +182,7 @@ create_virtual_environment() {
   if [ -d "$1" ] ; then
     rm -rf "$1"
   fi
-  python3 -m venv "$1"
+  python3.9 -m venv "$1"
 
   "$1"/bin/pip install -U setuptools pip wheel
 }

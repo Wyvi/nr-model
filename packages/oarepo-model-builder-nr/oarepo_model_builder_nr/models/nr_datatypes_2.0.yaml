@@ -3,6 +3,47 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
+NRPerson:
+  $id: NRPerson
+  properties:
+    nameType:
+      type: keyword
+      enum:
+        - "Personal"
+      label.cs: Typ
+      label.en: Type
+      hint.cs: Jako tvůrce je možné označit osobu nebo instituci.
+      hint.en: It is possible to designate a person or an institution as the creator/contributor.
+    fullName:
+      type: keyword
+      required: true
+      label.cs: Jméno autora
+      label.en: Author name
+      sample:
+        faker: name
+    givenName:
+      type: keyword
+    familyName:
+      type: keyword
+    authorityIdentifiers[]:
+      use: 'nr-datatypes#NRAuthorityIdentifier'
+    affiliations[]:
+      type: taxonomy
+      vocabulary-type: institutions
+      keys: [ id, title, props.ror ]
+      ui:
+        marshmallow:
+          class: nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema
+      marshmallow:
+        class: nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema
+      sample:
+        faker: company
+
+      #^uniqueItems: true
+      label.cs: Afiliace
+      label.en: Affiliation
+      hint.cs: Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.
+
 NRAuthorityIdentifier:
   $id: NRAuthorityIdentifier
   properties:

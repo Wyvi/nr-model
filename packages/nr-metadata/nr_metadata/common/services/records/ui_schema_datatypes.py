@@ -154,6 +154,8 @@ class NRAffiliationVocabularyUISchema(DictOnlySchema):
 
     title = VocabularyI18nStrUIField()
 
+    ror = ma_fields.String()
+
 
 class NRAuthorityRoleVocabularyUISchema(DictOnlySchema):
     class Meta:
@@ -281,3 +283,33 @@ class NRSubjectUISchema(DictOnlySchema):
     subjectScheme = ma_fields.String()
 
     valueURI = ma_fields.String()
+
+
+class NRAuthorityUIUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    affiliations = ma_fields.List(
+        ma_fields.Nested(lambda: AffiliationsItemNRAffiliationVocabularyUISchema())
+    )
+
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NRAuthorityIdentifierUISchema())
+    )
+
+    fullName = ma_fields.String(required=True)
+
+    nameType = ma_fields.String(validate=[OneOf(["Organizational", "Personal"])])
+
+
+class AffiliationsItemNRAffiliationVocabularyUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.INCLUDE
+
+    _id = String(data_key="id", attribute="id")
+
+    _version = String(data_key="@v", attribute="@v")
+
+    hierarchy = ma_fields.Nested(lambda: HierarchyUISchema())
+
+    title = VocabularyI18nStrUIField()

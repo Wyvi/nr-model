@@ -1,0 +1,145 @@
+NRDataMetadata:
+  $id: DataMetadata
+  marshmallow:
+    class: nr_metadata.data.services.records.schema.NRDataMetadataSchema
+  ui:
+    marshmallow:
+      class: nr_metadata.data.services.records.ui_schema.NRDataMetadataUISchema
+  properties:
+    dateAvailable: date
+      # dateAvailable might not be filled if real
+      # date (precision days) is not known
+    publicationYear:
+      required: true
+      type: integer
+    dateModified: date #should be date? why not edtf as in nr_common_md?
+    dateCollected:
+      use: 'nr-datatypes#NRDateOrRange'
+    dateCreated:
+      use: 'nr-datatypes#NRDateOrRange'
+    dateIssued:
+      use: 'nr-datatypes#NRDate'
+      sample:
+        faker: date
+      label.cs: Datum vydání
+      label.en: Date issued
+    dateValidTo:
+      use: 'nr-datatypes#NRDate'
+    dateWithdrawn:
+      type: object
+      properties:
+        dateInformation: keyword
+        date: date
+    title:
+      type: fulltext+keyword # Main (original) title of the object/work.
+      required: true
+      label.cs: Název
+      label.en: Title
+    additionalTitles[]:
+      # Additional titles of the object/work such as subtitle, translatedTitle and alternativeTitle.
+      ^label.cs: Další názvy
+      ^label.en: Additional titles
+      properties:
+        title:
+          type: i18nStr
+          required: true
+        titleType:
+          type: keyword
+          required: true
+          label.cs: Druh názvu
+          label.en: Title type
+          enum: [ translatedTitle, alternativeTitle, subtitle, other ]
+      marshmallow:
+        class: nr_metadata.common.services.records.schema_common.AdditionalTitlesSchema
+      ui:
+        detail: additionalTitle
+        marshmallow:
+          class: nr_metadata.common.services.records.ui_schema_common.AdditionalTitlesUISchema
+
+    subjects[]:
+      use: 'nr-datatypes#NRSubject'
+    notes[]:
+      # Free-form note for any comment that couldn't be inserted in any other fields.
+      type: fulltext
+      #^uniqueItems: true
+      ^label.cs: Poznámky
+      ^label.en: Notes
+    abstract:
+      required: true
+      type: multilingual
+      label.cs: Abstrakt
+      label.en: Abstract
+    methods:
+      type: multilingual
+    technicalInfo:
+      type: multilingual
+    resourceType:
+      use: 'nr-datatypes#NRResourceType'
+      required: true
+    publishers[]:
+      type: taxonomy
+      vocabulary-type: institutions
+      keys: [ id, title, props.ror ]
+    subjectCategories[]:
+      use: 'nr-datatypes#NRSubjectCategory'
+    languages[]:
+      use: 'nr-datatypes#NRLanguage'
+    accessRights:
+      use: 'nr-datatypes#NRAccessRights'
+    version: keyword
+    fundingReferences[]:
+      use: 'nr-datatypes#NRFundingReference'
+    geoLocations[]:
+      use: 'nr-datatypes#NRGeoLocation'
+    objectIdentifiers[]:
+      use: 'nr-datatypes#NRObjectPID'
+      properties:
+        status: keyword
+    creators[]:
+      use: 'nr-datatypes#NRAuthority'
+    contributors[]:
+      use: 'nr-datatypes#NRPerson'
+      properties:
+        contributorType:
+          required: true
+          type: vocabulary
+          vocabulary-type: contributor-roles
+    relatedItems[]:
+      properties:
+        itemTitle: fulltext
+        itemCreators[]:
+          use: 'nr-datatypes#NRAuthority'
+        itemContributors[]:
+          use: 'nr-datatypes#NRPerson'
+          properties:
+            contributorType:
+              type: vocabulary
+              vocabulary-type: contributor-types
+        itemPIDs[]:
+          use: 'nr-datatypes#NRObjectPID'
+        itemURL: keyword
+        itemYear: date
+        itemVolume: keyword
+        itemIssue: keyword
+        itemStartPage: keyword
+        itemEndPage: keyword
+        itemPublisher: keyword
+        itemRelationType:
+          type: vocabulary
+          vocabulary-type: item-relation-types
+          required: true
+        itemResourceType:
+          type: vocabulary
+          vocabulary-type: resource-types
+          required: true
+DataModel:
+  $id: DataModel
+  marshmallow:
+    class: nr_metadata.data.services.records.schema.NRDataRecordSchema
+  ui:
+    marshmallow:
+      class: nr_metadata.data.services.records.ui_schema.NRDataRecordUISchema
+  use: [invenio]
+  properties:
+    metadata:
+      use: ['nr-data#DataMetadata']

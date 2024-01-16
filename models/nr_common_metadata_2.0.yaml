@@ -107,10 +107,6 @@ CommonMetadata:
       label.en: Date modified
 
     dateIssued:
-      # The date the resource is publicly available in a repository.
-      #
-      # týká se dokumentu, nikoliv metadat!!!
-      # stejně jako pro data, budou se přes něj řídit přístupy - embargo
       use: 'nr-datatypes#NRDate'
       sample:
         faker: date
@@ -149,8 +145,6 @@ CommonMetadata:
       use: 'nr-datatypes#NRLanguage'
       ^label.cs: Jazyk
       ^label.en: Language
-      ^minItems: 1
-      ^required: true
       #^uniqueItems: true
 
     notes[]:
