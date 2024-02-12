@@ -45,7 +45,6 @@ CommonMetadata:
       ^required: true
       ^label.cs: Autoři
       ^label.en: Authors
-
       use: 'nr-datatypes#NRAuthority'
       marshmallow:
         class: nr_metadata.common.services.records.schema_common.NRCreatorSchema
@@ -95,17 +94,6 @@ CommonMetadata:
       label.cs: Datum zveřejnění
       label.en: Date available
 
-    dateModified:
-      # The date of the last update to the resource, not metadata
-      #
-      # týká se dokumentu/obsahu, nikoliv metadat!!!
-      # neukazuje se ve vkládacím formuláři. jen při editaci záznamu!
-      use: 'nr-datatypes#NRDate'
-      sample:
-        faker: date
-      label.cs: Datum změny zdroje
-      label.en: Date modified
-
     dateIssued:
       use: 'nr-datatypes#NRDate'
       sample:
@@ -114,24 +102,14 @@ CommonMetadata:
       label.en: Date issued
 
     subjects[]:
+      # subject by vocabularies or free-form keywords created by author(s)
+      use: 'nr-datatypes#NRSubject'
       ^label.cs: 'Klíčová slova'
       ^label.en: 'Keywords'
+      #^uniqueItems: true
       ^ui:
         marshmallow:
           field-class: nr_metadata.ui_schema.subjects.NRSubjectListField
-
-      # subject by vocabularies or free-form keywords created by author(s)
-      use: 'nr-datatypes#NRSubject'
-      #^uniqueItems: true
-
-    publishers[]:
-      # volný zápis vydavatele
-      type: fulltext
-      #^uniqueItems: true
-      sample:
-        faker: company
-      ^label.cs: Vydavatelé
-      ^label.en: Publishers
 
     subjectCategories[]:
       # FRASCATI oborové třídění - může sloužit jako podklad pro oborové filtrování
@@ -174,9 +152,7 @@ CommonMetadata:
 
     rights:
       # Any license or copyright information for this resource. Taxonomy field.
-      use: 'nr-datatypes#NRLicense'
-      label.cs: Licence
-      label.en: License
+      use: 'nr-datatypes#NRRights'
       #^uniqueItems: true
 
     accessRights:
@@ -226,12 +202,9 @@ CommonMetadata:
       # edice; tématicky sdružuje podobné věci, nemusí se jednat o pravou edici,
       # ale tagování/grupování podobných záznamů
       #^uniqueItems: true
-      ^label.cs: Série
-      ^label.en: Series
       use: 'nr-datatypes#NRSeries'
-
-    externalLocation: # TODO: NRExternalLocation
-      use: 'nr-datatypes#NRExternalLocation'
+      ^label.cs: Edice
+      ^label.en: Series
 
     originalRecord:
       # odkaz na původní záznam, zobrazovat koncovému uživateli v detailu záznamu

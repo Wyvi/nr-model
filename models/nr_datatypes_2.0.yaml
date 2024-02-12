@@ -558,10 +558,11 @@ NRLanguage:
   marshmallow:
     class: nr_metadata.common.services.records.schema_datatypes.NRLanguageVocabularySchema
 
-NRLicense:
-  $id: NRLicense
+NRRights:
+  $id: NRRights
+
   type: vocabulary
-  vocabulary-type: licenses
+  vocabulary-type: rights
   sample:
     - 'CC BY'
     - 'CC BY-SA'
@@ -569,13 +570,13 @@ NRLicense:
     - 'CC BY-ND'
     - 'CC BY-NC-SA'
     - 'CC BY-NC-ND'
-  label.cs: Licence
-  label.en: License
+  label.cs: Práva/Licence
+  label.en: Rights/Licenses
   ui:
     marshmallow:
-      class: nr_metadata.common.services.records.ui_schema_datatypes.NRLicenseVocabularyUISchema
+      class: nr_metadata.common.services.records.ui_schema_datatypes.NRRightsVocabularyUISchema
   marshmallow:
-    class: nr_metadata.common.services.records.schema_datatypes.NRLicenseVocabularySchema
+    class: nr_metadata.common.services.records.schema_datatypes.NRRightsVocabularySchema
 
 NRAccessRights:
   $id: NRAccessRights
@@ -592,7 +593,7 @@ NRAccessRights:
 
 NRSeries:
   $id: NRSeries
-  label.cs: Série
+  label.cs: Edice
   label.en: Series
   # edice; tématicky sdružuje podobné věci, nemusí se jednat o pravou edici,
   # ale tagování/grupování podobných záznamů
