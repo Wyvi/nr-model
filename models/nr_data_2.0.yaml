@@ -13,7 +13,7 @@ NRDataMetadata:
     dateCreated:
       use: 'nr-datatypes#NRDateOrRange'
     dateValidTo:
-      use: 'nr-datatypes#NRDate'
+      date: date
     dateWithdrawn:
       type: object
       properties:
@@ -22,6 +22,8 @@ NRDataMetadata:
     abstract:
       required: true
     publishers[]:
+      #^uniqueItems: true
+      ^minItems: 1
       type: taxonomy
       vocabulary-type: institutions
       keys: [ id, title, props.ror ]

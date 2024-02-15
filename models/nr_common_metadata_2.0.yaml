@@ -63,7 +63,7 @@ CommonMetadata:
       ^label.en: Contributors
       #^uniqueItems: true
       properties:
-        role:
+        contributorType:
           use: 'nr-datatypes#NRAuthorityRole'
         fullName:
           label.cs: Jméno přispěvatele
@@ -88,7 +88,7 @@ CommonMetadata:
       #
       # týká se dokumentu, nikoliv metadat!!!
       # stejně jako pro data, budou se přes něj řídit přístupy - embargo
-      use: 'nr-datatypes#NRDate'
+      date: date
       sample:
         faker: date
       label.cs: Datum zveřejnění
@@ -187,6 +187,7 @@ CommonMetadata:
       #^uniqueItems: true
 
     accessibility:
+      # pro harvest
       # textové vyjádření dostupnosti souborů, primárně pro harvestované zdroje.
       # nastavuje se pro každý zdroj zvlášť během konverze podle dostupnosti souborů
       # ve zdrojovém systému. ve vkládacím formuláři by bylo pouze pro restricted access
@@ -207,6 +208,7 @@ CommonMetadata:
       ^label.en: Series
 
     originalRecord:
+      # pro harvest
       # odkaz na původní záznam, zobrazovat koncovému uživateli v detailu záznamu
       # jako původní místo uložení. objevuje se jen u harvestu
       type: url
@@ -223,11 +225,14 @@ CommonMetadata:
       #^uniqueItems: true
 
     systemIdentifiers[]:
+      # pro harvest
+      #^uniqueItems: true
       use: 'nr-datatypes#NRSystemIdentifier'
       ^label.cs: Systémové identifikátory
       ^label.en: System identifiers
 
     events[]:
+      #^uniqueItems: true
       use: 'nr-datatypes#NREvent'
       ^label.cs: Události
       ^label.en: Events

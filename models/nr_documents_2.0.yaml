@@ -48,7 +48,8 @@ NRDocumentMetadata:
           type: keyword
           ^label.cs: Oblasti studia
           ^label.en: Study fields
-    collection:
+    collection[]:
+      #^uniqueItems: true
       type: keyword
       label.cs: Kolekce
       label.en: Collection

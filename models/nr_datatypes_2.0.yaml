@@ -146,7 +146,7 @@ NRObjectPID:
     scheme:
       type: keyword
       required: true
-      enum: [DOI, Handle, ISBN, ISSN, RIV]
+      enum: [DOI, Handle, ISBN, ISSN, RIV, IGSN]
       label.cs: Typ identifikátoru
       label.en: Identifier type
   ui:
@@ -282,7 +282,7 @@ NRRelatedItem:
       marshmallow:
         class: nr_metadata.common.services.records.schema_datatypes.NRRelatedItemContributorSchema
       properties:
-        role:
+        contributorType:
           use: 'nr-datatypes#NRAuthorityRole'
         affiliations[]:
           ^label.cs: Afiliace
@@ -469,7 +469,6 @@ NRGeoLocation:
     geoLocationPlace:
       description: Free description of the location; ie. Atlantic Ocean
       type: keyword
-      required: true
     geoLocationPoint:
       properties:
         pointLongitude:
