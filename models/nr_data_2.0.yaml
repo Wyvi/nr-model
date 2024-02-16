@@ -13,12 +13,12 @@ NRDataMetadata:
     dateCreated:
       use: 'nr-datatypes#NRDateOrRange'
     dateValidTo:
-      date: date
+      type: date
     dateWithdrawn:
       type: object
       properties:
         dateInformation: keyword
-        date: date
+        type: date
     abstract:
       required: true
     publishers[]:

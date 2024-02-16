@@ -52,10 +52,6 @@ CommonMetadata:
         detail: creator
         marshmallow:
           class: nr_metadata.common.services.records.ui_schema_common.NRCreatorUISchema
-      properties:
-        affiliations[]:
-          type: taxonomy
-          vocabulary-type: institutions
 
     contributors[]:
       use: 'nr-datatypes#NRAuthority'
@@ -64,13 +60,10 @@ CommonMetadata:
       #^uniqueItems: true
       properties:
         contributorType:
-          use: 'nr-datatypes#NRAuthorityRole'
+          use: 'nr-datatypes#NRContributorType'
         fullName:
           label.cs: Jméno přispěvatele
           label.en: Contributor name
-        affiliations[]:
-          type: taxonomy
-          vocabulary-type: institutions
       ui:
         detail: contributor
         marshmallow:
@@ -88,7 +81,7 @@ CommonMetadata:
       #
       # týká se dokumentu, nikoliv metadat!!!
       # stejně jako pro data, budou se přes něj řídit přístupy - embargo
-      date: date
+      type: date
       sample:
         faker: date
       label.cs: Datum zveřejnění
