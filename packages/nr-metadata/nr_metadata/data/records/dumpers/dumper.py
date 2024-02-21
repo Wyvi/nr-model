@@ -9,3 +9,6 @@ class DataDumper(SearchDumper):
 
     extensions = [MultilingualSearchDumperExt(), DataEDTFIntervalDumperExt()]
     extensions = [MultilingualSearchDumperExt(), DataEDTFIntervalDumperExt()]
+    extensions = [DataEDTFIntervalDumperExt(), MultilingualSearchDumperExt()]
+    extensions = [DataEDTFIntervalDumperExt(), MultilingualSearchDumperExt()]
+    extensions = [DataEDTFIntervalDumperExt(), MultilingualSearchDumperExt()]

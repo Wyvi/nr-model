@@ -1,9 +1,14 @@
 import marshmallow as ma
+from edtf import Date as EDTFDate
 from invenio_vocabularies.services.schema import i18n_strings
 from marshmallow import fields as ma_fields
 from marshmallow.fields import String
+from marshmallow_utils.fields import TrimmedString
 from oarepo_runtime.services.schema.marshmallow import BaseRecordSchema, DictOnlySchema
-from oarepo_runtime.services.schema.validation import validate_date
+from oarepo_runtime.services.schema.validation import (
+    CachedMultilayerEDTFValidator,
+    validate_date,
+)
 from oarepo_vocabularies.services.schema import HierarchySchema
 
 from nr_metadata.common.services.records.schema_common import (
@@ -15,7 +20,6 @@ from nr_metadata.common.services.records.schema_common import (
 from nr_metadata.common.services.records.schema_datatypes import (
     NRAccessRightsVocabularySchema,
     NRAffiliationVocabularySchema,
-    NRAuthorityRoleVocabularySchema,
     NRCountryVocabularySchema,
     NREventSchema,
     NRExternalLocationSchema,
@@ -25,19 +29,20 @@ from nr_metadata.common.services.records.schema_datatypes import (
     NRGeoLocationSchema,
     NRItemRelationTypeVocabularySchema,
     NRLanguageVocabularySchema,
-    NRLicenseVocabularySchema,
     NRLocationSchema,
+    NRObjectIdentifierSchema,
+    NROrganizationIdentifierSchema,
+    NROrganizationSchema,
+    NRPersonIdentifierSchema,
+    NRPersonSchema,
     NRRelatedItemContributorSchema,
     NRRelatedItemCreatorSchema,
     NRRelatedItemSchema,
     NRResourceTypeVocabularySchema,
+    NRRightsVocabularySchema,
     NRSeriesSchema,
     NRSubjectCategoryVocabularySchema,
     NRSubjectSchema,
-)
-from nr_metadata.schema.identifiers import (
-    NRAuthorityIdentifierSchema,
-    NRObjectIdentifierSchema,
     NRSystemIdentifierSchema,
 )
 
@@ -59,17 +64,48 @@ class NRDocumentMetadataSchema(NRCommonMetadataSchema):
         ma_fields.Nested(lambda: AdditionalTitlesItemSchema())
     )
 
-    collection = ma_fields.String()
-
     contributors = ma_fields.List(ma_fields.Nested(lambda: ContributorsItemSchema()))
 
-    creators = ma_fields.List(
-        ma_fields.Nested(lambda: CreatorsItemSchema()),
-        required=True,
-        validate=[ma.validate.Length(min=1)],
+    dateModified = TrimmedString(
+        validate=[CachedMultilayerEDTFValidator(types=(EDTFDate,))]
     )
 
+    externalLocation = ma_fields.Nested(lambda: NRExternalLocationSchema())
+
+    publishers = ma_fields.List(ma_fields.String())
+
     thesis = ma_fields.Nested(lambda: NRThesisSchema())
+
+
+class RelatedItemsItemSchema(NRRelatedItemSchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    itemContributors = ma_fields.List(
+        ma_fields.Nested(lambda: ItemContributorsItemSchema())
+    )
+
+
+class ContributorsItemSchema(NRContributorSchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    Organizational = ma_fields.Nested(lambda: OrganizationalSchema())
+
+    Personal = ma_fields.Nested(lambda: PersonalSchema())
+
+    type_field = "nameType"
+
+
+class CreatorsItemSchema(NRCreatorSchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    Organizational = ma_fields.Nested(lambda: OrganizationalSchema())
+
+    Personal = ma_fields.Nested(lambda: PersonalSchema())
+
+    type_field = "nameType"
 
 
 class GeoLocationsItemSchema(NRGeoLocationSchema):
@@ -77,6 +113,28 @@ class GeoLocationsItemSchema(NRGeoLocationSchema):
         unknown = ma.RAISE
 
     geoLocationPoint = ma_fields.Nested(lambda: GeoLocationPointSchema())
+
+
+class ItemContributorsItemSchema(NRRelatedItemContributorSchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    Organizational = ma_fields.Nested(lambda: OrganizationalSchema())
+
+    Personal = ma_fields.Nested(lambda: PersonalSchema())
+
+    type_field = "nameType"
+
+
+class ItemCreatorsItemSchema(NRRelatedItemCreatorSchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    Organizational = ma_fields.Nested(lambda: OrganizationalSchema())
+
+    Personal = ma_fields.Nested(lambda: PersonalSchema())
+
+    type_field = "nameType"
 
 
 class NRThesisSchema(DictOnlySchema):
@@ -90,17 +148,6 @@ class NRThesisSchema(DictOnlySchema):
     degreeGrantors = ma_fields.List(ma_fields.Nested(lambda: NRDegreeGrantorSchema()))
 
     studyFields = ma_fields.List(ma_fields.String())
-
-
-class RelatedItemsItemSchema(NRRelatedItemSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-    itemContributors = ma_fields.List(
-        ma_fields.Nested(lambda: ItemContributorsItemSchema())
-    )
-
-    itemCreators = ma_fields.List(ma_fields.Nested(lambda: ItemCreatorsItemSchema()))
 
 
 class AccessRightsSchema(NRAccessRightsVocabularySchema):
@@ -129,15 +176,12 @@ class AffiliationsItemSchema(NRAffiliationVocabularySchema):
 
     hierarchy = ma_fields.Nested(lambda: HierarchySchema())
 
+    ror = ma_fields.String()
+
     title = i18n_strings
 
 
-class AuthorityIdentifiersItemSchema(NRAuthorityIdentifierSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class ContributorsItemSchema(NRContributorSchema):
+class AuthorityIdentifiersItemSchema(NROrganizationIdentifierSchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -153,22 +197,12 @@ class CountrySchema(NRCountryVocabularySchema):
     title = i18n_strings
 
 
-class CreatorsItemSchema(NRCreatorSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
 class EventLocationSchema(NRLocationSchema):
     class Meta:
         unknown = ma.RAISE
 
 
 class EventsItemSchema(NREventSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class ExternalLocationSchema(NRExternalLocationSchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -205,16 +239,6 @@ class InstitutionsSchema(DictOnlySchema):
     hierarchy = ma_fields.Nested(lambda: HierarchySchema())
 
     title = i18n_strings
-
-
-class ItemContributorsItemSchema(NRRelatedItemContributorSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class ItemCreatorsItemSchema(NRRelatedItemCreatorSchema):
-    class Meta:
-        unknown = ma.RAISE
 
 
 class ItemRelationTypeSchema(NRItemRelationTypeVocabularySchema):
@@ -273,18 +297,22 @@ class ObjectIdentifiersItemSchema(NRObjectIdentifierSchema):
         unknown = ma.RAISE
 
 
-class RightsSchema(NRLicenseVocabularySchema):
+class OrganizationalSchema(NROrganizationSchema):
     class Meta:
-        unknown = ma.INCLUDE
-
-    _id = String(data_key="id", attribute="id")
-
-    _version = String(data_key="@v", attribute="@v")
-
-    title = i18n_strings
+        unknown = ma.RAISE
 
 
-class RoleSchema(NRAuthorityRoleVocabularySchema):
+class PersonalAuthorityIdentifiersItemSchema(NRPersonIdentifierSchema):
+    class Meta:
+        unknown = ma.RAISE
+
+
+class PersonalSchema(NRPersonSchema):
+    class Meta:
+        unknown = ma.RAISE
+
+
+class RightsSchema(NRRightsVocabularySchema):
     class Meta:
         unknown = ma.INCLUDE
 

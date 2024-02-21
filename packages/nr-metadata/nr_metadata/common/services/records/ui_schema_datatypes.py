@@ -10,11 +10,6 @@ from oarepo_vocabularies.services.ui_schema import (
     VocabularyI18nStrUIField,
 )
 
-from nr_metadata.ui_schema.identifiers import (
-    NRAuthorityIdentifierUISchema,
-    NRObjectIdentifierUISchema,
-)
-
 
 class NREventUISchema(DictOnlySchema):
     class Meta:
@@ -81,7 +76,7 @@ class NRGeoLocationUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
-    geoLocationPlace = ma_fields.String(required=True)
+    geoLocationPlace = ma_fields.String()
 
     geoLocationPoint = ma_fields.Nested(lambda: NRGeoLocationPointUISchema())
 
@@ -95,6 +90,27 @@ class NRLocationUISchema(DictOnlySchema):
     place = ma_fields.String(required=True)
 
 
+class NRPersonUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    affiliations = ma_fields.List(
+        ma_fields.Nested(lambda: NRAffiliationVocabularyUISchema())
+    )
+
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NRPersonIdentifierUISchema())
+    )
+
+    familyName = ma_fields.String()
+
+    fullName = ma_fields.String(required=True)
+
+    givenName = ma_fields.String()
+
+    nameType = ma_fields.String(validate=[OneOf(["Personal"])])
+
+
 class NRRelatedItemContributorUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
@@ -104,14 +120,18 @@ class NRRelatedItemContributorUISchema(DictOnlySchema):
     )
 
     authorityIdentifiers = ma_fields.List(
-        ma_fields.Nested(lambda: NRAuthorityIdentifierUISchema())
+        ma_fields.Nested(lambda: NRPersonIdentifierUISchema())
     )
+
+    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularyUISchema())
+
+    familyName = ma_fields.String()
 
     fullName = ma_fields.String(required=True)
 
-    nameType = ma_fields.String(validate=[OneOf(["Organizational", "Personal"])])
+    givenName = ma_fields.String()
 
-    role = ma_fields.Nested(lambda: NRAuthorityRoleVocabularyUISchema())
+    nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
 
 class NRRelatedItemCreatorUISchema(DictOnlySchema):
@@ -123,12 +143,16 @@ class NRRelatedItemCreatorUISchema(DictOnlySchema):
     )
 
     authorityIdentifiers = ma_fields.List(
-        ma_fields.Nested(lambda: NRAuthorityIdentifierUISchema())
+        ma_fields.Nested(lambda: NRPersonIdentifierUISchema())
     )
+
+    familyName = ma_fields.String()
 
     fullName = ma_fields.String(required=True)
 
-    nameType = ma_fields.String(validate=[OneOf(["Organizational", "Personal"])])
+    givenName = ma_fields.String()
+
+    nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
 
 class NRAccessRightsVocabularyUISchema(DictOnlySchema):
@@ -152,18 +176,7 @@ class NRAffiliationVocabularyUISchema(DictOnlySchema):
 
     hierarchy = ma_fields.Nested(lambda: HierarchyUISchema())
 
-    title = VocabularyI18nStrUIField()
-
     ror = ma_fields.String()
-
-
-class NRAuthorityRoleVocabularyUISchema(DictOnlySchema):
-    class Meta:
-        unknown = ma.INCLUDE
-
-    _id = String(data_key="id", attribute="id")
-
-    _version = String(data_key="@v", attribute="@v")
 
     title = VocabularyI18nStrUIField()
 
@@ -177,15 +190,6 @@ class NRCountryVocabularyUISchema(DictOnlySchema):
     _version = String(data_key="@v", attribute="@v")
 
     title = VocabularyI18nStrUIField()
-
-
-class NRExternalLocationUISchema(DictOnlySchema):
-    class Meta:
-        unknown = ma.RAISE
-
-    externalLocationNote = ma_fields.String()
-
-    externalLocationURL = ma_fields.String(required=True)
 
 
 class NRFunderVocabularyUISchema(DictOnlySchema):
@@ -230,7 +234,20 @@ class NRLanguageVocabularyUISchema(DictOnlySchema):
     title = VocabularyI18nStrUIField()
 
 
-class NRLicenseVocabularyUISchema(DictOnlySchema):
+class NROrganizationUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NROrganizationIdentifierUISchema())
+    )
+
+    fullName = ma_fields.String(required=True)
+
+    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
+
+
+class NRResourceTypeVocabularyUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
 
@@ -241,7 +258,7 @@ class NRLicenseVocabularyUISchema(DictOnlySchema):
     title = VocabularyI18nStrUIField()
 
 
-class NRResourceTypeVocabularyUISchema(DictOnlySchema):
+class NRRightsVocabularyUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
 
@@ -285,31 +302,10 @@ class NRSubjectUISchema(DictOnlySchema):
     valueURI = ma_fields.String()
 
 
-class NRAuthorityUIUISchema(DictOnlySchema):
+class NRExternalLocationUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
-    affiliations = ma_fields.List(
-        ma_fields.Nested(lambda: AffiliationsItemNRAffiliationVocabularyUISchema())
-    )
+    externalLocationNote = ma_fields.String()
 
-    authorityIdentifiers = ma_fields.List(
-        ma_fields.Nested(lambda: NRAuthorityIdentifierUISchema())
-    )
-
-    fullName = ma_fields.String(required=True)
-
-    nameType = ma_fields.String(validate=[OneOf(["Organizational", "Personal"])])
-
-
-class AffiliationsItemNRAffiliationVocabularyUISchema(DictOnlySchema):
-    class Meta:
-        unknown = ma.INCLUDE
-
-    _id = String(data_key="id", attribute="id")
-
-    _version = String(data_key="@v", attribute="@v")
-
-    hierarchy = ma_fields.Nested(lambda: HierarchyUISchema())
-
-    title = VocabularyI18nStrUIField()
+    externalLocationURL = ma_fields.String(required=True)

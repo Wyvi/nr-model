@@ -406,3 +406,78 @@ metadata_version = TermsFacet(
 metadata_dateModified = DateTimeFacet(
     field="metadata.dateModified", label=_("metadata/dateModified.label")
 )
+
+metadata_accessibility_cs = TermsFacet(
+    field="metadata.accessibility.cs.keyword", label=_("metadata/accessibility.label")
+)
+
+metadata_accessibility_en = TermsFacet(
+    field="metadata.accessibility.en.keyword", label=_("metadata/accessibility.label")
+)
+
+metadata_accessibility_lang = NestedLabeledFacet(
+    path="metadata.accessibility",
+    nested_facet=TermsFacet(
+        field="metadata.accessibility.lang",
+        label=_("metadata/accessibility/lang.label"),
+    ),
+)
+
+metadata_creators_familyName = TermsFacet(
+    field="metadata.creators.familyName", label=_("metadata/creators/familyName.label")
+)
+
+metadata_creators_givenName = TermsFacet(
+    field="metadata.creators.givenName", label=_("metadata/creators/givenName.label")
+)
+
+metadata_dateWithdrawn_type = DateTimeFacet(
+    field="metadata.dateWithdrawn.type", label=_("metadata/dateWithdrawn/type.label")
+)
+
+metadata_events_eventLocation_country = VocabularyFacet(
+    field="metadata.events.eventLocation.country",
+    label=_("metadata/events/eventLocation/country.label"),
+    vocabulary="countries",
+)
+
+metadata_events_eventLocation_place = TermsFacet(
+    field="metadata.events.eventLocation.place",
+    label=_("metadata/events/eventLocation/place.label"),
+)
+
+metadata_originalRecord = TermsFacet(
+    field="metadata.originalRecord", label=_("metadata/originalRecord.label")
+)
+
+metadata_relatedItems_itemCreators_familyName = TermsFacet(
+    field="metadata.relatedItems.itemCreators.familyName",
+    label=_("metadata/relatedItems/itemCreators/familyName.label"),
+)
+
+metadata_relatedItems_itemCreators_givenName = TermsFacet(
+    field="metadata.relatedItems.itemCreators.givenName",
+    label=_("metadata/relatedItems/itemCreators/givenName.label"),
+)
+
+metadata_rights = VocabularyFacet(
+    field="metadata.rights", label=_("metadata/rights.label"), vocabulary="rights"
+)
+
+metadata_series_seriesTitle = TermsFacet(
+    field="metadata.series.seriesTitle", label=_("metadata/series/seriesTitle.label")
+)
+
+metadata_series_seriesVolume = TermsFacet(
+    field="metadata.series.seriesVolume", label=_("metadata/series/seriesVolume.label")
+)
+
+metadata_systemIdentifiers_identifier = TermsFacet(
+    field="metadata.systemIdentifiers.identifier",
+    label=_("metadata/systemIdentifiers/identifier.label"),
+)
+
+metadata_systemIdentifiers_scheme = TermsFacet(
+    field="metadata.systemIdentifiers.scheme",
+    label=_("metadata/systemIdentifiers/scheme.label"),
+)

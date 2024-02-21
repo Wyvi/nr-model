@@ -2,7 +2,11 @@ import marshmallow as ma
 from marshmallow import fields as ma_fields
 from marshmallow.fields import String
 from oarepo_runtime.services.schema.marshmallow import DictOnlySchema
-from oarepo_runtime.services.schema.ui import InvenioUISchema, LocalizedDate
+from oarepo_runtime.services.schema.ui import (
+    InvenioUISchema,
+    LocalizedDate,
+    LocalizedEDTF,
+)
 from oarepo_vocabularies.services.ui_schema import (
     HierarchyUISchema,
     VocabularyI18nStrUIField,
@@ -17,7 +21,6 @@ from nr_metadata.common.services.records.ui_schema_common import (
 from nr_metadata.common.services.records.ui_schema_datatypes import (
     NRAccessRightsVocabularyUISchema,
     NRAffiliationVocabularyUISchema,
-    NRAuthorityRoleVocabularyUISchema,
     NRCountryVocabularyUISchema,
     NREventUISchema,
     NRExternalLocationUISchema,
@@ -27,19 +30,20 @@ from nr_metadata.common.services.records.ui_schema_datatypes import (
     NRGeoLocationUISchema,
     NRItemRelationTypeVocabularyUISchema,
     NRLanguageVocabularyUISchema,
-    NRLicenseVocabularyUISchema,
     NRLocationUISchema,
+    NRObjectIdentifierUISchema,
+    NROrganizationIdentifierUISchema,
+    NROrganizationUISchema,
+    NRPersonIdentifierUISchema,
+    NRPersonUISchema,
     NRRelatedItemContributorUISchema,
     NRRelatedItemCreatorUISchema,
     NRRelatedItemUISchema,
     NRResourceTypeVocabularyUISchema,
+    NRRightsVocabularyUISchema,
     NRSeriesUISchema,
     NRSubjectCategoryVocabularyUISchema,
     NRSubjectUISchema,
-)
-from nr_metadata.ui_schema.identifiers import (
-    NRAuthorityIdentifierUISchema,
-    NRObjectIdentifierUISchema,
     NRSystemIdentifierUISchema,
 )
 
@@ -61,13 +65,13 @@ class NRDocumentMetadataUISchema(NRCommonMetadataUISchema):
         ma_fields.Nested(lambda: AdditionalTitlesItemUISchema())
     )
 
-    collection = ma_fields.String()
-
     contributors = ma_fields.List(ma_fields.Nested(lambda: ContributorsItemUISchema()))
 
-    creators = ma_fields.List(
-        ma_fields.Nested(lambda: CreatorsItemUISchema()), required=True
-    )
+    dateModified = LocalizedEDTF()
+
+    externalLocation = ma_fields.Nested(lambda: NRExternalLocationUISchema())
+
+    publishers = ma_fields.List(ma_fields.String())
 
     thesis = ma_fields.Nested(lambda: NRThesisUISchema())
 
@@ -113,8 +117,6 @@ class RelatedItemsItemUISchema(NRRelatedItemUISchema):
         ma_fields.Nested(lambda: ItemContributorsItemUISchema())
     )
 
-    itemCreators = ma_fields.List(ma_fields.Nested(lambda: ItemCreatorsItemUISchema()))
-
 
 class AccessRightsUISchema(NRAccessRightsVocabularyUISchema):
     class Meta:
@@ -142,10 +144,12 @@ class AffiliationsItemUISchema(NRAffiliationVocabularyUISchema):
 
     hierarchy = ma_fields.Nested(lambda: HierarchyUISchema())
 
+    ror = ma_fields.String()
+
     title = VocabularyI18nStrUIField()
 
 
-class AuthorityIdentifiersItemUISchema(NRAuthorityIdentifierUISchema):
+class AuthorityIdentifiersItemUISchema(NROrganizationIdentifierUISchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -177,11 +181,6 @@ class EventLocationUISchema(NRLocationUISchema):
 
 
 class EventsItemUISchema(NREventUISchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class ExternalLocationUISchema(NRExternalLocationUISchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -281,18 +280,22 @@ class ObjectIdentifiersItemUISchema(NRObjectIdentifierUISchema):
         unknown = ma.RAISE
 
 
-class RightsUISchema(NRLicenseVocabularyUISchema):
+class OrganizationalUISchema(NROrganizationUISchema):
     class Meta:
-        unknown = ma.INCLUDE
-
-    _id = String(data_key="id", attribute="id")
-
-    _version = String(data_key="@v", attribute="@v")
-
-    title = VocabularyI18nStrUIField()
+        unknown = ma.RAISE
 
 
-class RoleUISchema(NRAuthorityRoleVocabularyUISchema):
+class PersonalAuthorityIdentifiersItemUISchema(NRPersonIdentifierUISchema):
+    class Meta:
+        unknown = ma.RAISE
+
+
+class PersonalUISchema(NRPersonUISchema):
+    class Meta:
+        unknown = ma.RAISE
+
+
+class RightsUISchema(NRRightsVocabularyUISchema):
     class Meta:
         unknown = ma.INCLUDE
 

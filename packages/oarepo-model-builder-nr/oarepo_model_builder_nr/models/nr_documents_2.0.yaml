@@ -48,10 +48,26 @@ NRDocumentMetadata:
           type: keyword
           ^label.cs: Oblasti studia
           ^label.en: Study fields
-    collection:
-      type: keyword
-      label.cs: Kolekce
-      label.en: Collection
+    externalLocation:
+      use: 'nr-datatypes#NRExternalLocation'
+    publishers[]:
+      # volný zápis vydavatele
+      type: fulltext
+      #^uniqueItems: true
+      sample:
+        faker: company
+      ^label.cs: Vydavatelé
+      ^label.en: Publishers
+    dateModified:
+      # The date of the last update to the resource, not metadata
+      #
+      # týká se dokumentu/obsahu, nikoliv metadat!!!
+      # neukazuje se ve vkládacím formuláři. jen při editaci záznamu!
+      use: 'nr-datatypes#NRDate'
+      sample:
+        faker: date
+      label.cs: Datum změny zdroje
+      label.en: Date modified
 
 DocumentModel:
   $id: DocumentModel

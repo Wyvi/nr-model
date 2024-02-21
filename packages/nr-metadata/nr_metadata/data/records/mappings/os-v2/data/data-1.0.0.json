@@ -35,6 +35,25 @@
                             }
                         }
                     },
+                    "accessibility_cs": {
+                        "type": "text",
+                        "analyzer": "czech",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "accessibility_en": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
                     "methods_cs": {
                         "type": "text",
                         "analyzer": "czech",
@@ -119,6 +138,24 @@
                             }
                         }
                     },
+                    "accessibility": {
+                        "type": "nested",
+                        "properties": {
+                            "lang": {
+                                "ignore_above": 256,
+                                "type": "keyword"
+                            },
+                            "value": {
+                                "type": "text",
+                                "fields": {
+                                    "keyword": {
+                                        "type": "keyword",
+                                        "ignore_above": 256
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "additionalTitles": {
                         "type": "object",
                         "properties": {
@@ -168,6 +205,55 @@
                     "contributors": {
                         "type": "object",
                         "properties": {
+                            "contributorType": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "fields": {
+                                            "text": {
+                                                "type": "search_as_you_type"
+                                            }
+                                        },
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    },
+                                    "title": {
+                                        "dynamic": true,
+                                        "properties": {
+                                            "en": {
+                                                "type": "search_as_you_type",
+                                                "copy_to": "title_sort"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "@v": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    }
+                                }
+                            },
+                            "fullName": {
+                                "type": "keyword",
+                                "ignore_above": 1024
+                            },
+                            "authorityIdentifiers": {
+                                "type": "object",
+                                "properties": {
+                                    "identifier": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    },
+                                    "scheme": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    }
+                                }
+                            },
+                            "nameType": {
+                                "type": "keyword",
+                                "ignore_above": 1024
+                            },
                             "affiliations": {
                                 "type": "object",
                                 "properties": {
@@ -224,6 +310,19 @@
                                     }
                                 }
                             },
+                            "familyName": {
+                                "type": "keyword",
+                                "ignore_above": 1024
+                            },
+                            "givenName": {
+                                "type": "keyword",
+                                "ignore_above": 1024
+                            }
+                        }
+                    },
+                    "creators": {
+                        "type": "object",
+                        "properties": {
                             "authorityIdentifiers": {
                                 "type": "object",
                                 "properties": {
@@ -237,55 +336,14 @@
                                     }
                                 }
                             },
-                            "contributorType": {
-                                "type": "object",
-                                "properties": {
-                                    "id": {
-                                        "fields": {
-                                            "text": {
-                                                "type": "search_as_you_type"
-                                            }
-                                        },
-                                        "type": "keyword",
-                                        "ignore_above": 1024
-                                    },
-                                    "title": {
-                                        "dynamic": true,
-                                        "properties": {
-                                            "en": {
-                                                "type": "search_as_you_type",
-                                                "copy_to": "title_sort"
-                                            }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "@v": {
-                                        "type": "keyword",
-                                        "ignore_above": 1024
-                                    }
-                                }
-                            },
-                            "familyName": {
-                                "type": "keyword",
-                                "ignore_above": 1024
-                            },
                             "fullName": {
-                                "type": "keyword",
-                                "ignore_above": 1024
-                            },
-                            "givenName": {
                                 "type": "keyword",
                                 "ignore_above": 1024
                             },
                             "nameType": {
                                 "type": "keyword",
                                 "ignore_above": 1024
-                            }
-                        }
-                    },
-                    "creators": {
-                        "type": "object",
-                        "properties": {
+                            },
                             "affiliations": {
                                 "type": "object",
                                 "properties": {
@@ -307,6 +365,10 @@
                                             }
                                         },
                                         "type": "object"
+                                    },
+                                    "ror": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
                                     },
                                     "hierarchy": {
                                         "type": "object",
@@ -338,24 +400,11 @@
                                     }
                                 }
                             },
-                            "authorityIdentifiers": {
-                                "type": "object",
-                                "properties": {
-                                    "identifier": {
-                                        "type": "keyword",
-                                        "ignore_above": 1024
-                                    },
-                                    "scheme": {
-                                        "type": "keyword",
-                                        "ignore_above": 1024
-                                    }
-                                }
-                            },
-                            "fullName": {
+                            "familyName": {
                                 "type": "keyword",
                                 "ignore_above": 1024
                             },
-                            "nameType": {
+                            "givenName": {
                                 "type": "keyword",
                                 "ignore_above": 1024
                             }
@@ -379,24 +428,77 @@
                         "type": "date",
                         "format": "strict_date_time||strict_date_time_no_millis||strict_date||yyyy-MM||yyyy"
                     },
-                    "dateModified": {
-                        "type": "date",
-                        "format": "basic_date||strict_date"
-                    },
                     "dateValidTo": {
                         "type": "date",
-                        "format": "strict_date_time||strict_date_time_no_millis||strict_date||yyyy-MM||yyyy"
+                        "format": "basic_date||strict_date"
                     },
                     "dateWithdrawn": {
                         "type": "object",
                         "properties": {
-                            "date": {
-                                "type": "date",
-                                "format": "basic_date||strict_date"
-                            },
                             "dateInformation": {
                                 "type": "keyword",
                                 "ignore_above": 1024
+                            },
+                            "type": {
+                                "type": "date",
+                                "format": "basic_date||strict_date"
+                            },
+                            "date": {
+                                "type": "date",
+                                "format": "basic_date||strict_date"
+                            }
+                        }
+                    },
+                    "events": {
+                        "type": "object",
+                        "properties": {
+                            "eventDate": {
+                                "type": "date_range",
+                                "format": "strict_date_time||strict_date_time_no_millis||strict_date||yyyy-MM||yyyy",
+                                "index": false
+                            },
+                            "eventLocation": {
+                                "type": "object",
+                                "properties": {
+                                    "country": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "fields": {
+                                                    "text": {
+                                                        "type": "search_as_you_type"
+                                                    }
+                                                },
+                                                "type": "keyword",
+                                                "ignore_above": 1024
+                                            },
+                                            "title": {
+                                                "dynamic": true,
+                                                "properties": {
+                                                    "en": {
+                                                        "type": "search_as_you_type",
+                                                        "copy_to": "title_sort"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "@v": {
+                                                "type": "keyword",
+                                                "ignore_above": 1024
+                                            }
+                                        }
+                                    },
+                                    "place": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    }
+                                }
+                            },
+                            "eventNameAlternate": {
+                                "type": "text"
+                            },
+                            "eventNameOriginal": {
+                                "type": "text"
                             }
                         }
                     },
@@ -529,8 +631,9 @@
                             }
                         }
                     },
-                    "publicationYear": {
-                        "type": "integer"
+                    "originalRecord": {
+                        "type": "keyword",
+                        "ignore_above": 1024
                     },
                     "publishers": {
                         "type": "object",
@@ -594,6 +697,55 @@
                             "itemContributors": {
                                 "type": "object",
                                 "properties": {
+                                    "contributorType": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "fields": {
+                                                    "text": {
+                                                        "type": "search_as_you_type"
+                                                    }
+                                                },
+                                                "type": "keyword",
+                                                "ignore_above": 1024
+                                            },
+                                            "title": {
+                                                "dynamic": true,
+                                                "properties": {
+                                                    "en": {
+                                                        "type": "search_as_you_type",
+                                                        "copy_to": "title_sort"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "@v": {
+                                                "type": "keyword",
+                                                "ignore_above": 1024
+                                            }
+                                        }
+                                    },
+                                    "authorityIdentifiers": {
+                                        "type": "object",
+                                        "properties": {
+                                            "identifier": {
+                                                "type": "keyword",
+                                                "ignore_above": 1024
+                                            },
+                                            "scheme": {
+                                                "type": "keyword",
+                                                "ignore_above": 1024
+                                            }
+                                        }
+                                    },
+                                    "fullName": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    },
+                                    "nameType": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    },
                                     "affiliations": {
                                         "type": "object",
                                         "properties": {
@@ -650,6 +802,19 @@
                                             }
                                         }
                                     },
+                                    "familyName": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    },
+                                    "givenName": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    }
+                                }
+                            },
+                            "itemCreators": {
+                                "type": "object",
+                                "properties": {
                                     "authorityIdentifiers": {
                                         "type": "object",
                                         "properties": {
@@ -663,55 +828,14 @@
                                             }
                                         }
                                     },
-                                    "contributorType": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                                "fields": {
-                                                    "text": {
-                                                        "type": "search_as_you_type"
-                                                    }
-                                                },
-                                                "type": "keyword",
-                                                "ignore_above": 1024
-                                            },
-                                            "title": {
-                                                "dynamic": true,
-                                                "properties": {
-                                                    "en": {
-                                                        "type": "search_as_you_type",
-                                                        "copy_to": "title_sort"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "@v": {
-                                                "type": "keyword",
-                                                "ignore_above": 1024
-                                            }
-                                        }
-                                    },
-                                    "familyName": {
-                                        "type": "keyword",
-                                        "ignore_above": 1024
-                                    },
                                     "fullName": {
-                                        "type": "keyword",
-                                        "ignore_above": 1024
-                                    },
-                                    "givenName": {
                                         "type": "keyword",
                                         "ignore_above": 1024
                                     },
                                     "nameType": {
                                         "type": "keyword",
                                         "ignore_above": 1024
-                                    }
-                                }
-                            },
-                            "itemCreators": {
-                                "type": "object",
-                                "properties": {
+                                    },
                                     "affiliations": {
                                         "type": "object",
                                         "properties": {
@@ -733,6 +857,10 @@
                                                     }
                                                 },
                                                 "type": "object"
+                                            },
+                                            "ror": {
+                                                "type": "keyword",
+                                                "ignore_above": 1024
                                             },
                                             "hierarchy": {
                                                 "type": "object",
@@ -764,24 +892,11 @@
                                             }
                                         }
                                     },
-                                    "authorityIdentifiers": {
-                                        "type": "object",
-                                        "properties": {
-                                            "identifier": {
-                                                "type": "keyword",
-                                                "ignore_above": 1024
-                                            },
-                                            "scheme": {
-                                                "type": "keyword",
-                                                "ignore_above": 1024
-                                            }
-                                        }
-                                    },
-                                    "fullName": {
+                                    "familyName": {
                                         "type": "keyword",
                                         "ignore_above": 1024
                                     },
-                                    "nameType": {
+                                    "givenName": {
                                         "type": "keyword",
                                         "ignore_above": 1024
                                     }
@@ -884,7 +999,7 @@
                                 "ignore_above": 1024
                             },
                             "itemYear": {
-                                "type": "date",
+                                "type": "integer",
                                 "format": "basic_date||strict_date"
                             }
                         }
@@ -912,6 +1027,47 @@
                                 "type": "object"
                             },
                             "@v": {
+                                "type": "keyword",
+                                "ignore_above": 1024
+                            }
+                        }
+                    },
+                    "rights": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "fields": {
+                                    "text": {
+                                        "type": "search_as_you_type"
+                                    }
+                                },
+                                "type": "keyword",
+                                "ignore_above": 1024
+                            },
+                            "title": {
+                                "dynamic": true,
+                                "properties": {
+                                    "en": {
+                                        "type": "search_as_you_type",
+                                        "copy_to": "title_sort"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "@v": {
+                                "type": "keyword",
+                                "ignore_above": 1024
+                            }
+                        }
+                    },
+                    "series": {
+                        "type": "object",
+                        "properties": {
+                            "seriesTitle": {
+                                "type": "keyword",
+                                "ignore_above": 1024
+                            },
+                            "seriesVolume": {
                                 "type": "keyword",
                                 "ignore_above": 1024
                             }
@@ -999,6 +1155,19 @@
                             }
                         }
                     },
+                    "systemIdentifiers": {
+                        "type": "object",
+                        "properties": {
+                            "identifier": {
+                                "type": "keyword",
+                                "ignore_above": 1024
+                            },
+                            "scheme": {
+                                "type": "keyword",
+                                "ignore_above": 1024
+                            }
+                        }
+                    },
                     "technicalInfo": {
                         "type": "nested",
                         "properties": {
@@ -1029,6 +1198,13 @@
                     "version": {
                         "type": "keyword",
                         "ignore_above": 1024
+                    },
+                    "dateModified": {
+                        "type": "date",
+                        "format": "basic_date||strict_date"
+                    },
+                    "publicationYear": {
+                        "type": "integer"
                     }
                 }
             },

@@ -5,10 +5,13 @@ from invenio_records_resources.services import (
 from invenio_records_resources.services import pagination_links
 from invenio_records_resources.services.records.components import DataComponent
 from oarepo_runtime.services.config.service import PermissionsPresetsConfigMixin
-from oarepo_runtime.services.results import RecordList
 
 from nr_metadata.common.records.api import CommonRecord
 from nr_metadata.common.services.records.permissions import CommonPermissionPolicy
+from nr_metadata.common.services.records.results import (
+    CommonRecordItem,
+    CommonRecordList,
+)
 from nr_metadata.common.services.records.schema_common import NRCommonRecordSchema
 from nr_metadata.common.services.records.search import CommonSearchOptions
 
@@ -16,7 +19,9 @@ from nr_metadata.common.services.records.search import CommonSearchOptions
 class CommonServiceConfig(PermissionsPresetsConfigMixin, InvenioRecordServiceConfig):
     """CommonRecord service config."""
 
-    result_list_cls = RecordList
+    result_item_cls = CommonRecordItem
+
+    result_list_cls = CommonRecordList
 
     PERMISSIONS_PRESETS = ["everyone"]
 
