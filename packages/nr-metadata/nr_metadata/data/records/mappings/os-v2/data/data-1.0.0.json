@@ -206,32 +206,7 @@
                         "type": "object",
                         "properties": {
                             "contributorType": {
-                                "type": "object",
-                                "properties": {
-                                    "id": {
-                                        "fields": {
-                                            "text": {
-                                                "type": "search_as_you_type"
-                                            }
-                                        },
-                                        "type": "keyword",
-                                        "ignore_above": 1024
-                                    },
-                                    "title": {
-                                        "dynamic": true,
-                                        "properties": {
-                                            "en": {
-                                                "type": "search_as_you_type",
-                                                "copy_to": "title_sort"
-                                            }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "@v": {
-                                        "type": "keyword",
-                                        "ignore_above": 1024
-                                    }
-                                }
+                                "type": "object"
                             },
                             "fullName": {
                                 "type": "keyword",
@@ -442,10 +417,6 @@
                             "type": {
                                 "type": "date",
                                 "format": "basic_date||strict_date"
-                            },
-                            "date": {
-                                "type": "date",
-                                "format": "basic_date||strict_date"
                             }
                         }
                     },
@@ -624,10 +595,6 @@
                             "scheme": {
                                 "type": "keyword",
                                 "ignore_above": 1024
-                            },
-                            "status": {
-                                "type": "keyword",
-                                "ignore_above": 1024
                             }
                         }
                     },
@@ -698,32 +665,7 @@
                                 "type": "object",
                                 "properties": {
                                     "contributorType": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                                "fields": {
-                                                    "text": {
-                                                        "type": "search_as_you_type"
-                                                    }
-                                                },
-                                                "type": "keyword",
-                                                "ignore_above": 1024
-                                            },
-                                            "title": {
-                                                "dynamic": true,
-                                                "properties": {
-                                                    "en": {
-                                                        "type": "search_as_you_type",
-                                                        "copy_to": "title_sort"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "@v": {
-                                                "type": "keyword",
-                                                "ignore_above": 1024
-                                            }
-                                        }
+                                        "type": "object"
                                     },
                                     "authorityIdentifiers": {
                                         "type": "object",
@@ -999,8 +941,7 @@
                                 "ignore_above": 1024
                             },
                             "itemYear": {
-                                "type": "integer",
-                                "format": "basic_date||strict_date"
+                                "type": "integer"
                             }
                         }
                     },
@@ -1198,13 +1139,6 @@
                     "version": {
                         "type": "keyword",
                         "ignore_above": 1024
-                    },
-                    "dateModified": {
-                        "type": "date",
-                        "format": "basic_date||strict_date"
-                    },
-                    "publicationYear": {
-                        "type": "integer"
                     }
                 }
             },

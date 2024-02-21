@@ -728,13 +728,13 @@
                                                 "ui": {
                                                     "marshmallow": {
                                                         "generate": false,
-                                                        "class": "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationIdentifierUISchema"
+                                                        "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
                                                     },
                                                     "detail": "nr_organization_identifier"
                                                 },
                                                 "marshmallow": {
                                                     "generate": false,
-                                                    "class": "nr_metadata.common.services.records.schema_datatypes.NROrganizationIdentifierSchema"
+                                                    "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                                 }
                                             }
                                         }
@@ -814,13 +814,13 @@
                                                 "ui": {
                                                     "marshmallow": {
                                                         "generate": false,
-                                                        "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema"
+                                                        "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                     },
                                                     "detail": "nr_person_identifier"
                                                 },
                                                 "marshmallow": {
                                                     "generate": false,
-                                                    "class": "nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema"
+                                                    "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                 }
                                             }
                                         },
@@ -1026,13 +1026,13 @@
                                         "ui": {
                                             "marshmallow": {
                                                 "generate": false,
-                                                "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema"
+                                                "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                             },
                                             "detail": "nr_person_identifier"
                                         },
                                         "marshmallow": {
                                             "generate": false,
-                                            "class": "nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema"
+                                            "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                         },
                                         "properties": {
                                             "identifier": {
@@ -1425,13 +1425,13 @@
                                                 "ui": {
                                                     "marshmallow": {
                                                         "generate": false,
-                                                        "class": "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationIdentifierUISchema"
+                                                        "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
                                                     },
                                                     "detail": "nr_organization_identifier"
                                                 },
                                                 "marshmallow": {
                                                     "generate": false,
-                                                    "class": "nr_metadata.common.services.records.schema_datatypes.NROrganizationIdentifierSchema"
+                                                    "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                                 }
                                             }
                                         }
@@ -1511,13 +1511,13 @@
                                                 "ui": {
                                                     "marshmallow": {
                                                         "generate": false,
-                                                        "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema"
+                                                        "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                     },
                                                     "detail": "nr_person_identifier"
                                                 },
                                                 "marshmallow": {
                                                     "generate": false,
-                                                    "class": "nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema"
+                                                    "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                 }
                                             }
                                         },
@@ -1682,13 +1682,13 @@
                                         "ui": {
                                             "marshmallow": {
                                                 "generate": false,
-                                                "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema"
+                                                "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                             },
                                             "detail": "nr_person_identifier"
                                         },
                                         "marshmallow": {
                                             "generate": false,
-                                            "class": "nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema"
+                                            "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                         },
                                         "properties": {
                                             "identifier": {
@@ -2613,13 +2613,13 @@
                             "ui": {
                                 "marshmallow": {
                                     "generate": false,
-                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRObjectIdentifierUISchema"
+                                    "class": "nr_metadata.ui_schema.identifiers.NRObjectIdentifierUISchema"
                                 },
                                 "detail": "nr_object_pid"
                             },
                             "marshmallow": {
                                 "generate": false,
-                                "class": "nr_metadata.common.services.records.schema_datatypes.NRObjectIdentifierSchema"
+                                "class": "nr_metadata.schema.identifiers.NRObjectIdentifierSchema"
                             },
                             "label.cs": "Identifikátor objektu",
                             "label.en": "Object identifier",
@@ -2743,13 +2743,13 @@
                                                             "ui": {
                                                                 "marshmallow": {
                                                                     "generate": false,
-                                                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationIdentifierUISchema"
+                                                                    "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
                                                                 },
                                                                 "detail": "nr_organization_identifier"
                                                             },
                                                             "marshmallow": {
                                                                 "generate": false,
-                                                                "class": "nr_metadata.common.services.records.schema_datatypes.NROrganizationIdentifierSchema"
+                                                                "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                                             }
                                                         }
                                                     }
@@ -2829,13 +2829,13 @@
                                                             "ui": {
                                                                 "marshmallow": {
                                                                     "generate": false,
-                                                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema"
+                                                                    "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                                 },
                                                                 "detail": "nr_person_identifier"
                                                             },
                                                             "marshmallow": {
                                                                 "generate": false,
-                                                                "class": "nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema"
+                                                                "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                             }
                                                         }
                                                     },
@@ -3032,13 +3032,13 @@
                                                     "ui": {
                                                         "marshmallow": {
                                                             "generate": false,
-                                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema"
+                                                            "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                         },
                                                         "detail": "nr_person_identifier"
                                                     },
                                                     "marshmallow": {
                                                         "generate": false,
-                                                        "class": "nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema"
+                                                        "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                     },
                                                     "properties": {
                                                         "identifier": {
@@ -3433,13 +3433,13 @@
                                                             "ui": {
                                                                 "marshmallow": {
                                                                     "generate": false,
-                                                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationIdentifierUISchema"
+                                                                    "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
                                                                 },
                                                                 "detail": "nr_organization_identifier"
                                                             },
                                                             "marshmallow": {
                                                                 "generate": false,
-                                                                "class": "nr_metadata.common.services.records.schema_datatypes.NROrganizationIdentifierSchema"
+                                                                "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                                             }
                                                         }
                                                     }
@@ -3519,13 +3519,13 @@
                                                             "ui": {
                                                                 "marshmallow": {
                                                                     "generate": false,
-                                                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema"
+                                                                    "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                                 },
                                                                 "detail": "nr_person_identifier"
                                                             },
                                                             "marshmallow": {
                                                                 "generate": false,
-                                                                "class": "nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema"
+                                                                "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                             }
                                                         }
                                                     },
@@ -3690,13 +3690,13 @@
                                                     "ui": {
                                                         "marshmallow": {
                                                             "generate": false,
-                                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema"
+                                                            "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                         },
                                                         "detail": "nr_person_identifier"
                                                     },
                                                     "marshmallow": {
                                                         "generate": false,
-                                                        "class": "nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema"
+                                                        "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                     },
                                                     "properties": {
                                                         "identifier": {
@@ -4044,13 +4044,13 @@
                                         "ui": {
                                             "marshmallow": {
                                                 "generate": false,
-                                                "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRObjectIdentifierUISchema"
+                                                "class": "nr_metadata.ui_schema.identifiers.NRObjectIdentifierUISchema"
                                             },
                                             "detail": "nr_object_pid"
                                         },
                                         "marshmallow": {
                                             "generate": false,
-                                            "class": "nr_metadata.common.services.records.schema_datatypes.NRObjectIdentifierSchema"
+                                            "class": "nr_metadata.schema.identifiers.NRObjectIdentifierSchema"
                                         },
                                         "label.cs": "Identifikátor objektu",
                                         "label.en": "Object identifier",
@@ -4842,13 +4842,13 @@
                             "ui": {
                                 "marshmallow": {
                                     "generate": false,
-                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRSystemIdentifierUISchema"
+                                    "class": "nr_metadata.ui_schema.identifiers.NRSystemIdentifierUISchema"
                                 },
                                 "detail": "identifier"
                             },
                             "marshmallow": {
                                 "generate": false,
-                                "class": "nr_metadata.common.services.records.schema_datatypes.NRSystemIdentifierSchema"
+                                "class": "nr_metadata.schema.identifiers.NRSystemIdentifierSchema"
                             },
                             "label.cs": "Systémový identifikátor",
                             "label.en": "System identifier",

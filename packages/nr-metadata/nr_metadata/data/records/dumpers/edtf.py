@@ -7,13 +7,6 @@ class DataEDTFIntervalDumperExt(EDTFIntervalDumperExt):
     paths = [
         "metadata/dateCollected",
         "metadata/dateCreated",
-        "metadata/dateCollected",
-        "metadata/dateCreated",
-        "metadata/dateCollected",
-        "metadata/dateCreated",
-        "metadata/events/eventDate",
-        "metadata/dateCollected",
-        "metadata/dateCreated",
         "metadata/events/eventDate",
         "metadata/dateCollected",
         "metadata/dateCreated",

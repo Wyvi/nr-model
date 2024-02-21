@@ -18,7 +18,6 @@ from nr_metadata.common.services.records.schema_datatypes import (
     NRFundingReferenceSchema,
     NRGeoLocationSchema,
     NRLanguageVocabularySchema,
-    NRObjectIdentifierSchema,
     NROrganizationSchema,
     NRPersonSchema,
     NRRelatedItemSchema,
@@ -27,6 +26,9 @@ from nr_metadata.common.services.records.schema_datatypes import (
     NRSeriesSchema,
     NRSubjectCategoryVocabularySchema,
     NRSubjectSchema,
+)
+from nr_metadata.schema.identifiers import (
+    NRObjectIdentifierSchema,
     NRSystemIdentifierSchema,
 )
 

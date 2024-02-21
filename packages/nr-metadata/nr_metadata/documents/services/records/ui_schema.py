@@ -31,10 +31,7 @@ from nr_metadata.common.services.records.ui_schema_datatypes import (
     NRItemRelationTypeVocabularyUISchema,
     NRLanguageVocabularyUISchema,
     NRLocationUISchema,
-    NRObjectIdentifierUISchema,
-    NROrganizationIdentifierUISchema,
     NROrganizationUISchema,
-    NRPersonIdentifierUISchema,
     NRPersonUISchema,
     NRRelatedItemContributorUISchema,
     NRRelatedItemCreatorUISchema,
@@ -44,6 +41,11 @@ from nr_metadata.common.services.records.ui_schema_datatypes import (
     NRSeriesUISchema,
     NRSubjectCategoryVocabularyUISchema,
     NRSubjectUISchema,
+)
+from nr_metadata.ui_schema.identifiers import (
+    NRObjectIdentifierUISchema,
+    NROrganizationIdentifierUISchema,
+    NRPersonIdentifierUISchema,
     NRSystemIdentifierUISchema,
 )
 

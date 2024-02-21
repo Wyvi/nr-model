@@ -22,14 +22,16 @@ from nr_metadata.common.services.records.ui_schema_datatypes import (
     NRFundingReferenceUISchema,
     NRGeoLocationUISchema,
     NRLanguageVocabularyUISchema,
-    NRObjectIdentifierUISchema,
-    NRPersonIdentifierUISchema,
     NRRelatedItemUISchema,
     NRResourceTypeVocabularyUISchema,
     NRRightsVocabularyUISchema,
     NRSeriesUISchema,
     NRSubjectCategoryVocabularyUISchema,
     NRSubjectUISchema,
+)
+from nr_metadata.ui_schema.identifiers import (
+    NRObjectIdentifierUISchema,
+    NRPersonIdentifierUISchema,
     NRSystemIdentifierUISchema,
 )
 from nr_metadata.ui_schema.subjects import NRSubjectListField

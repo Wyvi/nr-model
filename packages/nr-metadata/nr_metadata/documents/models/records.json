@@ -843,13 +843,13 @@
                                                     "marshmallow": {
                                                         "imports": [
                                                             {
-                                                                "import": "nr_metadata.common.services.records.ui_schema_datatypes",
-                                                                "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
+                                                                "import": "nr_metadata.ui_schema.identifiers",
+                                                                "alias": "nr_metadata.ui_schema.identifiers"
                                                             }
                                                         ],
                                                         "generate": true,
                                                         "base-classes": [
-                                                            "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationIdentifierUISchema"
+                                                            "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
                                                         ],
                                                         "read": false,
                                                         "write": false,
@@ -860,13 +860,13 @@
                                                 "marshmallow": {
                                                     "imports": [
                                                         {
-                                                            "import": "nr_metadata.common.services.records.schema_datatypes",
-                                                            "alias": "nr_metadata.common.services.records.schema_datatypes"
+                                                            "import": "nr_metadata.schema.identifiers",
+                                                            "alias": "nr_metadata.schema.identifiers"
                                                         }
                                                     ],
                                                     "generate": true,
                                                     "base-classes": [
-                                                        "nr_metadata.common.services.records.schema_datatypes.NROrganizationIdentifierSchema"
+                                                        "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                                     ],
                                                     "read": false,
                                                     "write": false,
@@ -1029,13 +1029,13 @@
                                                     "marshmallow": {
                                                         "imports": [
                                                             {
-                                                                "import": "nr_metadata.common.services.records.ui_schema_datatypes",
-                                                                "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
+                                                                "import": "nr_metadata.ui_schema.identifiers",
+                                                                "alias": "nr_metadata.ui_schema.identifiers"
                                                             }
                                                         ],
                                                         "generate": true,
                                                         "base-classes": [
-                                                            "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema"
+                                                            "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                         ],
                                                         "read": false,
                                                         "write": false,
@@ -1046,13 +1046,13 @@
                                                 "marshmallow": {
                                                     "imports": [
                                                         {
-                                                            "import": "nr_metadata.common.services.records.schema_datatypes",
-                                                            "alias": "nr_metadata.common.services.records.schema_datatypes"
+                                                            "import": "nr_metadata.schema.identifiers",
+                                                            "alias": "nr_metadata.schema.identifiers"
                                                         }
                                                     ],
                                                     "generate": true,
                                                     "base-classes": [
-                                                        "nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema"
+                                                        "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                     ],
                                                     "read": false,
                                                     "write": false,
@@ -1351,13 +1351,13 @@
                                             "marshmallow": {
                                                 "imports": [
                                                     {
-                                                        "import": "nr_metadata.common.services.records.ui_schema_datatypes",
-                                                        "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
+                                                        "import": "nr_metadata.ui_schema.identifiers",
+                                                        "alias": "nr_metadata.ui_schema.identifiers"
                                                     }
                                                 ],
                                                 "generate": true,
                                                 "base-classes": [
-                                                    "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema"
+                                                    "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                 ],
                                                 "read": false,
                                                 "write": false,
@@ -1368,13 +1368,13 @@
                                         "marshmallow": {
                                             "imports": [
                                                 {
-                                                    "import": "nr_metadata.common.services.records.schema_datatypes",
-                                                    "alias": "nr_metadata.common.services.records.schema_datatypes"
+                                                    "import": "nr_metadata.schema.identifiers",
+                                                    "alias": "nr_metadata.schema.identifiers"
                                                 }
                                             ],
                                             "generate": true,
                                             "base-classes": [
-                                                "nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema"
+                                                "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                             ],
                                             "read": false,
                                             "write": false,
@@ -1884,13 +1884,13 @@
                                                     "marshmallow": {
                                                         "imports": [
                                                             {
-                                                                "import": "nr_metadata.common.services.records.ui_schema_datatypes",
-                                                                "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
+                                                                "import": "nr_metadata.ui_schema.identifiers",
+                                                                "alias": "nr_metadata.ui_schema.identifiers"
                                                             }
                                                         ],
                                                         "generate": false,
                                                         "base-classes": [
-                                                            "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationIdentifierUISchema"
+                                                            "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
                                                         ],
                                                         "read": false,
                                                         "write": false,
@@ -1901,13 +1901,13 @@
                                                 "marshmallow": {
                                                     "imports": [
                                                         {
-                                                            "import": "nr_metadata.common.services.records.schema_datatypes",
-                                                            "alias": "nr_metadata.common.services.records.schema_datatypes"
+                                                            "import": "nr_metadata.schema.identifiers",
+                                                            "alias": "nr_metadata.schema.identifiers"
                                                         }
                                                     ],
                                                     "generate": false,
                                                     "base-classes": [
-                                                        "nr_metadata.common.services.records.schema_datatypes.NROrganizationIdentifierSchema"
+                                                        "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                                     ],
                                                     "read": false,
                                                     "write": false,
@@ -2070,13 +2070,13 @@
                                                     "marshmallow": {
                                                         "imports": [
                                                             {
-                                                                "import": "nr_metadata.common.services.records.ui_schema_datatypes",
-                                                                "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
+                                                                "import": "nr_metadata.ui_schema.identifiers",
+                                                                "alias": "nr_metadata.ui_schema.identifiers"
                                                             }
                                                         ],
                                                         "generate": false,
                                                         "base-classes": [
-                                                            "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema"
+                                                            "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                         ],
                                                         "read": false,
                                                         "write": false,
@@ -2087,13 +2087,13 @@
                                                 "marshmallow": {
                                                     "imports": [
                                                         {
-                                                            "import": "nr_metadata.common.services.records.schema_datatypes",
-                                                            "alias": "nr_metadata.common.services.records.schema_datatypes"
+                                                            "import": "nr_metadata.schema.identifiers",
+                                                            "alias": "nr_metadata.schema.identifiers"
                                                         }
                                                     ],
                                                     "generate": false,
                                                     "base-classes": [
-                                                        "nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema"
+                                                        "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                     ],
                                                     "read": false,
                                                     "write": false,
@@ -2325,13 +2325,13 @@
                                             "marshmallow": {
                                                 "imports": [
                                                     {
-                                                        "import": "nr_metadata.common.services.records.ui_schema_datatypes",
-                                                        "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
+                                                        "import": "nr_metadata.ui_schema.identifiers",
+                                                        "alias": "nr_metadata.ui_schema.identifiers"
                                                     }
                                                 ],
                                                 "generate": false,
                                                 "base-classes": [
-                                                    "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema"
+                                                    "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                 ],
                                                 "read": false,
                                                 "write": false,
@@ -2342,13 +2342,13 @@
                                         "marshmallow": {
                                             "imports": [
                                                 {
-                                                    "import": "nr_metadata.common.services.records.schema_datatypes",
-                                                    "alias": "nr_metadata.common.services.records.schema_datatypes"
+                                                    "import": "nr_metadata.schema.identifiers",
+                                                    "alias": "nr_metadata.schema.identifiers"
                                                 }
                                             ],
                                             "generate": false,
                                             "base-classes": [
-                                                "nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema"
+                                                "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                             ],
                                             "read": false,
                                             "write": false,
@@ -3701,13 +3701,13 @@
                                 "marshmallow": {
                                     "imports": [
                                         {
-                                            "import": "nr_metadata.common.services.records.ui_schema_datatypes",
-                                            "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
+                                            "import": "nr_metadata.ui_schema.identifiers",
+                                            "alias": "nr_metadata.ui_schema.identifiers"
                                         }
                                     ],
                                     "generate": true,
                                     "base-classes": [
-                                        "nr_metadata.common.services.records.ui_schema_datatypes.NRObjectIdentifierUISchema"
+                                        "nr_metadata.ui_schema.identifiers.NRObjectIdentifierUISchema"
                                     ],
                                     "read": false,
                                     "write": false,
@@ -3718,13 +3718,13 @@
                             "marshmallow": {
                                 "imports": [
                                     {
-                                        "import": "nr_metadata.common.services.records.schema_datatypes",
-                                        "alias": "nr_metadata.common.services.records.schema_datatypes"
+                                        "import": "nr_metadata.schema.identifiers",
+                                        "alias": "nr_metadata.schema.identifiers"
                                     }
                                 ],
                                 "generate": true,
                                 "base-classes": [
-                                    "nr_metadata.common.services.records.schema_datatypes.NRObjectIdentifierSchema"
+                                    "nr_metadata.schema.identifiers.NRObjectIdentifierSchema"
                                 ],
                                 "read": false,
                                 "write": false,
@@ -3951,13 +3951,13 @@
                                                                 "marshmallow": {
                                                                     "imports": [
                                                                         {
-                                                                            "import": "nr_metadata.common.services.records.ui_schema_datatypes",
-                                                                            "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
+                                                                            "import": "nr_metadata.ui_schema.identifiers",
+                                                                            "alias": "nr_metadata.ui_schema.identifiers"
                                                                         }
                                                                     ],
                                                                     "generate": false,
                                                                     "base-classes": [
-                                                                        "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationIdentifierUISchema"
+                                                                        "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
                                                                     ],
                                                                     "read": false,
                                                                     "write": false,
@@ -3968,13 +3968,13 @@
                                                             "marshmallow": {
                                                                 "imports": [
                                                                     {
-                                                                        "import": "nr_metadata.common.services.records.schema_datatypes",
-                                                                        "alias": "nr_metadata.common.services.records.schema_datatypes"
+                                                                        "import": "nr_metadata.schema.identifiers",
+                                                                        "alias": "nr_metadata.schema.identifiers"
                                                                     }
                                                                 ],
                                                                 "generate": false,
                                                                 "base-classes": [
-                                                                    "nr_metadata.common.services.records.schema_datatypes.NROrganizationIdentifierSchema"
+                                                                    "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                                                 ],
                                                                 "read": false,
                                                                 "write": false,
@@ -4137,13 +4137,13 @@
                                                                 "marshmallow": {
                                                                     "imports": [
                                                                         {
-                                                                            "import": "nr_metadata.common.services.records.ui_schema_datatypes",
-                                                                            "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
+                                                                            "import": "nr_metadata.ui_schema.identifiers",
+                                                                            "alias": "nr_metadata.ui_schema.identifiers"
                                                                         }
                                                                     ],
                                                                     "generate": false,
                                                                     "base-classes": [
-                                                                        "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema"
+                                                                        "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                                     ],
                                                                     "read": false,
                                                                     "write": false,
@@ -4154,13 +4154,13 @@
                                                             "marshmallow": {
                                                                 "imports": [
                                                                     {
-                                                                        "import": "nr_metadata.common.services.records.schema_datatypes",
-                                                                        "alias": "nr_metadata.common.services.records.schema_datatypes"
+                                                                        "import": "nr_metadata.schema.identifiers",
+                                                                        "alias": "nr_metadata.schema.identifiers"
                                                                     }
                                                                 ],
                                                                 "generate": false,
                                                                 "base-classes": [
-                                                                    "nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema"
+                                                                    "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                                 ],
                                                                 "read": false,
                                                                 "write": false,
@@ -4440,13 +4440,13 @@
                                                         "marshmallow": {
                                                             "imports": [
                                                                 {
-                                                                    "import": "nr_metadata.common.services.records.ui_schema_datatypes",
-                                                                    "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
+                                                                    "import": "nr_metadata.ui_schema.identifiers",
+                                                                    "alias": "nr_metadata.ui_schema.identifiers"
                                                                 }
                                                             ],
                                                             "generate": false,
                                                             "base-classes": [
-                                                                "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema"
+                                                                "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                             ],
                                                             "read": false,
                                                             "write": false,
@@ -4457,13 +4457,13 @@
                                                     "marshmallow": {
                                                         "imports": [
                                                             {
-                                                                "import": "nr_metadata.common.services.records.schema_datatypes",
-                                                                "alias": "nr_metadata.common.services.records.schema_datatypes"
+                                                                "import": "nr_metadata.schema.identifiers",
+                                                                "alias": "nr_metadata.schema.identifiers"
                                                             }
                                                         ],
                                                         "generate": false,
                                                         "base-classes": [
-                                                            "nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema"
+                                                            "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                         ],
                                                         "read": false,
                                                         "write": false,
@@ -4985,13 +4985,13 @@
                                                                 "marshmallow": {
                                                                     "imports": [
                                                                         {
-                                                                            "import": "nr_metadata.common.services.records.ui_schema_datatypes",
-                                                                            "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
+                                                                            "import": "nr_metadata.ui_schema.identifiers",
+                                                                            "alias": "nr_metadata.ui_schema.identifiers"
                                                                         }
                                                                     ],
                                                                     "generate": false,
                                                                     "base-classes": [
-                                                                        "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationIdentifierUISchema"
+                                                                        "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
                                                                     ],
                                                                     "read": false,
                                                                     "write": false,
@@ -5002,13 +5002,13 @@
                                                             "marshmallow": {
                                                                 "imports": [
                                                                     {
-                                                                        "import": "nr_metadata.common.services.records.schema_datatypes",
-                                                                        "alias": "nr_metadata.common.services.records.schema_datatypes"
+                                                                        "import": "nr_metadata.schema.identifiers",
+                                                                        "alias": "nr_metadata.schema.identifiers"
                                                                     }
                                                                 ],
                                                                 "generate": false,
                                                                 "base-classes": [
-                                                                    "nr_metadata.common.services.records.schema_datatypes.NROrganizationIdentifierSchema"
+                                                                    "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                                                 ],
                                                                 "read": false,
                                                                 "write": false,
@@ -5171,13 +5171,13 @@
                                                                 "marshmallow": {
                                                                     "imports": [
                                                                         {
-                                                                            "import": "nr_metadata.common.services.records.ui_schema_datatypes",
-                                                                            "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
+                                                                            "import": "nr_metadata.ui_schema.identifiers",
+                                                                            "alias": "nr_metadata.ui_schema.identifiers"
                                                                         }
                                                                     ],
                                                                     "generate": false,
                                                                     "base-classes": [
-                                                                        "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema"
+                                                                        "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                                     ],
                                                                     "read": false,
                                                                     "write": false,
@@ -5188,13 +5188,13 @@
                                                             "marshmallow": {
                                                                 "imports": [
                                                                     {
-                                                                        "import": "nr_metadata.common.services.records.schema_datatypes",
-                                                                        "alias": "nr_metadata.common.services.records.schema_datatypes"
+                                                                        "import": "nr_metadata.schema.identifiers",
+                                                                        "alias": "nr_metadata.schema.identifiers"
                                                                     }
                                                                 ],
                                                                 "generate": false,
                                                                 "base-classes": [
-                                                                    "nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema"
+                                                                    "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                                 ],
                                                                 "read": false,
                                                                 "write": false,
@@ -5426,13 +5426,13 @@
                                                         "marshmallow": {
                                                             "imports": [
                                                                 {
-                                                                    "import": "nr_metadata.common.services.records.ui_schema_datatypes",
-                                                                    "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
+                                                                    "import": "nr_metadata.ui_schema.identifiers",
+                                                                    "alias": "nr_metadata.ui_schema.identifiers"
                                                                 }
                                                             ],
                                                             "generate": false,
                                                             "base-classes": [
-                                                                "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema"
+                                                                "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                             ],
                                                             "read": false,
                                                             "write": false,
@@ -5443,13 +5443,13 @@
                                                     "marshmallow": {
                                                         "imports": [
                                                             {
-                                                                "import": "nr_metadata.common.services.records.schema_datatypes",
-                                                                "alias": "nr_metadata.common.services.records.schema_datatypes"
+                                                                "import": "nr_metadata.schema.identifiers",
+                                                                "alias": "nr_metadata.schema.identifiers"
                                                             }
                                                         ],
                                                         "generate": false,
                                                         "base-classes": [
-                                                            "nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema"
+                                                            "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                         ],
                                                         "read": false,
                                                         "write": false,
@@ -5904,13 +5904,13 @@
                                             "marshmallow": {
                                                 "imports": [
                                                     {
-                                                        "import": "nr_metadata.common.services.records.ui_schema_datatypes",
-                                                        "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
+                                                        "import": "nr_metadata.ui_schema.identifiers",
+                                                        "alias": "nr_metadata.ui_schema.identifiers"
                                                     }
                                                 ],
                                                 "generate": false,
                                                 "base-classes": [
-                                                    "nr_metadata.common.services.records.ui_schema_datatypes.NRObjectIdentifierUISchema"
+                                                    "nr_metadata.ui_schema.identifiers.NRObjectIdentifierUISchema"
                                                 ],
                                                 "read": false,
                                                 "write": false,
@@ -5921,13 +5921,13 @@
                                         "marshmallow": {
                                             "imports": [
                                                 {
-                                                    "import": "nr_metadata.common.services.records.schema_datatypes",
-                                                    "alias": "nr_metadata.common.services.records.schema_datatypes"
+                                                    "import": "nr_metadata.schema.identifiers",
+                                                    "alias": "nr_metadata.schema.identifiers"
                                                 }
                                             ],
                                             "generate": false,
                                             "base-classes": [
-                                                "nr_metadata.common.services.records.schema_datatypes.NRObjectIdentifierSchema"
+                                                "nr_metadata.schema.identifiers.NRObjectIdentifierSchema"
                                             ],
                                             "read": false,
                                             "write": false,
@@ -7006,13 +7006,13 @@
                                 "marshmallow": {
                                     "imports": [
                                         {
-                                            "import": "nr_metadata.common.services.records.ui_schema_datatypes",
-                                            "alias": "nr_metadata.common.services.records.ui_schema_datatypes"
+                                            "import": "nr_metadata.ui_schema.identifiers",
+                                            "alias": "nr_metadata.ui_schema.identifiers"
                                         }
                                     ],
                                     "generate": true,
                                     "base-classes": [
-                                        "nr_metadata.common.services.records.ui_schema_datatypes.NRSystemIdentifierUISchema"
+                                        "nr_metadata.ui_schema.identifiers.NRSystemIdentifierUISchema"
                                     ],
                                     "read": false,
                                     "write": false,
@@ -7023,13 +7023,13 @@
                             "marshmallow": {
                                 "imports": [
                                     {
-                                        "import": "nr_metadata.common.services.records.schema_datatypes",
-                                        "alias": "nr_metadata.common.services.records.schema_datatypes"
+                                        "import": "nr_metadata.schema.identifiers",
+                                        "alias": "nr_metadata.schema.identifiers"
                                     }
                                 ],
                                 "generate": true,
                                 "base-classes": [
-                                    "nr_metadata.common.services.records.schema_datatypes.NRSystemIdentifierSchema"
+                                    "nr_metadata.schema.identifiers.NRSystemIdentifierSchema"
                                 ],
                                 "read": false,
                                 "write": false,

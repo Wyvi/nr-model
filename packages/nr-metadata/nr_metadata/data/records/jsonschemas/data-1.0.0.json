@@ -84,18 +84,7 @@
                         "type": "object",
                         "properties": {
                             "contributorType": {
-                                "type": "object",
-                                "properties": {
-                                    "id": {
-                                        "type": "string"
-                                    },
-                                    "title": {
-                                        "type": "object"
-                                    },
-                                    "@v": {
-                                        "type": "string"
-                                    }
-                                }
+                                "type": "object"
                             },
                             "fullName": {
                                 "type": "string"
@@ -287,10 +276,6 @@
                         "type": {
                             "type": "string",
                             "format": "date"
-                        },
-                        "date": {
-                            "type": "string",
-                            "format": "date"
                         }
                     }
                 },
@@ -437,9 +422,6 @@
                             },
                             "scheme": {
                                 "type": "string"
-                            },
-                            "status": {
-                                "type": "string"
                             }
                         }
                     }
@@ -507,18 +489,7 @@
                                     "type": "object",
                                     "properties": {
                                         "contributorType": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string"
-                                                },
-                                                "title": {
-                                                    "type": "object"
-                                                },
-                                                "@v": {
-                                                    "type": "string"
-                                                }
-                                            }
+                                            "type": "object"
                                         },
                                         "authorityIdentifiers": {
                                             "type": "array",
@@ -745,8 +716,7 @@
                                 "type": "string"
                             },
                             "itemYear": {
-                                "type": "integer",
-                                "format": "date"
+                                "type": "integer"
                             }
                         }
                     }
@@ -874,13 +844,6 @@
                 },
                 "version": {
                     "type": "string"
-                },
-                "dateModified": {
-                    "type": "string",
-                    "format": "date"
-                },
-                "publicationYear": {
-                    "type": "integer"
                 }
             }
         },

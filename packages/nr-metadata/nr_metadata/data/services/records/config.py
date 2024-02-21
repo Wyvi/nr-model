@@ -5,11 +5,10 @@ from invenio_records_resources.services import (
 from invenio_records_resources.services import pagination_links
 from invenio_records_resources.services.records.components import DataComponent
 from oarepo_runtime.services.config.service import PermissionsPresetsConfigMixin
-from oarepo_runtime.services.results import RecordList
 
 from nr_metadata.data.records.api import DataRecord
 from nr_metadata.data.services.records.permissions import DataPermissionPolicy
-from nr_metadata.data.services.records.results import DataRecordItem
+from nr_metadata.data.services.records.results import DataRecordItem, DataRecordList
 from nr_metadata.data.services.records.schema import NRDataRecordSchema
 from nr_metadata.data.services.records.search import DataSearchOptions
 
@@ -17,7 +16,9 @@ from nr_metadata.data.services.records.search import DataSearchOptions
 class DataServiceConfig(PermissionsPresetsConfigMixin, InvenioRecordServiceConfig):
     """DataRecord service config."""
 
-    result_list_cls = RecordList
+    result_item_cls = DataRecordItem
+
+    result_list_cls = DataRecordList
 
     PERMISSIONS_PRESETS = ["everyone"]
 
@@ -39,17 +40,9 @@ class DataServiceConfig(PermissionsPresetsConfigMixin, InvenioRecordServiceConfi
         DataComponent,
         *PermissionsPresetsConfigMixin.components,
         *InvenioRecordServiceConfig.components,
-        *PermissionsPresetsConfigMixin.components,
-        *InvenioRecordServiceConfig.components,
-        *PermissionsPresetsConfigMixin.components,
-        *InvenioRecordServiceConfig.components,
-        *PermissionsPresetsConfigMixin.components,
-        *InvenioRecordServiceConfig.components,
     ]
 
     model = "nr_metadata.data"
-
-    result_item_cls = DataRecordItem
 
     @property
     def links_item(self):

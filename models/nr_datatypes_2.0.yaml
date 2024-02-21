@@ -111,10 +111,10 @@ NRPersonIdentifier:
   ui:
     detail: nr_person_identifier
     marshmallow:
-      class: nr_metadata.common.services.records.ui_schema_datatypes.NRPersonIdentifierUISchema #!common added
+      class: nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema
       generate: false
   marshmallow:
-    class: nr_metadata.common.services.records.schema_datatypes.NRPersonIdentifierSchema #!common added
+    class: nr_metadata.schema.identifiers.NRPersonIdentifierSchema
     generate: false
 
 NROrganizationIdentifier:
@@ -150,10 +150,10 @@ NROrganizationIdentifier:
   ui:
     detail: nr_organization_identifier
     marshmallow:
-      class: nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationIdentifierUISchema #!common added
+      class: nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema
       generate: false
   marshmallow:
-    class: nr_metadata.common.services.records.schema_datatypes.NROrganizationIdentifierSchema #!common added
+    class: nr_metadata.schema.identifiers.NROrganizationIdentifierSchema
     generate: false
 
 NRAuthority:
@@ -189,10 +189,10 @@ NRObjectPID:
   ui:
     detail: nr_object_pid
     marshmallow:
-      class: nr_metadata.common.services.records.ui_schema_datatypes.NRObjectIdentifierUISchema #!common added
+      class: nr_metadata.ui_schema.identifiers.NRObjectIdentifierUISchema
       generate: false
   marshmallow:
-    class: nr_metadata.common.services.records.schema_datatypes.NRObjectIdentifierSchema #!common added
+    class: nr_metadata.schema.identifiers.NRObjectIdentifierSchema
     generate: false
 
 NRDateOrRange:
@@ -505,10 +505,10 @@ NRSystemIdentifier:
   ui:
     detail: identifier
     marshmallow:
-      class: nr_metadata.common.services.records.ui_schema_datatypes.NRSystemIdentifierUISchema #!common added
+      class: nr_metadata.ui_schema.identifiers.NRSystemIdentifierUISchema
       generate: false
   marshmallow:
-    class: nr_metadata.common.services.records.schema_datatypes.NRSystemIdentifierSchema #!common added
+    class: nr_metadata.schema.identifiers.NRSystemIdentifierSchema
     generate: false
   properties:
     identifier:

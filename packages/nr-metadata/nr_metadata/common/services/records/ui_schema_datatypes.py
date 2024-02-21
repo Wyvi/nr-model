@@ -10,6 +10,12 @@ from oarepo_vocabularies.services.ui_schema import (
     VocabularyI18nStrUIField,
 )
 
+from nr_metadata.ui_schema.identifiers import (
+    NRObjectIdentifierUISchema,
+    NROrganizationIdentifierUISchema,
+    NRPersonIdentifierUISchema,
+)
+
 
 class NREventUISchema(DictOnlySchema):
     class Meta:

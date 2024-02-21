@@ -11,6 +11,12 @@ from oarepo_runtime.services.schema.polymorphic import PolymorphicSchema
 from oarepo_runtime.services.schema.validation import CachedMultilayerEDTFValidator
 from oarepo_vocabularies.services.schema import HierarchySchema
 
+from nr_metadata.schema.identifiers import (
+    NRObjectIdentifierSchema,
+    NROrganizationIdentifierSchema,
+    NRPersonIdentifierSchema,
+)
+
 
 class NRRelatedItemSchema(DictOnlySchema):
     class Meta:
