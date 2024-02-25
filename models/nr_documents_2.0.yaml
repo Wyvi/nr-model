@@ -102,9 +102,6 @@ DocumentModel:
             write: false
           label.cs: Lidé
           label.en: People
-          facets:
-            facet-groups:
-              default: 1
         institutions:
           type: taxonomy
           vocabulary-type: institutions
@@ -113,9 +110,6 @@ DocumentModel:
             write: false
           label.cs: Instituce
           label.en: Institutions
-          facets:
-            facet-groups:
-              default: 8
         keywords:
           type: keyword
           marshmallow:
@@ -130,9 +124,6 @@ DocumentModel:
             write: false
           label.cs: Datum poslední změny
           label.en: Updated date
-          facets:
-            facet-groups:
-            default: 2
       marshmallow:
         class: nr_metadata.documents.services.records.schema.NRDocumentSyntheticFieldsSchema
       ui:
