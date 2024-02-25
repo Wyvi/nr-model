@@ -59,30 +59,80 @@ DocumentModel:
       class: nr_metadata.documents.services.records.ui_schema.NRDocumentRecordUISchema
   use: [invenio]
 
+  record:
+    imports:
+      - {{oarepo_runtime.records.systemfields.SyntheticField}}
+      - {{oarepo_runtime.records.systemfields.PathSelector}}
+      - {{oarepo_runtime.records.systemfields.LanguageSelector}}
+    fields:
+      people: |
+        SyntheticField(
+            "syntheticFields.people",
+            selector=PathSelector("metadata.creators", "metadata.contributors"),
+            filter=lambda x: x.get("type") == "personal",
+            transform=lambda x: x.get("fullName")
+        )
+      institutions: |
+        SyntheticField(
+            "syntheticFields.institutions",
+            selector=PathSelector(
+                  "metadata.creators.affiliations", 
+                  "metadata.contributors.affiliations", 
+                  "metadata.thesis.degreeGrantors")
+        )
+      keywords: |
+        SyntheticField(
+            "syntheticFields.keywords_cs",
+            selector=PathSelector("metadata.subjects"),
+            transform=lambda x: x.get("subject", {}).get("value")
+        )
+      date: |
+        SyntheticField(
+            "syntheticFields.date",
+            selector=PathSelector("metadata.dateModified", "metadata.dateIssued", max_count=1)
+        )
+
   properties:
     syntheticFields:
       properties:
-        person:
+        people:
           type: keyword
           marshmallow:
             read: false
             write: false
+          label.cs: Lidé
+          label.en: People
+          facets:
+            facet-groups:
+              default: 1
         institutions:
           type: taxonomy
           vocabulary-type: institutions
           marshmallow:
             read: false
             write: false
-        keywords_cs:
+          label.cs: Instituce
+          label.en: Institutions
+          facets:
+            facet-groups:
+              default: 8
+        keywords:
           type: keyword
           marshmallow:
             read: false
             write: false
-        keywords_en:
-          type: keyword
+          label.cs: Klíčová slova
+          label.en: Keywords
+        date:
+          type: date
           marshmallow:
             read: false
             write: false
+          label.cs: Datum poslední změny
+          label.en: Updated date
+          facets:
+            facet-groups:
+            default: 2
       marshmallow:
         class: nr_metadata.documents.services.records.schema.NRDocumentSyntheticFieldsSchema
       ui:

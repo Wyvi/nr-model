@@ -83,6 +83,9 @@ CommonMetadata:
       # Taxonomy driven typology of objects that's possible to store in the repository
       use: 'nr-datatypes#NRResourceType'
       required: true
+      facets:
+        facet-groups:
+          - default: 5
 
     dateAvailable:
       # The date the resource is publicly available in a repository.
@@ -105,6 +108,9 @@ CommonMetadata:
         faker: date
       label.cs: Datum změny zdroje
       label.en: Date modified
+      facets:
+        facet-groups:
+          - default: 2
 
     dateIssued:
       # The date the resource is publicly available in a repository.
@@ -152,6 +158,9 @@ CommonMetadata:
       ^minItems: 1
       ^required: true
       #^uniqueItems: true
+      facets:
+        facet-groups:
+          - default: 7
 
     notes[]:
       # Free-form note for any comment that couldn't be inserted in any other fields.
@@ -184,12 +193,18 @@ CommonMetadata:
       label.cs: Licence
       label.en: License
       #^uniqueItems: true
+      facets:
+        facet-groups:
+          - default: 4
 
     accessRights:
       # Taxonomy driven list of possible access to the document - open,
       # embargoed, restirected and metadata only access. Based on COAR
       # vocabulary - http://vocabularies.coar-repositories.org/documentation/access_rights/",
       use: 'nr-datatypes#NRAccessRights'
+      facets:
+        facet-groups:
+          - default: 3
 
     relatedItems[]:
       use: 'nr-datatypes#NRRelatedItem'
@@ -202,6 +217,16 @@ CommonMetadata:
       #^uniqueItems: true
       ^label.cs: 'Projekt nebo financování'
       ^label.en: 'Funding'
+      properties:
+        funder:
+          use: 'nr-datatypes#NRFunder'
+          facets:
+            facet-groups:
+              - default: 9
+        projectID:
+          facets:
+            facet-groups:
+              default: 10
 
     version:
       # verze obsahu, nikoliv záznamu. hodnota ve formuláři není editovatelná.
