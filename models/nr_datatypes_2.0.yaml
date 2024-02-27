@@ -9,7 +9,7 @@ NRPerson:
     nameType:
       type: keyword
       enum:
-        - "Personal"
+        - Personal
       label.cs: Typ
       label.en: Type
     fullName:
@@ -41,6 +41,39 @@ NRPerson:
       label.cs: Afiliace
       label.en: Affiliation
       hint.cs: Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.
+  ui:
+    detail: nr_person
+    marshmallow:
+      class: nr_metadata.common.services.records.ui_schema_datatypes.NRPersonUISchema
+  marshmallow:
+    class: nr_metadata.common.services.records.schema_datatypes.NRPersonSchema
+NROrganization:
+  $id: NROrganization
+  properties:
+    nameType:
+      type: keyword
+      enum:
+        - Organizational
+      sample:
+        - Organizational
+      label.cs: Typ
+      label.en: Type
+    fullName:
+      type: keyword
+      required: true
+      label.cs: Jméno autora
+      label.en: Author name
+      sample:
+        faker: name
+    authorityIdentifiers[]:
+      use: 'nr-datatypes#NROrganizationIdentifier'
+      #^uniqueItems: true
+  ui:
+    detail: nr_organization
+    marshmallow:
+      class: nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationUISchema
+  marshmallow:
+    class: nr_metadata.common.services.records.schema_datatypes.NROrganizationSchema
 
 NROrganization:
   $id: NROrganization
@@ -280,7 +313,6 @@ NRRelatedItem:
       #^uniqueItems: true
       ^label.cs: Autoři
       ^label.en: Authors
-
       use: 'nr-datatypes#NRAuthority'
       ui:
         detail: creator

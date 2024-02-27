@@ -122,7 +122,8 @@
             "base-classes": [
                 "invenio_records_resources.resources.RecordResource"
             ],
-            "imports": []
+            "imports": [],
+            "additional-args": []
         },
         "resource-config": {
             "generate": true,
@@ -135,7 +136,8 @@
             "base-classes": [
                 "invenio_records_resources.resources.RecordResourceConfig"
             ],
-            "imports": []
+            "imports": [],
+            "additional-args": []
         },
         "saved-model": {
             "file": "nr_metadata/common/models/records.json",
@@ -183,8 +185,8 @@
             ],
             "extra-code": "",
             "extensions": [
-                "{{nr_metadata.common.records.dumpers.multilingual.MultilingualSearchDumperExt}}()",
-                "{{nr_metadata.common.records.dumpers.edtf.CommonEDTFIntervalDumperExt}}()"
+                "{{nr_metadata.common.records.dumpers.edtf.CommonEDTFIntervalDumperExt}}()",
+                "{{nr_metadata.common.records.dumpers.multilingual.MultilingualSearchDumperExt}}()"
             ],
             "imports": []
         },
@@ -217,7 +219,7 @@
             "components": [
                 "{{invenio_records_resources.services.records.components.DataComponent}}"
             ],
-            "result-list-class": "oarepo_runtime.services.results.RecordList"
+            "additional-args": []
         },
         "service": {
             "generate": true,
@@ -229,7 +231,8 @@
             "base-classes": [
                 "invenio_records_resources.services.RecordService{InvenioRecordService}"
             ],
-            "imports": []
+            "imports": [],
+            "additional-args": []
         },
         "json-serializer": {
             "module": "nr_metadata.common.resources.records.ui",
@@ -241,18 +244,11 @@
             "extra-code": "",
             "generate": true,
             "list_schema_cls": "flask_resources.BaseListSchema",
-            "format_serializer_cls": "flask_resources.serializers.JSONSerializer"
-        },
-        "multilingual-dumper": {
-            "generate": true,
-            "module": "nr_metadata.common.records.dumpers.multilingual",
-            "class": "nr_metadata.common.records.dumpers.multilingual.MultilingualSearchDumperExt",
-            "base-classes": [
-                "oarepo_runtime.records.dumpers.multilingual_dumper.MultilingualDumper"
-            ],
-            "extra-code": "",
-            "extensions": [],
-            "imports": []
+            "format_serializer_cls": "flask_resources.serializers.JSONSerializer",
+            "schema-context-args": {
+                "\"object_key\"": "\"ui\"",
+                "\"identity\"": "{{ flask.g{g.identity} }}"
+            }
         },
         "mapping": {
             "generate": true,
@@ -280,6 +276,39 @@
             "class": "nr_metadata.common.records.dumpers.edtf.CommonEDTFIntervalDumperExt",
             "base-classes": [
                 "oarepo_runtime.records.dumpers.edtf_interval.EDTFIntervalDumperExt"
+            ],
+            "extra-code": "",
+            "extensions": [],
+            "imports": []
+        },
+        "record-list": {
+            "generate": true,
+            "module": "nr_metadata.common.services.records.results",
+            "class": "nr_metadata.common.services.records.results.CommonRecordList",
+            "extra-code": "",
+            "base-classes": [
+                "oarepo_runtime.services.results.RecordList"
+            ],
+            "components": [],
+            "imports": []
+        },
+        "record-item": {
+            "generate": true,
+            "module": "nr_metadata.common.services.records.results",
+            "class": "nr_metadata.common.services.records.results.CommonRecordItem",
+            "extra-code": "",
+            "base-classes": [
+                "oarepo_runtime.services.results.RecordItem"
+            ],
+            "components": [],
+            "imports": []
+        },
+        "multilingual-dumper": {
+            "generate": true,
+            "module": "nr_metadata.common.records.dumpers.multilingual",
+            "class": "nr_metadata.common.records.dumpers.multilingual.MultilingualSearchDumperExt",
+            "base-classes": [
+                "oarepo_runtime.records.dumpers.multilingual_dumper.MultilingualDumper"
             ],
             "extra-code": "",
             "extensions": [],
@@ -640,7 +669,301 @@
                         "label.cs": "Přispěvatelé",
                         "label.en": "Contributors",
                         "items": {
-                            "type": "object",
+                            "type": "polymorphic",
+                            "schemas": {
+                                "Organizational": {
+                                    "type": "object",
+                                    "properties": {
+                                        "nameType": {
+                                            "type": "keyword",
+                                            "enum": [
+                                                "Organizational"
+                                            ],
+                                            "sample": [
+                                                "Organizational"
+                                            ],
+                                            "label.cs": "Typ",
+                                            "label.en": "Type"
+                                        },
+                                        "fullName": {
+                                            "type": "keyword",
+                                            "required": true,
+                                            "sample": {
+                                                "faker": "name"
+                                            },
+                                            "label.cs": "Jméno autora",
+                                            "label.en": "Author name"
+                                        },
+                                        "authorityIdentifiers": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "identifier": {
+                                                        "type": "keyword",
+                                                        "required": true,
+                                                        "sample": {
+                                                            "faker": "isbn13"
+                                                        },
+                                                        "label.cs": "Identifikátor",
+                                                        "label.en": "Identifier",
+                                                        "i18n.key": "identifier"
+                                                    },
+                                                    "scheme": {
+                                                        "type": "keyword",
+                                                        "required": true,
+                                                        "enum": [
+                                                            "ISNI",
+                                                            "ROR",
+                                                            "ICO",
+                                                            "DOI"
+                                                        ],
+                                                        "label.cs": "Typ identifikátoru",
+                                                        "label.en": "Identifier type",
+                                                        "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                                        "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
+                                                        "i18n.key": "identifier_type"
+                                                    }
+                                                },
+                                                "ui": {
+                                                    "marshmallow": {
+                                                        "generate": false,
+                                                        "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
+                                                    },
+                                                    "detail": "nr_organization_identifier"
+                                                },
+                                                "marshmallow": {
+                                                    "generate": false,
+                                                    "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "ui": {
+                                        "marshmallow": {
+                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationUISchema",
+                                            "generate": true
+                                        },
+                                        "detail": "nr_organization"
+                                    },
+                                    "marshmallow": {
+                                        "class": "nr_metadata.common.services.records.schema_datatypes.NROrganizationSchema",
+                                        "generate": true
+                                    }
+                                },
+                                "Personal": {
+                                    "type": "object",
+                                    "properties": {
+                                        "nameType": {
+                                            "type": "keyword",
+                                            "enum": [
+                                                "Personal"
+                                            ],
+                                            "label.cs": "Typ",
+                                            "label.en": "Type"
+                                        },
+                                        "fullName": {
+                                            "type": "keyword",
+                                            "required": true,
+                                            "sample": {
+                                                "faker": "name"
+                                            },
+                                            "label.cs": "Jméno autora",
+                                            "label.en": "Author name"
+                                        },
+                                        "givenName": {
+                                            "type": "keyword"
+                                        },
+                                        "familyName": {
+                                            "type": "keyword"
+                                        },
+                                        "authorityIdentifiers": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "identifier": {
+                                                        "type": "keyword",
+                                                        "required": true,
+                                                        "sample": {
+                                                            "faker": "isbn13"
+                                                        },
+                                                        "label.cs": "Identifikátor",
+                                                        "label.en": "Identifier",
+                                                        "i18n.key": "identifier"
+                                                    },
+                                                    "scheme": {
+                                                        "type": "keyword",
+                                                        "required": true,
+                                                        "enum": [
+                                                            "orcid",
+                                                            "scopusID",
+                                                            "researcherID",
+                                                            "czenasAutID",
+                                                            "vedidk",
+                                                            "institutionalID",
+                                                            "ISNI"
+                                                        ],
+                                                        "label.cs": "Typ identifikátoru",
+                                                        "label.en": "Identifier type",
+                                                        "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                                        "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
+                                                        "i18n.key": "identifier_type"
+                                                    }
+                                                },
+                                                "ui": {
+                                                    "marshmallow": {
+                                                        "generate": false,
+                                                        "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
+                                                    },
+                                                    "detail": "nr_person_identifier"
+                                                },
+                                                "marshmallow": {
+                                                    "generate": false,
+                                                    "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
+                                                }
+                                            }
+                                        },
+                                        "affiliations": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "taxonomy",
+                                                "properties": {},
+                                                "keys": [
+                                                    "id",
+                                                    "title",
+                                                    {
+                                                        "key": "props.ror",
+                                                        "model": {
+                                                            "type": "keyword"
+                                                        },
+                                                        "target": "ror"
+                                                    },
+                                                    {
+                                                        "key": "hierarchy",
+                                                        "model": {
+                                                            "type": "object",
+                                                            "marshmallow": {
+                                                                "class": "oarepo_vocabularies.services.schema.HierarchySchema",
+                                                                "generate": false,
+                                                                "imports": [
+                                                                    {
+                                                                        "import": "oarepo_vocabularies.services.schema.HierarchySchema"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "ui": {
+                                                                "marshmallow": {
+                                                                    "class": "oarepo_vocabularies.services.ui_schema.HierarchyUISchema",
+                                                                    "generate": false,
+                                                                    "imports": [
+                                                                        {
+                                                                            "import": "oarepo_vocabularies.services.ui_schema.HierarchyUISchema"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "properties": {
+                                                                "parent": {
+                                                                    "type": "keyword"
+                                                                },
+                                                                "level": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "title": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "propertyNames": {
+                                                                            "pattern": "^[a-z]{2}$"
+                                                                        },
+                                                                        "additionalProperties": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "mapping": {
+                                                                            "dynamic": true
+                                                                        },
+                                                                        "marshmallow": {
+                                                                            "field": "i18n_strings",
+                                                                            "generate": true,
+                                                                            "class": "nr_metadata.common.services.records.schema.TitleItemSchema"
+                                                                        },
+                                                                        "ui": {
+                                                                            "marshmallow": {
+                                                                                "field": "i18n_strings",
+                                                                                "generate": true,
+                                                                                "class": "nr_metadata.common.services.records.ui_schema.TitleItemUISchema"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "ancestors": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "keyword"
+                                                                    }
+                                                                },
+                                                                "ancestors_or_self": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "keyword"
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "target": "hierarchy"
+                                                    }
+                                                ],
+                                                "vocabulary-type": "institutions",
+                                                "ui": {
+                                                    "marshmallow": {
+                                                        "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
+                                                        "unknown": "INCLUDE",
+                                                        "generate": true
+                                                    },
+                                                    "detail": "taxonomy_item",
+                                                    "edit": "taxonomy_item"
+                                                },
+                                                "marshmallow": {
+                                                    "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
+                                                    "unknown": "INCLUDE",
+                                                    "generate": true
+                                                },
+                                                "sample": {
+                                                    "faker": "company"
+                                                },
+                                                "label.cs": "Afiliace",
+                                                "label.en": "Affiliation",
+                                                "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
+                                                "imports": [
+                                                    {
+                                                        "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                    }
+                                                ],
+                                                "model": "vocabularies",
+                                                "pid-field": "Vocabulary.pid.with_type_ctx(\"institutions\")",
+                                                "facets": {
+                                                    "args": [
+                                                        "vocabulary='institutions'"
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "ui": {
+                                        "marshmallow": {
+                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonUISchema",
+                                            "generate": true
+                                        },
+                                        "detail": "nr_person"
+                                    },
+                                    "marshmallow": {
+                                        "class": "nr_metadata.common.services.records.schema_datatypes.NRPersonSchema",
+                                        "generate": true
+                                    }
+                                }
+                            },
+                            "discriminator": "nameType",
                             "ui": {
                                 "marshmallow": {
                                     "class": "nr_metadata.common.services.records.ui_schema_common.NRContributorUISchema",
@@ -652,35 +975,119 @@
                                 "class": "nr_metadata.common.services.records.schema_common.NRContributorSchema",
                                 "generate": true
                             },
+                            "hint.cs": "Jako tvůrce je možné označit osobu nebo instituci.",
+                            "hint.en": "It is possible to designate a person or an institution as the creator/contributor.",
                             "properties": {
+                                "contributorType": {
+                                    "type": "vocabulary",
+                                    "vocabulary-type": "contributor-types",
+                                    "ui": {
+                                        "marshmallow": {
+                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorTypeVocabularyUISchema"
+                                        },
+                                        "detail": "vocabulary_item",
+                                        "edit": "vocabulary_item"
+                                    },
+                                    "marshmallow": {
+                                        "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorTypeVocabularySchema"
+                                    },
+                                    "label.cs": "Typ přispěvatele",
+                                    "label.en": "Contributor's type",
+                                    "imports": [
+                                        {
+                                            "import": "invenio_vocabularies.records.api.Vocabulary"
+                                        }
+                                    ],
+                                    "model": "vocabularies",
+                                    "keys": [
+                                        "id",
+                                        "title"
+                                    ],
+                                    "pid-field": "Vocabulary.pid.with_type_ctx(\"contributor-types\")",
+                                    "facets": {
+                                        "args": [
+                                            "vocabulary='contributor-types'"
+                                        ]
+                                    }
+                                },
+                                "fullName": {
+                                    "type": "keyword",
+                                    "required": true,
+                                    "sample": {
+                                        "faker": "name"
+                                    },
+                                    "label.cs": "Jméno autora",
+                                    "label.en": "Author name"
+                                },
+                                "authorityIdentifiers": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "ui": {
+                                            "marshmallow": {
+                                                "generate": false,
+                                                "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
+                                            },
+                                            "detail": "nr_person_identifier"
+                                        },
+                                        "marshmallow": {
+                                            "generate": false,
+                                            "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
+                                        },
+                                        "properties": {
+                                            "identifier": {
+                                                "type": "keyword",
+                                                "required": true,
+                                                "sample": {
+                                                    "faker": "isbn13"
+                                                },
+                                                "label.cs": "Identifikátor",
+                                                "label.en": "Identifier",
+                                                "i18n.key": "identifier"
+                                            },
+                                            "scheme": {
+                                                "type": "keyword",
+                                                "required": true,
+                                                "enum": [
+                                                    "orcid",
+                                                    "scopusID",
+                                                    "researcherID",
+                                                    "czenasAutID",
+                                                    "vedidk",
+                                                    "institutionalID",
+                                                    "ISNI"
+                                                ],
+                                                "label.cs": "Typ identifikátoru",
+                                                "label.en": "Identifier type",
+                                                "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                                "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
+                                                "i18n.key": "identifier_type"
+                                            }
+                                        }
+                                    }
+                                },
+                                "nameType": {
+                                    "type": "keyword",
+                                    "enum": [
+                                        "Personal"
+                                    ],
+                                    "label.cs": "Typ",
+                                    "label.en": "Type"
+                                },
                                 "affiliations": {
                                     "type": "array",
                                     "items": {
                                         "type": "taxonomy",
-                                        "vocabulary-type": "institutions",
-                                        "ui": {
-                                            "marshmallow": {
-                                                "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
-                                                "unknown": "INCLUDE",
-                                                "generate": true
-                                            },
-                                            "detail": "taxonomy_item",
-                                            "edit": "taxonomy_item"
-                                        },
-                                        "marshmallow": {
-                                            "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
-                                            "unknown": "INCLUDE",
-                                            "generate": true
-                                        },
-                                        "sample": {
-                                            "faker": "company"
-                                        },
-                                        "label.cs": "Afiliace",
-                                        "label.en": "Affiliation",
-                                        "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
                                         "keys": [
                                             "id",
                                             "title",
+                                            {
+                                                "key": "props.ror",
+                                                "model": {
+                                                    "type": "keyword"
+                                                },
+                                                "target": "ror"
+                                            },
                                             {
                                                 "key": "hierarchy",
                                                 "model": {
@@ -756,6 +1163,27 @@
                                                 "target": "hierarchy"
                                             }
                                         ],
+                                        "vocabulary-type": "institutions",
+                                        "ui": {
+                                            "marshmallow": {
+                                                "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
+                                                "unknown": "INCLUDE",
+                                                "generate": true
+                                            },
+                                            "detail": "taxonomy_item",
+                                            "edit": "taxonomy_item"
+                                        },
+                                        "marshmallow": {
+                                            "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
+                                            "unknown": "INCLUDE",
+                                            "generate": true
+                                        },
+                                        "sample": {
+                                            "faker": "company"
+                                        },
+                                        "label.cs": "Afiliace",
+                                        "label.en": "Affiliation",
+                                        "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
                                         "imports": [
                                             {
                                                 "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -824,6 +1252,9 @@
                                                 "additionalProperties": {
                                                     "type": "string"
                                                 }
+                                            },
+                                            "ror": {
+                                                "type": "keyword"
                                             },
                                             "hierarchy": {
                                                 "type": "object",
@@ -914,6 +1345,336 @@
                                         }
                                     }
                                 },
+                                "familyName": {
+                                    "type": "keyword"
+                                },
+                                "givenName": {
+                                    "type": "keyword"
+                                }
+                            }
+                        }
+                    },
+                    "creators": {
+                        "type": "array",
+                        "required": true,
+                        "minItems": 1,
+                        "label.cs": "Autoři",
+                        "label.en": "Authors",
+                        "marshmallow": {
+                            "validators": [
+                                "ma.validate.Length(min=1)"
+                            ]
+                        },
+                        "items": {
+                            "type": "polymorphic",
+                            "schemas": {
+                                "Organizational": {
+                                    "type": "object",
+                                    "properties": {
+                                        "nameType": {
+                                            "type": "keyword",
+                                            "enum": [
+                                                "Organizational"
+                                            ],
+                                            "sample": [
+                                                "Organizational"
+                                            ],
+                                            "label.cs": "Typ",
+                                            "label.en": "Type"
+                                        },
+                                        "fullName": {
+                                            "type": "keyword",
+                                            "required": true,
+                                            "sample": {
+                                                "faker": "name"
+                                            },
+                                            "label.cs": "Jméno autora",
+                                            "label.en": "Author name"
+                                        },
+                                        "authorityIdentifiers": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "identifier": {
+                                                        "type": "keyword",
+                                                        "required": true,
+                                                        "sample": {
+                                                            "faker": "isbn13"
+                                                        },
+                                                        "label.cs": "Identifikátor",
+                                                        "label.en": "Identifier",
+                                                        "i18n.key": "identifier"
+                                                    },
+                                                    "scheme": {
+                                                        "type": "keyword",
+                                                        "required": true,
+                                                        "enum": [
+                                                            "ISNI",
+                                                            "ROR",
+                                                            "ICO",
+                                                            "DOI"
+                                                        ],
+                                                        "label.cs": "Typ identifikátoru",
+                                                        "label.en": "Identifier type",
+                                                        "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                                        "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
+                                                        "i18n.key": "identifier_type"
+                                                    }
+                                                },
+                                                "ui": {
+                                                    "marshmallow": {
+                                                        "generate": false,
+                                                        "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
+                                                    },
+                                                    "detail": "nr_organization_identifier"
+                                                },
+                                                "marshmallow": {
+                                                    "generate": false,
+                                                    "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "ui": {
+                                        "marshmallow": {
+                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationUISchema",
+                                            "generate": false
+                                        },
+                                        "detail": "nr_organization"
+                                    },
+                                    "marshmallow": {
+                                        "class": "nr_metadata.common.services.records.schema_datatypes.NROrganizationSchema",
+                                        "generate": false
+                                    }
+                                },
+                                "Personal": {
+                                    "type": "object",
+                                    "properties": {
+                                        "nameType": {
+                                            "type": "keyword",
+                                            "enum": [
+                                                "Personal"
+                                            ],
+                                            "label.cs": "Typ",
+                                            "label.en": "Type"
+                                        },
+                                        "fullName": {
+                                            "type": "keyword",
+                                            "required": true,
+                                            "sample": {
+                                                "faker": "name"
+                                            },
+                                            "label.cs": "Jméno autora",
+                                            "label.en": "Author name"
+                                        },
+                                        "givenName": {
+                                            "type": "keyword"
+                                        },
+                                        "familyName": {
+                                            "type": "keyword"
+                                        },
+                                        "authorityIdentifiers": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "identifier": {
+                                                        "type": "keyword",
+                                                        "required": true,
+                                                        "sample": {
+                                                            "faker": "isbn13"
+                                                        },
+                                                        "label.cs": "Identifikátor",
+                                                        "label.en": "Identifier",
+                                                        "i18n.key": "identifier"
+                                                    },
+                                                    "scheme": {
+                                                        "type": "keyword",
+                                                        "required": true,
+                                                        "enum": [
+                                                            "orcid",
+                                                            "scopusID",
+                                                            "researcherID",
+                                                            "czenasAutID",
+                                                            "vedidk",
+                                                            "institutionalID",
+                                                            "ISNI"
+                                                        ],
+                                                        "label.cs": "Typ identifikátoru",
+                                                        "label.en": "Identifier type",
+                                                        "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                                        "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
+                                                        "i18n.key": "identifier_type"
+                                                    }
+                                                },
+                                                "ui": {
+                                                    "marshmallow": {
+                                                        "generate": false,
+                                                        "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
+                                                    },
+                                                    "detail": "nr_person_identifier"
+                                                },
+                                                "marshmallow": {
+                                                    "generate": false,
+                                                    "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
+                                                }
+                                            }
+                                        },
+                                        "affiliations": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "taxonomy",
+                                                "properties": {},
+                                                "keys": [
+                                                    "id",
+                                                    "title",
+                                                    {
+                                                        "key": "props.ror",
+                                                        "model": {
+                                                            "type": "keyword"
+                                                        },
+                                                        "target": "ror"
+                                                    },
+                                                    {
+                                                        "key": "hierarchy",
+                                                        "model": {
+                                                            "type": "object",
+                                                            "marshmallow": {
+                                                                "class": "oarepo_vocabularies.services.schema.HierarchySchema",
+                                                                "generate": false,
+                                                                "imports": [
+                                                                    {
+                                                                        "import": "oarepo_vocabularies.services.schema.HierarchySchema"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "ui": {
+                                                                "marshmallow": {
+                                                                    "class": "oarepo_vocabularies.services.ui_schema.HierarchyUISchema",
+                                                                    "generate": false,
+                                                                    "imports": [
+                                                                        {
+                                                                            "import": "oarepo_vocabularies.services.ui_schema.HierarchyUISchema"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "properties": {
+                                                                "parent": {
+                                                                    "type": "keyword"
+                                                                },
+                                                                "level": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "title": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "propertyNames": {
+                                                                            "pattern": "^[a-z]{2}$"
+                                                                        },
+                                                                        "additionalProperties": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "mapping": {
+                                                                            "dynamic": true
+                                                                        },
+                                                                        "marshmallow": {
+                                                                            "field": "i18n_strings",
+                                                                            "generate": false,
+                                                                            "class": "nr_metadata.common.services.records.schema.TitleItemSchema"
+                                                                        },
+                                                                        "ui": {
+                                                                            "marshmallow": {
+                                                                                "field": "i18n_strings",
+                                                                                "generate": false,
+                                                                                "class": "nr_metadata.common.services.records.ui_schema.TitleItemUISchema"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "ancestors": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "keyword"
+                                                                    }
+                                                                },
+                                                                "ancestors_or_self": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "keyword"
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "target": "hierarchy"
+                                                    }
+                                                ],
+                                                "vocabulary-type": "institutions",
+                                                "ui": {
+                                                    "marshmallow": {
+                                                        "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
+                                                        "unknown": "INCLUDE",
+                                                        "generate": false
+                                                    },
+                                                    "detail": "taxonomy_item",
+                                                    "edit": "taxonomy_item"
+                                                },
+                                                "marshmallow": {
+                                                    "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
+                                                    "unknown": "INCLUDE",
+                                                    "generate": false
+                                                },
+                                                "sample": {
+                                                    "faker": "company"
+                                                },
+                                                "label.cs": "Afiliace",
+                                                "label.en": "Affiliation",
+                                                "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
+                                                "imports": [
+                                                    {
+                                                        "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                    }
+                                                ],
+                                                "model": "vocabularies",
+                                                "pid-field": "Vocabulary.pid.with_type_ctx(\"institutions\")",
+                                                "facets": {
+                                                    "args": [
+                                                        "vocabulary='institutions'"
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "ui": {
+                                        "marshmallow": {
+                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonUISchema",
+                                            "generate": false
+                                        },
+                                        "detail": "nr_person"
+                                    },
+                                    "marshmallow": {
+                                        "class": "nr_metadata.common.services.records.schema_datatypes.NRPersonSchema",
+                                        "generate": false
+                                    }
+                                }
+                            },
+                            "discriminator": "nameType",
+                            "ui": {
+                                "marshmallow": {
+                                    "class": "nr_metadata.common.services.records.ui_schema_common.NRCreatorUISchema",
+                                    "generate": true
+                                },
+                                "detail": "creator"
+                            },
+                            "marshmallow": {
+                                "class": "nr_metadata.common.services.records.schema_common.NRCreatorSchema",
+                                "generate": true
+                            },
+                            "hint.cs": "Jako tvůrce je možné označit osobu nebo instituci.",
+                            "hint.en": "It is possible to designate a person or an institution as the creator/contributor.",
+                            "properties": {
                                 "authorityIdentifiers": {
                                     "type": "array",
                                     "items": {
@@ -921,13 +1682,13 @@
                                         "ui": {
                                             "marshmallow": {
                                                 "generate": false,
-                                                "class": "nr_metadata.ui_schema.identifiers.NRAuthorityIdentifierUISchema"
+                                                "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                             },
-                                            "detail": "nr_authority_identifier"
+                                            "detail": "nr_person_identifier"
                                         },
                                         "marshmallow": {
                                             "generate": false,
-                                            "class": "nr_metadata.schema.identifiers.NRAuthorityIdentifierSchema"
+                                            "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                         },
                                         "properties": {
                                             "identifier": {
@@ -950,10 +1711,7 @@
                                                     "czenasAutID",
                                                     "vedidk",
                                                     "institutionalID",
-                                                    "ISNI",
-                                                    "ROR",
-                                                    "ICO",
-                                                    "DOI"
+                                                    "ISNI"
                                                 ],
                                                 "label.cs": "Typ identifikátoru",
                                                 "label.en": "Identifier type",
@@ -970,190 +1728,31 @@
                                     "sample": {
                                         "faker": "name"
                                     },
-                                    "label.cs": "Jméno přispěvatele",
-                                    "label.en": "Contributor name"
+                                    "label.cs": "Jméno autora",
+                                    "label.en": "Author name"
                                 },
                                 "nameType": {
                                     "type": "keyword",
                                     "enum": [
-                                        "Organizational",
-                                        "Personal"
-                                    ],
-                                    "sample": [
-                                        "Organizational",
                                         "Personal"
                                     ],
                                     "label.cs": "Typ",
-                                    "label.en": "Type",
-                                    "hint.cs": "Jako tvůrce je možné označit osobu nebo instituci.",
-                                    "hint.en": "It is possible to designate a person or an institution as the creator/contributor."
+                                    "label.en": "Type"
                                 },
-                                "role": {
-                                    "type": "vocabulary",
-                                    "vocabulary-type": "contributor-roles",
-                                    "ui": {
-                                        "marshmallow": {
-                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAuthorityRoleVocabularyUISchema",
-                                            "unknown": "INCLUDE",
-                                            "generate": true
-                                        },
-                                        "detail": "vocabulary_item",
-                                        "edit": "vocabulary_item"
-                                    },
-                                    "marshmallow": {
-                                        "class": "nr_metadata.common.services.records.schema_datatypes.NRAuthorityRoleVocabularySchema",
-                                        "unknown": "INCLUDE",
-                                        "generate": true
-                                    },
-                                    "label.cs": "Role přispěvatele",
-                                    "label.en": "Contributor's role",
-                                    "imports": [
-                                        {
-                                            "import": "invenio_vocabularies.records.api.Vocabulary"
-                                        }
-                                    ],
-                                    "model": "vocabularies",
-                                    "keys": [
-                                        "id",
-                                        "title"
-                                    ],
-                                    "pid-field": "Vocabulary.pid.with_type_ctx(\"contributor-roles\")",
-                                    "facets": {
-                                        "args": [
-                                            "vocabulary='contributor-roles'"
-                                        ]
-                                    },
-                                    "properties": {
-                                        "id": {
-                                            "marshmallow": {
-                                                "field-class": "marshmallow.fields.String",
-                                                "validators": [],
-                                                "imports": []
-                                            },
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "field-class": "marshmallow.fields.String",
-                                                    "validators": [],
-                                                    "imports": []
-                                                }
-                                            },
-                                            "type": "keyword",
-                                            "mapping": {
-                                                "fields": {
-                                                    "text": {
-                                                        "type": "search_as_you_type"
-                                                    }
-                                                }
-                                            },
-                                            "sample": {
-                                                "skip": true
-                                            }
-                                        },
-                                        "title": {
-                                            "marshmallow": {
-                                                "generate": false,
-                                                "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
-                                                "field-class": "marshmallow.fields.Nested",
-                                                "validators": [],
-                                                "class": "invenio_vocabularies.services.records.schema.TitleSchema"
-                                            },
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
-                                                    "generate": false
-                                                }
-                                            },
-                                            "mapping": {
-                                                "dynamic": true,
-                                                "properties": {
-                                                    "en": {
-                                                        "type": "search_as_you_type",
-                                                        "copy_to": "title_sort"
-                                                    }
-                                                }
-                                            },
-                                            "type": "object",
-                                            "propertyNames": {
-                                                "pattern": "^[a-z]{2}$"
-                                            },
-                                            "additionalProperties": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "@v": {
-                                            "type": "keyword",
-                                            "marshmallow": {
-                                                "field-name": "_version",
-                                                "field-class": "marshmallow.fields.String"
-                                            },
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "field-name": "_version",
-                                                    "field-class": "marshmallow.fields.String"
-                                                }
-                                            },
-                                            "facets": {
-                                                "facet": false
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "creators": {
-                        "type": "array",
-                        "required": true,
-                        "minItems": 1,
-                        "label.cs": "Autoři",
-                        "label.en": "Authors",
-                        "marshmallow": {
-                            "validators": [
-                                "ma.validate.Length(min=1)"
-                            ]
-                        },
-                        "items": {
-                            "type": "object",
-                            "ui": {
-                                "marshmallow": {
-                                    "class": "nr_metadata.common.services.records.ui_schema_common.NRCreatorUISchema",
-                                    "generate": true
-                                },
-                                "detail": "creator"
-                            },
-                            "marshmallow": {
-                                "class": "nr_metadata.common.services.records.schema_common.NRCreatorSchema",
-                                "generate": true
-                            },
-                            "properties": {
                                 "affiliations": {
                                     "type": "array",
                                     "items": {
                                         "type": "taxonomy",
-                                        "vocabulary-type": "institutions",
-                                        "ui": {
-                                            "marshmallow": {
-                                                "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
-                                                "unknown": "INCLUDE",
-                                                "generate": false
-                                            },
-                                            "detail": "taxonomy_item",
-                                            "edit": "taxonomy_item"
-                                        },
-                                        "marshmallow": {
-                                            "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
-                                            "unknown": "INCLUDE",
-                                            "generate": false
-                                        },
-                                        "sample": {
-                                            "faker": "company"
-                                        },
-                                        "label.cs": "Afiliace",
-                                        "label.en": "Affiliation",
-                                        "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
                                         "keys": [
                                             "id",
                                             "title",
+                                            {
+                                                "key": "props.ror",
+                                                "model": {
+                                                    "type": "keyword"
+                                                },
+                                                "target": "ror"
+                                            },
                                             {
                                                 "key": "hierarchy",
                                                 "model": {
@@ -1229,6 +1828,27 @@
                                                 "target": "hierarchy"
                                             }
                                         ],
+                                        "vocabulary-type": "institutions",
+                                        "ui": {
+                                            "marshmallow": {
+                                                "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
+                                                "unknown": "INCLUDE",
+                                                "generate": false
+                                            },
+                                            "detail": "taxonomy_item",
+                                            "edit": "taxonomy_item"
+                                        },
+                                        "marshmallow": {
+                                            "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
+                                            "unknown": "INCLUDE",
+                                            "generate": false
+                                        },
+                                        "sample": {
+                                            "faker": "company"
+                                        },
+                                        "label.cs": "Afiliace",
+                                        "label.en": "Affiliation",
+                                        "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
                                         "imports": [
                                             {
                                                 "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -1297,6 +1917,9 @@
                                                 "additionalProperties": {
                                                     "type": "string"
                                                 }
+                                            },
+                                            "ror": {
+                                                "type": "keyword"
                                             },
                                             "hierarchy": {
                                                 "type": "object",
@@ -1387,85 +2010,17 @@
                                         }
                                     }
                                 },
-                                "authorityIdentifiers": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "ui": {
-                                            "marshmallow": {
-                                                "generate": false,
-                                                "class": "nr_metadata.ui_schema.identifiers.NRAuthorityIdentifierUISchema"
-                                            },
-                                            "detail": "nr_authority_identifier"
-                                        },
-                                        "marshmallow": {
-                                            "generate": false,
-                                            "class": "nr_metadata.schema.identifiers.NRAuthorityIdentifierSchema"
-                                        },
-                                        "properties": {
-                                            "identifier": {
-                                                "type": "keyword",
-                                                "required": true,
-                                                "sample": {
-                                                    "faker": "isbn13"
-                                                },
-                                                "label.cs": "Identifikátor",
-                                                "label.en": "Identifier",
-                                                "i18n.key": "identifier"
-                                            },
-                                            "scheme": {
-                                                "type": "keyword",
-                                                "required": true,
-                                                "enum": [
-                                                    "orcid",
-                                                    "scopusID",
-                                                    "researcherID",
-                                                    "czenasAutID",
-                                                    "vedidk",
-                                                    "institutionalID",
-                                                    "ISNI",
-                                                    "ROR",
-                                                    "ICO",
-                                                    "DOI"
-                                                ],
-                                                "label.cs": "Typ identifikátoru",
-                                                "label.en": "Identifier type",
-                                                "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                "i18n.key": "identifier_type"
-                                            }
-                                        }
-                                    }
+                                "familyName": {
+                                    "type": "keyword"
                                 },
-                                "fullName": {
-                                    "type": "keyword",
-                                    "required": true,
-                                    "sample": {
-                                        "faker": "name"
-                                    },
-                                    "label.cs": "Jméno autora",
-                                    "label.en": "Author name"
-                                },
-                                "nameType": {
-                                    "type": "keyword",
-                                    "enum": [
-                                        "Organizational",
-                                        "Personal"
-                                    ],
-                                    "sample": [
-                                        "Organizational",
-                                        "Personal"
-                                    ],
-                                    "label.cs": "Typ",
-                                    "label.en": "Type",
-                                    "hint.cs": "Jako tvůrce je možné označit osobu nebo instituci.",
-                                    "hint.en": "It is possible to designate a person or an institution as the creator/contributor."
+                                "givenName": {
+                                    "type": "keyword"
                                 }
                             }
                         }
                     },
                     "dateAvailable": {
-                        "type": "edtf",
+                        "type": "date",
                         "sample": {
                             "faker": "date"
                         },
@@ -1479,14 +2034,6 @@
                         },
                         "label.cs": "Datum vydání",
                         "label.en": "Date issued"
-                    },
-                    "dateModified": {
-                        "type": "edtf",
-                        "sample": {
-                            "faker": "date"
-                        },
-                        "label.cs": "Datum změny zdroje",
-                        "label.en": "Date modified"
                     },
                     "events": {
                         "type": "array",
@@ -1666,38 +2213,6 @@
                             }
                         }
                     },
-                    "externalLocation": {
-                        "type": "object",
-                        "ui": {
-                            "marshmallow": {
-                                "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRExternalLocationUISchema",
-                                "generate": true
-                            },
-                            "detail": "external_location"
-                        },
-                        "marshmallow": {
-                            "class": "nr_metadata.common.services.records.schema_datatypes.NRExternalLocationSchema",
-                            "generate": true
-                        },
-                        "label.cs": "Externí umístění",
-                        "label.en": "External location",
-                        "properties": {
-                            "externalLocationNote": {
-                                "type": "fulltext",
-                                "label.cs": "Poznámka",
-                                "label.en": "Note"
-                            },
-                            "externalLocationURL": {
-                                "type": "url",
-                                "required": true,
-                                "sample": {
-                                    "faker": "url"
-                                },
-                                "label.cs": "Externí umístění zdroje",
-                                "label.en": "Resource external location"
-                            }
-                        }
-                    },
                     "fundingReferences": {
                         "type": "array",
                         "label.cs": "Projekt nebo financování",
@@ -1869,7 +2384,6 @@
                             "properties": {
                                 "geoLocationPlace": {
                                     "type": "keyword",
-                                    "required": true,
                                     "description": "Free description of the location; ie. Atlantic Ocean"
                                 },
                                 "geoLocationPoint": {
@@ -2127,7 +2641,8 @@
                                         "Handle",
                                         "ISBN",
                                         "ISSN",
-                                        "RIV"
+                                        "RIV",
+                                        "IGSN"
                                     ],
                                     "label.cs": "Typ identifikátoru",
                                     "label.en": "Identifier type"
@@ -2142,17 +2657,6 @@
                         },
                         "label.cs": "Odkaz na původní záznam",
                         "label.en": "Original record URL"
-                    },
-                    "publishers": {
-                        "type": "array",
-                        "label.cs": "Vydavatelé",
-                        "label.en": "Publishers",
-                        "items": {
-                            "type": "fulltext",
-                            "sample": {
-                                "faker": "company"
-                            }
-                        }
                     },
                     "relatedItems": {
                         "type": "array",
@@ -2180,7 +2684,301 @@
                                     "label.cs": "Přispěvatelé",
                                     "label.en": "Contributors",
                                     "items": {
-                                        "type": "object",
+                                        "type": "polymorphic",
+                                        "schemas": {
+                                            "Organizational": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "nameType": {
+                                                        "type": "keyword",
+                                                        "enum": [
+                                                            "Organizational"
+                                                        ],
+                                                        "sample": [
+                                                            "Organizational"
+                                                        ],
+                                                        "label.cs": "Typ",
+                                                        "label.en": "Type"
+                                                    },
+                                                    "fullName": {
+                                                        "type": "keyword",
+                                                        "required": true,
+                                                        "sample": {
+                                                            "faker": "name"
+                                                        },
+                                                        "label.cs": "Jméno autora",
+                                                        "label.en": "Author name"
+                                                    },
+                                                    "authorityIdentifiers": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "identifier": {
+                                                                    "type": "keyword",
+                                                                    "required": true,
+                                                                    "sample": {
+                                                                        "faker": "isbn13"
+                                                                    },
+                                                                    "label.cs": "Identifikátor",
+                                                                    "label.en": "Identifier",
+                                                                    "i18n.key": "identifier"
+                                                                },
+                                                                "scheme": {
+                                                                    "type": "keyword",
+                                                                    "required": true,
+                                                                    "enum": [
+                                                                        "ISNI",
+                                                                        "ROR",
+                                                                        "ICO",
+                                                                        "DOI"
+                                                                    ],
+                                                                    "label.cs": "Typ identifikátoru",
+                                                                    "label.en": "Identifier type",
+                                                                    "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                                                    "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
+                                                                    "i18n.key": "identifier_type"
+                                                                }
+                                                            },
+                                                            "ui": {
+                                                                "marshmallow": {
+                                                                    "generate": false,
+                                                                    "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
+                                                                },
+                                                                "detail": "nr_organization_identifier"
+                                                            },
+                                                            "marshmallow": {
+                                                                "generate": false,
+                                                                "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "ui": {
+                                                    "marshmallow": {
+                                                        "class": "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationUISchema",
+                                                        "generate": false
+                                                    },
+                                                    "detail": "nr_organization"
+                                                },
+                                                "marshmallow": {
+                                                    "class": "nr_metadata.common.services.records.schema_datatypes.NROrganizationSchema",
+                                                    "generate": false
+                                                }
+                                            },
+                                            "Personal": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "nameType": {
+                                                        "type": "keyword",
+                                                        "enum": [
+                                                            "Personal"
+                                                        ],
+                                                        "label.cs": "Typ",
+                                                        "label.en": "Type"
+                                                    },
+                                                    "fullName": {
+                                                        "type": "keyword",
+                                                        "required": true,
+                                                        "sample": {
+                                                            "faker": "name"
+                                                        },
+                                                        "label.cs": "Jméno autora",
+                                                        "label.en": "Author name"
+                                                    },
+                                                    "givenName": {
+                                                        "type": "keyword"
+                                                    },
+                                                    "familyName": {
+                                                        "type": "keyword"
+                                                    },
+                                                    "authorityIdentifiers": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "identifier": {
+                                                                    "type": "keyword",
+                                                                    "required": true,
+                                                                    "sample": {
+                                                                        "faker": "isbn13"
+                                                                    },
+                                                                    "label.cs": "Identifikátor",
+                                                                    "label.en": "Identifier",
+                                                                    "i18n.key": "identifier"
+                                                                },
+                                                                "scheme": {
+                                                                    "type": "keyword",
+                                                                    "required": true,
+                                                                    "enum": [
+                                                                        "orcid",
+                                                                        "scopusID",
+                                                                        "researcherID",
+                                                                        "czenasAutID",
+                                                                        "vedidk",
+                                                                        "institutionalID",
+                                                                        "ISNI"
+                                                                    ],
+                                                                    "label.cs": "Typ identifikátoru",
+                                                                    "label.en": "Identifier type",
+                                                                    "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                                                    "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
+                                                                    "i18n.key": "identifier_type"
+                                                                }
+                                                            },
+                                                            "ui": {
+                                                                "marshmallow": {
+                                                                    "generate": false,
+                                                                    "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
+                                                                },
+                                                                "detail": "nr_person_identifier"
+                                                            },
+                                                            "marshmallow": {
+                                                                "generate": false,
+                                                                "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
+                                                            }
+                                                        }
+                                                    },
+                                                    "affiliations": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "taxonomy",
+                                                            "properties": {},
+                                                            "keys": [
+                                                                "id",
+                                                                "title",
+                                                                {
+                                                                    "key": "props.ror",
+                                                                    "model": {
+                                                                        "type": "keyword"
+                                                                    },
+                                                                    "target": "ror"
+                                                                },
+                                                                {
+                                                                    "key": "hierarchy",
+                                                                    "model": {
+                                                                        "type": "object",
+                                                                        "marshmallow": {
+                                                                            "class": "oarepo_vocabularies.services.schema.HierarchySchema",
+                                                                            "generate": false,
+                                                                            "imports": [
+                                                                                {
+                                                                                    "import": "oarepo_vocabularies.services.schema.HierarchySchema"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "ui": {
+                                                                            "marshmallow": {
+                                                                                "class": "oarepo_vocabularies.services.ui_schema.HierarchyUISchema",
+                                                                                "generate": false,
+                                                                                "imports": [
+                                                                                    {
+                                                                                        "import": "oarepo_vocabularies.services.ui_schema.HierarchyUISchema"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        "properties": {
+                                                                            "parent": {
+                                                                                "type": "keyword"
+                                                                            },
+                                                                            "level": {
+                                                                                "type": "integer"
+                                                                            },
+                                                                            "title": {
+                                                                                "type": "array",
+                                                                                "items": {
+                                                                                    "type": "object",
+                                                                                    "propertyNames": {
+                                                                                        "pattern": "^[a-z]{2}$"
+                                                                                    },
+                                                                                    "additionalProperties": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "mapping": {
+                                                                                        "dynamic": true
+                                                                                    },
+                                                                                    "marshmallow": {
+                                                                                        "field": "i18n_strings",
+                                                                                        "generate": false,
+                                                                                        "class": "nr_metadata.common.services.records.schema.TitleItemSchema"
+                                                                                    },
+                                                                                    "ui": {
+                                                                                        "marshmallow": {
+                                                                                            "field": "i18n_strings",
+                                                                                            "generate": false,
+                                                                                            "class": "nr_metadata.common.services.records.ui_schema.TitleItemUISchema"
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "ancestors": {
+                                                                                "type": "array",
+                                                                                "items": {
+                                                                                    "type": "keyword"
+                                                                                }
+                                                                            },
+                                                                            "ancestors_or_self": {
+                                                                                "type": "array",
+                                                                                "items": {
+                                                                                    "type": "keyword"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "target": "hierarchy"
+                                                                }
+                                                            ],
+                                                            "vocabulary-type": "institutions",
+                                                            "ui": {
+                                                                "marshmallow": {
+                                                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
+                                                                    "unknown": "INCLUDE",
+                                                                    "generate": false
+                                                                },
+                                                                "detail": "taxonomy_item",
+                                                                "edit": "taxonomy_item"
+                                                            },
+                                                            "marshmallow": {
+                                                                "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
+                                                                "unknown": "INCLUDE",
+                                                                "generate": false
+                                                            },
+                                                            "sample": {
+                                                                "faker": "company"
+                                                            },
+                                                            "label.cs": "Afiliace",
+                                                            "label.en": "Affiliation",
+                                                            "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
+                                                            "imports": [
+                                                                {
+                                                                    "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                                }
+                                                            ],
+                                                            "model": "vocabularies",
+                                                            "pid-field": "Vocabulary.pid.with_type_ctx(\"institutions\")",
+                                                            "facets": {
+                                                                "args": [
+                                                                    "vocabulary='institutions'"
+                                                                ]
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "ui": {
+                                                    "marshmallow": {
+                                                        "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonUISchema",
+                                                        "generate": false
+                                                    },
+                                                    "detail": "nr_person"
+                                                },
+                                                "marshmallow": {
+                                                    "class": "nr_metadata.common.services.records.schema_datatypes.NRPersonSchema",
+                                                    "generate": false
+                                                }
+                                            }
+                                        },
+                                        "discriminator": "nameType",
                                         "ui": {
                                             "marshmallow": {
                                                 "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRRelatedItemContributorUISchema",
@@ -2192,37 +2990,119 @@
                                             "class": "nr_metadata.common.services.records.schema_datatypes.NRRelatedItemContributorSchema",
                                             "generate": true
                                         },
+                                        "hint.cs": "Jako tvůrce je možné označit osobu nebo instituci.",
+                                        "hint.en": "It is possible to designate a person or an institution as the creator/contributor.",
                                         "properties": {
-                                            "affiliations": {
+                                            "contributorType": {
+                                                "type": "vocabulary",
+                                                "vocabulary-type": "contributor-types",
+                                                "ui": {
+                                                    "marshmallow": {
+                                                        "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorTypeVocabularyUISchema"
+                                                    },
+                                                    "detail": "vocabulary_item",
+                                                    "edit": "vocabulary_item"
+                                                },
+                                                "marshmallow": {
+                                                    "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorTypeVocabularySchema"
+                                                },
+                                                "label.cs": "Typ přispěvatele",
+                                                "label.en": "Contributor's type",
+                                                "imports": [
+                                                    {
+                                                        "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                    }
+                                                ],
+                                                "model": "vocabularies",
+                                                "keys": [
+                                                    "id",
+                                                    "title"
+                                                ],
+                                                "pid-field": "Vocabulary.pid.with_type_ctx(\"contributor-types\")",
+                                                "facets": {
+                                                    "args": [
+                                                        "vocabulary='contributor-types'"
+                                                    ]
+                                                }
+                                            },
+                                            "authorityIdentifiers": {
                                                 "type": "array",
-                                                "label.cs": "Afiliace",
-                                                "label.en": "Affiliation",
                                                 "items": {
-                                                    "type": "taxonomy",
-                                                    "vocabulary-type": "institutions",
+                                                    "type": "object",
                                                     "ui": {
                                                         "marshmallow": {
-                                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
-                                                            "unknown": "INCLUDE",
-                                                            "generate": false
+                                                            "generate": false,
+                                                            "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                         },
-                                                        "detail": "taxonomy_item",
-                                                        "edit": "taxonomy_item"
+                                                        "detail": "nr_person_identifier"
                                                     },
                                                     "marshmallow": {
-                                                        "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
-                                                        "unknown": "INCLUDE",
-                                                        "generate": false
+                                                        "generate": false,
+                                                        "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                     },
-                                                    "sample": {
-                                                        "faker": "company"
-                                                    },
-                                                    "label.cs": "Afiliace",
-                                                    "label.en": "Affiliation",
-                                                    "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
+                                                    "properties": {
+                                                        "identifier": {
+                                                            "type": "keyword",
+                                                            "required": true,
+                                                            "sample": {
+                                                                "faker": "isbn13"
+                                                            },
+                                                            "label.cs": "Identifikátor",
+                                                            "label.en": "Identifier",
+                                                            "i18n.key": "identifier"
+                                                        },
+                                                        "scheme": {
+                                                            "type": "keyword",
+                                                            "required": true,
+                                                            "enum": [
+                                                                "orcid",
+                                                                "scopusID",
+                                                                "researcherID",
+                                                                "czenasAutID",
+                                                                "vedidk",
+                                                                "institutionalID",
+                                                                "ISNI"
+                                                            ],
+                                                            "label.cs": "Typ identifikátoru",
+                                                            "label.en": "Identifier type",
+                                                            "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                                            "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
+                                                            "i18n.key": "identifier_type"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "fullName": {
+                                                "type": "keyword",
+                                                "required": true,
+                                                "sample": {
+                                                    "faker": "name"
+                                                },
+                                                "label.cs": "Jméno autora",
+                                                "label.en": "Author name"
+                                            },
+                                            "nameType": {
+                                                "type": "keyword",
+                                                "enum": [
+                                                    "Personal"
+                                                ],
+                                                "label.cs": "Typ",
+                                                "label.en": "Type"
+                                            },
+                                            "affiliations": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "taxonomy",
                                                     "keys": [
                                                         "id",
                                                         "title",
+                                                        {
+                                                            "key": "props.ror",
+                                                            "model": {
+                                                                "type": "keyword"
+                                                            },
+                                                            "target": "ror"
+                                                        },
                                                         {
                                                             "key": "hierarchy",
                                                             "model": {
@@ -2298,6 +3178,27 @@
                                                             "target": "hierarchy"
                                                         }
                                                     ],
+                                                    "vocabulary-type": "institutions",
+                                                    "ui": {
+                                                        "marshmallow": {
+                                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
+                                                            "unknown": "INCLUDE",
+                                                            "generate": false
+                                                        },
+                                                        "detail": "taxonomy_item",
+                                                        "edit": "taxonomy_item"
+                                                    },
+                                                    "marshmallow": {
+                                                        "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
+                                                        "unknown": "INCLUDE",
+                                                        "generate": false
+                                                    },
+                                                    "sample": {
+                                                        "faker": "company"
+                                                    },
+                                                    "label.cs": "Afiliace",
+                                                    "label.en": "Affiliation",
+                                                    "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
                                                     "imports": [
                                                         {
                                                             "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -2366,6 +3267,9 @@
                                                             "additionalProperties": {
                                                                 "type": "string"
                                                             }
+                                                        },
+                                                        "ror": {
+                                                            "type": "keyword"
                                                         },
                                                         "hierarchy": {
                                                             "type": "object",
@@ -2456,189 +3360,11 @@
                                                     }
                                                 }
                                             },
-                                            "authorityIdentifiers": {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "object",
-                                                    "ui": {
-                                                        "marshmallow": {
-                                                            "generate": false,
-                                                            "class": "nr_metadata.ui_schema.identifiers.NRAuthorityIdentifierUISchema"
-                                                        },
-                                                        "detail": "nr_authority_identifier"
-                                                    },
-                                                    "marshmallow": {
-                                                        "generate": false,
-                                                        "class": "nr_metadata.schema.identifiers.NRAuthorityIdentifierSchema"
-                                                    },
-                                                    "properties": {
-                                                        "identifier": {
-                                                            "type": "keyword",
-                                                            "required": true,
-                                                            "sample": {
-                                                                "faker": "isbn13"
-                                                            },
-                                                            "label.cs": "Identifikátor",
-                                                            "label.en": "Identifier",
-                                                            "i18n.key": "identifier"
-                                                        },
-                                                        "scheme": {
-                                                            "type": "keyword",
-                                                            "required": true,
-                                                            "enum": [
-                                                                "orcid",
-                                                                "scopusID",
-                                                                "researcherID",
-                                                                "czenasAutID",
-                                                                "vedidk",
-                                                                "institutionalID",
-                                                                "ISNI",
-                                                                "ROR",
-                                                                "ICO",
-                                                                "DOI"
-                                                            ],
-                                                            "label.cs": "Typ identifikátoru",
-                                                            "label.en": "Identifier type",
-                                                            "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                            "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                            "i18n.key": "identifier_type"
-                                                        }
-                                                    }
-                                                }
+                                            "familyName": {
+                                                "type": "keyword"
                                             },
-                                            "fullName": {
-                                                "type": "keyword",
-                                                "required": true,
-                                                "sample": {
-                                                    "faker": "name"
-                                                },
-                                                "label.cs": "Jméno autora",
-                                                "label.en": "Author name"
-                                            },
-                                            "nameType": {
-                                                "type": "keyword",
-                                                "enum": [
-                                                    "Organizational",
-                                                    "Personal"
-                                                ],
-                                                "sample": [
-                                                    "Organizational",
-                                                    "Personal"
-                                                ],
-                                                "label.cs": "Typ",
-                                                "label.en": "Type",
-                                                "hint.cs": "Jako tvůrce je možné označit osobu nebo instituci.",
-                                                "hint.en": "It is possible to designate a person or an institution as the creator/contributor."
-                                            },
-                                            "role": {
-                                                "type": "vocabulary",
-                                                "vocabulary-type": "contributor-roles",
-                                                "ui": {
-                                                    "marshmallow": {
-                                                        "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAuthorityRoleVocabularyUISchema",
-                                                        "unknown": "INCLUDE",
-                                                        "generate": false
-                                                    },
-                                                    "detail": "vocabulary_item",
-                                                    "edit": "vocabulary_item"
-                                                },
-                                                "marshmallow": {
-                                                    "class": "nr_metadata.common.services.records.schema_datatypes.NRAuthorityRoleVocabularySchema",
-                                                    "unknown": "INCLUDE",
-                                                    "generate": false
-                                                },
-                                                "label.cs": "Role přispěvatele",
-                                                "label.en": "Contributor's role",
-                                                "imports": [
-                                                    {
-                                                        "import": "invenio_vocabularies.records.api.Vocabulary"
-                                                    }
-                                                ],
-                                                "model": "vocabularies",
-                                                "keys": [
-                                                    "id",
-                                                    "title"
-                                                ],
-                                                "pid-field": "Vocabulary.pid.with_type_ctx(\"contributor-roles\")",
-                                                "facets": {
-                                                    "args": [
-                                                        "vocabulary='contributor-roles'"
-                                                    ]
-                                                },
-                                                "properties": {
-                                                    "id": {
-                                                        "marshmallow": {
-                                                            "field-class": "marshmallow.fields.String",
-                                                            "validators": [],
-                                                            "imports": []
-                                                        },
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "field-class": "marshmallow.fields.String",
-                                                                "validators": [],
-                                                                "imports": []
-                                                            }
-                                                        },
-                                                        "type": "keyword",
-                                                        "mapping": {
-                                                            "fields": {
-                                                                "text": {
-                                                                    "type": "search_as_you_type"
-                                                                }
-                                                            }
-                                                        },
-                                                        "sample": {
-                                                            "skip": true
-                                                        }
-                                                    },
-                                                    "title": {
-                                                        "marshmallow": {
-                                                            "generate": false,
-                                                            "field": "{{invenio_vocabularies.services.schema.i18n_strings}}",
-                                                            "field-class": "marshmallow.fields.Nested",
-                                                            "validators": [],
-                                                            "class": "invenio_vocabularies.services.records.schema.TitleSchema"
-                                                        },
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "field": "{{oarepo_vocabularies.services.ui_schema.VocabularyI18nStrUIField}}()",
-                                                                "generate": false
-                                                            }
-                                                        },
-                                                        "mapping": {
-                                                            "dynamic": true,
-                                                            "properties": {
-                                                                "en": {
-                                                                    "type": "search_as_you_type",
-                                                                    "copy_to": "title_sort"
-                                                                }
-                                                            }
-                                                        },
-                                                        "type": "object",
-                                                        "propertyNames": {
-                                                            "pattern": "^[a-z]{2}$"
-                                                        },
-                                                        "additionalProperties": {
-                                                            "type": "string"
-                                                        }
-                                                    },
-                                                    "@v": {
-                                                        "type": "keyword",
-                                                        "marshmallow": {
-                                                            "field-name": "_version",
-                                                            "field-class": "marshmallow.fields.String"
-                                                        },
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "field-name": "_version",
-                                                                "field-class": "marshmallow.fields.String"
-                                                            }
-                                                        },
-                                                        "facets": {
-                                                            "facet": false
-                                                        }
-                                                    }
-                                                }
+                                            "givenName": {
+                                                "type": "keyword"
                                             }
                                         }
                                     }
@@ -2648,7 +3374,301 @@
                                     "label.cs": "Autoři",
                                     "label.en": "Authors",
                                     "items": {
-                                        "type": "object",
+                                        "type": "polymorphic",
+                                        "schemas": {
+                                            "Organizational": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "nameType": {
+                                                        "type": "keyword",
+                                                        "enum": [
+                                                            "Organizational"
+                                                        ],
+                                                        "sample": [
+                                                            "Organizational"
+                                                        ],
+                                                        "label.cs": "Typ",
+                                                        "label.en": "Type"
+                                                    },
+                                                    "fullName": {
+                                                        "type": "keyword",
+                                                        "required": true,
+                                                        "sample": {
+                                                            "faker": "name"
+                                                        },
+                                                        "label.cs": "Jméno autora",
+                                                        "label.en": "Author name"
+                                                    },
+                                                    "authorityIdentifiers": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "identifier": {
+                                                                    "type": "keyword",
+                                                                    "required": true,
+                                                                    "sample": {
+                                                                        "faker": "isbn13"
+                                                                    },
+                                                                    "label.cs": "Identifikátor",
+                                                                    "label.en": "Identifier",
+                                                                    "i18n.key": "identifier"
+                                                                },
+                                                                "scheme": {
+                                                                    "type": "keyword",
+                                                                    "required": true,
+                                                                    "enum": [
+                                                                        "ISNI",
+                                                                        "ROR",
+                                                                        "ICO",
+                                                                        "DOI"
+                                                                    ],
+                                                                    "label.cs": "Typ identifikátoru",
+                                                                    "label.en": "Identifier type",
+                                                                    "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                                                    "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
+                                                                    "i18n.key": "identifier_type"
+                                                                }
+                                                            },
+                                                            "ui": {
+                                                                "marshmallow": {
+                                                                    "generate": false,
+                                                                    "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
+                                                                },
+                                                                "detail": "nr_organization_identifier"
+                                                            },
+                                                            "marshmallow": {
+                                                                "generate": false,
+                                                                "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "ui": {
+                                                    "marshmallow": {
+                                                        "class": "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationUISchema",
+                                                        "generate": false
+                                                    },
+                                                    "detail": "nr_organization"
+                                                },
+                                                "marshmallow": {
+                                                    "class": "nr_metadata.common.services.records.schema_datatypes.NROrganizationSchema",
+                                                    "generate": false
+                                                }
+                                            },
+                                            "Personal": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "nameType": {
+                                                        "type": "keyword",
+                                                        "enum": [
+                                                            "Personal"
+                                                        ],
+                                                        "label.cs": "Typ",
+                                                        "label.en": "Type"
+                                                    },
+                                                    "fullName": {
+                                                        "type": "keyword",
+                                                        "required": true,
+                                                        "sample": {
+                                                            "faker": "name"
+                                                        },
+                                                        "label.cs": "Jméno autora",
+                                                        "label.en": "Author name"
+                                                    },
+                                                    "givenName": {
+                                                        "type": "keyword"
+                                                    },
+                                                    "familyName": {
+                                                        "type": "keyword"
+                                                    },
+                                                    "authorityIdentifiers": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "identifier": {
+                                                                    "type": "keyword",
+                                                                    "required": true,
+                                                                    "sample": {
+                                                                        "faker": "isbn13"
+                                                                    },
+                                                                    "label.cs": "Identifikátor",
+                                                                    "label.en": "Identifier",
+                                                                    "i18n.key": "identifier"
+                                                                },
+                                                                "scheme": {
+                                                                    "type": "keyword",
+                                                                    "required": true,
+                                                                    "enum": [
+                                                                        "orcid",
+                                                                        "scopusID",
+                                                                        "researcherID",
+                                                                        "czenasAutID",
+                                                                        "vedidk",
+                                                                        "institutionalID",
+                                                                        "ISNI"
+                                                                    ],
+                                                                    "label.cs": "Typ identifikátoru",
+                                                                    "label.en": "Identifier type",
+                                                                    "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                                                    "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
+                                                                    "i18n.key": "identifier_type"
+                                                                }
+                                                            },
+                                                            "ui": {
+                                                                "marshmallow": {
+                                                                    "generate": false,
+                                                                    "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
+                                                                },
+                                                                "detail": "nr_person_identifier"
+                                                            },
+                                                            "marshmallow": {
+                                                                "generate": false,
+                                                                "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
+                                                            }
+                                                        }
+                                                    },
+                                                    "affiliations": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "taxonomy",
+                                                            "properties": {},
+                                                            "keys": [
+                                                                "id",
+                                                                "title",
+                                                                {
+                                                                    "key": "props.ror",
+                                                                    "model": {
+                                                                        "type": "keyword"
+                                                                    },
+                                                                    "target": "ror"
+                                                                },
+                                                                {
+                                                                    "key": "hierarchy",
+                                                                    "model": {
+                                                                        "type": "object",
+                                                                        "marshmallow": {
+                                                                            "class": "oarepo_vocabularies.services.schema.HierarchySchema",
+                                                                            "generate": false,
+                                                                            "imports": [
+                                                                                {
+                                                                                    "import": "oarepo_vocabularies.services.schema.HierarchySchema"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "ui": {
+                                                                            "marshmallow": {
+                                                                                "class": "oarepo_vocabularies.services.ui_schema.HierarchyUISchema",
+                                                                                "generate": false,
+                                                                                "imports": [
+                                                                                    {
+                                                                                        "import": "oarepo_vocabularies.services.ui_schema.HierarchyUISchema"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        "properties": {
+                                                                            "parent": {
+                                                                                "type": "keyword"
+                                                                            },
+                                                                            "level": {
+                                                                                "type": "integer"
+                                                                            },
+                                                                            "title": {
+                                                                                "type": "array",
+                                                                                "items": {
+                                                                                    "type": "object",
+                                                                                    "propertyNames": {
+                                                                                        "pattern": "^[a-z]{2}$"
+                                                                                    },
+                                                                                    "additionalProperties": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "mapping": {
+                                                                                        "dynamic": true
+                                                                                    },
+                                                                                    "marshmallow": {
+                                                                                        "field": "i18n_strings",
+                                                                                        "generate": false,
+                                                                                        "class": "nr_metadata.common.services.records.schema.TitleItemSchema"
+                                                                                    },
+                                                                                    "ui": {
+                                                                                        "marshmallow": {
+                                                                                            "field": "i18n_strings",
+                                                                                            "generate": false,
+                                                                                            "class": "nr_metadata.common.services.records.ui_schema.TitleItemUISchema"
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "ancestors": {
+                                                                                "type": "array",
+                                                                                "items": {
+                                                                                    "type": "keyword"
+                                                                                }
+                                                                            },
+                                                                            "ancestors_or_self": {
+                                                                                "type": "array",
+                                                                                "items": {
+                                                                                    "type": "keyword"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "target": "hierarchy"
+                                                                }
+                                                            ],
+                                                            "vocabulary-type": "institutions",
+                                                            "ui": {
+                                                                "marshmallow": {
+                                                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
+                                                                    "unknown": "INCLUDE",
+                                                                    "generate": false
+                                                                },
+                                                                "detail": "taxonomy_item",
+                                                                "edit": "taxonomy_item"
+                                                            },
+                                                            "marshmallow": {
+                                                                "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
+                                                                "unknown": "INCLUDE",
+                                                                "generate": false
+                                                            },
+                                                            "sample": {
+                                                                "faker": "company"
+                                                            },
+                                                            "label.cs": "Afiliace",
+                                                            "label.en": "Affiliation",
+                                                            "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
+                                                            "imports": [
+                                                                {
+                                                                    "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                                }
+                                                            ],
+                                                            "model": "vocabularies",
+                                                            "pid-field": "Vocabulary.pid.with_type_ctx(\"institutions\")",
+                                                            "facets": {
+                                                                "args": [
+                                                                    "vocabulary='institutions'"
+                                                                ]
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "ui": {
+                                                    "marshmallow": {
+                                                        "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonUISchema",
+                                                        "generate": false
+                                                    },
+                                                    "detail": "nr_person"
+                                                },
+                                                "marshmallow": {
+                                                    "class": "nr_metadata.common.services.records.schema_datatypes.NRPersonSchema",
+                                                    "generate": false
+                                                }
+                                            }
+                                        },
+                                        "discriminator": "nameType",
                                         "ui": {
                                             "marshmallow": {
                                                 "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRRelatedItemCreatorUISchema",
@@ -2660,37 +3680,87 @@
                                             "class": "nr_metadata.common.services.records.schema_datatypes.NRRelatedItemCreatorSchema",
                                             "generate": true
                                         },
+                                        "hint.cs": "Jako tvůrce je možné označit osobu nebo instituci.",
+                                        "hint.en": "It is possible to designate a person or an institution as the creator/contributor.",
                                         "properties": {
-                                            "affiliations": {
+                                            "authorityIdentifiers": {
                                                 "type": "array",
-                                                "label.cs": "Afiliace",
-                                                "label.en": "Affiliation",
                                                 "items": {
-                                                    "type": "taxonomy",
-                                                    "vocabulary-type": "institutions",
+                                                    "type": "object",
                                                     "ui": {
                                                         "marshmallow": {
-                                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
-                                                            "unknown": "INCLUDE",
-                                                            "generate": false
+                                                            "generate": false,
+                                                            "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                         },
-                                                        "detail": "taxonomy_item",
-                                                        "edit": "taxonomy_item"
+                                                        "detail": "nr_person_identifier"
                                                     },
                                                     "marshmallow": {
-                                                        "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
-                                                        "unknown": "INCLUDE",
-                                                        "generate": false
+                                                        "generate": false,
+                                                        "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                     },
-                                                    "sample": {
-                                                        "faker": "company"
-                                                    },
-                                                    "label.cs": "Afiliace",
-                                                    "label.en": "Affiliation",
-                                                    "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
+                                                    "properties": {
+                                                        "identifier": {
+                                                            "type": "keyword",
+                                                            "required": true,
+                                                            "sample": {
+                                                                "faker": "isbn13"
+                                                            },
+                                                            "label.cs": "Identifikátor",
+                                                            "label.en": "Identifier",
+                                                            "i18n.key": "identifier"
+                                                        },
+                                                        "scheme": {
+                                                            "type": "keyword",
+                                                            "required": true,
+                                                            "enum": [
+                                                                "orcid",
+                                                                "scopusID",
+                                                                "researcherID",
+                                                                "czenasAutID",
+                                                                "vedidk",
+                                                                "institutionalID",
+                                                                "ISNI"
+                                                            ],
+                                                            "label.cs": "Typ identifikátoru",
+                                                            "label.en": "Identifier type",
+                                                            "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                                            "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
+                                                            "i18n.key": "identifier_type"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "fullName": {
+                                                "type": "keyword",
+                                                "required": true,
+                                                "sample": {
+                                                    "faker": "name"
+                                                },
+                                                "label.cs": "Jméno autora",
+                                                "label.en": "Author name"
+                                            },
+                                            "nameType": {
+                                                "type": "keyword",
+                                                "enum": [
+                                                    "Personal"
+                                                ],
+                                                "label.cs": "Typ",
+                                                "label.en": "Type"
+                                            },
+                                            "affiliations": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "taxonomy",
                                                     "keys": [
                                                         "id",
                                                         "title",
+                                                        {
+                                                            "key": "props.ror",
+                                                            "model": {
+                                                                "type": "keyword"
+                                                            },
+                                                            "target": "ror"
+                                                        },
                                                         {
                                                             "key": "hierarchy",
                                                             "model": {
@@ -2766,6 +3836,27 @@
                                                             "target": "hierarchy"
                                                         }
                                                     ],
+                                                    "vocabulary-type": "institutions",
+                                                    "ui": {
+                                                        "marshmallow": {
+                                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
+                                                            "unknown": "INCLUDE",
+                                                            "generate": false
+                                                        },
+                                                        "detail": "taxonomy_item",
+                                                        "edit": "taxonomy_item"
+                                                    },
+                                                    "marshmallow": {
+                                                        "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
+                                                        "unknown": "INCLUDE",
+                                                        "generate": false
+                                                    },
+                                                    "sample": {
+                                                        "faker": "company"
+                                                    },
+                                                    "label.cs": "Afiliace",
+                                                    "label.en": "Affiliation",
+                                                    "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
                                                     "imports": [
                                                         {
                                                             "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -2834,6 +3925,9 @@
                                                             "additionalProperties": {
                                                                 "type": "string"
                                                             }
+                                                        },
+                                                        "ror": {
+                                                            "type": "keyword"
                                                         },
                                                         "hierarchy": {
                                                             "type": "object",
@@ -2924,79 +4018,11 @@
                                                     }
                                                 }
                                             },
-                                            "authorityIdentifiers": {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "object",
-                                                    "ui": {
-                                                        "marshmallow": {
-                                                            "generate": false,
-                                                            "class": "nr_metadata.ui_schema.identifiers.NRAuthorityIdentifierUISchema"
-                                                        },
-                                                        "detail": "nr_authority_identifier"
-                                                    },
-                                                    "marshmallow": {
-                                                        "generate": false,
-                                                        "class": "nr_metadata.schema.identifiers.NRAuthorityIdentifierSchema"
-                                                    },
-                                                    "properties": {
-                                                        "identifier": {
-                                                            "type": "keyword",
-                                                            "required": true,
-                                                            "sample": {
-                                                                "faker": "isbn13"
-                                                            },
-                                                            "label.cs": "Identifikátor",
-                                                            "label.en": "Identifier",
-                                                            "i18n.key": "identifier"
-                                                        },
-                                                        "scheme": {
-                                                            "type": "keyword",
-                                                            "required": true,
-                                                            "enum": [
-                                                                "orcid",
-                                                                "scopusID",
-                                                                "researcherID",
-                                                                "czenasAutID",
-                                                                "vedidk",
-                                                                "institutionalID",
-                                                                "ISNI",
-                                                                "ROR",
-                                                                "ICO",
-                                                                "DOI"
-                                                            ],
-                                                            "label.cs": "Typ identifikátoru",
-                                                            "label.en": "Identifier type",
-                                                            "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                            "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                            "i18n.key": "identifier_type"
-                                                        }
-                                                    }
-                                                }
+                                            "familyName": {
+                                                "type": "keyword"
                                             },
-                                            "fullName": {
-                                                "type": "keyword",
-                                                "required": true,
-                                                "sample": {
-                                                    "faker": "name"
-                                                },
-                                                "label.cs": "Jméno autora",
-                                                "label.en": "Author name"
-                                            },
-                                            "nameType": {
-                                                "type": "keyword",
-                                                "enum": [
-                                                    "Organizational",
-                                                    "Personal"
-                                                ],
-                                                "sample": [
-                                                    "Organizational",
-                                                    "Personal"
-                                                ],
-                                                "label.cs": "Typ",
-                                                "label.en": "Type",
-                                                "hint.cs": "Jako tvůrce je možné označit osobu nebo instituci.",
-                                                "hint.en": "It is possible to designate a person or an institution as the creator/contributor."
+                                            "givenName": {
+                                                "type": "keyword"
                                             }
                                         }
                                     }
@@ -3046,7 +4072,8 @@
                                                     "Handle",
                                                     "ISBN",
                                                     "ISSN",
-                                                    "RIV"
+                                                    "RIV",
+                                                    "IGSN"
                                                 ],
                                                 "label.cs": "Typ identifikátoru",
                                                 "label.en": "Identifier type"
@@ -3436,10 +4463,10 @@
                     },
                     "rights": {
                         "type": "vocabulary",
-                        "vocabulary-type": "licenses",
+                        "vocabulary-type": "rights",
                         "ui": {
                             "marshmallow": {
-                                "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRLicenseVocabularyUISchema",
+                                "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRRightsVocabularyUISchema",
                                 "unknown": "INCLUDE",
                                 "generate": true
                             },
@@ -3447,7 +4474,7 @@
                             "edit": "vocabulary_item"
                         },
                         "marshmallow": {
-                            "class": "nr_metadata.common.services.records.schema_datatypes.NRLicenseVocabularySchema",
+                            "class": "nr_metadata.common.services.records.schema_datatypes.NRRightsVocabularySchema",
                             "unknown": "INCLUDE",
                             "generate": true
                         },
@@ -3459,8 +4486,8 @@
                             "CC BY-NC-SA",
                             "CC BY-NC-ND"
                         ],
-                        "label.cs": "Licence",
-                        "label.en": "License",
+                        "label.cs": "Práva/Licence",
+                        "label.en": "Rights/Licenses",
                         "imports": [
                             {
                                 "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -3471,10 +4498,10 @@
                             "id",
                             "title"
                         ],
-                        "pid-field": "Vocabulary.pid.with_type_ctx(\"licenses\")",
+                        "pid-field": "Vocabulary.pid.with_type_ctx(\"rights\")",
                         "facets": {
                             "args": [
-                                "vocabulary='licenses'"
+                                "vocabulary='rights'"
                             ]
                         },
                         "properties": {
@@ -3554,7 +4581,7 @@
                     },
                     "series": {
                         "type": "array",
-                        "label.cs": "Série",
+                        "label.cs": "Edice",
                         "label.en": "Series",
                         "items": {
                             "type": "object",
@@ -3569,7 +4596,7 @@
                                 "class": "nr_metadata.common.services.records.schema_datatypes.NRSeriesSchema",
                                 "generate": true
                             },
-                            "label.cs": "Série",
+                            "label.cs": "Edice",
                             "label.en": "Series",
                             "properties": {
                                 "seriesTitle": {

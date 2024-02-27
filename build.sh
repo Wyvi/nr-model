@@ -61,6 +61,7 @@ compile_nr_metadata() {
 
   decho "Compilling nr-data"
   "$MODEL_BUILDER_VENV"/bin/oarepo-compile-model nr-data.yaml -vvv \
+      --include nr-common-metadata="$base_dir/models/nr_common_metadata_${MODEL_VERSION}.yaml" \
       --include nr-datatypes="$base_dir/models/nr_datatypes_${MODEL_VERSION}.yaml" \
       --include nr-data="$base_dir/models/nr_data_${MODEL_VERSION}.yaml"
   copy_version ../../version nr_metadata/version.py
@@ -80,6 +81,7 @@ compile_nr_data() {
 
   decho "Compilling nr-data"
   "$MODEL_BUILDER_VENV"/bin/oarepo-compile-model nr-data.yaml -vvv \
+      --include nr-common-metadata="$base_dir/models/nr_common_metadata_${MODEL_VERSION}.yaml" \
       --include nr-datatypes="$base_dir/models/nr_datatypes_${MODEL_VERSION}.yaml" \
       --include nr-data="$base_dir/models/nr_data_${MODEL_VERSION}.yaml"
   copy_version ../../version nr_metadata/version.py

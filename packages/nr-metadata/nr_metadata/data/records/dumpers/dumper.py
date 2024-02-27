@@ -7,5 +7,5 @@ from nr_metadata.data.records.dumpers.multilingual import MultilingualSearchDump
 class DataDumper(SearchDumper):
     """DataRecord opensearch dumper."""
 
-    extensions = [MultilingualSearchDumperExt(), DataEDTFIntervalDumperExt()]
-    extensions = [MultilingualSearchDumperExt(), DataEDTFIntervalDumperExt()]
+    extensions = [DataEDTFIntervalDumperExt(), MultilingualSearchDumperExt()]
+    extensions = [DataEDTFIntervalDumperExt(), MultilingualSearchDumperExt()]

@@ -5,10 +5,13 @@ from invenio_records_resources.services import (
 from invenio_records_resources.services import pagination_links
 from invenio_records_resources.services.records.components import DataComponent
 from oarepo_runtime.services.config.service import PermissionsPresetsConfigMixin
-from oarepo_runtime.services.results import RecordList
 
 from nr_metadata.documents.records.api import DocumentsRecord
 from nr_metadata.documents.services.records.permissions import DocumentsPermissionPolicy
+from nr_metadata.documents.services.records.results import (
+    DocumentsRecordItem,
+    DocumentsRecordList,
+)
 from nr_metadata.documents.services.records.schema import NRDocumentRecordSchema
 from nr_metadata.documents.services.records.search import DocumentsSearchOptions
 
@@ -16,7 +19,9 @@ from nr_metadata.documents.services.records.search import DocumentsSearchOptions
 class DocumentsServiceConfig(PermissionsPresetsConfigMixin, InvenioRecordServiceConfig):
     """DocumentsRecord service config."""
 
-    result_list_cls = RecordList
+    result_item_cls = DocumentsRecordItem
+
+    result_list_cls = DocumentsRecordList
 
     PERMISSIONS_PRESETS = ["everyone"]
 

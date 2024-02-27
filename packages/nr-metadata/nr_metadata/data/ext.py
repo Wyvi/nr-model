@@ -5,6 +5,7 @@ from nr_metadata.data import config
 
 
 class DataExt:
+
     def __init__(self, app=None):
 
         if app:

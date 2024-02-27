@@ -62,6 +62,7 @@ CommonMetadata:
         contributorType:
           use: 'nr-datatypes#NRContributorType'
         fullName:
+          type: keyword
           label.cs: Jméno přispěvatele
           label.en: Contributor name
       ui:

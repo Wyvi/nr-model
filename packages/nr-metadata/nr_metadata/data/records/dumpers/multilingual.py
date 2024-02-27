@@ -6,11 +6,13 @@ class MultilingualSearchDumperExt(MultilingualDumper):
 
     paths = [
         "/metadata/abstract",
+        "/metadata/accessibility",
         "/metadata/additionalTitles/title",
         "/metadata/methods",
         "/metadata/subjects/subject",
         "/metadata/technicalInfo",
         "/metadata/abstract",
+        "/metadata/accessibility",
         "/metadata/additionalTitles/title",
         "/metadata/methods",
         "/metadata/subjects/subject",

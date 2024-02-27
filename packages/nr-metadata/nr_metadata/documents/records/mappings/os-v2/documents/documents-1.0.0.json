@@ -202,13 +202,33 @@
                             }
                         }
                     },
-                    "collection": {
-                        "type": "keyword",
-                        "ignore_above": 1024
-                    },
                     "contributors": {
                         "type": "object",
                         "properties": {
+                            "contributorType": {
+                                "type": "object"
+                            },
+                            "fullName": {
+                                "type": "keyword",
+                                "ignore_above": 1024
+                            },
+                            "authorityIdentifiers": {
+                                "type": "object",
+                                "properties": {
+                                    "identifier": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    },
+                                    "scheme": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    }
+                                }
+                            },
+                            "nameType": {
+                                "type": "keyword",
+                                "ignore_above": 1024
+                            },
                             "affiliations": {
                                 "type": "object",
                                 "properties": {
@@ -230,6 +250,10 @@
                                             }
                                         },
                                         "type": "object"
+                                    },
+                                    "ror": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
                                     },
                                     "hierarchy": {
                                         "type": "object",
@@ -261,60 +285,40 @@
                                     }
                                 }
                             },
-                            "authorityIdentifiers": {
-                                "type": "object",
-                                "properties": {
-                                    "identifier": {
-                                        "type": "keyword",
-                                        "ignore_above": 1024
-                                    },
-                                    "scheme": {
-                                        "type": "keyword",
-                                        "ignore_above": 1024
-                                    }
-                                }
-                            },
-                            "fullName": {
+                            "familyName": {
                                 "type": "keyword",
                                 "ignore_above": 1024
                             },
-                            "nameType": {
+                            "givenName": {
                                 "type": "keyword",
                                 "ignore_above": 1024
-                            },
-                            "role": {
-                                "type": "object",
-                                "properties": {
-                                    "id": {
-                                        "fields": {
-                                            "text": {
-                                                "type": "search_as_you_type"
-                                            }
-                                        },
-                                        "type": "keyword",
-                                        "ignore_above": 1024
-                                    },
-                                    "title": {
-                                        "dynamic": true,
-                                        "properties": {
-                                            "en": {
-                                                "type": "search_as_you_type",
-                                                "copy_to": "title_sort"
-                                            }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "@v": {
-                                        "type": "keyword",
-                                        "ignore_above": 1024
-                                    }
-                                }
                             }
                         }
                     },
                     "creators": {
                         "type": "object",
                         "properties": {
+                            "authorityIdentifiers": {
+                                "type": "object",
+                                "properties": {
+                                    "identifier": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    },
+                                    "scheme": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    }
+                                }
+                            },
+                            "fullName": {
+                                "type": "keyword",
+                                "ignore_above": 1024
+                            },
+                            "nameType": {
+                                "type": "keyword",
+                                "ignore_above": 1024
+                            },
                             "affiliations": {
                                 "type": "object",
                                 "properties": {
@@ -336,6 +340,10 @@
                                             }
                                         },
                                         "type": "object"
+                                    },
+                                    "ror": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
                                     },
                                     "hierarchy": {
                                         "type": "object",
@@ -367,24 +375,11 @@
                                     }
                                 }
                             },
-                            "authorityIdentifiers": {
-                                "type": "object",
-                                "properties": {
-                                    "identifier": {
-                                        "type": "keyword",
-                                        "ignore_above": 1024
-                                    },
-                                    "scheme": {
-                                        "type": "keyword",
-                                        "ignore_above": 1024
-                                    }
-                                }
-                            },
-                            "fullName": {
+                            "familyName": {
                                 "type": "keyword",
                                 "ignore_above": 1024
                             },
-                            "nameType": {
+                            "givenName": {
                                 "type": "keyword",
                                 "ignore_above": 1024
                             }
@@ -392,7 +387,7 @@
                     },
                     "dateAvailable": {
                         "type": "date",
-                        "format": "strict_date_time||strict_date_time_no_millis||strict_date||yyyy-MM||yyyy"
+                        "format": "basic_date||strict_date"
                     },
                     "dateIssued": {
                         "type": "date",
@@ -605,6 +600,30 @@
                             "itemContributors": {
                                 "type": "object",
                                 "properties": {
+                                    "contributorType": {
+                                        "type": "object"
+                                    },
+                                    "authorityIdentifiers": {
+                                        "type": "object",
+                                        "properties": {
+                                            "identifier": {
+                                                "type": "keyword",
+                                                "ignore_above": 1024
+                                            },
+                                            "scheme": {
+                                                "type": "keyword",
+                                                "ignore_above": 1024
+                                            }
+                                        }
+                                    },
+                                    "fullName": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    },
+                                    "nameType": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    },
                                     "affiliations": {
                                         "type": "object",
                                         "properties": {
@@ -626,6 +645,10 @@
                                                     }
                                                 },
                                                 "type": "object"
+                                            },
+                                            "ror": {
+                                                "type": "keyword",
+                                                "ignore_above": 1024
                                             },
                                             "hierarchy": {
                                                 "type": "object",
@@ -657,60 +680,40 @@
                                             }
                                         }
                                     },
-                                    "authorityIdentifiers": {
-                                        "type": "object",
-                                        "properties": {
-                                            "identifier": {
-                                                "type": "keyword",
-                                                "ignore_above": 1024
-                                            },
-                                            "scheme": {
-                                                "type": "keyword",
-                                                "ignore_above": 1024
-                                            }
-                                        }
-                                    },
-                                    "fullName": {
+                                    "familyName": {
                                         "type": "keyword",
                                         "ignore_above": 1024
                                     },
-                                    "nameType": {
+                                    "givenName": {
                                         "type": "keyword",
                                         "ignore_above": 1024
-                                    },
-                                    "role": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                                "fields": {
-                                                    "text": {
-                                                        "type": "search_as_you_type"
-                                                    }
-                                                },
-                                                "type": "keyword",
-                                                "ignore_above": 1024
-                                            },
-                                            "title": {
-                                                "dynamic": true,
-                                                "properties": {
-                                                    "en": {
-                                                        "type": "search_as_you_type",
-                                                        "copy_to": "title_sort"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "@v": {
-                                                "type": "keyword",
-                                                "ignore_above": 1024
-                                            }
-                                        }
                                     }
                                 }
                             },
                             "itemCreators": {
                                 "type": "object",
                                 "properties": {
+                                    "authorityIdentifiers": {
+                                        "type": "object",
+                                        "properties": {
+                                            "identifier": {
+                                                "type": "keyword",
+                                                "ignore_above": 1024
+                                            },
+                                            "scheme": {
+                                                "type": "keyword",
+                                                "ignore_above": 1024
+                                            }
+                                        }
+                                    },
+                                    "fullName": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    },
+                                    "nameType": {
+                                        "type": "keyword",
+                                        "ignore_above": 1024
+                                    },
                                     "affiliations": {
                                         "type": "object",
                                         "properties": {
@@ -732,6 +735,10 @@
                                                     }
                                                 },
                                                 "type": "object"
+                                            },
+                                            "ror": {
+                                                "type": "keyword",
+                                                "ignore_above": 1024
                                             },
                                             "hierarchy": {
                                                 "type": "object",
@@ -763,24 +770,11 @@
                                             }
                                         }
                                     },
-                                    "authorityIdentifiers": {
-                                        "type": "object",
-                                        "properties": {
-                                            "identifier": {
-                                                "type": "keyword",
-                                                "ignore_above": 1024
-                                            },
-                                            "scheme": {
-                                                "type": "keyword",
-                                                "ignore_above": 1024
-                                            }
-                                        }
-                                    },
-                                    "fullName": {
+                                    "familyName": {
                                         "type": "keyword",
                                         "ignore_above": 1024
                                     },
-                                    "nameType": {
+                                    "givenName": {
                                         "type": "keyword",
                                         "ignore_above": 1024
                                     }
