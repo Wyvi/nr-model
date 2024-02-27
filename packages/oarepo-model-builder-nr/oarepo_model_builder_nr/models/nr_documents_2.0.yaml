@@ -78,30 +78,71 @@ DocumentModel:
       class: nr_metadata.documents.services.records.ui_schema.NRDocumentRecordUISchema
   use: [invenio]
 
+  record:
+    imports:
+      - import: oarepo_runtime.records.systemfields.SyntheticSystemField
+      - import: oarepo_runtime.records.systemfields.PathSelector
+      - import: oarepo_runtime.records.systemfields.FirstItemSelector
+    fields:
+      people: |
+        SyntheticSystemField(
+            PathSelector("metadata.creators", "metadata.contributors"),
+            filter=lambda x: x.get("type") == "personal",
+            map=lambda x: x.get("fullName"),
+            key="syntheticFields.people",
+        )
+      institutions: |
+        SyntheticSystemField(
+            PathSelector(
+                  "metadata.creators.affiliations", 
+                  "metadata.contributors.affiliations", 
+                  "metadata.thesis.degreeGrantors"),
+            key="syntheticFields.institutions",
+        )
+      keywords: |
+        SyntheticSystemField(
+            PathSelector("metadata.subjects"),
+            map=lambda x: x.get("subject", {}).get("value"),
+            key="syntheticFields.keywords",
+        )
+      date: |
+        SyntheticSystemField(
+            selector=FirstItemSelector("metadata.dateModified", "metadata.dateIssued"),
+            key="syntheticFields.date",
+        )
+
   properties:
     syntheticFields:
       properties:
-        person:
+        people:
           type: keyword
           marshmallow:
             read: false
             write: false
+          label.cs: Lidé
+          label.en: People
         institutions:
           type: taxonomy
           vocabulary-type: institutions
           marshmallow:
             read: false
             write: false
-        keywords_cs:
+          label.cs: Instituce
+          label.en: Institutions
+        keywords:
           type: keyword
           marshmallow:
             read: false
             write: false
-        keywords_en:
-          type: keyword
+          label.cs: Klíčová slova
+          label.en: Keywords
+        date:
+          type: date
           marshmallow:
             read: false
             write: false
+          label.cs: Datum poslední změny
+          label.en: Updated date
       marshmallow:
         class: nr_metadata.documents.services.records.schema.NRDocumentSyntheticFieldsSchema
       ui:

@@ -64,6 +64,7 @@
                 "invenio_records_resources.services.SearchOptions{InvenioSearchOptions}"
             ],
             "imports": [],
+            "fields": {},
             "sort-options-field": "sort_options"
         },
         "config": {
@@ -100,7 +101,8 @@
         "facets": {
             "generate": true,
             "module": "nr_metadata.common.services.records.facets",
-            "extra-code": ""
+            "extra-code": "",
+            "groups": true
         },
         "record": {
             "generate": true,
@@ -110,7 +112,8 @@
                 "invenio_records_resources.records.api.Record{InvenioRecord}"
             ],
             "imports": [],
-            "extra-code": ""
+            "extra-code": "",
+            "fields": {}
         },
         "resource": {
             "generate": true,
@@ -147,10 +150,6 @@
         "proxy": {
             "module": "nr_metadata.common.proxies",
             "generate": true
-        },
-        "translations": {
-            "module": "nr_metadata.common.translations",
-            "alias": "common"
         },
         "json-schema-settings": {
             "generate": true,
@@ -301,17 +300,6 @@
                 "oarepo_runtime.services.results.RecordItem"
             ],
             "components": [],
-            "imports": []
-        },
-        "multilingual-dumper": {
-            "generate": true,
-            "module": "nr_metadata.common.records.dumpers.multilingual",
-            "class": "nr_metadata.common.records.dumpers.multilingual.MultilingualSearchDumperExt",
-            "base-classes": [
-                "oarepo_runtime.records.dumpers.multilingual_dumper.MultilingualDumper"
-            ],
-            "extra-code": "",
-            "extensions": [],
             "imports": []
         },
         "sortable": [],
@@ -2664,6 +2652,7 @@
                         "label.en": "Link to/from other resources:",
                         "items": {
                             "type": "object",
+                            "description": "linkdata, propojení přidružených dokumentů a datasetů.",
                             "ui": {
                                 "marshmallow": {
                                     "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRRelatedItemUISchema",
@@ -2675,7 +2664,6 @@
                                 "class": "nr_metadata.common.services.records.schema_datatypes.NRRelatedItemSchema",
                                 "generate": true
                             },
-                            "description": "linkdata, propojení přidružených dokumentů a datasetů.",
                             "label.cs": "Vazba na/z dalších zdrojů:",
                             "label.en": "Link to/from other resources:",
                             "properties": {
@@ -4089,6 +4077,7 @@
                                 "itemRelationType": {
                                     "type": "vocabulary",
                                     "vocabulary-type": "item-relation-types",
+                                    "description": "typ vztahu k původnímu popisovanému dok.",
                                     "ui": {
                                         "marshmallow": {
                                             "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRItemRelationTypeVocabularyUISchema",
@@ -4103,7 +4092,6 @@
                                         "unknown": "INCLUDE",
                                         "generate": true
                                     },
-                                    "description": "typ vztahu k původnímu popisovanému dok.",
                                     "label.cs": "Typ vazby",
                                     "label.en": "Relation type",
                                     "imports": [
