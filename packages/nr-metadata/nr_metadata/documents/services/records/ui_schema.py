@@ -83,13 +83,13 @@ class NRDocumentSyntheticFieldsUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
+    date = LocalizedDate()
+
     institutions = ma_fields.Nested(lambda: InstitutionsUISchema())
 
-    keywords_cs = ma_fields.String()
+    keywords = ma_fields.String()
 
-    keywords_en = ma_fields.String()
-
-    person = ma_fields.String()
+    people = ma_fields.String()
 
 
 class NRThesisUISchema(DictOnlySchema):

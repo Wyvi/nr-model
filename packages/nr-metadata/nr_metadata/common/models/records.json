@@ -64,6 +64,7 @@
                 "invenio_records_resources.services.SearchOptions{InvenioSearchOptions}"
             ],
             "imports": [],
+            "fields": {},
             "sort-options-field": "sort_options"
         },
         "config": {
@@ -100,7 +101,8 @@
         "facets": {
             "generate": true,
             "module": "nr_metadata.common.services.records.facets",
-            "extra-code": ""
+            "extra-code": "",
+            "groups": true
         },
         "record": {
             "generate": true,
@@ -110,7 +112,8 @@
                 "invenio_records_resources.records.api.Record{InvenioRecord}"
             ],
             "imports": [],
-            "extra-code": ""
+            "extra-code": "",
+            "fields": {}
         },
         "resource": {
             "generate": true,
@@ -122,7 +125,8 @@
             "base-classes": [
                 "invenio_records_resources.resources.RecordResource"
             ],
-            "imports": []
+            "imports": [],
+            "additional-args": []
         },
         "resource-config": {
             "generate": true,
@@ -135,7 +139,8 @@
             "base-classes": [
                 "invenio_records_resources.resources.RecordResourceConfig"
             ],
-            "imports": []
+            "imports": [],
+            "additional-args": []
         },
         "saved-model": {
             "file": "nr_metadata/common/models/records.json",
@@ -145,10 +150,6 @@
         "proxy": {
             "module": "nr_metadata.common.proxies",
             "generate": true
-        },
-        "translations": {
-            "module": "nr_metadata.common.translations",
-            "alias": "common"
         },
         "json-schema-settings": {
             "generate": true,
@@ -217,7 +218,7 @@
             "components": [
                 "{{invenio_records_resources.services.records.components.DataComponent}}"
             ],
-            "result-list-class": "oarepo_runtime.services.results.RecordList"
+            "additional-args": []
         },
         "service": {
             "generate": true,
@@ -229,7 +230,8 @@
             "base-classes": [
                 "invenio_records_resources.services.RecordService{InvenioRecordService}"
             ],
-            "imports": []
+            "imports": [],
+            "additional-args": []
         },
         "json-serializer": {
             "module": "nr_metadata.common.resources.records.ui",
@@ -241,7 +243,15 @@
             "extra-code": "",
             "generate": true,
             "list_schema_cls": "flask_resources.BaseListSchema",
-            "format_serializer_cls": "flask_resources.serializers.JSONSerializer"
+            "format_serializer_cls": "flask_resources.serializers.JSONSerializer",
+            "schema-context-args": {
+                "\"object_key\"": "\"ui\"",
+                "\"identity\"": "{{ flask.g{g.identity} }}"
+            }
+        },
+        "translations": {
+            "module": "nr_metadata.common.translations",
+            "alias": "common"
         },
         "multilingual-dumper": {
             "generate": true,
@@ -283,6 +293,28 @@
             ],
             "extra-code": "",
             "extensions": [],
+            "imports": []
+        },
+        "record-list": {
+            "generate": true,
+            "module": "nr_metadata.common.services.records.results",
+            "class": "nr_metadata.common.services.records.results.CommonRecordList",
+            "extra-code": "",
+            "base-classes": [
+                "oarepo_runtime.services.results.RecordList"
+            ],
+            "components": [],
+            "imports": []
+        },
+        "record-item": {
+            "generate": true,
+            "module": "nr_metadata.common.services.records.results",
+            "class": "nr_metadata.common.services.records.results.CommonRecordItem",
+            "extra-code": "",
+            "base-classes": [
+                "oarepo_runtime.services.results.RecordItem"
+            ],
+            "components": [],
             "imports": []
         },
         "sortable": [],
@@ -2167,6 +2199,7 @@
                         "label.en": "Link to/from other resources:",
                         "items": {
                             "type": "object",
+                            "description": "linkdata, propojení přidružených dokumentů a datasetů.",
                             "ui": {
                                 "marshmallow": {
                                     "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRRelatedItemUISchema",
@@ -2178,7 +2211,6 @@
                                 "class": "nr_metadata.common.services.records.schema_datatypes.NRRelatedItemSchema",
                                 "generate": true
                             },
-                            "description": "linkdata, propojení přidružených dokumentů a datasetů.",
                             "label.cs": "Vazba na/z dalších zdrojů:",
                             "label.en": "Link to/from other resources:",
                             "properties": {
@@ -3069,6 +3101,7 @@
                                 "itemRelationType": {
                                     "type": "vocabulary",
                                     "vocabulary-type": "item-relation-types",
+                                    "description": "typ vztahu k původnímu popisovanému dok.",
                                     "ui": {
                                         "marshmallow": {
                                             "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRItemRelationTypeVocabularyUISchema",
@@ -3083,7 +3116,6 @@
                                         "unknown": "INCLUDE",
                                         "generate": true
                                     },
-                                    "description": "typ vztahu k původnímu popisovanému dok.",
                                     "label.cs": "Typ vazby",
                                     "label.en": "Relation type",
                                     "imports": [

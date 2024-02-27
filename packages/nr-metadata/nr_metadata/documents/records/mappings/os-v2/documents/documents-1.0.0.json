@@ -1155,6 +1155,10 @@
             "syntheticFields": {
                 "type": "object",
                 "properties": {
+                    "date": {
+                        "type": "date",
+                        "format": "basic_date||strict_date"
+                    },
                     "institutions": {
                         "type": "object",
                         "properties": {
@@ -1207,15 +1211,11 @@
                             }
                         }
                     },
-                    "keywords_cs": {
+                    "keywords": {
                         "type": "keyword",
                         "ignore_above": 1024
                     },
-                    "keywords_en": {
-                        "type": "keyword",
-                        "ignore_above": 1024
-                    },
-                    "person": {
+                    "people": {
                         "type": "keyword",
                         "ignore_above": 1024
                     }

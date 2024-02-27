@@ -5,6 +5,11 @@ from invenio_records_resources.records.systemfields import IndexField
 from invenio_records_resources.records.systemfields.pid import PIDField, PIDFieldContext
 from invenio_vocabularies.records.api import Vocabulary
 from oarepo_runtime.records.relations import PIDRelation, RelationsField
+from oarepo_runtime.records.systemfields import (
+    FirstItemSelector,
+    PathSelector,
+    SyntheticSystemField,
+)
 
 from nr_metadata.documents.records.dumpers.dumper import DocumentsDumper
 from nr_metadata.documents.records.models import DocumentsMetadata
@@ -27,6 +32,33 @@ class DocumentsRecord(InvenioRecord):
     )
 
     dumper = DocumentsDumper()
+
+    people = SyntheticSystemField(
+        PathSelector("metadata.creators", "metadata.contributors"),
+        filter=lambda x: x.get("type") == "personal",
+        map=lambda x: x.get("fullName"),
+        key="syntheticFields.people",
+    )
+
+    institutions = SyntheticSystemField(
+        PathSelector(
+            "metadata.creators.affiliations",
+            "metadata.contributors.affiliations",
+            "metadata.thesis.degreeGrantors",
+        ),
+        key="syntheticFields.institutions",
+    )
+
+    keywords = SyntheticSystemField(
+        PathSelector("metadata.subjects"),
+        map=lambda x: x.get("subject", {}).get("value"),
+        key="syntheticFields.keywords",
+    )
+
+    date = SyntheticSystemField(
+        selector=FirstItemSelector("metadata.dateModified", "metadata.dateIssued"),
+        key="syntheticFields.date",
+    )
 
     relations = RelationsField(
         accessRights=PIDRelation(

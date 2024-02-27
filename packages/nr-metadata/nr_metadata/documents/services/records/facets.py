@@ -439,20 +439,20 @@ metadata_version = TermsFacet(
     field="metadata.version", label=_("metadata/version.label")
 )
 
+syntheticFields_date = DateTimeFacet(
+    field="syntheticFields.date", label=_("syntheticFields/date.label")
+)
+
 syntheticFields_institutions = HierarchyVocabularyFacet(
     field="syntheticFields.institutions",
     label=_("syntheticFields/institutions.label"),
     vocabulary="institutions",
 )
 
-syntheticFields_keywords_cs = TermsFacet(
-    field="syntheticFields.keywords_cs", label=_("syntheticFields/keywords_cs.label")
+syntheticFields_keywords = TermsFacet(
+    field="syntheticFields.keywords", label=_("syntheticFields/keywords.label")
 )
 
-syntheticFields_keywords_en = TermsFacet(
-    field="syntheticFields.keywords_en", label=_("syntheticFields/keywords_en.label")
-)
-
-syntheticFields_person = TermsFacet(
-    field="syntheticFields.person", label=_("syntheticFields/person.label")
+syntheticFields_people = TermsFacet(
+    field="syntheticFields.people", label=_("syntheticFields/people.label")
 )

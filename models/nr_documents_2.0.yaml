@@ -61,35 +61,35 @@ DocumentModel:
 
   record:
     imports:
-      - {{oarepo_runtime.records.systemfields.SyntheticField}}
-      - {{oarepo_runtime.records.systemfields.PathSelector}}
-      - {{oarepo_runtime.records.systemfields.LanguageSelector}}
+      - import: oarepo_runtime.records.systemfields.SyntheticSystemField
+      - import: oarepo_runtime.records.systemfields.PathSelector
+      - import: oarepo_runtime.records.systemfields.FirstItemSelector
     fields:
       people: |
-        SyntheticField(
-            "syntheticFields.people",
-            selector=PathSelector("metadata.creators", "metadata.contributors"),
+        SyntheticSystemField(
+            PathSelector("metadata.creators", "metadata.contributors"),
             filter=lambda x: x.get("type") == "personal",
-            transform=lambda x: x.get("fullName")
+            map=lambda x: x.get("fullName"),
+            key="syntheticFields.people",
         )
       institutions: |
-        SyntheticField(
-            "syntheticFields.institutions",
-            selector=PathSelector(
+        SyntheticSystemField(
+            PathSelector(
                   "metadata.creators.affiliations", 
                   "metadata.contributors.affiliations", 
-                  "metadata.thesis.degreeGrantors")
+                  "metadata.thesis.degreeGrantors"),
+            key="syntheticFields.institutions",
         )
       keywords: |
-        SyntheticField(
-            "syntheticFields.keywords_cs",
-            selector=PathSelector("metadata.subjects"),
-            transform=lambda x: x.get("subject", {}).get("value")
+        SyntheticSystemField(
+            PathSelector("metadata.subjects"),
+            map=lambda x: x.get("subject", {}).get("value"),
+            key="syntheticFields.keywords",
         )
       date: |
-        SyntheticField(
-            "syntheticFields.date",
-            selector=PathSelector("metadata.dateModified", "metadata.dateIssued", max_count=1)
+        SyntheticSystemField(
+            selector=FirstItemSelector("metadata.dateModified", "metadata.dateIssued"),
+            key="syntheticFields.date",
         )
 
   properties:
