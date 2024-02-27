@@ -3,8 +3,75 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
-NRAuthorityIdentifier:
-  $id: NRAuthorityIdentifier
+NRPerson:
+  $id: NRPerson
+  properties:
+    nameType:
+      type: keyword
+      enum:
+        - "Personal"
+      label.cs: Typ
+      label.en: Type
+    fullName:
+      type: keyword
+      required: true
+      label.cs: Jméno autora
+      label.en: Author name
+      sample:
+        faker: name
+    givenName:
+      type: keyword
+    familyName:
+      type: keyword
+    authorityIdentifiers[]:
+      use: 'nr-datatypes#NRPersonIdentifier'
+    affiliations[]:
+      type: taxonomy
+      vocabulary-type: institutions
+      keys: [ id, title, props.ror ]
+      ui:
+        marshmallow:
+          class: nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema
+      marshmallow:
+        class: nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema
+      sample:
+        faker: company
+
+      #^uniqueItems: true
+      label.cs: Afiliace
+      label.en: Affiliation
+      hint.cs: Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.
+
+NROrganization:
+  $id: NROrganization
+  properties:
+    nameType:
+      type: keyword
+      enum:
+        - Organizational
+      sample:
+        - Organizational
+      label.cs: Typ
+      label.en: Type
+    fullName:
+      type: keyword
+      required: true
+      label.cs: Jméno autora
+      label.en: Author name
+      sample:
+        faker: name
+    authorityIdentifiers[]:
+      use: 'nr-datatypes#NROrganizationIdentifier'
+      #^uniqueItems: true
+  ui:
+    detail: nr_organization
+    marshmallow:
+      class: nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationUIUISchema
+  marshmallow:
+    class: nr_metadata.common.services.records.schema_datatypes.NROrganizationSchema
+
+NRPersonIdentifier:
+  $id: NRPersonIdentifier
   properties:
     identifier:
       type: keyword
@@ -25,10 +92,7 @@ NRAuthorityIdentifier:
           czenasAutID,
           vedidk,
           institutionalID,
-          ISNI,
-          ROR,
-          ICO,
-          DOI,
+          ISNI
         ]
       i18n.key: identifier_type
       label.cs: Typ identifikátoru
@@ -40,55 +104,64 @@ NRAuthorityIdentifier:
         We recommend providing at least one of the identifier types.
         If you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.
   ui:
-    detail: nr_authority_identifier
+    detail: nr_person_identifier
     marshmallow:
-      class: nr_metadata.ui_schema.identifiers.NRAuthorityIdentifierUISchema
+      class: nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema
       generate: false
   marshmallow:
-    class: nr_metadata.schema.identifiers.NRAuthorityIdentifierSchema
+    class: nr_metadata.schema.identifiers.NRPersonIdentifierSchema
+    generate: false
+
+NROrganizationIdentifier:
+  $id: NROrganizationIdentifier
+  properties:
+    identifier:
+      type: keyword
+      required: true
+      sample:
+        faker: isbn13
+      i18n.key: identifier
+      label.cs: Identifikátor
+      label.en: Identifier
+    scheme:
+      type: keyword
+      required: true
+      enum:
+        [
+          ISNI,
+          ROR,
+          ICO,
+          DOI
+        ]
+      i18n.key: identifier_type
+      label.cs: Typ identifikátoru
+      label.en: Identifier type
+      hint.cs: |
+        Doporučujeme zadat alespoň jeden z typů identifikátorů.
+        Pokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.
+      hint.en: |
+        We recommend providing at least one of the identifier types.
+        If you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.
+  ui:
+    detail: nr_organization_identifier
+    marshmallow:
+      class: nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema
+      generate: false
+  marshmallow:
+    class: nr_metadata.schema.identifiers.NROrganizationIdentifierSchema
     generate: false
 
 NRAuthority:
   $id: NRAuthority
-  properties:
-    nameType:
-      type: keyword
-      enum: [Organizational, Personal]
-      sample: [Organizational, Personal]
-      label.cs: Typ
-      label.en: Type
-      hint.cs: Jako tvůrce je možné označit osobu nebo instituci.
-      hint.en: It is possible to designate a person or an institution as the creator/contributor.
-    fullName:
-      type: keyword
-      required: true
-      label.cs: Jméno autora
-      label.en: Author name
-      sample:
-        faker: name
-    authorityIdentifiers[]:
-      use: 'nr-datatypes#NRAuthorityIdentifier'
-      #^uniqueItems: true
-    affiliations[]:
-      ui:
-        marshmallow:
-          class: nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema
-      marshmallow:
-        class: nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema
-      sample:
-        faker: company
-      type: taxonomy
-      vocabulary-type: institutions
-      #^uniqueItems: true
-      label.cs: Afiliace
-      label.en: Affiliation
-      hint.cs: Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.
-  ui:
-    detail: nr_authority
-    marshmallow:
-      class: nr_metadata.common.services.records.ui_schema_datatypes.NRAuthorityUIUISchema
-  marshmallow:
-    class: nr_metadata.common.services.records.schema_datatypes.NRAuthoritySchema
+  schemas:
+    Personal:
+      use: 'nr-datatypes#NRPerson'
+    Organizational:
+      use: 'nr-datatypes#NROrganization'
+  type: polymorphic
+  discriminator: nameType
+  hint.cs: Jako tvůrce je možné označit osobu nebo instituci.
+  hint.en: It is possible to designate a person or an institution as the creator/contributor.
 
 NRObjectPID:
   $id: NRObjectPID
@@ -105,7 +178,7 @@ NRObjectPID:
     scheme:
       type: keyword
       required: true
-      enum: [DOI, Handle, ISBN, ISSN, RIV]
+      enum: [DOI, Handle, ISBN, ISSN, RIV, IGSN]
       label.cs: Typ identifikátoru
       label.en: Identifier type
   ui:
@@ -172,17 +245,17 @@ NRLatitude:
   label.cs: Zeměpisná šířka
   label.en: Latitude
 
-NRAuthorityRole:
-  $id: NRAuthorityRole
+NRContributorType:
+  $id: NRContributorType
   type: vocabulary
-  vocabulary-type: contributor-roles
-  label.cs: Role přispěvatele
-  label.en: Contributor's role
+  vocabulary-type: contributor-types
+  label.cs: Typ přispěvatele
+  label.en: Contributor's type
   ui:
     marshmallow:
-      class: nr_metadata.common.services.records.ui_schema_datatypes.NRAuthorityRoleVocabularyUISchema
+      class: nr_metadata.common.services.records.ui_schema_datatypes.NRContributorTypeVocabularyUISchema
   marshmallow:
-    class: nr_metadata.common.services.records.schema_datatypes.NRAuthorityRoleVocabularySchema
+    class: nr_metadata.common.services.records.schema_datatypes.NRContributorTypeVocabularySchema
 
 NRRelatedItem:
   $id: NRRelatedItem
@@ -215,18 +288,6 @@ NRRelatedItem:
           class: nr_metadata.common.services.records.ui_schema_datatypes.NRRelatedItemCreatorUISchema
       marshmallow:
         class: nr_metadata.common.services.records.schema_datatypes.NRRelatedItemCreatorSchema
-      properties:
-        affiliations[]:
-          ^label.cs: Afiliace
-          ^label.en: Affiliation
-
-          type: taxonomy
-          vocabulary-type: institutions
-          ui:
-            marshmallow:
-              class: nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema
-          marshmallow:
-            class: nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema
 
     itemContributors[]:
       #^uniqueItems: true
@@ -241,19 +302,9 @@ NRRelatedItem:
       marshmallow:
         class: nr_metadata.common.services.records.schema_datatypes.NRRelatedItemContributorSchema
       properties:
-        role:
-          use: 'nr-datatypes#NRAuthorityRole'
-        affiliations[]:
-          ^label.cs: Afiliace
-          ^label.en: Affiliation
+        contributorType:
+          use: 'nr-datatypes#NRContributorType'
 
-          type: taxonomy
-          vocabulary-type: institutions
-          ui:
-            marshmallow:
-              class: nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema
-          marshmallow:
-            class: nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema
 
     itemPIDs[]:
       use: 'nr-datatypes#NRObjectPID'
@@ -428,7 +479,6 @@ NRGeoLocation:
     geoLocationPlace:
       description: Free description of the location; ie. Atlantic Ocean
       type: keyword
-      required: true
     geoLocationPoint:
       properties:
         pointLongitude:
@@ -517,10 +567,11 @@ NRLanguage:
   marshmallow:
     class: nr_metadata.common.services.records.schema_datatypes.NRLanguageVocabularySchema
 
-NRLicense:
-  $id: NRLicense
+NRRights:
+  $id: NRRights
+
   type: vocabulary
-  vocabulary-type: licenses
+  vocabulary-type: rights
   sample:
     - 'CC BY'
     - 'CC BY-SA'
@@ -528,13 +579,13 @@ NRLicense:
     - 'CC BY-ND'
     - 'CC BY-NC-SA'
     - 'CC BY-NC-ND'
-  label.cs: Licence
-  label.en: License
+  label.cs: Práva/Licence
+  label.en: Rights/Licenses
   ui:
     marshmallow:
-      class: nr_metadata.common.services.records.ui_schema_datatypes.NRLicenseVocabularyUISchema
+      class: nr_metadata.common.services.records.ui_schema_datatypes.NRRightsVocabularyUISchema
   marshmallow:
-    class: nr_metadata.common.services.records.schema_datatypes.NRLicenseVocabularySchema
+    class: nr_metadata.common.services.records.schema_datatypes.NRRightsVocabularySchema
 
 NRAccessRights:
   $id: NRAccessRights
@@ -551,7 +602,7 @@ NRAccessRights:
 
 NRSeries:
   $id: NRSeries
-  label.cs: Série
+  label.cs: Edice
   label.en: Series
   # edice; tématicky sdružuje podobné věci, nemusí se jednat o pravou edici,
   # ale tagování/grupování podobných záznamů

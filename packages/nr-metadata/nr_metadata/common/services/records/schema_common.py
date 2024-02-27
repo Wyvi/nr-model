@@ -6,26 +6,28 @@ from marshmallow.validate import OneOf
 from marshmallow_utils.fields import TrimmedString
 from oarepo_runtime.services.schema.i18n import I18nStrField, MultilingualField
 from oarepo_runtime.services.schema.marshmallow import BaseRecordSchema, DictOnlySchema
-from oarepo_runtime.services.schema.validation import CachedMultilayerEDTFValidator
+from oarepo_runtime.services.schema.polymorphic import PolymorphicSchema
+from oarepo_runtime.services.schema.validation import (
+    CachedMultilayerEDTFValidator,
+    validate_date,
+)
 
 from nr_metadata.common.services.records.schema_datatypes import (
     NRAccessRightsVocabularySchema,
-    NRAffiliationVocabularySchema,
-    NRAuthorityRoleVocabularySchema,
     NREventSchema,
-    NRExternalLocationSchema,
     NRFundingReferenceSchema,
     NRGeoLocationSchema,
     NRLanguageVocabularySchema,
-    NRLicenseVocabularySchema,
+    NROrganizationSchema,
+    NRPersonSchema,
     NRRelatedItemSchema,
     NRResourceTypeVocabularySchema,
+    NRRightsVocabularySchema,
     NRSeriesSchema,
     NRSubjectCategoryVocabularySchema,
     NRSubjectSchema,
 )
 from nr_metadata.schema.identifiers import (
-    NRAuthorityIdentifierSchema,
     NRObjectIdentifierSchema,
     NRSystemIdentifierSchema,
 )
@@ -60,21 +62,13 @@ class NRCommonMetadataSchema(Schema):
         validate=[ma.validate.Length(min=1)],
     )
 
-    dateAvailable = TrimmedString(
-        validate=[CachedMultilayerEDTFValidator(types=(EDTFDate,))]
-    )
+    dateAvailable = ma_fields.String(validate=[validate_date("%Y-%m-%d")])
 
     dateIssued = TrimmedString(
         validate=[CachedMultilayerEDTFValidator(types=(EDTFDate,))]
     )
 
-    dateModified = TrimmedString(
-        validate=[CachedMultilayerEDTFValidator(types=(EDTFDate,))]
-    )
-
     events = ma_fields.List(ma_fields.Nested(lambda: NREventSchema()))
-
-    externalLocation = ma_fields.Nested(lambda: NRExternalLocationSchema())
 
     fundingReferences = ma_fields.List(
         ma_fields.Nested(lambda: NRFundingReferenceSchema())
@@ -82,11 +76,7 @@ class NRCommonMetadataSchema(Schema):
 
     geoLocations = ma_fields.List(ma_fields.Nested(lambda: NRGeoLocationSchema()))
 
-    languages = ma_fields.List(
-        ma_fields.Nested(lambda: NRLanguageVocabularySchema()),
-        required=True,
-        validate=[ma.validate.Length(min=1)],
-    )
+    languages = ma_fields.List(ma_fields.Nested(lambda: NRLanguageVocabularySchema()))
 
     methods = MultilingualField(I18nStrField())
 
@@ -98,15 +88,13 @@ class NRCommonMetadataSchema(Schema):
 
     originalRecord = ma_fields.String()
 
-    publishers = ma_fields.List(ma_fields.String())
-
     relatedItems = ma_fields.List(ma_fields.Nested(lambda: NRRelatedItemSchema()))
 
     resourceType = ma_fields.Nested(
         lambda: NRResourceTypeVocabularySchema(), required=True
     )
 
-    rights = ma_fields.Nested(lambda: NRLicenseVocabularySchema())
+    rights = ma_fields.Nested(lambda: NRRightsVocabularySchema())
 
     series = ma_fields.List(ma_fields.Nested(lambda: NRSeriesSchema()))
 
@@ -139,37 +127,23 @@ class AdditionalTitlesSchema(DictOnlySchema):
     )
 
 
-class NRContributorSchema(DictOnlySchema):
+class NRContributorSchema(PolymorphicSchema):
     class Meta:
         unknown = ma.RAISE
 
-    affiliations = ma_fields.List(
-        ma_fields.Nested(lambda: NRAffiliationVocabularySchema())
-    )
+    Organizational = ma_fields.Nested(lambda: NROrganizationSchema())
 
-    authorityIdentifiers = ma_fields.List(
-        ma_fields.Nested(lambda: NRAuthorityIdentifierSchema())
-    )
+    Personal = ma_fields.Nested(lambda: NRPersonSchema())
 
-    fullName = ma_fields.String(required=True)
-
-    nameType = ma_fields.String(validate=[OneOf(["Organizational", "Personal"])])
-
-    role = ma_fields.Nested(lambda: NRAuthorityRoleVocabularySchema())
+    type_field = "nameType"
 
 
-class NRCreatorSchema(DictOnlySchema):
+class NRCreatorSchema(PolymorphicSchema):
     class Meta:
         unknown = ma.RAISE
 
-    affiliations = ma_fields.List(
-        ma_fields.Nested(lambda: NRAffiliationVocabularySchema())
-    )
+    Organizational = ma_fields.Nested(lambda: NROrganizationSchema())
 
-    authorityIdentifiers = ma_fields.List(
-        ma_fields.Nested(lambda: NRAuthorityIdentifierSchema())
-    )
+    Personal = ma_fields.Nested(lambda: NRPersonSchema())
 
-    fullName = ma_fields.String(required=True)
-
-    nameType = ma_fields.String(validate=[OneOf(["Organizational", "Personal"])])
+    type_field = "nameType"

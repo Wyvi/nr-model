@@ -69,12 +69,6 @@ metadata_additionalTitles_titleType = TermsFacet(
     label=_("metadata/additionalTitles/titleType.label"),
 )
 
-metadata_contributors_affiliations = HierarchyVocabularyFacet(
-    field="metadata.contributors.affiliations",
-    label=_("metadata/contributors/affiliations.label"),
-    vocabulary="institutions",
-)
-
 metadata_contributors_authorityIdentifiers_identifier = TermsFacet(
     field="metadata.contributors.authorityIdentifiers.identifier",
     label=_("metadata/contributors/authorityIdentifiers/identifier.label"),
@@ -95,16 +89,20 @@ metadata_contributors_nameType = TermsFacet(
     label=_("metadata/contributors/nameType.label"),
 )
 
-metadata_contributors_role = VocabularyFacet(
-    field="metadata.contributors.role",
-    label=_("metadata/contributors/role.label"),
-    vocabulary="contributor-roles",
+metadata_contributors_affiliations = HierarchyVocabularyFacet(
+    field="metadata.contributors.affiliations",
+    label=_("metadata/contributors/affiliations.label"),
+    vocabulary="institutions",
 )
 
-metadata_creators_affiliations = HierarchyVocabularyFacet(
-    field="metadata.creators.affiliations",
-    label=_("metadata/creators/affiliations.label"),
-    vocabulary="institutions",
+metadata_contributors_familyName = TermsFacet(
+    field="metadata.contributors.familyName",
+    label=_("metadata/contributors/familyName.label"),
+)
+
+metadata_contributors_givenName = TermsFacet(
+    field="metadata.contributors.givenName",
+    label=_("metadata/contributors/givenName.label"),
 )
 
 metadata_creators_authorityIdentifiers_identifier = TermsFacet(
@@ -125,16 +123,26 @@ metadata_creators_nameType = TermsFacet(
     field="metadata.creators.nameType", label=_("metadata/creators/nameType.label")
 )
 
+metadata_creators_affiliations = HierarchyVocabularyFacet(
+    field="metadata.creators.affiliations",
+    label=_("metadata/creators/affiliations.label"),
+    vocabulary="institutions",
+)
+
+metadata_creators_familyName = TermsFacet(
+    field="metadata.creators.familyName", label=_("metadata/creators/familyName.label")
+)
+
+metadata_creators_givenName = TermsFacet(
+    field="metadata.creators.givenName", label=_("metadata/creators/givenName.label")
+)
+
 metadata_dateAvailable = DateTimeFacet(
     field="metadata.dateAvailable", label=_("metadata/dateAvailable.label")
 )
 
 metadata_dateIssued = DateTimeFacet(
     field="metadata.dateIssued", label=_("metadata/dateIssued.label")
-)
-
-metadata_dateModified = DateTimeFacet(
-    field="metadata.dateModified", label=_("metadata/dateModified.label")
 )
 
 metadata_events_eventLocation_country = VocabularyFacet(
@@ -146,11 +154,6 @@ metadata_events_eventLocation_country = VocabularyFacet(
 metadata_events_eventLocation_place = TermsFacet(
     field="metadata.events.eventLocation.place",
     label=_("metadata/events/eventLocation/place.label"),
-)
-
-metadata_externalLocation_externalLocationURL = TermsFacet(
-    field="metadata.externalLocation.externalLocationURL",
-    label=_("metadata/externalLocation/externalLocationURL.label"),
 )
 
 metadata_fundingReferences_funder = VocabularyFacet(
@@ -214,12 +217,6 @@ metadata_originalRecord = TermsFacet(
     field="metadata.originalRecord", label=_("metadata/originalRecord.label")
 )
 
-metadata_relatedItems_itemContributors_affiliations = HierarchyVocabularyFacet(
-    field="metadata.relatedItems.itemContributors.affiliations",
-    label=_("metadata/relatedItems/itemContributors/affiliations.label"),
-    vocabulary="institutions",
-)
-
 metadata_relatedItems_itemContributors_authorityIdentifiers_identifier = TermsFacet(
     field="metadata.relatedItems.itemContributors.authorityIdentifiers.identifier",
     label=_(
@@ -242,16 +239,20 @@ metadata_relatedItems_itemContributors_nameType = TermsFacet(
     label=_("metadata/relatedItems/itemContributors/nameType.label"),
 )
 
-metadata_relatedItems_itemContributors_role = VocabularyFacet(
-    field="metadata.relatedItems.itemContributors.role",
-    label=_("metadata/relatedItems/itemContributors/role.label"),
-    vocabulary="contributor-roles",
+metadata_relatedItems_itemContributors_affiliations = HierarchyVocabularyFacet(
+    field="metadata.relatedItems.itemContributors.affiliations",
+    label=_("metadata/relatedItems/itemContributors/affiliations.label"),
+    vocabulary="institutions",
 )
 
-metadata_relatedItems_itemCreators_affiliations = HierarchyVocabularyFacet(
-    field="metadata.relatedItems.itemCreators.affiliations",
-    label=_("metadata/relatedItems/itemCreators/affiliations.label"),
-    vocabulary="institutions",
+metadata_relatedItems_itemContributors_familyName = TermsFacet(
+    field="metadata.relatedItems.itemContributors.familyName",
+    label=_("metadata/relatedItems/itemContributors/familyName.label"),
+)
+
+metadata_relatedItems_itemContributors_givenName = TermsFacet(
+    field="metadata.relatedItems.itemContributors.givenName",
+    label=_("metadata/relatedItems/itemContributors/givenName.label"),
 )
 
 metadata_relatedItems_itemCreators_authorityIdentifiers_identifier = TermsFacet(
@@ -272,6 +273,22 @@ metadata_relatedItems_itemCreators_fullName = TermsFacet(
 metadata_relatedItems_itemCreators_nameType = TermsFacet(
     field="metadata.relatedItems.itemCreators.nameType",
     label=_("metadata/relatedItems/itemCreators/nameType.label"),
+)
+
+metadata_relatedItems_itemCreators_affiliations = HierarchyVocabularyFacet(
+    field="metadata.relatedItems.itemCreators.affiliations",
+    label=_("metadata/relatedItems/itemCreators/affiliations.label"),
+    vocabulary="institutions",
+)
+
+metadata_relatedItems_itemCreators_familyName = TermsFacet(
+    field="metadata.relatedItems.itemCreators.familyName",
+    label=_("metadata/relatedItems/itemCreators/familyName.label"),
+)
+
+metadata_relatedItems_itemCreators_givenName = TermsFacet(
+    field="metadata.relatedItems.itemCreators.givenName",
+    label=_("metadata/relatedItems/itemCreators/givenName.label"),
 )
 
 metadata_relatedItems_itemEndPage = TermsFacet(
@@ -338,7 +355,7 @@ metadata_resourceType = VocabularyFacet(
 )
 
 metadata_rights = VocabularyFacet(
-    field="metadata.rights", label=_("metadata/rights.label"), vocabulary="licenses"
+    field="metadata.rights", label=_("metadata/rights.label"), vocabulary="rights"
 )
 
 metadata_series_seriesTitle = TermsFacet(

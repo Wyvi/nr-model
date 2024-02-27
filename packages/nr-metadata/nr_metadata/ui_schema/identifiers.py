@@ -57,3 +57,40 @@ class NRSystemIdentifierUISchema(NRIdentifierUISchema):
             )
         ],
     )
+
+
+class NROrganizationIdentifierUISchema(NRIdentifierUISchema):
+    scheme = ma.fields.String(
+        required=True,
+        validate=[
+            validate.OneOf(
+                [
+
+                    "ISNI",
+                    "ROR",
+                    "ICO",
+                    "DOI",  # normalized
+                ]
+            )
+        ],
+    )
+
+
+class NRPersonIdentifierUISchema(NRIdentifierUISchema):
+    scheme = ma.fields.String(
+        required=True,
+        validate=[
+            validate.OneOf(
+                [
+                    "orcid",  # normalized
+                    "scopusID",
+                    "researcherID",
+                    "czenasAutID",
+                    "vedidk",
+                    "institutionalID",
+                    "ISNI",
+
+                ]
+            )
+        ],
+    )

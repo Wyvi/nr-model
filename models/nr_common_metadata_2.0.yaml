@@ -45,7 +45,6 @@ CommonMetadata:
       ^required: true
       ^label.cs: Autoři
       ^label.en: Authors
-
       use: 'nr-datatypes#NRAuthority'
       marshmallow:
         class: nr_metadata.common.services.records.schema_common.NRCreatorSchema
@@ -53,10 +52,6 @@ CommonMetadata:
         detail: creator
         marshmallow:
           class: nr_metadata.common.services.records.ui_schema_common.NRCreatorUISchema
-      properties:
-        affiliations[]:
-          type: taxonomy
-          vocabulary-type: institutions
 
     contributors[]:
       use: 'nr-datatypes#NRAuthority'
@@ -64,14 +59,12 @@ CommonMetadata:
       ^label.en: Contributors
       #^uniqueItems: true
       properties:
-        role:
-          use: 'nr-datatypes#NRAuthorityRole'
+        contributorType:
+          use: 'nr-datatypes#NRContributorType'
         fullName:
+          type: keyword
           label.cs: Jméno přispěvatele
           label.en: Contributor name
-        affiliations[]:
-          type: taxonomy
-          vocabulary-type: institutions
       ui:
         detail: contributor
         marshmallow:
@@ -89,28 +82,13 @@ CommonMetadata:
       #
       # týká se dokumentu, nikoliv metadat!!!
       # stejně jako pro data, budou se přes něj řídit přístupy - embargo
-      use: 'nr-datatypes#NRDate'
+      type: date
       sample:
         faker: date
       label.cs: Datum zveřejnění
       label.en: Date available
 
-    dateModified:
-      # The date of the last update to the resource, not metadata
-      #
-      # týká se dokumentu/obsahu, nikoliv metadat!!!
-      # neukazuje se ve vkládacím formuláři. jen při editaci záznamu!
-      use: 'nr-datatypes#NRDate'
-      sample:
-        faker: date
-      label.cs: Datum změny zdroje
-      label.en: Date modified
-
     dateIssued:
-      # The date the resource is publicly available in a repository.
-      #
-      # týká se dokumentu, nikoliv metadat!!!
-      # stejně jako pro data, budou se přes něj řídit přístupy - embargo
       use: 'nr-datatypes#NRDate'
       sample:
         faker: date
@@ -118,24 +96,14 @@ CommonMetadata:
       label.en: Date issued
 
     subjects[]:
+      # subject by vocabularies or free-form keywords created by author(s)
+      use: 'nr-datatypes#NRSubject'
       ^label.cs: 'Klíčová slova'
       ^label.en: 'Keywords'
+      #^uniqueItems: true
       ^ui:
         marshmallow:
           field-class: nr_metadata.ui_schema.subjects.NRSubjectListField
-
-      # subject by vocabularies or free-form keywords created by author(s)
-      use: 'nr-datatypes#NRSubject'
-      #^uniqueItems: true
-
-    publishers[]:
-      # volný zápis vydavatele
-      type: fulltext
-      #^uniqueItems: true
-      sample:
-        faker: company
-      ^label.cs: Vydavatelé
-      ^label.en: Publishers
 
     subjectCategories[]:
       # FRASCATI oborové třídění - může sloužit jako podklad pro oborové filtrování
@@ -149,8 +117,6 @@ CommonMetadata:
       use: 'nr-datatypes#NRLanguage'
       ^label.cs: Jazyk
       ^label.en: Language
-      ^minItems: 1
-      ^required: true
       #^uniqueItems: true
 
     notes[]:
@@ -180,9 +146,7 @@ CommonMetadata:
 
     rights:
       # Any license or copyright information for this resource. Taxonomy field.
-      use: 'nr-datatypes#NRLicense'
-      label.cs: Licence
-      label.en: License
+      use: 'nr-datatypes#NRRights'
       #^uniqueItems: true
 
     accessRights:
@@ -217,6 +181,7 @@ CommonMetadata:
       #^uniqueItems: true
 
     accessibility:
+      # pro harvest
       # textové vyjádření dostupnosti souborů, primárně pro harvestované zdroje.
       # nastavuje se pro každý zdroj zvlášť během konverze podle dostupnosti souborů
       # ve zdrojovém systému. ve vkládacím formuláři by bylo pouze pro restricted access
@@ -232,14 +197,12 @@ CommonMetadata:
       # edice; tématicky sdružuje podobné věci, nemusí se jednat o pravou edici,
       # ale tagování/grupování podobných záznamů
       #^uniqueItems: true
-      ^label.cs: Série
-      ^label.en: Series
       use: 'nr-datatypes#NRSeries'
-
-    externalLocation: # TODO: NRExternalLocation
-      use: 'nr-datatypes#NRExternalLocation'
+      ^label.cs: Edice
+      ^label.en: Series
 
     originalRecord:
+      # pro harvest
       # odkaz na původní záznam, zobrazovat koncovému uživateli v detailu záznamu
       # jako původní místo uložení. objevuje se jen u harvestu
       type: url
@@ -256,11 +219,14 @@ CommonMetadata:
       #^uniqueItems: true
 
     systemIdentifiers[]:
+      # pro harvest
+      #^uniqueItems: true
       use: 'nr-datatypes#NRSystemIdentifier'
       ^label.cs: Systémové identifikátory
       ^label.en: System identifiers
 
     events[]:
+      #^uniqueItems: true
       use: 'nr-datatypes#NREvent'
       ^label.cs: Události
       ^label.en: Events

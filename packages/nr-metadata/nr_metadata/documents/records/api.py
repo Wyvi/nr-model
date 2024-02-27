@@ -68,17 +68,12 @@ class DocumentsRecord(InvenioRecord):
         ),
         affiliations=PIDRelation(
             "metadata.contributors.affiliations",
-            keys=["id", "title", "hierarchy"],
+            keys=["id", "title", {"key": "props.ror", "target": "ror"}, "hierarchy"],
             pid_field=Vocabulary.pid.with_type_ctx("institutions"),
         ),
-        role=PIDRelation(
-            "metadata.contributors.role",
-            keys=["id", "title"],
-            pid_field=Vocabulary.pid.with_type_ctx("contributor-roles"),
-        ),
-        creators_affiliations=PIDRelation(
+        Personal_affiliations=PIDRelation(
             "metadata.creators.affiliations",
-            keys=["id", "title", "hierarchy"],
+            keys=["id", "title", {"key": "props.ror", "target": "ror"}, "hierarchy"],
             pid_field=Vocabulary.pid.with_type_ctx("institutions"),
         ),
         country=PIDRelation(
@@ -96,19 +91,14 @@ class DocumentsRecord(InvenioRecord):
             keys=["id", "title"],
             pid_field=Vocabulary.pid.with_type_ctx("languages"),
         ),
-        itemContributors_affiliations=PIDRelation(
+        itemContributors_Personal_affiliations=PIDRelation(
             "metadata.relatedItems.itemContributors.affiliations",
-            keys=["id", "title", "hierarchy"],
+            keys=["id", "title", {"key": "props.ror", "target": "ror"}, "hierarchy"],
             pid_field=Vocabulary.pid.with_type_ctx("institutions"),
         ),
-        itemContributors_role=PIDRelation(
-            "metadata.relatedItems.itemContributors.role",
-            keys=["id", "title"],
-            pid_field=Vocabulary.pid.with_type_ctx("contributor-roles"),
-        ),
-        itemCreators_affiliations=PIDRelation(
+        itemCreators_Personal_affiliations=PIDRelation(
             "metadata.relatedItems.itemCreators.affiliations",
-            keys=["id", "title", "hierarchy"],
+            keys=["id", "title", {"key": "props.ror", "target": "ror"}, "hierarchy"],
             pid_field=Vocabulary.pid.with_type_ctx("institutions"),
         ),
         itemRelationType=PIDRelation(
@@ -129,7 +119,7 @@ class DocumentsRecord(InvenioRecord):
         rights=PIDRelation(
             "metadata.rights",
             keys=["id", "title"],
-            pid_field=Vocabulary.pid.with_type_ctx("licenses"),
+            pid_field=Vocabulary.pid.with_type_ctx("rights"),
         ),
         subjectCategories=PIDRelation(
             "metadata.subjectCategories",
