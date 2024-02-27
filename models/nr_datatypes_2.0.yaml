@@ -75,6 +75,34 @@ NROrganization:
   marshmallow:
     class: nr_metadata.common.services.records.schema_datatypes.NROrganizationSchema
 
+NROrganization:
+  $id: NROrganization
+  properties:
+    nameType:
+      type: keyword
+      enum: 
+        - Organizational
+      sample: 
+        - Organizational
+      label.cs: Typ
+      label.en: Type
+    fullName:
+      type: keyword
+      required: true
+      label.cs: Jméno autora
+      label.en: Author name
+      sample:
+        faker: name
+    authorityIdentifiers[]:
+      use: 'nr-datatypes#NROrganizationIdentifier'
+      #^uniqueItems: true
+  ui:
+    detail: nr_organization
+    marshmallow:
+      class: nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationUIUISchema
+  marshmallow:
+    class: nr_metadata.common.services.records.schema_datatypes.NROrganizationSchema
+
 NRPersonIdentifier:
   $id: NRPersonIdentifier
   properties:
@@ -159,10 +187,10 @@ NROrganizationIdentifier:
 NRAuthority:
   $id: NRAuthority
   schemas:
-    Organizational:
-      use: 'nr-datatypes#NROrganization'
     Personal:
       use: 'nr-datatypes#NRPerson'
+    Organizational:
+      use: 'nr-datatypes#NROrganization'
   type: polymorphic
   discriminator: nameType
   hint.cs: Jako tvůrce je možné označit osobu nebo instituci.
