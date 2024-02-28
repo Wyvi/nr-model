@@ -16,7 +16,17 @@ from nr_metadata.common.services.records.schema_common import (
     NRCommonMetadataSchema,
 )
 from nr_metadata.common.services.records.schema_datatypes import (
+    NREventSchema,
     NRExternalLocationSchema,
+    NRFundingReferenceSchema,
+    NRGeoLocationSchema,
+    NRRelatedItemSchema,
+    NRSeriesSchema,
+    NRSubjectSchema,
+)
+from nr_metadata.schema.identifiers import (
+    NRObjectIdentifierSchema,
+    NRSystemIdentifierSchema,
 )
 
 
@@ -41,9 +51,31 @@ class NRDocumentMetadataSchema(NRCommonMetadataSchema):
         validate=[CachedMultilayerEDTFValidator(types=(EDTFDate,))]
     )
 
+    events = ma_fields.List(ma_fields.Nested(lambda: NREventSchema()))
+
     externalLocation = ma_fields.Nested(lambda: NRExternalLocationSchema())
 
+    fundingReferences = ma_fields.List(
+        ma_fields.Nested(lambda: NRFundingReferenceSchema())
+    )
+
+    geoLocations = ma_fields.List(ma_fields.Nested(lambda: NRGeoLocationSchema()))
+
+    objectIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NRObjectIdentifierSchema())
+    )
+
     publishers = ma_fields.List(ma_fields.String())
+
+    relatedItems = ma_fields.List(ma_fields.Nested(lambda: NRRelatedItemSchema()))
+
+    series = ma_fields.List(ma_fields.Nested(lambda: NRSeriesSchema()))
+
+    subjects = ma_fields.List(ma_fields.Nested(lambda: NRSubjectSchema()))
+
+    systemIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NRSystemIdentifierSchema())
+    )
 
     thesis = ma_fields.Nested(lambda: NRThesisSchema())
 

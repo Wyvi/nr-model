@@ -17,8 +17,19 @@ from nr_metadata.common.services.records.ui_schema_common import (
     NRCommonMetadataUISchema,
 )
 from nr_metadata.common.services.records.ui_schema_datatypes import (
+    NREventUISchema,
     NRExternalLocationUISchema,
+    NRFundingReferenceUISchema,
+    NRGeoLocationUISchema,
+    NRRelatedItemUISchema,
+    NRSeriesUISchema,
+    NRSubjectUISchema,
 )
+from nr_metadata.ui_schema.identifiers import (
+    NRObjectIdentifierUISchema,
+    NRSystemIdentifierUISchema,
+)
+from nr_metadata.ui_schema.subjects import NRSubjectListField
 
 
 class NRDocumentRecordUISchema(InvenioUISchema):
@@ -40,9 +51,31 @@ class NRDocumentMetadataUISchema(NRCommonMetadataUISchema):
 
     dateModified = LocalizedEDTF()
 
+    events = ma_fields.List(ma_fields.Nested(lambda: NREventUISchema()))
+
     externalLocation = ma_fields.Nested(lambda: NRExternalLocationUISchema())
 
+    fundingReferences = ma_fields.List(
+        ma_fields.Nested(lambda: NRFundingReferenceUISchema())
+    )
+
+    geoLocations = ma_fields.List(ma_fields.Nested(lambda: NRGeoLocationUISchema()))
+
+    objectIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NRObjectIdentifierUISchema())
+    )
+
     publishers = ma_fields.List(ma_fields.String())
+
+    relatedItems = ma_fields.List(ma_fields.Nested(lambda: NRRelatedItemUISchema()))
+
+    series = ma_fields.List(ma_fields.Nested(lambda: NRSeriesUISchema()))
+
+    subjects = NRSubjectListField(ma_fields.Nested(lambda: NRSubjectUISchema()))
+
+    systemIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NRSystemIdentifierUISchema())
+    )
 
     thesis = ma_fields.Nested(lambda: NRThesisUISchema())
 

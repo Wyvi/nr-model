@@ -1,10 +1,12 @@
 NameType:
+  $id: NameType
   type: keyword
   enum:
   - Organizational
   - Personal
 
 NameIdentifier:
+  $id: NameIdentifier
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.NameIdentifierSchema
   ui:
@@ -21,6 +23,7 @@ NameIdentifier:
       type: url
 
 AlternateIdentifier:
+  $id: AlternateIdentifier
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.AlternateIdentifierSchema
   ui:
@@ -35,6 +38,7 @@ AlternateIdentifier:
       required: true
 
 Affiliation:
+  $id: Affiliation
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.AffiliationSchema
   ui:
@@ -52,6 +56,7 @@ Affiliation:
       type: url
 
 Creator:
+  $id: Creator
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.CreatorSchema
   ui:
@@ -73,9 +78,11 @@ Creator:
     affiliation[]:
       "$ref": "datacite-datatypes#Affiliation"
     lang:
-      type: string
+      type: keyword
 
 Contributor:
+  $id: Contributor
+
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.ContributorSchema
   ui:
@@ -89,6 +96,7 @@ Contributor:
       required: true
 
 ContributorType:
+  $id: ContributorType
   type: keyword
   enum:
   - ContactPerson
@@ -114,6 +122,7 @@ ContributorType:
   - Other
 
 TitleType:
+  $id: TitleType
   type: keyword
   enum:
   - AlternativeTitle
@@ -122,6 +131,7 @@ TitleType:
   - Other
 
 Title:
+  $id: Title
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.TitleSchema
   ui:
@@ -137,16 +147,19 @@ Title:
       type: keyword
 
 Longitude:
+  $id: Longitude
   type: float
   maximum: 180
   minimum: -180
 
 Latitude:
+  $id: Latitude
   type: float
   maximum: 90
   minimum: -90
 
 Date:
+  $id: Date
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.DateSchema
   ui:
@@ -163,6 +176,7 @@ Date:
       type: keyword
 
 DateType:
+  $id: DateType
   type: keyword
   enum:
   - Accepted
@@ -178,6 +192,7 @@ DateType:
   - Other
 
 ResourceTypeGeneral:
+  $id: ResourceTypeGeneral
   type: keyword
   enum:
   - Audiovisual
@@ -212,6 +227,7 @@ ResourceTypeGeneral:
   - Other
 
 ResourceType:
+  $id: ResourceType
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.ResourceTypeSchema
   ui:
@@ -221,10 +237,11 @@ ResourceType:
     resourceType:
       type: keyword
     resourceTypeGeneral:
-      "use": "/$defs#ResourceTypeGeneral"
+      "use": "datacite-datatypes#ResourceTypeGeneral"
       required: true
 
 RelatedIdentifierType:
+  $id: RelatedIdentifierType
   type: keyword
   enum:
   - ARK
@@ -248,6 +265,7 @@ RelatedIdentifierType:
   - w3id
 
 RelationType:
+  $id: RelationType
   type: keyword
   enum:
   - IsCitedBy
@@ -288,6 +306,7 @@ RelationType:
   - Obsoletes
 
 RelatedObject:
+  $id: RelatedObject
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.RelatedObjectSchema
   ui:
@@ -308,6 +327,7 @@ RelatedObject:
       "$ref": "datacite-datatypes#ResourceTypeGeneral"
 
 RelatedIdentifier:
+  $id: RelatedIdentifier
   use: "datacite-datatypes#RelatedObject"
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.RelatedIdentifierSchema
@@ -320,7 +340,39 @@ RelatedIdentifier:
     relatedIdentifierType:
       "use": "datacite-datatypes#RelatedIdentifierType"
 
+RelatedItemIdentifier:
+  $id: RelatedItemIdentifier
+  marshmallow:
+    class: nr_metadata.datacite.services.records.schema_datatypes.RelatedItemIdentifierSchema
+  ui:
+    marshmallow:
+      class: nr_metadata.datacite.services.records.ui_schema_datatypes.RelatedItemIdentifierUISchema
+  properties:
+    relatedItemIdentifier:
+      type: keyword
+      required: true
+    relatedItemIdentifierType:
+      use: "datacite-datatypes#RelatedIdentifierType"
+      required: true
+
+RelatedItemTitle:
+    $id: RelatedItemTitle
+    marshmallow:
+      class: nr_metadata.datacite.services.records.schema_datatypes.RelatedItemTitleSchema
+    ui:
+      marshmallow:
+        class: nr_metadata.datacite.services.records.ui_schema_datatypes.RelatedItemTitleUISchema
+    properties:
+      title:
+        type: fulltext
+        required: true
+      titleType:
+        use: "datacite-datatypes#TitleType"
+      lang:
+        type: keyword
+
 RelatedItem:
+  $id: RelatedItem
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.RelatedItemSchema
   ui:
@@ -328,13 +380,7 @@ RelatedItem:
       class: nr_metadata.datacite.services.records.ui_schema_datatypes.RelatedItemUISchema
   properties:
     relatedItemIdentifier:
-      properties:
-        relatedItemIdentifier:
-          type: keyword
-          required: true
-        relatedItemIdentifierType:
-          use: "datacite-datatypes#RelatedIdentifierType"
-          required: true
+      use: "datacite-datatypes#RelatedItemIdentifier"
       required: true
 
     relatedItemType:
@@ -348,19 +394,11 @@ RelatedItem:
       use: "datacite-datatypes#Contributor"
 
     titles[]:
-      properties:
-        title:
-          type: fulltext
-          required: true
-        titleType:
-          use: "datacite-datatypes#TitleType"
-        lang:
-          type: keyword
+      use: "datacite-datatypes#RelatedItemTitle"
       ^required: true
 
     publicationYear:
       type: keyword
-      pattern: "^[0-9]{4}$"
 
     volume:
       type: keyword
@@ -385,6 +423,7 @@ RelatedItem:
         - Other
 
 DescriptionType:
+  $id: DescriptionType
   type: keyword
   enum:
   - Abstract
@@ -395,6 +434,7 @@ DescriptionType:
   - Other
 
 GeoLocationPoint:
+  $id: GeoLocationPoint
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.GeoLocationPointSchema
   ui:
@@ -406,11 +446,45 @@ GeoLocationPoint:
       "$ref": "datacite-datatypes#Longitude"
     pointLatitude:
       "$ref": "datacite-datatypes#Latitude"
-  required:
-  - pointLongitude
-  - pointLatitude
+
+GeoLocationBox:
+  $id: GeoLocationBox
+  marshmallow:
+    class: nr_metadata.datacite.services.records.schema_datatypes.GeoLocationBoxSchema
+  ui:
+    marshmallow:
+      class: nr_metadata.datacite.services.records.ui_schema_datatypes.GeoLocationBoxUISchema
+  properties:
+    westBoundLongitude:
+      use: "datacite-datatypes#Longitude"
+      required: true
+    eastBoundLongitude:
+      use: "datacite-datatypes#Longitude"
+      required: true
+    southBoundLatitude:
+      use: "datacite-datatypes#Latitude"
+      required: true
+    northBoundLatitude:
+      use: "datacite-datatypes#Latitude"
+      required: true
+
+GeoLocationPolygon:
+  $id: GeoLocationPolygon
+  marshmallow:
+    class: nr_metadata.datacite.services.records.schema_datatypes.GeoLocationPolygonSchema
+  ui:
+    marshmallow:
+      class: nr_metadata.datacite.services.records.ui_schema_datatypes.GeoLocationPolygonUISchema
+  properties:
+    polygonPoints[]:
+      use: "datacite-datatypes#GeoLocationPoint"
+      ^required: true
+    inPolygonPoint:
+      use: "datacite-datatypes#GeoLocationPoint"
+
 
 GeoLocation:
+  $id: GeoLocation
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.GeoLocationSchema
   ui:
@@ -422,29 +496,13 @@ GeoLocation:
     geoLocationPoint:
       use: "datacite-datatypes#GeoLocationPoint"
     geoLocationBox:
-      properties:
-        westBoundLongitude:
-          use: "datacite-datatypes#Longitude"
-          required: true
-        eastBoundLongitude:
-          use: "datacite-datatypes#Longitude"
-          required: true
-        southBoundLatitude:
-          use: "datacite-datatypes#Latitude"
-          required: true
-        northBoundLatitude:
-          use: "datacite-datatypes#Latitude"
-          required: true
+      use: "datacite-datatypes#GeoLocationBox"
 
     geoLocationPolygons[]:
-      properties:
-        polygonPoints[]:
-          use: "datacite-datatypes#GeoLocationPoint"
-          required: true
-        inPolygonPoint:
-          use: "datacite-datatypes#GeoLocationPoint"
+      use: "datacite-datatypes#GeoLocationPolygon"
 
 FunderIdentifierType:
+  $id: FunderIdentifierType
   type: keyword
   enum:
   - ISNI
@@ -454,10 +512,11 @@ FunderIdentifierType:
   - Other
 
 Prefix:
+  $id: Prefix
   type: keyword
-  pattern: "^10.\\d{4,9}$"
 
 Publisher:
+  $id: Publisher
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.PublisherSchema
   ui:
@@ -477,6 +536,7 @@ Publisher:
       type: keyword
 
 Subject:
+  $id: Subject
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.SubjectSchema
   ui:
@@ -498,6 +558,7 @@ Subject:
       type: keyword
 
 Rights:
+  $id: Rights
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.RightsSchema
   ui:
@@ -518,6 +579,7 @@ Rights:
       type: keyword
 
 Description:
+  $id: Description
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.DescriptionSchema
   ui:
@@ -534,6 +596,7 @@ Description:
       type: keyword
 
 FundingReference:
+  $id: FundingReference
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.FundingReferenceSchema
   ui:
@@ -555,6 +618,7 @@ FundingReference:
       type: keyword
 
 Container:
+  $id: Container
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.ContainerSchema
   ui:

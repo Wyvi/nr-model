@@ -879,17 +879,13 @@
                                                 "ui": {
                                                     "marshmallow": {
                                                         "generate": false,
-                                                        "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema",
-                                                        "read": false,
-                                                        "write": false
+                                                        "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                     },
                                                     "detail": "nr_person_identifier"
                                                 },
                                                 "marshmallow": {
                                                     "generate": false,
-                                                    "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema",
-                                                    "read": false,
-                                                    "write": false
+                                                    "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                 }
                                             }
                                         },
@@ -1179,17 +1175,13 @@
                                                 "ui": {
                                                     "marshmallow": {
                                                         "generate": false,
-                                                        "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema",
-                                                        "read": false,
-                                                        "write": false
+                                                        "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
                                                     },
                                                     "detail": "nr_organization_identifier"
                                                 },
                                                 "marshmallow": {
                                                     "generate": false,
-                                                    "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema",
-                                                    "read": false,
-                                                    "write": false
+                                                    "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                                 }
                                             }
                                         }
@@ -1514,17 +1506,13 @@
                                         "ui": {
                                             "marshmallow": {
                                                 "generate": false,
-                                                "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema",
-                                                "read": false,
-                                                "write": false
+                                                "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
                                             },
                                             "detail": "nr_organization_identifier"
                                         },
                                         "marshmallow": {
                                             "generate": false,
-                                            "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema",
-                                            "read": false,
-                                            "write": false
+                                            "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                         },
                                         "properties": {
                                             "identifier": {
@@ -1895,17 +1883,13 @@
                                                 "ui": {
                                                     "marshmallow": {
                                                         "generate": false,
-                                                        "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema",
-                                                        "read": false,
-                                                        "write": false
+                                                        "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                     },
                                                     "detail": "nr_person_identifier"
                                                 },
                                                 "marshmallow": {
                                                     "generate": false,
-                                                    "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema",
-                                                    "read": false,
-                                                    "write": false
+                                                    "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                 }
                                             }
                                         },
@@ -2148,17 +2132,13 @@
                                                 "ui": {
                                                     "marshmallow": {
                                                         "generate": false,
-                                                        "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema",
-                                                        "read": false,
-                                                        "write": false
+                                                        "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
                                                     },
                                                     "detail": "nr_organization_identifier"
                                                 },
                                                 "marshmallow": {
                                                     "generate": false,
-                                                    "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema",
-                                                    "read": false,
-                                                    "write": false
+                                                    "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                                 }
                                             }
                                         }
@@ -2477,17 +2457,13 @@
                                         "ui": {
                                             "marshmallow": {
                                                 "generate": false,
-                                                "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema",
-                                                "read": false,
-                                                "write": false
+                                                "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
                                             },
                                             "detail": "nr_organization_identifier"
                                         },
                                         "marshmallow": {
                                             "generate": false,
-                                            "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema",
-                                            "read": false,
-                                            "write": false
+                                            "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                         },
                                         "properties": {
                                             "identifier": {
@@ -2660,17 +2636,13 @@
                             "ui": {
                                 "marshmallow": {
                                     "generate": false,
-                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NREventUISchema",
-                                    "read": false,
-                                    "write": false
+                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NREventUISchema"
                                 },
                                 "detail": "identifier"
                             },
                             "marshmallow": {
                                 "generate": false,
-                                "class": "nr_metadata.common.services.records.schema_datatypes.NREventSchema",
-                                "read": false,
-                                "write": false
+                                "class": "nr_metadata.common.services.records.schema_datatypes.NREventSchema"
                             },
                             "properties": {
                                 "eventDate": {
@@ -2695,17 +2667,13 @@
                                     "ui": {
                                         "marshmallow": {
                                             "generate": false,
-                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRLocationUISchema",
-                                            "read": false,
-                                            "write": false
+                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRLocationUISchema"
                                         },
                                         "detail": "location"
                                     },
                                     "marshmallow": {
                                         "generate": false,
-                                        "class": "nr_metadata.common.services.records.schema_datatypes.NRLocationSchema",
-                                        "read": false,
-                                        "write": false
+                                        "class": "nr_metadata.common.services.records.schema_datatypes.NRLocationSchema"
                                     },
                                     "properties": {
                                         "country": {
@@ -2918,17 +2886,13 @@
                             "ui": {
                                 "marshmallow": {
                                     "generate": false,
-                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRFundingReferenceUISchema",
-                                    "read": false,
-                                    "write": false
+                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRFundingReferenceUISchema"
                                 },
                                 "detail": "funding_reference"
                             },
                             "marshmallow": {
                                 "generate": false,
-                                "class": "nr_metadata.common.services.records.schema_datatypes.NRFundingReferenceSchema",
-                                "read": false,
-                                "write": false
+                                "class": "nr_metadata.common.services.records.schema_datatypes.NRFundingReferenceSchema"
                             },
                             "properties": {
                                 "funder": {
@@ -3103,17 +3067,13 @@
                             "ui": {
                                 "marshmallow": {
                                     "generate": false,
-                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRGeoLocationUISchema",
-                                    "read": false,
-                                    "write": false
+                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRGeoLocationUISchema"
                                 },
                                 "detail": "geolocation"
                             },
                             "marshmallow": {
                                 "generate": false,
-                                "class": "nr_metadata.common.services.records.schema_datatypes.NRGeoLocationSchema",
-                                "read": false,
-                                "write": false
+                                "class": "nr_metadata.common.services.records.schema_datatypes.NRGeoLocationSchema"
                             },
                             "properties": {
                                 "geoLocationPlace": {
@@ -3398,17 +3358,13 @@
                             "ui": {
                                 "marshmallow": {
                                     "generate": false,
-                                    "class": "nr_metadata.ui_schema.identifiers.NRObjectIdentifierUISchema",
-                                    "read": false,
-                                    "write": false
+                                    "class": "nr_metadata.ui_schema.identifiers.NRObjectIdentifierUISchema"
                                 },
                                 "detail": "nr_object_pid"
                             },
                             "marshmallow": {
                                 "generate": false,
-                                "class": "nr_metadata.schema.identifiers.NRObjectIdentifierSchema",
-                                "read": false,
-                                "write": false
+                                "class": "nr_metadata.schema.identifiers.NRObjectIdentifierSchema"
                             },
                             "properties": {
                                 "identifier": {
@@ -3495,17 +3451,13 @@
                             "ui": {
                                 "marshmallow": {
                                     "generate": false,
-                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRRelatedItemUISchema",
-                                    "read": false,
-                                    "write": false
+                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRRelatedItemUISchema"
                                 },
                                 "detail": "related_item"
                             },
                             "marshmallow": {
                                 "generate": false,
-                                "class": "nr_metadata.common.services.records.schema_datatypes.NRRelatedItemSchema",
-                                "read": false,
-                                "write": false
+                                "class": "nr_metadata.common.services.records.schema_datatypes.NRRelatedItemSchema"
                             },
                             "properties": {
                                 "itemContributors": {
@@ -3679,17 +3631,13 @@
                                                             "ui": {
                                                                 "marshmallow": {
                                                                     "generate": false,
-                                                                    "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema",
-                                                                    "read": false,
-                                                                    "write": false
+                                                                    "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                                 },
                                                                 "detail": "nr_person_identifier"
                                                             },
                                                             "marshmallow": {
                                                                 "generate": false,
-                                                                "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema",
-                                                                "read": false,
-                                                                "write": false
+                                                                "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                             }
                                                         }
                                                     },
@@ -3979,17 +3927,13 @@
                                                             "ui": {
                                                                 "marshmallow": {
                                                                     "generate": false,
-                                                                    "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema",
-                                                                    "read": false,
-                                                                    "write": false
+                                                                    "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
                                                                 },
                                                                 "detail": "nr_organization_identifier"
                                                             },
                                                             "marshmallow": {
                                                                 "generate": false,
-                                                                "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema",
-                                                                "read": false,
-                                                                "write": false
+                                                                "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                                             }
                                                         }
                                                     }
@@ -4314,17 +4258,13 @@
                                                     "ui": {
                                                         "marshmallow": {
                                                             "generate": false,
-                                                            "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema",
-                                                            "read": false,
-                                                            "write": false
+                                                            "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
                                                         },
                                                         "detail": "nr_organization_identifier"
                                                     },
                                                     "marshmallow": {
                                                         "generate": false,
-                                                        "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema",
-                                                        "read": false,
-                                                        "write": false
+                                                        "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                                     },
                                                     "properties": {
                                                         "identifier": {
@@ -4688,17 +4628,13 @@
                                                             "ui": {
                                                                 "marshmallow": {
                                                                     "generate": false,
-                                                                    "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema",
-                                                                    "read": false,
-                                                                    "write": false
+                                                                    "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
                                                                 },
                                                                 "detail": "nr_person_identifier"
                                                             },
                                                             "marshmallow": {
                                                                 "generate": false,
-                                                                "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema",
-                                                                "read": false,
-                                                                "write": false
+                                                                "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                             }
                                                         }
                                                     },
@@ -4941,17 +4877,13 @@
                                                             "ui": {
                                                                 "marshmallow": {
                                                                     "generate": false,
-                                                                    "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema",
-                                                                    "read": false,
-                                                                    "write": false
+                                                                    "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
                                                                 },
                                                                 "detail": "nr_organization_identifier"
                                                             },
                                                             "marshmallow": {
                                                                 "generate": false,
-                                                                "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema",
-                                                                "read": false,
-                                                                "write": false
+                                                                "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                                             }
                                                         }
                                                     }
@@ -5270,17 +5202,13 @@
                                                     "ui": {
                                                         "marshmallow": {
                                                             "generate": false,
-                                                            "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema",
-                                                            "read": false,
-                                                            "write": false
+                                                            "class": "nr_metadata.ui_schema.identifiers.NROrganizationIdentifierUISchema"
                                                         },
                                                         "detail": "nr_organization_identifier"
                                                     },
                                                     "marshmallow": {
                                                         "generate": false,
-                                                        "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema",
-                                                        "read": false,
-                                                        "write": false
+                                                        "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                                     },
                                                     "properties": {
                                                         "identifier": {
@@ -5437,17 +5365,13 @@
                                         "ui": {
                                             "marshmallow": {
                                                 "generate": false,
-                                                "class": "nr_metadata.ui_schema.identifiers.NRObjectIdentifierUISchema",
-                                                "read": false,
-                                                "write": false
+                                                "class": "nr_metadata.ui_schema.identifiers.NRObjectIdentifierUISchema"
                                             },
                                             "detail": "nr_object_pid"
                                         },
                                         "marshmallow": {
                                             "generate": false,
-                                            "class": "nr_metadata.schema.identifiers.NRObjectIdentifierSchema",
-                                            "read": false,
-                                            "write": false
+                                            "class": "nr_metadata.schema.identifiers.NRObjectIdentifierSchema"
                                         },
                                         "properties": {
                                             "identifier": {
@@ -6079,17 +6003,13 @@
                             "ui": {
                                 "marshmallow": {
                                     "generate": false,
-                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRSeriesUISchema",
-                                    "read": false,
-                                    "write": false
+                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRSeriesUISchema"
                                 },
                                 "detail": "series"
                             },
                             "marshmallow": {
                                 "generate": false,
-                                "class": "nr_metadata.common.services.records.schema_datatypes.NRSeriesSchema",
-                                "read": false,
-                                "write": false
+                                "class": "nr_metadata.common.services.records.schema_datatypes.NRSeriesSchema"
                             },
                             "properties": {
                                 "seriesTitle": {
@@ -6270,17 +6190,13 @@
                             "ui": {
                                 "marshmallow": {
                                     "generate": false,
-                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRSubjectUISchema",
-                                    "read": false,
-                                    "write": false
+                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRSubjectUISchema"
                                 },
                                 "detail": "subject"
                             },
                             "marshmallow": {
                                 "generate": false,
-                                "class": "nr_metadata.common.services.records.schema_datatypes.NRSubjectSchema",
-                                "read": false,
-                                "write": false
+                                "class": "nr_metadata.common.services.records.schema_datatypes.NRSubjectSchema"
                             },
                             "properties": {
                                 "classificationCode": {
@@ -6395,17 +6311,13 @@
                             "ui": {
                                 "marshmallow": {
                                     "generate": false,
-                                    "class": "nr_metadata.ui_schema.identifiers.NRSystemIdentifierUISchema",
-                                    "read": false,
-                                    "write": false
+                                    "class": "nr_metadata.ui_schema.identifiers.NRSystemIdentifierUISchema"
                                 },
                                 "detail": "identifier"
                             },
                             "marshmallow": {
                                 "generate": false,
-                                "class": "nr_metadata.schema.identifiers.NRSystemIdentifierSchema",
-                                "read": false,
-                                "write": false
+                                "class": "nr_metadata.schema.identifiers.NRSystemIdentifierSchema"
                             },
                             "properties": {
                                 "identifier": {

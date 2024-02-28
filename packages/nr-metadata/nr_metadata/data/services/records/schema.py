@@ -15,6 +15,18 @@ from nr_metadata.common.services.records.schema_common import (
     AdditionalTitlesSchema,
     NRCommonMetadataSchema,
 )
+from nr_metadata.common.services.records.schema_datatypes import (
+    NREventSchema,
+    NRFundingReferenceSchema,
+    NRGeoLocationSchema,
+    NRRelatedItemSchema,
+    NRSeriesSchema,
+    NRSubjectSchema,
+)
+from nr_metadata.schema.identifiers import (
+    NRObjectIdentifierSchema,
+    NRSystemIdentifierSchema,
+)
 
 
 class NRDataRecordSchema(BaseRecordSchema):
@@ -44,9 +56,31 @@ class NRDataMetadataSchema(NRCommonMetadataSchema):
 
     dateWithdrawn = ma_fields.Nested(lambda: DateWithdrawnSchema())
 
+    events = ma_fields.List(ma_fields.Nested(lambda: NREventSchema()))
+
+    fundingReferences = ma_fields.List(
+        ma_fields.Nested(lambda: NRFundingReferenceSchema())
+    )
+
+    geoLocations = ma_fields.List(ma_fields.Nested(lambda: NRGeoLocationSchema()))
+
+    objectIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NRObjectIdentifierSchema())
+    )
+
     publishers = ma_fields.List(
         ma_fields.Nested(lambda: PublishersItemSchema()),
         validate=[ma.validate.Length(min=1)],
+    )
+
+    relatedItems = ma_fields.List(ma_fields.Nested(lambda: NRRelatedItemSchema()))
+
+    series = ma_fields.List(ma_fields.Nested(lambda: NRSeriesSchema()))
+
+    subjects = ma_fields.List(ma_fields.Nested(lambda: NRSubjectSchema()))
+
+    systemIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NRSystemIdentifierSchema())
     )
 
 
