@@ -10,7 +10,7 @@ jobs:
   build:
     uses: ./.github/workflows/build.yaml
     with:
-      oarepo: 11
+      oarepo: 12
 
   publish:
     runs-on: ubuntu-latest
