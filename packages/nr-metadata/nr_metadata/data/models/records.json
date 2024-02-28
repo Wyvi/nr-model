@@ -711,6 +711,8 @@
                                             "ui": {
                                                 "marshmallow": {
                                                     "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorTypeVocabularyUISchema",
+                                                    "read": false,
+                                                    "write": false,
                                                     "unknown": "INCLUDE",
                                                     "generate": true
                                                 },
@@ -719,6 +721,8 @@
                                             },
                                             "marshmallow": {
                                                 "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorTypeVocabularySchema",
+                                                "read": false,
+                                                "write": false,
                                                 "unknown": "INCLUDE",
                                                 "generate": true
                                             },
@@ -1033,6 +1037,8 @@
                                             "ui": {
                                                 "marshmallow": {
                                                     "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorTypeVocabularyUISchema",
+                                                    "read": false,
+                                                    "write": false,
                                                     "unknown": "INCLUDE",
                                                     "generate": false
                                                 },
@@ -1041,6 +1047,8 @@
                                             },
                                             "marshmallow": {
                                                 "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorTypeVocabularySchema",
+                                                "read": false,
+                                                "write": false,
                                                 "unknown": "INCLUDE",
                                                 "generate": false
                                             },
@@ -1194,7 +1202,7 @@
                             "discriminator": "nameType",
                             "ui": {
                                 "marshmallow": {
-                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAuthorityUISchema",
+                                    "class": "nr_metadata.common.services.records.ui_schema_common.NRContributorUISchema",
                                     "read": false,
                                     "write": false,
                                     "generate": true
@@ -1202,7 +1210,7 @@
                                 "detail": "contributor"
                             },
                             "marshmallow": {
-                                "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAuthoritySchema",
+                                "class": "nr_metadata.common.services.records.schema_common.NRContributorSchema",
                                 "read": false,
                                 "write": false,
                                 "generate": true
@@ -1559,6 +1567,8 @@
                                     "ui": {
                                         "marshmallow": {
                                             "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorTypeVocabularyUISchema",
+                                            "read": false,
+                                            "write": false,
                                             "unknown": "INCLUDE",
                                             "generate": false
                                         },
@@ -1567,6 +1577,8 @@
                                     },
                                     "marshmallow": {
                                         "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorTypeVocabularySchema",
+                                        "read": false,
+                                        "write": false,
                                         "unknown": "INCLUDE",
                                         "generate": false
                                     },
@@ -2153,7 +2165,7 @@
                             "discriminator": "nameType",
                             "ui": {
                                 "marshmallow": {
-                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.CreatorsItemNRAuthorityUISchema",
+                                    "class": "nr_metadata.common.services.records.ui_schema_common.NRCreatorUISchema",
                                     "read": false,
                                     "write": false,
                                     "generate": true
@@ -2161,7 +2173,7 @@
                                 "detail": "creator"
                             },
                             "marshmallow": {
-                                "class": "nr_metadata.common.services.records.ui_schema_datatypes.CreatorsItemNRAuthoritySchema",
+                                "class": "nr_metadata.common.services.records.schema_common.NRCreatorSchema",
                                 "read": false,
                                 "write": false,
                                 "generate": true
@@ -3742,6 +3754,8 @@
                                                         "ui": {
                                                             "marshmallow": {
                                                                 "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorTypeVocabularyUISchema",
+                                                                "read": false,
+                                                                "write": false,
                                                                 "unknown": "INCLUDE",
                                                                 "generate": false
                                                             },
@@ -3750,6 +3764,8 @@
                                                         },
                                                         "marshmallow": {
                                                             "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorTypeVocabularySchema",
+                                                            "read": false,
+                                                            "write": false,
                                                             "unknown": "INCLUDE",
                                                             "generate": false
                                                         },
@@ -4064,6 +4080,8 @@
                                                         "ui": {
                                                             "marshmallow": {
                                                                 "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorTypeVocabularyUISchema",
+                                                                "read": false,
+                                                                "write": false,
                                                                 "unknown": "INCLUDE",
                                                                 "generate": false
                                                             },
@@ -4072,6 +4090,8 @@
                                                         },
                                                         "marshmallow": {
                                                             "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorTypeVocabularySchema",
+                                                            "read": false,
+                                                            "write": false,
                                                             "unknown": "INCLUDE",
                                                             "generate": false
                                                         },
@@ -4225,15 +4245,15 @@
                                         "discriminator": "nameType",
                                         "ui": {
                                             "marshmallow": {
-                                                "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAuthorityUISchema",
+                                                "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRRelatedItemContributorUISchema",
                                                 "read": false,
                                                 "write": false,
-                                                "generate": false
+                                                "generate": true
                                             },
                                             "detail": "contributor"
                                         },
                                         "marshmallow": {
-                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.ItemContributorsItemNRAuthoritySchema",
+                                            "class": "nr_metadata.common.services.records.schema_datatypes.NRRelatedItemContributorSchema",
                                             "read": false,
                                             "write": false,
                                             "generate": true
@@ -4590,6 +4610,8 @@
                                                 "ui": {
                                                     "marshmallow": {
                                                         "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorTypeVocabularyUISchema",
+                                                        "read": false,
+                                                        "write": false,
                                                         "unknown": "INCLUDE",
                                                         "generate": false
                                                     },
@@ -4598,6 +4620,8 @@
                                                 },
                                                 "marshmallow": {
                                                     "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorTypeVocabularySchema",
+                                                    "read": false,
+                                                    "write": false,
                                                     "unknown": "INCLUDE",
                                                     "generate": false
                                                 },
@@ -5177,18 +5201,18 @@
                                         "discriminator": "nameType",
                                         "ui": {
                                             "marshmallow": {
-                                                "class": "nr_metadata.common.services.records.ui_schema_datatypes.CreatorsItemNRAuthorityUISchema",
+                                                "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRRelatedItemCreatorUISchema",
                                                 "read": false,
                                                 "write": false,
-                                                "generate": false
+                                                "generate": true
                                             },
                                             "detail": "creator"
                                         },
                                         "marshmallow": {
-                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.CreatorsItemNRAuthoritySchema",
+                                            "class": "nr_metadata.common.services.records.schema_datatypes.NRRelatedItemCreatorSchema",
                                             "read": false,
                                             "write": false,
-                                            "generate": false
+                                            "generate": true
                                         },
                                         "hint.cs": "Jako tvůrce je možné označit osobu nebo instituci.",
                                         "hint.en": "It is possible to designate a person or an institution as the creator/contributor.",

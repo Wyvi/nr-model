@@ -4,21 +4,12 @@ from marshmallow.fields import String
 from marshmallow.validate import OneOf
 from oarepo_runtime.services.schema.i18n_ui import I18nStrUIField
 from oarepo_runtime.services.schema.marshmallow import DictOnlySchema
-from oarepo_runtime.services.schema.polymorphic import PolymorphicSchema
 from oarepo_runtime.services.schema.ui import LocalizedEDTFInterval
 from oarepo_vocabularies.services.ui_schema import (
     HierarchyUISchema,
     VocabularyI18nStrUIField,
 )
 
-from nr_metadata.common.services.records.schema_common import (
-    NRContributorOrganizationSchema,
-    NRContributorPersonSchema,
-)
-from nr_metadata.common.services.records.schema_datatypes import (
-    NROrganizationSchema,
-    NRPersonSchema,
-)
 from nr_metadata.ui_schema.identifiers import (
     NRObjectIdentifierUISchema,
     NROrganizationIdentifierUISchema,
@@ -364,40 +355,6 @@ class NRSubjectUISchema(DictOnlySchema):
     subjectScheme = ma_fields.String()
 
     valueURI = ma_fields.String()
-
-
-class CreatorsItemNRAuthoritySchema(PolymorphicSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-    Organizational = ma_fields.Nested(lambda: NROrganizationSchema())
-
-    Personal = ma_fields.Nested(lambda: NRPersonSchema())
-
-    type_field = "nameType"
-
-
-class NRAuthoritySchema(PolymorphicSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-    Organizational = ma_fields.Nested(lambda: NRContributorOrganizationSchema())
-
-    Personal = ma_fields.Nested(lambda: NRContributorPersonSchema())
-
-    type_field = "nameType"
-
-
-class NRAuthorityUISchema(DictOnlySchema):
-    class Meta:
-        unknown = ma.RAISE
-
-    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularyUISchema())
-
-
-class CreatorsItemNRAuthorityUISchema(DictOnlySchema):
-    class Meta:
-        unknown = ma.RAISE
 
 
 class NRExternalLocationUISchema(DictOnlySchema):
