@@ -26,6 +26,8 @@ NRDataMetadata:
       type: taxonomy
       vocabulary-type: institutions
       keys: [ id, title, props.ror ]
+
+
 DataModel:
   $id: DataModel
   marshmallow:

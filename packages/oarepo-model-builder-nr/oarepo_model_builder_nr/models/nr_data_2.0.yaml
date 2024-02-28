@@ -1,7 +1,6 @@
 NRDataMetadata:
   $id: DataMetadata
   extend: ['nr-common-metadata#CommonMetadata']
-
   marshmallow:
     class: nr_metadata.data.services.records.schema.NRDataMetadataSchema
   ui:
@@ -27,6 +26,7 @@ NRDataMetadata:
       type: taxonomy
       vocabulary-type: institutions
       keys: [ id, title, props.ror ]
+
 
 DataModel:
   $id: DataModel

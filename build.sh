@@ -42,16 +42,17 @@ OAREPO_VERSION_MAX=$((OAREPO_VERSION+1))
 
 compile_nr_metadata() {
   cd "$base_dir/packages/nr-metadata"
-  create_builder_venv
+#  create_builder_venv
   rm -rf nr_metadata/common
   rm -rf nr_metadata/documents
+  rm -rf nr_metadata/data
 
-  decho "Compilling common metadata"
+  decho "Compiling common metadata"
   "$MODEL_BUILDER_VENV"/bin/oarepo-compile-model nr-metadata.yaml -vvv \
       --include nr-common-metadata="$base_dir/models/nr_common_metadata_${MODEL_VERSION}.yaml" \
       --include nr-datatypes="$base_dir/models/nr_datatypes_${MODEL_VERSION}.yaml"
 
-  decho "Compilling nr-documents"
+  decho "Compiling nr-documents"
   "$MODEL_BUILDER_VENV"/bin/oarepo-compile-model nr-documents.yaml -vvv \
       --include nr-common-metadata="$base_dir/models/nr_common_metadata_${MODEL_VERSION}.yaml" \
       --include nr-datatypes="$base_dir/models/nr_datatypes_${MODEL_VERSION}.yaml" \
@@ -59,27 +60,7 @@ compile_nr_metadata() {
   copy_version ../../version nr_metadata/version.py
   cp ../../README.md .
 
-  decho "Compilling nr-data"
-  "$MODEL_BUILDER_VENV"/bin/oarepo-compile-model nr-data.yaml -vvv \
-      --include nr-common-metadata="$base_dir/models/nr_common_metadata_${MODEL_VERSION}.yaml" \
-      --include nr-datatypes="$base_dir/models/nr_datatypes_${MODEL_VERSION}.yaml" \
-      --include nr-data="$base_dir/models/nr_data_${MODEL_VERSION}.yaml"
-  copy_version ../../version nr_metadata/version.py
-  cp ../../README.md .
-}
-
-compile_nr_data() {
-  cd "$base_dir/packages/nr-metadata"
-  create_builder_venv
-  rm -rf nr_metadata/common
-  rm -rf nr_metadata/data
-
-  decho "Compilling common metadata"
-  "$MODEL_BUILDER_VENV"/bin/oarepo-compile-model nr-metadata.yaml -vvv \
-      --include nr-common-metadata="$base_dir/models/nr_common_metadata_${MODEL_VERSION}.yaml" \
-      --include nr-datatypes="$base_dir/models/nr_datatypes_${MODEL_VERSION}.yaml"
-
-  decho "Compilling nr-data"
+  decho "Compiling nr-data"
   "$MODEL_BUILDER_VENV"/bin/oarepo-compile-model nr-data.yaml -vvv \
       --include nr-common-metadata="$base_dir/models/nr_common_metadata_${MODEL_VERSION}.yaml" \
       --include nr-datatypes="$base_dir/models/nr_datatypes_${MODEL_VERSION}.yaml" \

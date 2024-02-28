@@ -38,8 +38,6 @@ class DataServiceConfig(PermissionsPresetsConfigMixin, InvenioRecordServiceConfi
         *PermissionsPresetsConfigMixin.components,
         *InvenioRecordServiceConfig.components,
         DataComponent,
-        *PermissionsPresetsConfigMixin.components,
-        *InvenioRecordServiceConfig.components,
     ]
 
     model = "nr_metadata.data"

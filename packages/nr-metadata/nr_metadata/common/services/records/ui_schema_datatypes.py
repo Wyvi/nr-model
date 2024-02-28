@@ -4,12 +4,21 @@ from marshmallow.fields import String
 from marshmallow.validate import OneOf
 from oarepo_runtime.services.schema.i18n_ui import I18nStrUIField
 from oarepo_runtime.services.schema.marshmallow import DictOnlySchema
+from oarepo_runtime.services.schema.polymorphic import PolymorphicSchema
 from oarepo_runtime.services.schema.ui import LocalizedEDTFInterval
 from oarepo_vocabularies.services.ui_schema import (
     HierarchyUISchema,
     VocabularyI18nStrUIField,
 )
 
+from nr_metadata.common.services.records.schema_common import (
+    NRContributorOrganizationSchema,
+    NRContributorPersonSchema,
+)
+from nr_metadata.common.services.records.schema_datatypes import (
+    NROrganizationSchema,
+    NRPersonSchema,
+)
 from nr_metadata.ui_schema.identifiers import (
     NRObjectIdentifierUISchema,
     NROrganizationIdentifierUISchema,
@@ -117,7 +126,22 @@ class NRPersonUISchema(DictOnlySchema):
     nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
 
-class NRRelatedItemContributorUISchema(DictOnlySchema):
+class NRRelatedItemContributorOrganizationUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NROrganizationIdentifierUISchema())
+    )
+
+    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularyUISchema())
+
+    fullName = ma_fields.String(required=True)
+
+    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
+
+
+class NRRelatedItemContributorPersonUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -140,6 +164,29 @@ class NRRelatedItemContributorUISchema(DictOnlySchema):
     nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
 
+class NRRelatedItemContributorUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    affiliations = ma_fields.List(
+        ma_fields.Nested(lambda: NRAffiliationVocabularyUISchema())
+    )
+
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NROrganizationIdentifierUISchema())
+    )
+
+    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularyUISchema())
+
+    familyName = ma_fields.String()
+
+    fullName = ma_fields.String(required=True)
+
+    givenName = ma_fields.String()
+
+    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
+
+
 class NRRelatedItemCreatorUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
@@ -149,7 +196,7 @@ class NRRelatedItemCreatorUISchema(DictOnlySchema):
     )
 
     authorityIdentifiers = ma_fields.List(
-        ma_fields.Nested(lambda: NRPersonIdentifierUISchema())
+        ma_fields.Nested(lambda: NROrganizationIdentifierUISchema())
     )
 
     familyName = ma_fields.String()
@@ -158,7 +205,7 @@ class NRRelatedItemCreatorUISchema(DictOnlySchema):
 
     givenName = ma_fields.String()
 
-    nameType = ma_fields.String(validate=[OneOf(["Personal"])])
+    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
 
 
 class NRAccessRightsVocabularyUISchema(DictOnlySchema):
@@ -183,6 +230,17 @@ class NRAffiliationVocabularyUISchema(DictOnlySchema):
     hierarchy = ma_fields.Nested(lambda: HierarchyUISchema())
 
     ror = ma_fields.String()
+
+    title = VocabularyI18nStrUIField()
+
+
+class NRContributorTypeVocabularyUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.INCLUDE
+
+    _id = String(data_key="id", attribute="id")
+
+    _version = String(data_key="@v", attribute="@v")
 
     title = VocabularyI18nStrUIField()
 
@@ -306,6 +364,40 @@ class NRSubjectUISchema(DictOnlySchema):
     subjectScheme = ma_fields.String()
 
     valueURI = ma_fields.String()
+
+
+class CreatorsItemNRAuthoritySchema(PolymorphicSchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    Organizational = ma_fields.Nested(lambda: NROrganizationSchema())
+
+    Personal = ma_fields.Nested(lambda: NRPersonSchema())
+
+    type_field = "nameType"
+
+
+class NRAuthoritySchema(PolymorphicSchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    Organizational = ma_fields.Nested(lambda: NRContributorOrganizationSchema())
+
+    Personal = ma_fields.Nested(lambda: NRContributorPersonSchema())
+
+    type_field = "nameType"
+
+
+class NRAuthorityUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularyUISchema())
+
+
+class CreatorsItemNRAuthorityUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
 
 
 class NRExternalLocationUISchema(DictOnlySchema):

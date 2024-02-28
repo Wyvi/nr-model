@@ -83,29 +83,6 @@
                     "items": {
                         "type": "object",
                         "properties": {
-                            "contributorType": {
-                                "type": "object"
-                            },
-                            "fullName": {
-                                "type": "string"
-                            },
-                            "authorityIdentifiers": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "identifier": {
-                                            "type": "string"
-                                        },
-                                        "scheme": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            },
-                            "nameType": {
-                                "type": "string"
-                            },
                             "affiliations": {
                                 "type": "array",
                                 "items": {
@@ -155,10 +132,44 @@
                                     }
                                 }
                             },
+                            "authorityIdentifiers": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "identifier": {
+                                            "type": "string"
+                                        },
+                                        "scheme": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "contributorType": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "title": {
+                                        "type": "object"
+                                    },
+                                    "@v": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
                             "familyName": {
                                 "type": "string"
                             },
+                            "fullName": {
+                                "type": "string"
+                            },
                             "givenName": {
+                                "type": "string"
+                            },
+                            "nameType": {
                                 "type": "string"
                             }
                         }
@@ -169,26 +180,6 @@
                     "items": {
                         "type": "object",
                         "properties": {
-                            "authorityIdentifiers": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "identifier": {
-                                            "type": "string"
-                                        },
-                                        "scheme": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            },
-                            "fullName": {
-                                "type": "string"
-                            },
-                            "nameType": {
-                                "type": "string"
-                            },
                             "affiliations": {
                                 "type": "array",
                                 "items": {
@@ -238,10 +229,30 @@
                                     }
                                 }
                             },
+                            "authorityIdentifiers": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "identifier": {
+                                            "type": "string"
+                                        },
+                                        "scheme": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
                             "familyName": {
                                 "type": "string"
                             },
+                            "fullName": {
+                                "type": "string"
+                            },
                             "givenName": {
+                                "type": "string"
+                            },
+                            "nameType": {
                                 "type": "string"
                             }
                         }
@@ -436,29 +447,6 @@
                                 "items": {
                                     "type": "object",
                                     "properties": {
-                                        "contributorType": {
-                                            "type": "object"
-                                        },
-                                        "authorityIdentifiers": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "identifier": {
-                                                        "type": "string"
-                                                    },
-                                                    "scheme": {
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "fullName": {
-                                            "type": "string"
-                                        },
-                                        "nameType": {
-                                            "type": "string"
-                                        },
                                         "affiliations": {
                                             "type": "array",
                                             "items": {
@@ -508,10 +496,44 @@
                                                 }
                                             }
                                         },
+                                        "authorityIdentifiers": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "identifier": {
+                                                        "type": "string"
+                                                    },
+                                                    "scheme": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "contributorType": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "object"
+                                                },
+                                                "@v": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
                                         "familyName": {
                                             "type": "string"
                                         },
+                                        "fullName": {
+                                            "type": "string"
+                                        },
                                         "givenName": {
+                                            "type": "string"
+                                        },
+                                        "nameType": {
                                             "type": "string"
                                         }
                                     }
@@ -522,26 +544,6 @@
                                 "items": {
                                     "type": "object",
                                     "properties": {
-                                        "authorityIdentifiers": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "identifier": {
-                                                        "type": "string"
-                                                    },
-                                                    "scheme": {
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "fullName": {
-                                            "type": "string"
-                                        },
-                                        "nameType": {
-                                            "type": "string"
-                                        },
                                         "affiliations": {
                                             "type": "array",
                                             "items": {
@@ -591,10 +593,30 @@
                                                 }
                                             }
                                         },
+                                        "authorityIdentifiers": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "identifier": {
+                                                        "type": "string"
+                                                    },
+                                                    "scheme": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
                                         "familyName": {
                                             "type": "string"
                                         },
+                                        "fullName": {
+                                            "type": "string"
+                                        },
                                         "givenName": {
+                                            "type": "string"
+                                        },
+                                        "nameType": {
                                             "type": "string"
                                         }
                                     }

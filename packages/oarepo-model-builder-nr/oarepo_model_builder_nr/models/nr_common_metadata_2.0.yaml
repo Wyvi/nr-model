@@ -58,13 +58,36 @@ CommonMetadata:
       ^label.cs: Přispěvatelé
       ^label.en: Contributors
       #^uniqueItems: true
-      properties:
-        contributorType:
-          use: 'nr-datatypes#NRContributorType'
-        fullName:
-          type: keyword
-          label.cs: Jméno přispěvatele
-          label.en: Contributor name
+      schemas:
+        Personal:
+          ui:
+            detail: nr_contributor_person
+            marshmallow:
+              class: nr_metadata.common.services.records.ui_schema_common.NRContributorPersonUISchema
+          marshmallow:
+            class: nr_metadata.common.services.records.schema_common.NRContributorPersonSchema
+          properties:
+            contributorType:
+              use: 'nr-datatypes#NRContributorType'
+            fullName:
+              type: keyword
+              label.cs: Jméno přispěvatele
+              label.en: Contributor name
+        Organizational:
+          ui:
+            detail: nr_contributor_organization
+            marshmallow:
+              class: nr_metadata.common.services.records.ui_schema_common.NRContributorOrganizationUISchema
+          marshmallow:
+            class: nr_metadata.common.services.records.schema_common.NRContributorOrganizationSchema
+          properties:
+            contributorType:
+              use: 'nr-datatypes#NRContributorType'
+            fullName:
+              type: keyword
+              label.cs: Jméno přispěvatele
+              label.en: Contributor name
+
       ui:
         detail: contributor
         marshmallow:

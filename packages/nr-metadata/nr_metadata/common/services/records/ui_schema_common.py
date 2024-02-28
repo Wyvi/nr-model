@@ -31,6 +31,7 @@ from nr_metadata.common.services.records.ui_schema_datatypes import (
 )
 from nr_metadata.ui_schema.identifiers import (
     NRObjectIdentifierUISchema,
+    NROrganizationIdentifierUISchema,
     NRPersonIdentifierUISchema,
     NRSystemIdentifierUISchema,
 )
@@ -127,7 +128,22 @@ class AdditionalTitlesUISchema(DictOnlySchema):
     )
 
 
-class NRContributorUISchema(DictOnlySchema):
+class NRContributorOrganizationUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NROrganizationIdentifierUISchema())
+    )
+
+    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularyUISchema())
+
+    fullName = ma_fields.String(required=True)
+
+    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
+
+
+class NRContributorPersonUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
@@ -150,6 +166,29 @@ class NRContributorUISchema(DictOnlySchema):
     nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
 
+class NRContributorUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    affiliations = ma_fields.List(
+        ma_fields.Nested(lambda: NRAffiliationVocabularyUISchema())
+    )
+
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NROrganizationIdentifierUISchema())
+    )
+
+    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularyUISchema())
+
+    familyName = ma_fields.String()
+
+    fullName = ma_fields.String(required=True)
+
+    givenName = ma_fields.String()
+
+    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
+
+
 class NRCreatorUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
@@ -159,7 +198,7 @@ class NRCreatorUISchema(DictOnlySchema):
     )
 
     authorityIdentifiers = ma_fields.List(
-        ma_fields.Nested(lambda: NRPersonIdentifierUISchema())
+        ma_fields.Nested(lambda: NROrganizationIdentifierUISchema())
     )
 
     familyName = ma_fields.String()
@@ -168,4 +207,4 @@ class NRCreatorUISchema(DictOnlySchema):
 
     givenName = ma_fields.String()
 
-    nameType = ma_fields.String(validate=[OneOf(["Personal"])])
+    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])

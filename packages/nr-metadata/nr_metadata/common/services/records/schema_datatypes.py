@@ -72,9 +72,11 @@ class NRRelatedItemContributorSchema(PolymorphicSchema):
     class Meta:
         unknown = ma.RAISE
 
-    Organizational = ma_fields.Nested(lambda: NROrganizationSchema())
+    Organizational = ma_fields.Nested(
+        lambda: NRRelatedItemContributorOrganizationSchema()
+    )
 
-    Personal = ma_fields.Nested(lambda: NRPersonSchema())
+    Personal = ma_fields.Nested(lambda: NRRelatedItemContributorPersonSchema())
 
     type_field = "nameType"
 
@@ -142,6 +144,44 @@ class NRPersonSchema(DictOnlySchema):
     nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
 
+class NRRelatedItemContributorOrganizationSchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NROrganizationIdentifierSchema())
+    )
+
+    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularySchema())
+
+    fullName = ma_fields.String(required=True)
+
+    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
+
+
+class NRRelatedItemContributorPersonSchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    affiliations = ma_fields.List(
+        ma_fields.Nested(lambda: NRAffiliationVocabularySchema())
+    )
+
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NRPersonIdentifierSchema())
+    )
+
+    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularySchema())
+
+    familyName = ma_fields.String()
+
+    fullName = ma_fields.String(required=True)
+
+    givenName = ma_fields.String()
+
+    nameType = ma_fields.String(validate=[OneOf(["Personal"])])
+
+
 class NRAccessRightsVocabularySchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
@@ -164,6 +204,17 @@ class NRAffiliationVocabularySchema(DictOnlySchema):
     hierarchy = ma_fields.Nested(lambda: HierarchySchema())
 
     ror = ma_fields.String()
+
+    title = i18n_strings
+
+
+class NRContributorTypeVocabularySchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.INCLUDE
+
+    _id = String(data_key="id", attribute="id")
+
+    _version = String(data_key="@v", attribute="@v")
 
     title = i18n_strings
 

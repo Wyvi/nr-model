@@ -8,7 +8,4 @@ class DataEDTFIntervalDumperExt(EDTFIntervalDumperExt):
         "metadata/dateCollected",
         "metadata/dateCreated",
         "metadata/events/eventDate",
-        "metadata/dateCollected",
-        "metadata/dateCreated",
-        "metadata/events/eventDate",
     ]

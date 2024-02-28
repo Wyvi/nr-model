@@ -9,7 +9,7 @@ NRPerson:
     nameType:
       type: keyword
       enum:
-        - "Personal"
+        - Personal
       label.cs: Typ
       label.en: Type
     fullName:
@@ -41,15 +41,22 @@ NRPerson:
       label.cs: Afiliace
       label.en: Affiliation
       hint.cs: Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.
+  ui:
+    detail: nr_person
+    marshmallow:
+      class: nr_metadata.common.services.records.ui_schema_datatypes.NRPersonUISchema
+  marshmallow:
+    class: nr_metadata.common.services.records.schema_datatypes.NRPersonSchema
+
 
 NROrganization:
   $id: NROrganization
   properties:
     nameType:
       type: keyword
-      enum:
+      enum: 
         - Organizational
-      sample:
+      sample: 
         - Organizational
       label.cs: Typ
       label.en: Type
@@ -66,7 +73,7 @@ NROrganization:
   ui:
     detail: nr_organization
     marshmallow:
-      class: nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationUIUISchema
+      class: nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationUISchema
   marshmallow:
     class: nr_metadata.common.services.records.schema_datatypes.NROrganizationSchema
 
@@ -162,6 +169,12 @@ NRAuthority:
   discriminator: nameType
   hint.cs: Jako tvůrce je možné označit osobu nebo instituci.
   hint.en: It is possible to designate a person or an institution as the creator/contributor.
+  ui:
+    detail: nr_authority
+    marshmallow:
+      class: nr_metadata.common.services.records.ui_schema_datatypes.NRAuthorityUISchema
+  marshmallow:
+    class: nr_metadata.common.services.records.ui_schema_datatypes.NRAuthoritySchema
 
 NRObjectPID:
   $id: NRObjectPID
@@ -280,7 +293,6 @@ NRRelatedItem:
       #^uniqueItems: true
       ^label.cs: Autoři
       ^label.en: Authors
-
       use: 'nr-datatypes#NRAuthority'
       ui:
         detail: creator
@@ -301,10 +313,27 @@ NRRelatedItem:
           class: nr_metadata.common.services.records.ui_schema_datatypes.NRRelatedItemContributorUISchema
       marshmallow:
         class: nr_metadata.common.services.records.schema_datatypes.NRRelatedItemContributorSchema
-      properties:
-        contributorType:
-          use: 'nr-datatypes#NRContributorType'
-
+      schemas:
+        Personal:
+          ui:
+            detail: nr_contributor_person
+            marshmallow:
+              class: nr_metadata.common.services.records.ui_schema_datatypes.NRRelatedItemContributorPersonUISchema
+          marshmallow:
+            class: nr_metadata.common.services.records.schema_datatypes.NRRelatedItemContributorPersonSchema
+          properties:
+            contributorType:
+              use: 'nr-datatypes#NRContributorType'
+        Organizational:
+          ui:
+            detail: nr_contributor_organization
+            marshmallow:
+              class: nr_metadata.common.services.records.ui_schema_datatypes.NRRelatedItemContributorOrganizationUISchema
+          marshmallow:
+            class: nr_metadata.common.services.records.schema_datatypes.NRRelatedItemContributorOrganizationSchema
+          properties:
+            contributorType:
+              use: 'nr-datatypes#NRContributorType'
 
     itemPIDs[]:
       use: 'nr-datatypes#NRObjectPID'

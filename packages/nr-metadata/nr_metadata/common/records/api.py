@@ -37,6 +37,16 @@ class CommonRecord(InvenioRecord):
             keys=["id", "title", {"key": "props.ror", "target": "ror"}, "hierarchy"],
             pid_field=Vocabulary.pid.with_type_ctx("institutions"),
         ),
+        contributorType=PIDRelation(
+            "metadata.contributors.contributorType",
+            keys=["id", "title"],
+            pid_field=Vocabulary.pid.with_type_ctx("contributor-types"),
+        ),
+        Organizational_contributorType=PIDRelation(
+            "metadata.contributors.contributorType",
+            keys=["id", "title"],
+            pid_field=Vocabulary.pid.with_type_ctx("contributor-types"),
+        ),
         Personal_affiliations=PIDRelation(
             "metadata.creators.affiliations",
             keys=["id", "title", {"key": "props.ror", "target": "ror"}, "hierarchy"],
@@ -61,6 +71,16 @@ class CommonRecord(InvenioRecord):
             "metadata.relatedItems.itemContributors.affiliations",
             keys=["id", "title", {"key": "props.ror", "target": "ror"}, "hierarchy"],
             pid_field=Vocabulary.pid.with_type_ctx("institutions"),
+        ),
+        Personal_contributorType=PIDRelation(
+            "metadata.relatedItems.itemContributors.contributorType",
+            keys=["id", "title"],
+            pid_field=Vocabulary.pid.with_type_ctx("contributor-types"),
+        ),
+        itemContributors_Organizational_contributorType=PIDRelation(
+            "metadata.relatedItems.itemContributors.contributorType",
+            keys=["id", "title"],
+            pid_field=Vocabulary.pid.with_type_ctx("contributor-types"),
         ),
         itemCreators_Personal_affiliations=PIDRelation(
             "metadata.relatedItems.itemCreators.affiliations",

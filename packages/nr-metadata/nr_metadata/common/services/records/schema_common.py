@@ -14,6 +14,8 @@ from oarepo_runtime.services.schema.validation import (
 
 from nr_metadata.common.services.records.schema_datatypes import (
     NRAccessRightsVocabularySchema,
+    NRAffiliationVocabularySchema,
+    NRContributorTypeVocabularySchema,
     NREventSchema,
     NRFundingReferenceSchema,
     NRGeoLocationSchema,
@@ -29,6 +31,8 @@ from nr_metadata.common.services.records.schema_datatypes import (
 )
 from nr_metadata.schema.identifiers import (
     NRObjectIdentifierSchema,
+    NROrganizationIdentifierSchema,
+    NRPersonIdentifierSchema,
     NRSystemIdentifierSchema,
 )
 
@@ -115,6 +119,17 @@ class NRCommonMetadataSchema(Schema):
     version = ma_fields.String()
 
 
+class NRContributorSchema(PolymorphicSchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    Organizational = ma_fields.Nested(lambda: NRContributorOrganizationSchema())
+
+    Personal = ma_fields.Nested(lambda: NRContributorPersonSchema())
+
+    type_field = "nameType"
+
+
 class AdditionalTitlesSchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
@@ -127,15 +142,42 @@ class AdditionalTitlesSchema(DictOnlySchema):
     )
 
 
-class NRContributorSchema(PolymorphicSchema):
+class NRContributorOrganizationSchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
-    Organizational = ma_fields.Nested(lambda: NROrganizationSchema())
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NROrganizationIdentifierSchema())
+    )
 
-    Personal = ma_fields.Nested(lambda: NRPersonSchema())
+    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularySchema())
 
-    type_field = "nameType"
+    fullName = ma_fields.String(required=True)
+
+    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
+
+
+class NRContributorPersonSchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    affiliations = ma_fields.List(
+        ma_fields.Nested(lambda: NRAffiliationVocabularySchema())
+    )
+
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NRPersonIdentifierSchema())
+    )
+
+    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularySchema())
+
+    familyName = ma_fields.String()
+
+    fullName = ma_fields.String(required=True)
+
+    givenName = ma_fields.String()
+
+    nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
 
 class NRCreatorSchema(PolymorphicSchema):

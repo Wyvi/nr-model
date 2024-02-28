@@ -8,10 +8,6 @@ class DataPermissionPolicy(RecordPermissionPolicy):
     Values in this class will be merged with permission presets.
     """
 
-    """nr_metadata.data.records.api.DataRecord permissions.
-        Values in this class will be merged with permission presets.
-    """
-
     can_search = []
     can_read = []
     can_create = []
