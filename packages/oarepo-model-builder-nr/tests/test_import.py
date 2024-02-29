@@ -12,11 +12,9 @@ def test_import():
     import test_rec.proxies  # noqa
     import test_rec.views.records.api  # noqa
     import test_rec.views.records.app  # noqa
-    import test_rec.services.records.ui_schema  # noqa
     import test_rec.services.records.service  # noqa
     import test_rec.services.records.config  # noqa
     import test_rec.services.records.permissions  # noqa
     import test_rec.services.records.search  # noqa
     import test_rec.services.records.facets  # noqa
-    import test_rec.services.records.schema  # noqa
     import test_rec.ext  # noqa

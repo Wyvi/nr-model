@@ -5,6 +5,7 @@ from nr_metadata.common import config
 
 
 class CommonExt:
+
     def __init__(self, app=None):
 
         if app:

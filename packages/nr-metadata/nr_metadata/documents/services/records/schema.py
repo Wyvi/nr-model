@@ -1,42 +1,30 @@
 import marshmallow as ma
+from edtf import Date as EDTFDate
 from invenio_vocabularies.services.schema import i18n_strings
 from marshmallow import fields as ma_fields
 from marshmallow.fields import String
+from marshmallow_utils.fields import TrimmedString
 from oarepo_runtime.services.schema.marshmallow import BaseRecordSchema, DictOnlySchema
-from oarepo_runtime.services.schema.validation import validate_date
+from oarepo_runtime.services.schema.validation import (
+    CachedMultilayerEDTFValidator,
+    validate_date,
+)
 from oarepo_vocabularies.services.schema import HierarchySchema
 
 from nr_metadata.common.services.records.schema_common import (
     AdditionalTitlesSchema,
     NRCommonMetadataSchema,
-    NRContributorSchema,
-    NRCreatorSchema,
 )
 from nr_metadata.common.services.records.schema_datatypes import (
-    NRAccessRightsVocabularySchema,
-    NRAffiliationVocabularySchema,
-    NRAuthorityRoleVocabularySchema,
-    NRCountryVocabularySchema,
     NREventSchema,
     NRExternalLocationSchema,
-    NRFunderVocabularySchema,
     NRFundingReferenceSchema,
-    NRGeoLocationPointSchema,
     NRGeoLocationSchema,
-    NRItemRelationTypeVocabularySchema,
-    NRLanguageVocabularySchema,
-    NRLicenseVocabularySchema,
-    NRLocationSchema,
-    NRRelatedItemContributorSchema,
-    NRRelatedItemCreatorSchema,
     NRRelatedItemSchema,
-    NRResourceTypeVocabularySchema,
     NRSeriesSchema,
-    NRSubjectCategoryVocabularySchema,
     NRSubjectSchema,
 )
 from nr_metadata.schema.identifiers import (
-    NRAuthorityIdentifierSchema,
     NRObjectIdentifierSchema,
     NRSystemIdentifierSchema,
 )
@@ -56,27 +44,40 @@ class NRDocumentMetadataSchema(NRCommonMetadataSchema):
         unknown = ma.RAISE
 
     additionalTitles = ma_fields.List(
-        ma_fields.Nested(lambda: AdditionalTitlesItemSchema())
+        ma_fields.Nested(lambda: AdditionalTitlesSchema())
     )
 
-    collection = ma_fields.String()
+    dateModified = TrimmedString(
+        validate=[CachedMultilayerEDTFValidator(types=(EDTFDate,))]
+    )
 
-    contributors = ma_fields.List(ma_fields.Nested(lambda: ContributorsItemSchema()))
+    events = ma_fields.List(ma_fields.Nested(lambda: NREventSchema()))
 
-    creators = ma_fields.List(
-        ma_fields.Nested(lambda: CreatorsItemSchema()),
-        required=True,
-        validate=[ma.validate.Length(min=1)],
+    externalLocation = ma_fields.Nested(lambda: NRExternalLocationSchema())
+
+    fundingReferences = ma_fields.List(
+        ma_fields.Nested(lambda: NRFundingReferenceSchema())
+    )
+
+    geoLocations = ma_fields.List(ma_fields.Nested(lambda: NRGeoLocationSchema()))
+
+    objectIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NRObjectIdentifierSchema())
+    )
+
+    publishers = ma_fields.List(ma_fields.String())
+
+    relatedItems = ma_fields.List(ma_fields.Nested(lambda: NRRelatedItemSchema()))
+
+    series = ma_fields.List(ma_fields.Nested(lambda: NRSeriesSchema()))
+
+    subjects = ma_fields.List(ma_fields.Nested(lambda: NRSubjectSchema()))
+
+    systemIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NRSystemIdentifierSchema())
     )
 
     thesis = ma_fields.Nested(lambda: NRThesisSchema())
-
-
-class GeoLocationsItemSchema(NRGeoLocationSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-    geoLocationPoint = ma_fields.Nested(lambda: GeoLocationPointSchema())
 
 
 class NRThesisSchema(DictOnlySchema):
@@ -92,108 +93,6 @@ class NRThesisSchema(DictOnlySchema):
     studyFields = ma_fields.List(ma_fields.String())
 
 
-class RelatedItemsItemSchema(NRRelatedItemSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-    itemContributors = ma_fields.List(
-        ma_fields.Nested(lambda: ItemContributorsItemSchema())
-    )
-
-    itemCreators = ma_fields.List(ma_fields.Nested(lambda: ItemCreatorsItemSchema()))
-
-
-class AccessRightsSchema(NRAccessRightsVocabularySchema):
-    class Meta:
-        unknown = ma.INCLUDE
-
-    _id = String(data_key="id", attribute="id")
-
-    _version = String(data_key="@v", attribute="@v")
-
-    title = i18n_strings
-
-
-class AdditionalTitlesItemSchema(AdditionalTitlesSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class AffiliationsItemSchema(NRAffiliationVocabularySchema):
-    class Meta:
-        unknown = ma.INCLUDE
-
-    _id = String(data_key="id", attribute="id")
-
-    _version = String(data_key="@v", attribute="@v")
-
-    hierarchy = ma_fields.Nested(lambda: HierarchySchema())
-
-    title = i18n_strings
-
-
-class AuthorityIdentifiersItemSchema(NRAuthorityIdentifierSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class ContributorsItemSchema(NRContributorSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class CountrySchema(NRCountryVocabularySchema):
-    class Meta:
-        unknown = ma.INCLUDE
-
-    _id = String(data_key="id", attribute="id")
-
-    _version = String(data_key="@v", attribute="@v")
-
-    title = i18n_strings
-
-
-class CreatorsItemSchema(NRCreatorSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class EventLocationSchema(NRLocationSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class EventsItemSchema(NREventSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class ExternalLocationSchema(NRExternalLocationSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class FunderSchema(NRFunderVocabularySchema):
-    class Meta:
-        unknown = ma.INCLUDE
-
-    _id = String(data_key="id", attribute="id")
-
-    _version = String(data_key="@v", attribute="@v")
-
-    title = i18n_strings
-
-
-class FundingReferencesItemSchema(NRFundingReferenceSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class GeoLocationPointSchema(NRGeoLocationPointSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
 class InstitutionsSchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
@@ -203,49 +102,6 @@ class InstitutionsSchema(DictOnlySchema):
     _version = String(data_key="@v", attribute="@v")
 
     hierarchy = ma_fields.Nested(lambda: HierarchySchema())
-
-    title = i18n_strings
-
-
-class ItemContributorsItemSchema(NRRelatedItemContributorSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class ItemCreatorsItemSchema(NRRelatedItemCreatorSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class ItemRelationTypeSchema(NRItemRelationTypeVocabularySchema):
-    class Meta:
-        unknown = ma.INCLUDE
-
-    _id = String(data_key="id", attribute="id")
-
-    _version = String(data_key="@v", attribute="@v")
-
-    title = i18n_strings
-
-
-class ItemResourceTypeSchema(NRResourceTypeVocabularySchema):
-    class Meta:
-        unknown = ma.INCLUDE
-
-    _id = String(data_key="id", attribute="id")
-
-    _version = String(data_key="@v", attribute="@v")
-
-    title = i18n_strings
-
-
-class LanguagesItemSchema(NRLanguageVocabularySchema):
-    class Meta:
-        unknown = ma.INCLUDE
-
-    _id = String(data_key="id", attribute="id")
-
-    _version = String(data_key="@v", attribute="@v")
 
     title = i18n_strings
 
@@ -264,58 +120,5 @@ class NRDegreeGrantorSchema(DictOnlySchema):
 
 
 class NRDocumentSyntheticFieldsSchema(DictOnlySchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class ObjectIdentifiersItemSchema(NRObjectIdentifierSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class RightsSchema(NRLicenseVocabularySchema):
-    class Meta:
-        unknown = ma.INCLUDE
-
-    _id = String(data_key="id", attribute="id")
-
-    _version = String(data_key="@v", attribute="@v")
-
-    title = i18n_strings
-
-
-class RoleSchema(NRAuthorityRoleVocabularySchema):
-    class Meta:
-        unknown = ma.INCLUDE
-
-    _id = String(data_key="id", attribute="id")
-
-    _version = String(data_key="@v", attribute="@v")
-
-    title = i18n_strings
-
-
-class SeriesItemSchema(NRSeriesSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class SubjectCategoriesItemSchema(NRSubjectCategoryVocabularySchema):
-    class Meta:
-        unknown = ma.INCLUDE
-
-    _id = String(data_key="id", attribute="id")
-
-    _version = String(data_key="@v", attribute="@v")
-
-    title = i18n_strings
-
-
-class SubjectsItemSchema(NRSubjectSchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class SystemIdentifiersItemSchema(NRSystemIdentifierSchema):
     class Meta:
         unknown = ma.RAISE

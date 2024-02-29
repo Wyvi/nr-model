@@ -71,3 +71,38 @@ class NRSystemIdentifierSchema(NRIdentifierSchema):
             )
         ],
     )
+
+class NROrganizationIdentifierSchema(NRIdentifierSchema):
+    scheme = ma.fields.String(
+        required=True,
+        validate=[
+            validate.OneOf(
+                [
+
+                    "ISNI",
+                    "ROR",
+                    "ICO",
+                    "DOI",  # normalized
+                ]
+            )
+        ],
+    )
+
+class NRPersonIdentifierSchema(NRIdentifierSchema):
+    scheme = ma.fields.String(
+        required=True,
+        validate=[
+            validate.OneOf(
+                [
+                    "orcid",  # normalized
+                    "scopusID",
+                    "researcherID",
+                    "czenasAutID",
+                    "vedidk",
+                    "institutionalID",
+                    "ISNI",
+
+                ]
+            )
+        ],
+    )

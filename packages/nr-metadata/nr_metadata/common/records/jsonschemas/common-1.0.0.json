@@ -94,6 +94,9 @@
                                         "title": {
                                             "type": "object"
                                         },
+                                        "ror": {
+                                            "type": "string"
+                                        },
                                         "hierarchy": {
                                             "type": "object",
                                             "properties": {
@@ -143,13 +146,7 @@
                                     }
                                 }
                             },
-                            "fullName": {
-                                "type": "string"
-                            },
-                            "nameType": {
-                                "type": "string"
-                            },
-                            "role": {
+                            "contributorType": {
                                 "type": "object",
                                 "properties": {
                                     "id": {
@@ -162,6 +159,18 @@
                                         "type": "string"
                                     }
                                 }
+                            },
+                            "familyName": {
+                                "type": "string"
+                            },
+                            "fullName": {
+                                "type": "string"
+                            },
+                            "givenName": {
+                                "type": "string"
+                            },
+                            "nameType": {
+                                "type": "string"
                             }
                         }
                     }
@@ -182,6 +191,9 @@
                                         "title": {
                                             "type": "object"
                                         },
+                                        "ror": {
+                                            "type": "string"
+                                        },
                                         "hierarchy": {
                                             "type": "object",
                                             "properties": {
@@ -231,7 +243,13 @@
                                     }
                                 }
                             },
+                            "familyName": {
+                                "type": "string"
+                            },
                             "fullName": {
+                                "type": "string"
+                            },
+                            "givenName": {
                                 "type": "string"
                             },
                             "nameType": {
@@ -242,13 +260,9 @@
                 },
                 "dateAvailable": {
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date"
                 },
                 "dateIssued": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "dateModified": {
                     "type": "string",
                     "format": "date-time"
                 },
@@ -292,17 +306,6 @@
                             "eventNameOriginal": {
                                 "type": "string"
                             }
-                        }
-                    }
-                },
-                "externalLocation": {
-                    "type": "object",
-                    "properties": {
-                        "externalLocationNote": {
-                            "type": "string"
-                        },
-                        "externalLocationURL": {
-                            "type": "string"
                         }
                     }
                 },
@@ -413,12 +416,6 @@
                 "originalRecord": {
                     "type": "string"
                 },
-                "publishers": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
                 "relatedItems": {
                     "type": "array",
                     "items": {
@@ -440,6 +437,9 @@
                                                     "title": {
                                                         "type": "object"
                                                     },
+                                                    "ror": {
+                                                        "type": "string"
+                                                    },
                                                     "hierarchy": {
                                                         "type": "object",
                                                         "properties": {
@@ -489,13 +489,7 @@
                                                 }
                                             }
                                         },
-                                        "fullName": {
-                                            "type": "string"
-                                        },
-                                        "nameType": {
-                                            "type": "string"
-                                        },
-                                        "role": {
+                                        "contributorType": {
                                             "type": "object",
                                             "properties": {
                                                 "id": {
@@ -508,6 +502,18 @@
                                                     "type": "string"
                                                 }
                                             }
+                                        },
+                                        "familyName": {
+                                            "type": "string"
+                                        },
+                                        "fullName": {
+                                            "type": "string"
+                                        },
+                                        "givenName": {
+                                            "type": "string"
+                                        },
+                                        "nameType": {
+                                            "type": "string"
                                         }
                                     }
                                 }
@@ -528,6 +534,9 @@
                                                     "title": {
                                                         "type": "object"
                                                     },
+                                                    "ror": {
+                                                        "type": "string"
+                                                    },
                                                     "hierarchy": {
                                                         "type": "object",
                                                         "properties": {
@@ -577,7 +586,13 @@
                                                 }
                                             }
                                         },
+                                        "familyName": {
+                                            "type": "string"
+                                        },
                                         "fullName": {
+                                            "type": "string"
+                                        },
+                                        "givenName": {
                                             "type": "string"
                                         },
                                         "nameType": {
