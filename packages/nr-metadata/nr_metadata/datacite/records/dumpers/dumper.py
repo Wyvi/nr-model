@@ -10,8 +10,3 @@ class DataciteDumper(SearchDumper):
     """DataciteRecord opensearch dumper."""
 
     extensions = [DataciteEDTFIntervalDumperExt(), MultilingualSearchDumperExt()]
-    extensions = [DataciteEDTFIntervalDumperExt(), MultilingualSearchDumperExt()]
-    extensions = [DataciteEDTFIntervalDumperExt(), MultilingualSearchDumperExt()]
-    extensions = [DataciteEDTFIntervalDumperExt(), MultilingualSearchDumperExt()]
-    extensions = [MultilingualSearchDumperExt(), DataciteEDTFIntervalDumperExt()]
-    extensions = [MultilingualSearchDumperExt(), DataciteEDTFIntervalDumperExt()]

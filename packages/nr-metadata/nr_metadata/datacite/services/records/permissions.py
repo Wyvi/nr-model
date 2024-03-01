@@ -8,10 +8,6 @@ class DatacitePermissionPolicy(RecordPermissionPolicy):
     Values in this class will be merged with permission presets.
     """
 
-    """nr_metadata.datacite.records.api.DataciteRecord permissions.
-        Values in this class will be merged with permission presets.
-    """
-
     can_search = []
     can_read = []
     can_create = []
