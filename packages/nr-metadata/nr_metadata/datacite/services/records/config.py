@@ -41,16 +41,6 @@ class DataciteServiceConfig(PermissionsPresetsConfigMixin, InvenioRecordServiceC
         *PermissionsPresetsConfigMixin.components,
         *InvenioRecordServiceConfig.components,
         DataComponent,
-        *PermissionsPresetsConfigMixin.components,
-        *InvenioRecordServiceConfig.components,
-        *PermissionsPresetsConfigMixin.components,
-        *InvenioRecordServiceConfig.components,
-        *PermissionsPresetsConfigMixin.components,
-        *InvenioRecordServiceConfig.components,
-        *PermissionsPresetsConfigMixin.components,
-        *InvenioRecordServiceConfig.components,
-        *PermissionsPresetsConfigMixin.components,
-        *InvenioRecordServiceConfig.components,
     ]
 
     model = "nr_metadata.datacite"
