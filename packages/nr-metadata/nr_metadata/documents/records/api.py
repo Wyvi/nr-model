@@ -50,8 +50,7 @@ class DocumentsRecord(InvenioRecord):
     )
 
     keywords = SyntheticSystemField(
-        PathSelector("metadata.subjects"),
-        map=lambda x: x.get("subject", {}).get("value"),
+        PathSelector("metadata.subjects.subject.value"),
         key="syntheticFields.keywords",
     )
 
