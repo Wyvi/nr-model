@@ -5,20 +5,7 @@ class MultilingualSearchDumperExt(MultilingualDumper):
     """Multilingual search dumper."""
 
     paths = []
-    SUPPORTED_LANGS = [
-        "cs",
-        "en",
-        "cs",
-        "en",
-        "cs",
-        "en",
-        "cs",
-        "en",
-        "cs",
-        "en",
-        "cs",
-        "en",
-    ]
+    SUPPORTED_LANGS = ["cs", "en"]
 
     def dump(self, record, data):
         super().dump(record, data)

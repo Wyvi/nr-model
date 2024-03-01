@@ -1,6 +1,7 @@
 import marshmallow as ma
 from marshmallow import Schema
 from marshmallow import fields as ma_fields
+from oarepo_runtime.services.schema.marshmallow import BaseRecordSchema
 
 from nr_metadata.datacite.services.records.schema_datatypes import (
     AlternateIdentifierSchema,
@@ -21,7 +22,7 @@ from nr_metadata.datacite.services.records.schema_datatypes import (
 )
 
 
-class DataCiteRecordSchema(Schema):
+class DataCiteRecordSchema(BaseRecordSchema):
     class Meta:
         unknown = ma.RAISE
 

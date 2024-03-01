@@ -46,6 +46,7 @@ compile_nr_metadata() {
   rm -rf nr_metadata/common
   rm -rf nr_metadata/documents
   rm -rf nr_metadata/data
+  rm -rf nr_metadata/datacite
 
   decho "Compiling common metadata"
   "$MODEL_BUILDER_VENV"/bin/oarepo-compile-model nr-metadata.yaml -vvv \
