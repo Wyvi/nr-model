@@ -87,6 +87,10 @@ class NRGeoLocationUISchema(DictOnlySchema):
     geoLocationPoint = ma_fields.Nested(lambda: NRGeoLocationPointUISchema())
 
 
+class NRAuthorityRoleVocabularyUISchema:
+    pass
+
+
 class NRLocationUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
