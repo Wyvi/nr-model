@@ -19,7 +19,7 @@ NameIdentifier:
     nameIdentifierScheme:
       type: keyword
       required: true
-    schemeUri:
+    schemeURI:
       type: url
 
 AlternateIdentifier:
@@ -52,7 +52,7 @@ Affiliation:
       type: keyword
     affiliationIdentifierScheme:
       type: keyword
-    schemeUri:
+    schemeURI:
       type: url
 
 Creator:
@@ -319,7 +319,7 @@ RelatedObject:
       required: true
     relatedMetadataScheme:
       type: keyword
-    schemeUri:
+    schemeURI:
       type: url
     schemeType:
       type: keyword
@@ -373,6 +373,7 @@ RelatedItemTitle:
 
 RelatedItem:
   $id: RelatedItem
+  use: "datacite-datatypes#RelatedObject"
   marshmallow:
     class: nr_metadata.datacite.services.records.schema_datatypes.RelatedItemSchema
   ui:
@@ -548,9 +549,9 @@ Subject:
       required: true
     subjectScheme:
       type: keyword
-    schemeUri:
+    schemeURI:
       type: url
-    valueUri:
+    valueURI:
       type: url
     classificationCode:
       type: keyword
@@ -567,13 +568,13 @@ Rights:
   properties:
     rights:
       type: keyword
-    rightsUri:
+    rightsURI:
       type: url
     rightsIdentifier:
       type: keyword
     rightsIdentifierScheme:
       type: keyword
-    schemeUri:
+    schemeURI:
       type: url
     lang:
       type: keyword
@@ -612,7 +613,7 @@ FundingReference:
       use: "datacite-datatypes#FunderIdentifierType"
     awardNumber:
       type: keyword
-    awardUri:
+    awardURI:
       type: url
     awardTitle:
       type: keyword

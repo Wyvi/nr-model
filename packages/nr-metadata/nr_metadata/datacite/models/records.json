@@ -492,7 +492,7 @@
                                                 "type": "keyword",
                                                 "required": true
                                             },
-                                            "schemeUri": {
+                                            "schemeURI": {
                                                 "type": "url"
                                             }
                                         }
@@ -561,7 +561,7 @@
                                                 "type": "keyword",
                                                 "required": true
                                             },
-                                            "schemeUri": {
+                                            "schemeURI": {
                                                 "type": "url"
                                             }
                                         }
@@ -617,7 +617,7 @@
                                                 "type": "keyword",
                                                 "required": true
                                             },
-                                            "schemeUri": {
+                                            "schemeURI": {
                                                 "type": "url"
                                             }
                                         }
@@ -659,7 +659,7 @@
                                                 "type": "keyword",
                                                 "required": true
                                             },
-                                            "schemeUri": {
+                                            "schemeURI": {
                                                 "type": "url"
                                             }
                                         }
@@ -784,7 +784,7 @@
                                 "awardTitle": {
                                     "type": "keyword"
                                 },
-                                "awardUri": {
+                                "awardURI": {
                                     "type": "url"
                                 },
                                 "funderIdentifier": {
@@ -1176,7 +1176,7 @@
                                 "schemeType": {
                                     "type": "keyword"
                                 },
-                                "schemeUri": {
+                                "schemeURI": {
                                     "type": "url"
                                 }
                             }
@@ -1237,7 +1237,7 @@
                                                             "type": "keyword",
                                                             "required": true
                                                         },
-                                                        "schemeUri": {
+                                                        "schemeURI": {
                                                             "type": "url"
                                                         }
                                                     }
@@ -1306,7 +1306,7 @@
                                                             "type": "keyword",
                                                             "required": true
                                                         },
-                                                        "schemeUri": {
+                                                        "schemeURI": {
                                                             "type": "url"
                                                         }
                                                     }
@@ -1362,7 +1362,7 @@
                                                             "type": "keyword",
                                                             "required": true
                                                         },
-                                                        "schemeUri": {
+                                                        "schemeURI": {
                                                             "type": "url"
                                                         }
                                                     }
@@ -1404,7 +1404,7 @@
                                                             "type": "keyword",
                                                             "required": true
                                                         },
-                                                        "schemeUri": {
+                                                        "schemeURI": {
                                                             "type": "url"
                                                         }
                                                     }
@@ -1531,6 +1531,92 @@
                                         "Other"
                                     ]
                                 },
+                                "relatedMetadataScheme": {
+                                    "type": "keyword"
+                                },
+                                "relationType": {
+                                    "type": "keyword",
+                                    "required": true,
+                                    "enum": [
+                                        "IsCitedBy",
+                                        "Cites",
+                                        "IsCollectedBy",
+                                        "Collects",
+                                        "IsSupplementTo",
+                                        "IsSupplementedBy",
+                                        "IsContinuedBy",
+                                        "Continues",
+                                        "IsDescribedBy",
+                                        "Describes",
+                                        "HasMetadata",
+                                        "IsMetadataFor",
+                                        "HasVersion",
+                                        "IsVersionOf",
+                                        "IsNewVersionOf",
+                                        "IsPartOf",
+                                        "IsPreviousVersionOf",
+                                        "IsPublishedIn",
+                                        "HasPart",
+                                        "IsReferencedBy",
+                                        "References",
+                                        "IsDocumentedBy",
+                                        "Documents",
+                                        "IsCompiledBy",
+                                        "Compiles",
+                                        "IsVariantFormOf",
+                                        "IsOriginalFormOf",
+                                        "IsIdenticalTo",
+                                        "IsReviewedBy",
+                                        "Reviews",
+                                        "IsDerivedFrom",
+                                        "IsSourceOf",
+                                        "IsRequiredBy",
+                                        "Requires",
+                                        "IsObsoletedBy",
+                                        "Obsoletes"
+                                    ]
+                                },
+                                "resourceTypeGeneral": {
+                                    "type": "keyword",
+                                    "enum": [
+                                        "Audiovisual",
+                                        "Book",
+                                        "BookChapter",
+                                        "Collection",
+                                        "ComputationalNotebook",
+                                        "ConferencePaper",
+                                        "ConferenceProceeding",
+                                        "DataPaper",
+                                        "Dataset",
+                                        "Dissertation",
+                                        "Event",
+                                        "Image",
+                                        "Instrument",
+                                        "InteractiveResource",
+                                        "Journal",
+                                        "JournalArticle",
+                                        "Model",
+                                        "OutputManagementPlan",
+                                        "PeerReview",
+                                        "PhysicalObject",
+                                        "Preprint",
+                                        "Report",
+                                        "Service",
+                                        "Software",
+                                        "Sound",
+                                        "Standard",
+                                        "StudyRegistration",
+                                        "Text",
+                                        "Workflow",
+                                        "Other"
+                                    ]
+                                },
+                                "schemeType": {
+                                    "type": "keyword"
+                                },
+                                "schemeURI": {
+                                    "type": "url"
+                                },
                                 "titles": {
                                     "type": "array",
                                     "required": true,
@@ -1599,10 +1685,10 @@
                                 "rightsIdentifierScheme": {
                                     "type": "keyword"
                                 },
-                                "rightsUri": {
+                                "rightsURI": {
                                     "type": "url"
                                 },
-                                "schemeUri": {
+                                "schemeURI": {
                                     "type": "url"
                                 }
                             }
@@ -1638,7 +1724,7 @@
                                 "lang": {
                                     "type": "keyword"
                                 },
-                                "schemeUri": {
+                                "schemeURI": {
                                     "type": "url"
                                 },
                                 "subject": {
@@ -1648,7 +1734,7 @@
                                 "subjectScheme": {
                                     "type": "keyword"
                                 },
-                                "valueUri": {
+                                "valueURI": {
                                     "type": "url"
                                 }
                             }
