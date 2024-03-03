@@ -520,7 +520,7 @@ export const CreatibutorsModal = ({
                   />
                   {!isCreator && (
                     <LocalVocabularySelectField
-                      type="contributor-roles"
+                      type="contributor-types"
                       placeholder={i18next.t(
                         "Choose contributor's role from the list (editor, illustrator...)"
                       )}
@@ -533,7 +533,7 @@ export const CreatibutorsModal = ({
                         />
                       }
                       clearable
-                      optionsListName="contributor-roles"
+                      optionsListName="contributor-types"
                     />
                   )}
                 </div>
