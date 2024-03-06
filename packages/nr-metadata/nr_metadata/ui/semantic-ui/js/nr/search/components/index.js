@@ -7,3 +7,4 @@ export * from "./ResultsItemLicense";
 export * from "./ResultsItemResourceType";
 export * from "./ResultsItemSubjects";
 export * from "./SearchFacetLink";
+export * from "./EmptyResultsElement";
