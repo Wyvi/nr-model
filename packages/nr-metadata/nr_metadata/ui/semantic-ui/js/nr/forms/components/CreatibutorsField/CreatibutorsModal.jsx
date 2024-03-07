@@ -29,7 +29,7 @@ import * as Yup from "yup";
 import _get from "lodash/get";
 import _isEmpty from "lodash/isEmpty";
 import { CreatibutorsIdentifiers } from "./CreatibutorsIdentifiers";
-import { CREATIBUTOR_TYPE } from "./type";
+import { CREATIBUTOR_TYPE } from "./constants";
 import { i18next } from "@translations/i18next";
 import { Trans } from "react-i18next";
 import {
