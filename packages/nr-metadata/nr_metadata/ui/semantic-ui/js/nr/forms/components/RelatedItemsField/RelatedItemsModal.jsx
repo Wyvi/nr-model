@@ -17,10 +17,7 @@ import { CreatibutorsField } from "../CreatibutorsField";
 import { IdentifiersField, objectIdentifiersSchema } from "../IdentifiersField";
 import { LocalVocabularySelectField } from "@js/oarepo_vocabularies";
 import PropTypes from "prop-types";
-import {
-  unique,
-  requiredMessage,
-} from "../../../validationschemas/NRDocumentValidationSchema";
+import { unique, requiredMessage } from "@js/oarepo_ui";
 
 const RelatedItemsSchema = Yup.object({
   itemTitle: Yup.string().required(requiredMessage).label(i18next.t("Title")),

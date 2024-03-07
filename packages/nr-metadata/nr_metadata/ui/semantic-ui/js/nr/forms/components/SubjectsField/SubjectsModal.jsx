@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { i18next } from "@translations/i18next";
 import PropTypes from "prop-types";
 import { MultilingualTextInput } from "@js/oarepo_ui";
-import { requiredMessage } from "../../../validationschemas/NRDocumentValidationSchema";
+import { requiredMessage } from "@js/oarepo_ui";
 
 const SubjectsValidationSchema = Yup.object({
   keywords: Yup.array().of(
