@@ -11,7 +11,7 @@ export const SearchFacetLink = ({
   ...rest
 }) => (
   <a
-    className={`${className} ui search link`}
+    className={`${className} ui search-link`}
     href={`${searchUrl}?q=&f=${searchFacet}:${encodeURI(value)}`}
     aria-label={title}
     title={title}

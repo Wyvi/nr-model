@@ -8,7 +8,7 @@
 } %}
 <div role="listitem" class="item creatibutor-wrap separated">
         <div class="content">
-            <SearchLink data={data} className="search link" searchFacet={searchFacet} search_link={search_link}></SearchLink>
+            <SearchLink data={data} className="search-link" searchFacet={searchFacet} search_link={search_link}></SearchLink>
             {%- if roles -%}
                 ({{roles | map(attribute='title') | join(', ') }})
             {%- endif -%}
