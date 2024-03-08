@@ -6,7 +6,7 @@ theme = WebpackThemeBundle(
     default="semantic-ui",
     themes={
         "semantic-ui": {
-            "entry": {},
+            "entry": {"nr_components": "./js/nr/custom-components.js"},
             "dependencies": {},
             "devDependencies": {},
             "aliases": {
