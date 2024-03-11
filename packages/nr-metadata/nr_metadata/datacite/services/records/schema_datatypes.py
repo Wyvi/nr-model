@@ -92,6 +92,97 @@ class RelatedItemSchema(DictOnlySchema):
         ],
     )
 
+    relatedMetadataScheme = ma_fields.String()
+
+    relationType = ma_fields.String(
+        required=True,
+        validate=[
+            OneOf(
+                [
+                    "IsCitedBy",
+                    "Cites",
+                    "IsCollectedBy",
+                    "Collects",
+                    "IsSupplementTo",
+                    "IsSupplementedBy",
+                    "IsContinuedBy",
+                    "Continues",
+                    "IsDescribedBy",
+                    "Describes",
+                    "HasMetadata",
+                    "IsMetadataFor",
+                    "HasVersion",
+                    "IsVersionOf",
+                    "IsNewVersionOf",
+                    "IsPartOf",
+                    "IsPreviousVersionOf",
+                    "IsPublishedIn",
+                    "HasPart",
+                    "IsReferencedBy",
+                    "References",
+                    "IsDocumentedBy",
+                    "Documents",
+                    "IsCompiledBy",
+                    "Compiles",
+                    "IsVariantFormOf",
+                    "IsOriginalFormOf",
+                    "IsIdenticalTo",
+                    "IsReviewedBy",
+                    "Reviews",
+                    "IsDerivedFrom",
+                    "IsSourceOf",
+                    "IsRequiredBy",
+                    "Requires",
+                    "IsObsoletedBy",
+                    "Obsoletes",
+                ]
+            )
+        ],
+    )
+
+    resourceTypeGeneral = ma_fields.String(
+        validate=[
+            OneOf(
+                [
+                    "Audiovisual",
+                    "Book",
+                    "BookChapter",
+                    "Collection",
+                    "ComputationalNotebook",
+                    "ConferencePaper",
+                    "ConferenceProceeding",
+                    "DataPaper",
+                    "Dataset",
+                    "Dissertation",
+                    "Event",
+                    "Image",
+                    "Instrument",
+                    "InteractiveResource",
+                    "Journal",
+                    "JournalArticle",
+                    "Model",
+                    "OutputManagementPlan",
+                    "PeerReview",
+                    "PhysicalObject",
+                    "Preprint",
+                    "Report",
+                    "Service",
+                    "Software",
+                    "Sound",
+                    "Standard",
+                    "StudyRegistration",
+                    "Text",
+                    "Workflow",
+                    "Other",
+                ]
+            )
+        ]
+    )
+
+    schemeType = ma_fields.String()
+
+    schemeURI = ma_fields.String()
+
     titles = ma_fields.List(
         ma_fields.Nested(lambda: RelatedItemTitleSchema()), required=True
     )
@@ -189,7 +280,7 @@ class AffiliationSchema(DictOnlySchema):
 
     name = ma_fields.String(required=True)
 
-    schemeUri = ma_fields.String()
+    schemeURI = ma_fields.String()
 
 
 class AlternateIdentifierSchema(DictOnlySchema):
@@ -277,7 +368,7 @@ class FundingReferenceSchema(DictOnlySchema):
 
     awardTitle = ma_fields.String()
 
-    awardUri = ma_fields.String()
+    awardURI = ma_fields.String()
 
     funderIdentifier = ma_fields.String()
 
@@ -328,7 +419,7 @@ class NameIdentifierSchema(DictOnlySchema):
 
     nameIdentifierScheme = ma_fields.String(required=True)
 
-    schemeUri = ma_fields.String()
+    schemeURI = ma_fields.String()
 
 
 class PublisherSchema(DictOnlySchema):
@@ -469,7 +560,7 @@ class RelatedIdentifierSchema(DictOnlySchema):
 
     schemeType = ma_fields.String()
 
-    schemeUri = ma_fields.String()
+    schemeURI = ma_fields.String()
 
 
 class RelatedItemIdentifierSchema(DictOnlySchema):
@@ -580,9 +671,9 @@ class RightsSchema(DictOnlySchema):
 
     rightsIdentifierScheme = ma_fields.String()
 
-    rightsUri = ma_fields.String()
+    rightsURI = ma_fields.String()
 
-    schemeUri = ma_fields.String()
+    schemeURI = ma_fields.String()
 
 
 class SubjectSchema(DictOnlySchema):
@@ -593,13 +684,13 @@ class SubjectSchema(DictOnlySchema):
 
     lang = ma_fields.String()
 
-    schemeUri = ma_fields.String()
+    schemeURI = ma_fields.String()
 
     subject = ma_fields.String(required=True)
 
     subjectScheme = ma_fields.String()
 
-    valueUri = ma_fields.String()
+    valueURI = ma_fields.String()
 
 
 class TitleSchema(DictOnlySchema):
