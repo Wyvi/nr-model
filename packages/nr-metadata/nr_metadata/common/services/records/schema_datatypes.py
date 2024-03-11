@@ -18,10 +18,6 @@ from nr_metadata.schema.identifiers import (
 )
 
 
-class NRLicenseVocabularyUISchema:
-    pass
-
-
 class NRRelatedItemSchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
@@ -146,10 +142,6 @@ class NRPersonSchema(DictOnlySchema):
     givenName = ma_fields.String()
 
     nameType = ma_fields.String(validate=[OneOf(["Personal"])])
-
-
-class NRAuthorityRoleVocabularySchema:
-    pass
 
 
 class NRRelatedItemContributorOrganizationSchema(DictOnlySchema):
