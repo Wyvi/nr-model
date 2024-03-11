@@ -7,3 +7,4 @@ recursive-include nr_metadata *.mo
 recursive-include nr_metadata *.js
 recursive-include nr_metadata *.jsx
 recursive-include nr_metadata *.less
+recursive-include nr_metadata *.jinja
