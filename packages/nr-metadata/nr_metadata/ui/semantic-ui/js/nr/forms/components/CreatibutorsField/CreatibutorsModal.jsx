@@ -329,7 +329,7 @@ export const CreatibutorsModal = ({
   const nameFieldPath = `${personOrOrgPath}fullName`;
   const identifiersFieldPath = `${personOrOrgPath}authorityIdentifiers`;
   const affiliationsFieldPath = "affiliations";
-  const roleFieldPath = "role";
+  const roleFieldPath = "contributorType";
 
   return (
     <Formik
