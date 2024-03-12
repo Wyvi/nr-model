@@ -91,14 +91,15 @@ const makeIdEntry = (identifier) => {
 const serializeCreatibutor = (submittedCreatibutor, isCreator, isPerson) => {
   const fullName = `${submittedCreatibutor.family_name}, ${submittedCreatibutor.given_name}`;
   const affiliations = _get(submittedCreatibutor, "affiliations", []);
-  const role = _get(submittedCreatibutor, "role");
+  const contributorType = _get(submittedCreatibutor, "contributorType");
   const { given_name, family_name, ...cleanedCreatibutor } =
     submittedCreatibutor;
+
   return {
     ...cleanedCreatibutor,
     affiliations,
     ...(isPerson && { fullName }),
-    ...(!isCreator && role && { role }),
+    ...(!isCreator && { contributorType } && { contributorType }),
   };
 };
 
@@ -129,7 +130,7 @@ const deserializeCreatibutor = (initialCreatibutor, isCreator) => {
       value: aff.id,
     })),
     ...(!isCreator && {
-      role: _get(initialCreatibutor, "role"),
+      contributorType: _get(initialCreatibutor, "contributorType"),
     }),
   };
   return result;
@@ -235,7 +236,7 @@ export const CreatibutorsModal = ({
       }
     }),
     fullName: Yup.string(),
-    role: Yup.object().when("_", (_, schema) => {
+    contributorType: Yup.object().when("_", (_, schema) => {
       if (!isCreator) {
         return schema.required(i18next.t("Role is a required field."));
       }
