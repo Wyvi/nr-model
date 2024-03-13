@@ -691,7 +691,7 @@
                             },
                             "properties": {
                                 "date": {
-                                    "type": "edtf",
+                                    "type": "edtf-time",
                                     "required": true
                                 },
                                 "dateInformation": {
