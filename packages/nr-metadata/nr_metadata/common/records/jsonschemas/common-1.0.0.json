@@ -264,7 +264,7 @@
                 },
                 "dateIssued": {
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date"
                 },
                 "events": {
                     "type": "array",
@@ -273,7 +273,7 @@
                         "properties": {
                             "eventDate": {
                                 "type": "string",
-                                "format": "date-time"
+                                "format": "date"
                             },
                             "eventLocation": {
                                 "type": "object",
