@@ -88,5 +88,6 @@ vocabulary-postprocessed-schema.json
 
 installation.log
 packages/oarepo-model-builder-nr/tests/model/
-
+node_modules/
+**/node_modules
 
