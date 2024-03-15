@@ -7,7 +7,7 @@
 // Invenio-RDM-Records is free software; you can redistribute it and/or modify it
 // under the terms of the MIT License; see LICENSE file for more details.
 
-import React, { createRef } from "react";
+import React, { createRef, useState } from "react";
 import {
   Button,
   Form,
@@ -28,7 +28,6 @@ import {
 import * as Yup from "yup";
 import _get from "lodash/get";
 import _isEmpty from "lodash/isEmpty";
-import { CreatibutorsIdentifiers } from "./CreatibutorsIdentifiers";
 import { CREATIBUTOR_TYPE } from "./constants";
 import { i18next } from "@translations/i18next";
 import { Trans } from "react-i18next";
@@ -37,6 +36,11 @@ import {
   LocalVocabularySelectField,
 } from "@js/oarepo_vocabularies";
 import PropTypes from "prop-types";
+import {
+  IdentifiersField,
+  personIdentifiersSchema,
+  organizationIdentifiersSchema,
+} from "../IdentifiersField";
 
 const ModalActions = {
   ADD: "add",
@@ -52,7 +56,6 @@ const NamesAutocompleteOptions = {
 const makeIdEntry = (identifier) => {
   let icon = null;
   let link = null;
-  use;
   if (identifier.scheme === "orcid") {
     icon = "/static/images/orcid.svg";
     link = "https://orcid.org/" + identifier.identifier;
@@ -84,31 +87,56 @@ const makeIdEntry = (identifier) => {
   );
 };
 
+const typeFieldPath = "nameType";
+const familyNameFieldPath = "family_name";
+const givenNameFieldPath = "given_name";
+const identifiersFieldPath = "authorityIdentifiers";
+const personalIdentifiersFieldPath = "personalIdentifiers";
+const organizationIdentifiersFieldPath = "organizationalIdentifiers";
+const affiliationsFieldPath = "affiliations";
+const roleFieldPath = "contributorType";
+const affiliationFullNameFieldPath = "affiliationNameFieldPath";
+const fullNameFieldPath = "fullName";
+
 /**
  * Function to transform formik creatibutor state
  * back to the external format.
  */
 const serializeCreatibutor = (submittedCreatibutor, isCreator, isPerson) => {
-  const contributorType = _get(submittedCreatibutor, "contributorType");
+  const contributorType = _get(submittedCreatibutor, roleFieldPath);
+  const nameType = _get(submittedCreatibutor, typeFieldPath);
 
   if (isPerson) {
     const fullName = `${submittedCreatibutor.family_name}, ${submittedCreatibutor.given_name}`;
-    const affiliations = _get(submittedCreatibutor, "affiliations", []);
-    const { given_name, family_name, ...cleanedCreatibutor } =
-      submittedCreatibutor;
-
+    const affiliations = _get(submittedCreatibutor, affiliationsFieldPath, []);
+    const identifiers = _get(
+      submittedCreatibutor,
+      personalIdentifiersFieldPath,
+      []
+    );
     return {
-      ...cleanedCreatibutor,
-      affiliations: affiliations.map((aff) => aff.data || aff),
-      ...{ fullName },
+      nameType,
+      fullName,
+      authorityIdentifiers: identifiers,
+      affiliations: affiliations.map((aff) => aff?.data || aff),
       ...(!isCreator && { contributorType } && { contributorType }),
     };
   } else {
-    const { nameType, affiliationAsOrganization } = submittedCreatibutor;
+    const affiliation = _get(
+      submittedCreatibutor,
+      affiliationFullNameFieldPath,
+      ""
+    );
+    const identifiers = _get(
+      submittedCreatibutor,
+      organizationIdentifiersFieldPath,
+      []
+    );
 
     return {
       nameType,
-      fullName: affiliationAsOrganization.data.title[i18next.language],
+      authorityIdentifiers: identifiers,
+      fullName: affiliation?.data?.title[i18next.language],
       ...(!isCreator && { contributorType } && { contributorType }),
     };
   }
@@ -119,11 +147,10 @@ const serializeCreatibutor = (submittedCreatibutor, isCreator, isPerson) => {
  * to formik initialValues.
  */
 const deserializeCreatibutor = (initialCreatibutor, isCreator, isPerson) => {
-  const identifiersFieldPath = "authorityIdentifiers";
   if (isPerson) {
     const [family_name = "", given_name = ""] = _get(
       initialCreatibutor,
-      "fullName",
+      fullNameFieldPath,
       ""
     )
       .trim()
@@ -134,23 +161,34 @@ const deserializeCreatibutor = (initialCreatibutor, isCreator, isPerson) => {
       family_name,
       given_name,
       ...initialCreatibutor,
-      authorityIdentifiers: _get(initialCreatibutor, identifiersFieldPath, []),
-      affiliations: _get(initialCreatibutor, "affiliations", []).map((aff) => ({
-        ...aff,
-        text: aff?.title?.cs,
-        value: aff?.id,
-      })),
+      [personalIdentifiersFieldPath]: _get(
+        initialCreatibutor,
+        identifiersFieldPath,
+        []
+      ),
+      affiliations: _get(initialCreatibutor, affiliationsFieldPath, []).map(
+        (aff) => ({
+          ...aff,
+          text: aff?.title?.cs,
+          value: aff?.id,
+        })
+      ),
       ...(!isCreator && {
-        contributorType: _get(initialCreatibutor, "contributorType"),
+        contributorType: _get(initialCreatibutor, typeFieldPath),
       }),
     };
     return result;
   } else {
     return {
       nameType: CREATIBUTOR_TYPE.ORGANIZATION,
-      affiliationAsOrganization: _get(
+      [affiliationFullNameFieldPath]: _get(
         initialCreatibutor,
-        "affiliationAsOrganization"
+        fullNameFieldPath
+      ),
+      [organizationIdentifiersFieldPath]: _get(
+        initialCreatibutor,
+        identifiersFieldPath,
+        []
       ),
       ...(!isCreator && {
         contributorType: _get(initialCreatibutor, "contributorType"),
@@ -234,19 +272,18 @@ export const CreatibutorsModal = ({
   lastNameFieldPlaceholder,
   nameTypeHelpText,
 }) => {
-  const [open, setOpen] = React.useState(false);
-  const [action, setAction] = React.useState(initialAction);
-  const [saveAndContinueLabel, setSaveAndContinueLabel] = React.useState(
+  const [open, setOpen] = useState(false);
+  const [action, setAction] = useState(initialAction);
+  const [saveAndContinueLabel, setSaveAndContinueLabel] = useState(
     i18next.t("Save and add another")
   );
-  const [showPersonForm, setShowPersonForm] = React.useState(
+  const [showPersonForm, setShowPersonForm] = useState(
     autocompleteNames !== NamesAutocompleteOptions.SEARCH_ONLY ||
       !_isEmpty(initialCreatibutor)
   );
+
   const namesAutocompleteRef = createRef();
   const isCreator = schema === "creators";
-  const isPerson =
-    _get(initialCreatibutor, "nameType") === CREATIBUTOR_TYPE.PERSON;
 
   const CreatorSchema = Yup.object({
     nameType: Yup.string(),
@@ -287,7 +324,6 @@ export const CreatibutorsModal = ({
   const displayActionLabel = action === ModalActions.ADD ? addLabel : editLabel;
 
   const onSubmit = (values, formikBag) => {
-    const typeFieldPath = `${personOrOrgPath}nameType`;
     const isPerson = _get(values, typeFieldPath) === CREATIBUTOR_TYPE.PERSON;
     onCreatibutorChange(serializeCreatibutor(values, isCreator, isPerson));
 
@@ -348,21 +384,13 @@ export const CreatibutorsModal = ({
   };
 
   const ActionLabel = () => displayActionLabel;
-  const personOrOrgPath = ``;
-  const typeFieldPath = `${personOrOrgPath}nameType`;
-  const familyNameFieldPath = `${personOrOrgPath}family_name`;
-  const givenNameFieldPath = `${personOrOrgPath}given_name`;
-  const nameFieldPath = `${personOrOrgPath}fullName`;
-  const identifiersFieldPath = `${personOrOrgPath}authorityIdentifiers`;
-  const affiliationsFieldPath = "affiliations";
-  const roleFieldPath = "contributorType";
-  const affiliationAsOrganization = "affiliationAsOrganization";
+
   return (
     <Formik
       initialValues={deserializeCreatibutor(
         initialCreatibutor,
         isCreator,
-        isPerson
+        _get(initialCreatibutor, typeFieldPath) === CREATIBUTOR_TYPE.PERSON
       )}
       onSubmit={onSubmit}
       enableReinitialize
@@ -509,8 +537,16 @@ export const CreatibutorsModal = ({
                         />
                       </Form.Group>
                       <Form.Group widths="equal">
-                        <CreatibutorsIdentifiers
-                          fieldPath={identifiersFieldPath}
+                        <IdentifiersField
+                          className="modal-identifiers-field"
+                          options={personIdentifiersSchema}
+                          fieldPath={personalIdentifiersFieldPath}
+                          label={i18next.t("Personal identifier")}
+                          helpText={i18next.t(
+                            "Choose from the menu identifier type. Write the identifier without prefix (i.e. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
+                          )}
+                          selectOnBlur={false}
+                          placeholder={i18next.t("Personal identifier")}
                         />
                       </Form.Group>
                       <VocabularySelectField
@@ -540,17 +576,27 @@ export const CreatibutorsModal = ({
                     type="institutions"
                     label={
                       <FieldLabel
-                        htmlFor={affiliationAsOrganization}
+                        htmlFor={affiliationFullNameFieldPath}
                         icon=""
-                        label={i18next.t("Affiliations")}
+                        label={i18next.t("Affiliation")}
                       />
                     }
-                    fieldPath={affiliationAsOrganization}
+                    fieldPath={affiliationFullNameFieldPath}
                     placeholder={i18next.t(
                       "Start writing name of the institution, then choose from the options."
                     )}
                     multiple={false}
                     clearable
+                  />
+                  <IdentifiersField
+                    className="modal-identifiers-field"
+                    options={organizationIdentifiersSchema}
+                    fieldPath={organizationIdentifiersFieldPath}
+                    label={i18next.t("Organizational identifiers")}
+                    helpText={i18next.t(
+                      "Choose from the menu identifier type. Write the identifier without prefix (i.e. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
+                    )}
+                    selectOnBlur={false}
                   />
                 </div>
               )}
@@ -648,4 +694,7 @@ CreatibutorsModal.defaultProps = {
     authorityIdentifiers: [],
   },
   autocompleteNames: "search",
+  nameTypeHelpText: i18next.t(
+    "Choose if the author is a person or an organization."
+  ),
 };

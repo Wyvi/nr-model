@@ -76,6 +76,7 @@ class CreatibutorsFieldForm extends Component {
                 <CreatibutorsFieldItem
                   key={key}
                   identifiersError={identifiersError}
+                  nameTypeHelpText={nameTypeHelpText}
                   {...{
                     displayName,
                     index,
@@ -197,7 +198,4 @@ CreatibutorsField.defaultProps = {
   addButtonLabel: i18next.t("Add creator"),
   nameFieldPlaceholder: i18next.t("Write author's name."),
   lastNameFieldPlaceholder: i18next.t("Write author's last name."),
-  nameTypeHelpText: i18next.t(
-    "Choose if the author is a person or an organization."
-  ),
 };

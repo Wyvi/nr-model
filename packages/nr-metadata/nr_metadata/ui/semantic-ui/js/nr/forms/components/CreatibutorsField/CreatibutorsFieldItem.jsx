@@ -28,6 +28,7 @@ export const CreatibutorsFieldItem = ({
   displayName,
   schema,
   autocompleteNames,
+  nameTypeHelpText,
 }) => {
   const dropRef = React.useRef(null);
   // eslint-disable-next-line no-unused-vars
@@ -97,6 +98,7 @@ export const CreatibutorsFieldItem = ({
             onCreatibutorChange={(selectedCreatibutor) => {
               replaceCreatibutor(index, selectedCreatibutor);
             }}
+            nameTypeHelpText={nameTypeHelpText}
             initialCreatibutor={initialCreatibutor}
             schema={schema}
             autocompleteNames={autocompleteNames}
@@ -184,6 +186,7 @@ CreatibutorsFieldItem.propTypes = {
   displayName: PropTypes.string,
   schema: PropTypes.string.isRequired,
   autocompleteNames: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  nameTypeHelpText: PropTypes.string.isRequired,
 };
 
 CreatibutorsFieldItem.defaultProps = {
