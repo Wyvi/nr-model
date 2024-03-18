@@ -41,6 +41,7 @@ import {
   personIdentifiersSchema,
   organizationIdentifiersSchema,
 } from "../IdentifiersField";
+import { getTitleFromMultilingualObject } from "@js/oarepo_ui";
 
 const ModalActions = {
   ADD: "add",
@@ -136,7 +137,10 @@ const serializeCreatibutor = (submittedCreatibutor, isCreator, isPerson) => {
     return {
       nameType,
       authorityIdentifiers: identifiers,
-      fullName: affiliation?.data?.title[i18next.language],
+      fullName:
+        getTitleFromMultilingualObject(affiliation?.title) ||
+        affiliation?.name ||
+        affiliation,
       ...(!isCreator && { contributorType } && { contributorType }),
     };
   }
@@ -169,12 +173,12 @@ const deserializeCreatibutor = (initialCreatibutor, isCreator, isPerson) => {
       affiliations: _get(initialCreatibutor, affiliationsFieldPath, []).map(
         (aff) => ({
           ...aff,
-          text: aff?.title?.cs,
+          text: getTitleFromMultilingualObject(aff?.title),
           value: aff?.id,
         })
       ),
       ...(!isCreator && {
-        contributorType: _get(initialCreatibutor, typeFieldPath),
+        contributorType: _get(initialCreatibutor, roleFieldPath),
       }),
     };
     return result;
@@ -303,6 +307,21 @@ export const CreatibutorsModal = ({
         return schema.required(i18next.t("Role is a required field."));
       }
     }),
+    affiliationNameFieldPath: Yup.mixed().test(
+      "text",
+      i18next.t("Affiliation name is a required field."),
+      (value, testContext) => {
+        if (testContext.parent.nameType === CREATIBUTOR_TYPE.ORGANIZATION) {
+          return (
+            !_isEmpty(value) ||
+            typeof value === "object" ||
+            typeof value === "string"
+          );
+        } else {
+          return true;
+        }
+      }
+    ),
   });
 
   const openModal = () => {
@@ -573,6 +592,9 @@ export const CreatibutorsModal = ({
                 CREATIBUTOR_TYPE.ORGANIZATION && (
                 <div>
                   <VocabularySelectField
+                    additionLabel={i18next.t(
+                      "Add institution name (free text): "
+                    )}
                     type="institutions"
                     label={
                       <FieldLabel
@@ -585,8 +607,10 @@ export const CreatibutorsModal = ({
                     placeholder={i18next.t(
                       "Start writing name of the institution, then choose from the options."
                     )}
-                    multiple={false}
                     clearable
+                    allowAdditions
+                    selection
+                    deburr
                   />
                   <IdentifiersField
                     className="modal-identifiers-field"

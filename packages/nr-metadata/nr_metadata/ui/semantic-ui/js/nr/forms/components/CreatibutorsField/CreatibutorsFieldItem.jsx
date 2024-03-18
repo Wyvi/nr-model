@@ -186,7 +186,7 @@ CreatibutorsFieldItem.propTypes = {
   displayName: PropTypes.string,
   schema: PropTypes.string.isRequired,
   autocompleteNames: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  nameTypeHelpText: PropTypes.string.isRequired,
+  nameTypeHelpText: PropTypes.string,
 };
 
 CreatibutorsFieldItem.defaultProps = {
