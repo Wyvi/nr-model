@@ -101,7 +101,7 @@ export const SubjectsModal = ({ trigger, handleSubjectAdd }) => {
           </Modal.Header>
           <Modal.Content>
             <Form>
-              <Form.Field width={16}>
+              <Form.Field width={16} className="subjects-modal-fields">
                 <MultilingualTextInput
                   fieldPath="keywords"
                   lngFieldWidth={3}

@@ -102,6 +102,6 @@ IdentifiersField.propTypes = {
 IdentifiersField.defaultProps = {
   label: i18next.t("Identifier field"),
   identifierLabel: i18next.t("Identifier"),
-  identifierTypePlaceholder: i18next.t("e.g. ORCID, ISNI or GND."),
+  identifierTypePlaceholder: i18next.t("e.g. ORCID, ISNI or ScopusID."),
   identifierPlaceholder: i18next.t("e.g. 10.1086/679716 for a DOI"),
 };

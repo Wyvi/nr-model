@@ -621,6 +621,9 @@ export const CreatibutorsModal = ({
                       "Choose from the menu identifier type. Write the identifier without prefix (i.e. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
                     )}
                     selectOnBlur={false}
+                    identifierTypePlaceholder={i18next.t(
+                      "e.g. ISNI, ROR, ICO."
+                    )}
                   />
                 </div>
               )}
