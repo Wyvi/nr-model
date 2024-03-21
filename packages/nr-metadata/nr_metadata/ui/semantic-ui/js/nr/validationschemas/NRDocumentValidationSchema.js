@@ -68,13 +68,6 @@ export const NRDocumentValidationSchema = Yup.object().shape({
         })
       )
       .label(i18next.t("Technical info")),
-    accessRights: Yup.object()
-      .test(
-        "is-non-empty",
-        requiredMessage,
-        (value) => value && Object.keys(value).length > 0 && value?.id
-      )
-      .label(i18next.t("Access rights")),
     dateModified: Yup.string()
       .matches(edtfRegEx, i18next.t("Invalid date format"))
       .label(i18next.t("Date modified")),
@@ -84,10 +77,6 @@ export const NRDocumentValidationSchema = Yup.object().shape({
     creators: Yup.array()
       .required(requiredMessage)
       .label(i18next.t("Creators")),
-    languages: Yup.array()
-      .min(1, requiredMessage)
-      .required(requiredMessage)
-      .label(i18next.t("Language")),
     publishers: Yup.array()
       .of(Yup.string().required(requiredMessage))
       .test("unique-publishers", returnGroupError, (value, context) =>

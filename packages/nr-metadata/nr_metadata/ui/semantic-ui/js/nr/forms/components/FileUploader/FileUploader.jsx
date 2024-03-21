@@ -26,6 +26,8 @@ export const FileUploader = ({ messageContent, record, recordFiles }) => {
 
   return (
     <React.Fragment>
+      {/* Hacky solution for form feedback links to be able to scroll to the files uploader */}
+      <label htmlFor="files.enabled"></label>
       {values.id ? (
         <React.Fragment>
           {recordObject?.files?.enabled && (
