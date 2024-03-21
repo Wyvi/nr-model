@@ -8,7 +8,7 @@
         <div class="ui list">
         {% for person in ri.itemCreators %}
             <div class="item">
-                <Person person={person} search_link={search_link} searchFacet="metadata_creators_fullName"></Person>
+                <Person person={person} search_link={search_link} searchFacet="syntheticFields_people"></Person>
             </div>
         {% endfor %}
         </div>
@@ -19,7 +19,7 @@
         {% for fullName, matches in ri.itemContributors | groupby('fullName') %}
             <div class="item">
                 {% set roles= matches |  map(attribute='role') | select('defined') | list %}
-                <Person person={matches[0]} search_link={search_link} searchFacet="metadata_contributors_fullName" roles={roles}></Person>
+                <Person person={matches[0]} search_link={search_link} searchFacet="syntheticFields_people" roles={roles}></Person>
             </div>
         {% endfor %}
         </div>
