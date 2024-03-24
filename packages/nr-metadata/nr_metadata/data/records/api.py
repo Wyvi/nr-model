@@ -20,7 +20,9 @@ class DataRecord(InvenioRecord):
 
     schema = ConstantField("$schema", "local://data-1.0.0.json")
 
-    index = IndexField("data-data-1.0.0")
+    index = IndexField(
+        "data-data-1.0.0",
+    )
 
     pid = PIDField(provider=DataIdProvider, context_cls=PIDFieldContext, create=True)
 
