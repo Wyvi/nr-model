@@ -8,7 +8,7 @@ import { SearchFacetLink } from "./SearchFacetLink";
 const SubjectElement = ({ searchUrl, subject }) => (
   <SearchFacetLink
     searchUrl={searchUrl}
-    searchFacet={`metadata_subjects_subject_${subject.subject.lang}_keyword`}
+    searchFacet="syntheticFields_keywords"
     value={subject.subject.value}
     title={i18next.t("Find more records with this subject")}
     className="subject-link"

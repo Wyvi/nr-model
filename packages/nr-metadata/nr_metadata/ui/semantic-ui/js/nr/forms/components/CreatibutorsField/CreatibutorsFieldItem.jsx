@@ -67,7 +67,7 @@ export const CreatibutorsFieldItem = ({
       role && (
         <Label size="tiny">
           {
-            vocabularies["contributor-roles"].all.find(
+            vocabularies["contributor-types"].all.find(
               (item) => item.value === role.id
             ).text
           }
