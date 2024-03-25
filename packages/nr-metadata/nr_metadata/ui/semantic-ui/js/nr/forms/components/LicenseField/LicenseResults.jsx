@@ -16,8 +16,7 @@ export const LicenseResults = withState(
     const serializeLicenseResult = serializeLicenses
       ? serializeLicenses
       : (result) => ({
-          title: result.title_l10n,
-          description: result.description_l10n,
+          title: result.title,
           id: result.id,
         });
     return (
@@ -46,7 +45,7 @@ export const LicenseResults = withState(
                         serializeLicenseResult(result)
                       )
                     }
-                    className="mt-2"
+                    className="mt-2 mr-5"
                   />
                   <Item.Content className="license-item-content">
                     <Header size="small">{title}</Header>

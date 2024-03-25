@@ -7,8 +7,7 @@
 // under the terms of the MIT License; see LICENSE file for more details.
 
 import React from "react";
-import { Button, Item } from "semantic-ui-react";
-import _truncate from "lodash/truncate";
+import { Button, Grid } from "semantic-ui-react";
 import { LicenseModal } from "./LicenseModal";
 import { i18next } from "@translations/i18next";
 import PropTypes from "prop-types";
@@ -23,33 +22,23 @@ export const LicenseFieldItem = ({
   fieldPath,
 }) => {
   const { setFieldValue } = useFormikContext();
-  console.log(license);
   return (
-    <div className="flex" key={license.key}>
-      <div>{getTitleFromMultilingualObject(license.title)}</div>
-      <LicenseModal
-        searchConfig={searchConfig}
-        handleLicenseChange={handleLicenseChange}
-        mode={license.type}
-        initialLicense={license.initial}
-        action="edit"
-        trigger={
-          <Button size="mini" primary type="button">
-            {i18next.t("Edit")}
-          </Button>
-        }
-        serializeLicenses={serializeLicenses}
-      />
-      <Button
-        size="mini"
-        type="button"
-        onClick={() => {
-          setFieldValue(fieldPath, "");
-        }}
-      >
-        {i18next.t("Remove")}
-      </Button>
-    </div>
+    <Grid className="flex" key={license.key}>
+      <Grid.Column width={10}>
+        {getTitleFromMultilingualObject(license.title)}
+      </Grid.Column>
+      <Grid.Column textAlign="right" width={6}>
+        <Button
+          size="mini"
+          type="button"
+          onClick={() => {
+            setFieldValue(fieldPath, "");
+          }}
+        >
+          {i18next.t("Remove")}
+        </Button>
+      </Grid.Column>
+    </Grid>
   );
 };
 
@@ -57,6 +46,8 @@ LicenseFieldItem.propTypes = {
   license: PropTypes.object.isRequired,
   searchConfig: PropTypes.object.isRequired,
   serializeLicenses: PropTypes.func,
+  handleLicenseChange: PropTypes.func.isRequired,
+  fieldPath: PropTypes.string.isRequired,
 };
 
 LicenseFieldItem.defaultProps = {

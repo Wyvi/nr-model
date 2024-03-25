@@ -59,7 +59,6 @@ export class LicenseModal extends Component {
     // license as an object makes React get rid of this component. Otherwise
     // we get a memory leak warning.
     const { handleLicenseChange } = this.props;
-    console.log(values.selectedLicense);
     this.closeModal();
     handleLicenseChange(values.selectedLicense);
   };
@@ -67,17 +66,13 @@ export class LicenseModal extends Component {
   render() {
     const {
       trigger,
-      action,
       searchConfig,
       serializeLicenses,
       initialLicense: initialLicenseProp,
     } = this.props;
     const { open } = this.state;
 
-    const initialLicense = initialLicenseProp || {
-      title: "",
-      id: null,
-    };
+    const initialLicense = initialLicenseProp || {};
 
     const searchApi = new InvenioSearchApi(searchConfig.searchApi);
     return (
@@ -86,6 +81,7 @@ export class LicenseModal extends Component {
           selectedLicense: initialLicense,
         }}
         onSubmit={this.onSubmit}
+        enableReinitialize={true}
         validationSchema={LicenseSchema}
         validateOnChange={false}
         validateOnBlur={false}
@@ -102,11 +98,7 @@ export class LicenseModal extends Component {
             <Modal.Header as="h6" className="pt-10 pb-10">
               <Grid>
                 <Grid.Column floated="left">
-                  <Header as="h2">
-                    {action === ModalActions.ADD
-                      ? i18next.t("Add license")
-                      : i18next.t("Edit license")}
-                  </Header>
+                  <Header as="h2">{i18next.t("Choose license")}</Header>
                 </Grid.Column>
               </Grid>
             </Modal.Header>
@@ -195,11 +187,7 @@ export class LicenseModal extends Component {
                 primary
                 icon="checkmark"
                 labelPosition="left"
-                content={
-                  action === ModalActions.ADD
-                    ? i18next.t("Add license")
-                    : i18next.t("Edit license")
-                }
+                content={i18next.t("Choose license")}
               />
             </Modal.Actions>
           </Modal>
@@ -210,12 +198,7 @@ export class LicenseModal extends Component {
 }
 
 LicenseModal.propTypes = {
-  action: PropTypes.oneOf(["add", "edit"]).isRequired,
-  initialLicense: PropTypes.shape({
-    id: PropTypes.string,
-    title: PropTypes.string,
-    description: PropTypes.string,
-  }),
+  initialLicense: PropTypes.object,
   trigger: PropTypes.object.isRequired,
   handleLicenseChange: PropTypes.func.isRequired,
   searchConfig: PropTypes.shape({

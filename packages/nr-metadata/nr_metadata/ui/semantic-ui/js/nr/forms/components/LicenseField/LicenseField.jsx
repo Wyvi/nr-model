@@ -6,7 +6,7 @@
 // React-Invenio-Deposit is free software; you can redistribute it and/or modify it
 // under the terms of the MIT License; see LICENSE file for more details.
 
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { getIn, useFormikContext } from "formik";
 import { FieldLabel } from "react-invenio-forms";
@@ -14,7 +14,6 @@ import { Button, Form, Icon } from "semantic-ui-react";
 import { LicenseModal } from "./LicenseModal";
 import { LicenseFieldItem } from "./LicenseFieldItem";
 import { i18next } from "@translations/i18next";
-import { set } from "lodash";
 
 export const visibleLicense = ({ id, title }) => ({ id, title: title });
 
@@ -25,6 +24,7 @@ export const LicenseField = ({
   required,
   searchConfig,
   serializeLicenses,
+  helpText,
 }) => {
   const { values, setFieldValue } = useFormikContext();
   let licenseUI;
@@ -37,7 +37,6 @@ export const LicenseField = ({
   const handleLicenseChange = (selectedLicense) => {
     setFieldValue(fieldPath, selectedLicense);
   };
-  console.log(licenseUI);
   return (
     <Form.Field required={required}>
       <FieldLabel htmlFor={fieldPath} icon={labelIcon} label={label} />
@@ -57,14 +56,13 @@ export const LicenseField = ({
         trigger={
           <Button type="button" key="license" icon labelPosition="left">
             <Icon name="add" />
-            {i18next.t("Add license")}
+            {i18next.t("Choose license")}
           </Button>
         }
         handleLicenseChange={handleLicenseChange}
-        mode="standard"
-        action="add"
         serializeLicenses={serializeLicenses}
       />
+      <label className="helptext">{helpText}</label>
     </Form.Field>
   );
 };
@@ -76,6 +74,7 @@ LicenseField.propTypes = {
   required: PropTypes.bool,
   searchConfig: PropTypes.object.isRequired,
   serializeLicenses: PropTypes.func,
+  helpText: PropTypes.string,
 };
 
 LicenseField.defaultProps = {
@@ -83,4 +82,7 @@ LicenseField.defaultProps = {
   label: i18next.t("License"),
   serializeLicenses: undefined,
   required: false,
+  helpText: i18next.t(
+    "If a Creative Commons license is associated with the resource, select the appropriate license option from the menu. We recommend choosing the latest versions, namely 3.0 Czech and 4.0 International."
+  ),
 };
