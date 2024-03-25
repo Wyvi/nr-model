@@ -416,17 +416,17 @@
                     },
                     "dateCollected": {
                         "type": "date_range",
-                        "format": "strict_date_time||strict_date_time_no_millis||strict_date||yyyy-MM||yyyy",
+                        "format": "strict_date||yyyy-MM||yyyy",
                         "index": false
                     },
                     "dateCreated": {
                         "type": "date_range",
-                        "format": "strict_date_time||strict_date_time_no_millis||strict_date||yyyy-MM||yyyy",
+                        "format": "strict_date||yyyy-MM||yyyy",
                         "index": false
                     },
                     "dateIssued": {
                         "type": "date",
-                        "format": "strict_date_time||strict_date_time_no_millis||strict_date||yyyy-MM||yyyy"
+                        "format": "strict_date||yyyy-MM||yyyy"
                     },
                     "dateValidTo": {
                         "type": "date",
@@ -450,7 +450,7 @@
                         "properties": {
                             "eventDate": {
                                 "type": "date_range",
-                                "format": "strict_date_time||strict_date_time_no_millis||strict_date||yyyy-MM||yyyy",
+                                "format": "strict_date||yyyy-MM||yyyy",
                                 "index": false
                             },
                             "eventLocation": {
