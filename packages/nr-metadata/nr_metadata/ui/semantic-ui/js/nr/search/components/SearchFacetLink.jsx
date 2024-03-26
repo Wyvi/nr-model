@@ -24,7 +24,7 @@ export const SearchFacetLink = ({
 SearchFacetLink.propTypes = {
   searchUrl: PropTypes.string,
   searchFacet: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   title: PropTypes.string,
   label: PropTypes.string,
   className: PropTypes.string,
