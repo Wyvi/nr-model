@@ -158,7 +158,7 @@ export const CreatibutorsFieldItem = ({
                     height="16"
                   />
                 )} */}
-                {displayName} {renderRole(initialCreatibutor?.role)}
+                {displayName} {renderRole(initialCreatibutor?.contributorType)}
               </span>
             </List.Description>
             {firstError && (

@@ -47,6 +47,7 @@ export const IdentifiersField = ({
   className,
   identifierTypePlaceholder,
   identifierPlaceholder,
+  defaultNewValue,
   ...uiProps
 }) => {
   const { setFieldTouched } = useFormikContext();
@@ -58,6 +59,7 @@ export const IdentifiersField = ({
       labelIcon="pencil"
       helpText={helpText}
       className={className}
+      defaultNewValue={defaultNewValue}
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
@@ -97,6 +99,7 @@ IdentifiersField.propTypes = {
   className: PropTypes.string,
   identifierTypePlaceholder: PropTypes.string,
   identifierPlaceholder: PropTypes.string,
+  defaultNewValue: PropTypes.object,
 };
 
 IdentifiersField.defaultProps = {
@@ -104,4 +107,5 @@ IdentifiersField.defaultProps = {
   identifierLabel: i18next.t("Identifier"),
   identifierTypePlaceholder: i18next.t("e.g. ORCID, ISNI or ScopusID."),
   identifierPlaceholder: i18next.t("e.g. 10.1086/679716 for a DOI"),
+  defaultNewValue: { scheme: "", identifier: "" },
 };
