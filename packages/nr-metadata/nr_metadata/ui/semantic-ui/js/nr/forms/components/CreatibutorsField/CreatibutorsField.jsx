@@ -17,7 +17,7 @@ import { DndProvider } from "react-dnd";
 
 import { CreatibutorsModal } from "./CreatibutorsModal";
 import { CreatibutorsFieldItem } from "./CreatibutorsFieldItem";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 
 const creatibutorNameDisplay = (value) => {
   const name = _get(value, `fullName`);

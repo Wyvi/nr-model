@@ -11,6 +11,7 @@ theme = WebpackThemeBundle(
             "devDependencies": {},
             "aliases": {
                 "@nr": "./js/nr",
+                "@translations/nr/i18next": "translations/nr_metadata/i18next.js",
             },
         }
     },

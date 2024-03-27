@@ -11,7 +11,7 @@ import React from "react";
 import { Button, Form, Grid, Header, Modal } from "semantic-ui-react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import { TextField, FieldLabel, GroupField } from "react-invenio-forms";
 import { CreatibutorsField } from "../CreatibutorsField";
 import { IdentifiersField, objectIdentifiersSchema } from "../IdentifiersField";

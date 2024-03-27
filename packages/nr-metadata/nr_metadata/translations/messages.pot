@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-03 20:27+0100\n"
+"POT-Creation-Date: 2024-03-22 10:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -484,7 +484,7 @@ msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/common/services/records/facets.py:389
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:408
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:573
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:598
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:398
 msgid "metadata/subjects/classificationCode.label"
 msgstr ""
@@ -493,7 +493,7 @@ msgstr ""
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/common/services/records/facets.py:399
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:413
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:418
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:585
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:610
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:403
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:408
 msgid "metadata/subjects/subject.label"
@@ -507,13 +507,14 @@ msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/common/services/records/facets.py:412
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:431
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:590
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:615
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:421
 msgid "metadata/subjects/subjectScheme.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/common/services/records/facets.py:416
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:435
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:619
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:425
 msgid "metadata/subjects/valueURI.label"
 msgstr ""
@@ -547,7 +548,7 @@ msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/common/services/records/facets.py:446
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:465
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:617
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:642
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:473
 msgid "metadata/version.label"
 msgstr ""
@@ -601,7 +602,7 @@ msgid "metadata/contributors/affiliation/name.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:46
-msgid "metadata/contributors/affiliation/schemeUri.label"
+msgid "metadata/contributors/affiliation/schemeURI.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:65
@@ -621,7 +622,7 @@ msgid "metadata/contributors/nameIdentifiers/nameIdentifierScheme.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:84
-msgid "metadata/contributors/nameIdentifiers/schemeUri.label"
+msgid "metadata/contributors/nameIdentifiers/schemeURI.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:94
@@ -637,7 +638,7 @@ msgid "metadata/creators/affiliation/name.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:109
-msgid "metadata/creators/affiliation/schemeUri.label"
+msgid "metadata/creators/affiliation/schemeURI.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:121
@@ -657,7 +658,7 @@ msgid "metadata/creators/nameIdentifiers/nameIdentifierScheme.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:140
-msgid "metadata/creators/nameIdentifiers/schemeUri.label"
+msgid "metadata/creators/nameIdentifiers/schemeURI.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:148
@@ -697,7 +698,7 @@ msgid "metadata/fundingReferences/awardTitle.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:187
-msgid "metadata/fundingReferences/awardUri.label"
+msgid "metadata/fundingReferences/awardURI.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:192
@@ -801,7 +802,7 @@ msgid "metadata/relatedIdentifiers/schemeType.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:330
-msgid "metadata/relatedIdentifiers/schemeUri.label"
+msgid "metadata/relatedIdentifiers/schemeURI.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:335
@@ -819,7 +820,7 @@ msgid "metadata/relatedItems/contributors/affiliation/name.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:354
-msgid "metadata/relatedItems/contributors/affiliation/schemeUri.label"
+msgid "metadata/relatedItems/contributors/affiliation/schemeURI.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:359
@@ -853,7 +854,7 @@ msgid ""
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:396
-msgid "metadata/relatedItems/contributors/nameIdentifiers/schemeUri.label"
+msgid "metadata/relatedItems/contributors/nameIdentifiers/schemeURI.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:401
@@ -874,7 +875,7 @@ msgid "metadata/relatedItems/creators/affiliation/name.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:423
-msgid "metadata/relatedItems/creators/affiliation/schemeUri.label"
+msgid "metadata/relatedItems/creators/affiliation/schemeURI.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:428
@@ -903,7 +904,7 @@ msgid ""
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:460
-msgid "metadata/relatedItems/creators/nameIdentifiers/schemeUri.label"
+msgid "metadata/relatedItems/creators/nameIdentifiers/schemeURI.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:465
@@ -957,78 +958,94 @@ msgid "metadata/relatedItems/relatedItemType.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:525
-msgid "metadata/relatedItems/titles/lang.label"
+msgid "metadata/relatedItems/relatedMetadataScheme.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:530
+msgid "metadata/relatedItems/relationType.label"
+msgstr ""
+
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:535
+msgid "metadata/relatedItems/resourceTypeGeneral.label"
+msgstr ""
+
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:540
+msgid "metadata/relatedItems/schemeType.label"
+msgstr ""
+
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:545
+msgid "metadata/relatedItems/schemeURI.label"
+msgstr ""
+
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:550
+msgid "metadata/relatedItems/titles/lang.label"
+msgstr ""
+
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:555
 msgid "metadata/relatedItems/titles/titleType.label"
 msgstr ""
 
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:534
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:559
 msgid "metadata/relatedItems/volume.label"
 msgstr ""
 
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:538
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:563
 msgid "metadata/rightsList/lang.label"
 msgstr ""
 
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:542
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:567
 msgid "metadata/rightsList/rights.label"
 msgstr ""
 
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:547
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:572
 msgid "metadata/rightsList/rightsIdentifier.label"
 msgstr ""
 
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:552
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:577
 msgid "metadata/rightsList/rightsIdentifierScheme.label"
 msgstr ""
 
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:557
-msgid "metadata/rightsList/rightsUri.label"
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:582
+msgid "metadata/rightsList/rightsURI.label"
 msgstr ""
 
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:562
-msgid "metadata/rightsList/schemeUri.label"
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:587
+msgid "metadata/rightsList/schemeURI.label"
 msgstr ""
 
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:566
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:591
 msgid "metadata/schemaVersion.label"
 msgstr ""
 
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:569
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:594
 msgid "metadata/sizes.label"
 msgstr ""
 
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:577
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:602
 msgid "metadata/subjects/lang.label"
 msgstr ""
 
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:581
-msgid "metadata/subjects/schemeUri.label"
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:606
+msgid "metadata/subjects/schemeURI.label"
 msgstr ""
 
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:594
-msgid "metadata/subjects/valueUri.label"
-msgstr ""
-
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:598
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:623
 msgid "metadata/titles/lang.label"
 msgstr ""
 
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:602
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:627
 msgid "metadata/titles/titleType.label"
 msgstr ""
 
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:606
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:631
 msgid "metadata/types/resourceType.label"
 msgstr ""
 
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:611
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:636
 msgid "metadata/types/resourceTypeGeneral.label"
 msgstr ""
 
-#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:614
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/datacite/services/records/facets.py:639
 msgid "metadata/url.label"
 msgstr ""
 
@@ -1148,30 +1165,10 @@ msgstr ""
 msgid "Write author's last name."
 msgstr ""
 
-msgid "Choose if the author is a person or an organization."
-msgstr ""
-
 msgid "Edit"
 msgstr ""
 
 msgid "Remove"
-msgstr ""
-
-msgid ""
-"Choose from the menu identifier type. Write the identifier without prefix "
-"(i.e. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
-msgstr ""
-
-msgid "Identifier"
-msgstr ""
-
-msgid "Type the value of an identifier..."
-msgstr ""
-
-msgid "Personal identifier"
-msgstr ""
-
-msgid "e.g. ORCID, ISNI or GND."
 msgstr ""
 
 msgid "Save and add another"
@@ -1184,6 +1181,9 @@ msgid "Family name is a required field."
 msgstr ""
 
 msgid "Role is a required field."
+msgstr ""
+
+msgid "Affiliation name is a required field."
 msgstr ""
 
 msgid "Added"
@@ -1204,19 +1204,30 @@ msgstr ""
 msgid "Given names"
 msgstr ""
 
-msgid "Name"
+msgid "Personal identifier"
 msgstr ""
 
-msgid "Organization name"
-msgstr ""
-
-msgid "e.g. ROR, ISNI or GND."
+msgid ""
+"Choose from the menu identifier type. Write the identifier without prefix "
+"(i.e. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
 msgstr ""
 
 msgid "Affiliations"
 msgstr ""
 
 msgid "Start writing name of the institution, then choose from the options."
+msgstr ""
+
+msgid "Add institution name (free text): "
+msgstr ""
+
+msgid "Affiliation"
+msgstr ""
+
+msgid "Organizational identifiers"
+msgstr ""
+
+msgid "e.g. ISNI, ROR, ICO."
 msgstr ""
 
 msgid "Choose contributor's role from the list (editor, illustrator...)"
@@ -1229,6 +1240,9 @@ msgid "Cancel"
 msgstr ""
 
 msgid "Save"
+msgstr ""
+
+msgid "Choose if the author is a person or an organization."
 msgstr ""
 
 msgid "Couldn't find your person? You can <2>create a new entry</2>."
@@ -1256,11 +1270,6 @@ msgid "If event has other known names, write them here."
 msgstr ""
 
 msgid "Event date"
-msgstr ""
-
-msgid ""
-"Write down the time period in which the event took place. If it is not a "
-"range, choose same date twice."
 msgstr ""
 
 msgid "Place"
@@ -1361,6 +1370,24 @@ msgstr ""
 msgid "Latitude"
 msgstr ""
 
+msgid "DOI"
+msgstr ""
+
+msgid "Handle"
+msgstr ""
+
+msgid "ISBN"
+msgstr ""
+
+msgid "ISSN"
+msgstr ""
+
+msgid "RIV"
+msgstr ""
+
+msgid "IGSN"
+msgstr ""
+
 msgid "ORCID"
 msgstr ""
 
@@ -1388,9 +1415,6 @@ msgstr ""
 msgid "ICO"
 msgstr ""
 
-msgid "DOI"
-msgstr ""
-
 msgid "Add identifier"
 msgstr ""
 
@@ -1398,6 +1422,15 @@ msgid "Identifier type"
 msgstr ""
 
 msgid "Identifier field"
+msgstr ""
+
+msgid "Identifier"
+msgstr ""
+
+msgid "e.g. ORCID, ISNI or ScopusID."
+msgstr ""
+
+msgid "e.g. 10.1086/679716 for a DOI"
 msgstr ""
 
 msgid "Publish"
@@ -1543,10 +1576,58 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
-msgid "is a required field"
+msgid "We couldn't find any matches for "
 msgstr ""
 
-msgid "Items must be unique"
+msgid "your search"
+msgstr ""
+
+msgid "Start over"
+msgstr ""
+
+msgid "ProTip"
+msgstr ""
+
+msgid "will give you all the publications from 2017 until today."
+msgstr ""
+
+msgid "For more tips, check out our "
+msgstr ""
+
+msgid "Search guide"
+msgstr ""
+
+msgid "search guide"
+msgstr ""
+
+msgid " for defining advanced search queries."
+msgstr ""
+
+msgid "ORCID profile"
+msgstr ""
+
+msgid "Scopus ID profile"
+msgstr ""
+
+msgid "ROR profile"
+msgstr ""
+
+msgid "WOS Researcher ID"
+msgstr ""
+
+msgid "DOI profile"
+msgstr ""
+
+msgid "GND profile"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Find all records"
+msgstr ""
+
+msgid "by this document type"
 msgstr ""
 
 msgid "Abstract"
@@ -1556,9 +1637,6 @@ msgid "Methods"
 msgstr ""
 
 msgid "Technical info"
-msgstr ""
-
-msgid "Access rights"
 msgstr ""
 
 msgid "Invalid date format"

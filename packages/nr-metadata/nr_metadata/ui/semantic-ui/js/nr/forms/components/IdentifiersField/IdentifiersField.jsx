@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ArrayField, SelectField, TextField } from "react-invenio-forms";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import { ArrayFieldItem } from "@js/oarepo_ui";
 import { useFormikContext } from "formik";
 

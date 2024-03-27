@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { TextField, GroupField, FieldLabel } from "react-invenio-forms";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import { Form } from "semantic-ui-react";
 
 export const ExternalLocationField = ({ fieldPath, helpText }) => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import PropTypes from "prop-types";
 
 export const IconIdentifier = ({ link, linkTitle, icon, alt }) => {
