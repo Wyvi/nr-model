@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ArrayField, TextField, GroupField } from "react-invenio-forms";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import { LocalVocabularySelectField } from "@js/oarepo_vocabularies";
 import { StringArrayField } from "../StringArray/StringArrayField";
 import { ArrayFieldItem, EDTFDaterangePicker } from "@js/oarepo_ui";
@@ -46,18 +46,20 @@ export const EventsField = ({ fieldPath, helpText }) => {
             />
             <GroupField>
               <TextField
-                style={{ marginTop: "0.28rem" }}
                 width={10}
                 fieldPath={`${fieldPathPrefix}.eventLocation.place`}
                 label={i18next.t("Place")}
-                inline
                 placeholder={i18next.t("Write down the place of the event.")}
               />
               <LocalVocabularySelectField
                 selectOnBlur={false}
                 width={6}
                 fieldPath={`${fieldPathPrefix}.eventLocation.country`}
-                label={i18next.t("Country")}
+                label={
+                  <label htmlFor={`${fieldPathPrefix}.eventLocation.country`}>
+                    {i18next.t("Country")}
+                  </label>
+                }
                 optionsListName="countries"
                 clearable
                 placeholder={i18next.t("Choose country from the list.")}

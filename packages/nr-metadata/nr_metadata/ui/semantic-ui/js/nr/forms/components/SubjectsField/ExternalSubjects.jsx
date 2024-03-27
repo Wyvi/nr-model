@@ -1,5 +1,5 @@
 import React from "react";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import { Divider, Label } from "semantic-ui-react";
 import PropTypes from "prop-types";
 

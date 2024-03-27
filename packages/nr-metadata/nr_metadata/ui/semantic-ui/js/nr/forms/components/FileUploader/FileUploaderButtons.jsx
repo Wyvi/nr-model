@@ -4,7 +4,7 @@ import { Button, Icon } from "semantic-ui-react";
 import FileManagementDialog from "@oarepo/file-manager";
 import { FileEditWrapper, FileUploadWrapper } from "./FileUploaderWrappers";
 import { useDepositFileApiClient } from "@js/oarepo_ui";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 
 export const EditFileButton = ({ fileName, record }) => {
   return (

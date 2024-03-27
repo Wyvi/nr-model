@@ -1,6 +1,6 @@
 import React from "react";
 import { SearchFacetLink } from "./SearchFacetLink";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import PropTypes from "prop-types";
 
 export const ResultsItemResourceType = ({

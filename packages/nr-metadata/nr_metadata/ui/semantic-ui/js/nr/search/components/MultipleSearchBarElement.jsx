@@ -1,6 +1,6 @@
 import React from "react";
 import { MultipleOptionsSearchBarRSK } from "@js/invenio_search_ui/components";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import PropTypes from "prop-types";
 
 export const MultipleSearchBarElement = ({ queryString, onInputChange }) => {

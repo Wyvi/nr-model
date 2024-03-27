@@ -7,7 +7,7 @@
 // Invenio-RDM-Records is free software; you can redistribute it and/or modify it
 // under the terms of the MIT License; see LICENSE file for more details.
 
-import React, { createRef } from "react";
+import React, { createRef, useState } from "react";
 import {
   Button,
   Form,
@@ -28,15 +28,20 @@ import {
 import * as Yup from "yup";
 import _get from "lodash/get";
 import _isEmpty from "lodash/isEmpty";
-import { CreatibutorsIdentifiers } from "./CreatibutorsIdentifiers";
 import { CREATIBUTOR_TYPE } from "./constants";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import { Trans } from "react-i18next";
 import {
   VocabularySelectField,
   LocalVocabularySelectField,
 } from "@js/oarepo_vocabularies";
 import PropTypes from "prop-types";
+import {
+  IdentifiersField,
+  personIdentifiersSchema,
+  organizationIdentifiersSchema,
+} from "../IdentifiersField";
+import { getTitleFromMultilingualObject } from "@js/oarepo_ui";
 
 const ModalActions = {
   ADD: "add",
@@ -52,7 +57,6 @@ const NamesAutocompleteOptions = {
 const makeIdEntry = (identifier) => {
   let icon = null;
   let link = null;
-
   if (identifier.scheme === "orcid") {
     icon = "/static/images/orcid.svg";
     link = "https://orcid.org/" + identifier.identifier;
@@ -84,56 +88,117 @@ const makeIdEntry = (identifier) => {
   );
 };
 
+const typeFieldPath = "nameType";
+const familyNameFieldPath = "family_name";
+const givenNameFieldPath = "given_name";
+const identifiersFieldPath = "authorityIdentifiers";
+const personalIdentifiersFieldPath = "personalIdentifiers";
+const organizationIdentifiersFieldPath = "organizationalIdentifiers";
+const affiliationsFieldPath = "affiliations";
+const roleFieldPath = "contributorType";
+const affiliationFullNameFieldPath = "affiliationNameFieldPath";
+const fullNameFieldPath = "fullName";
+
 /**
  * Function to transform formik creatibutor state
  * back to the external format.
  */
 const serializeCreatibutor = (submittedCreatibutor, isCreator, isPerson) => {
-  const fullName = `${submittedCreatibutor.family_name}, ${submittedCreatibutor.given_name}`;
-  const affiliations = _get(submittedCreatibutor, "affiliations", []);
-  const contributorType = _get(submittedCreatibutor, "contributorType");
-  const { given_name, family_name, ...cleanedCreatibutor } =
-    submittedCreatibutor;
+  const contributorType = _get(submittedCreatibutor, roleFieldPath);
+  const nameType = _get(submittedCreatibutor, typeFieldPath);
 
-  return {
-    ...cleanedCreatibutor,
-    affiliations,
-    ...(isPerson && { fullName }),
-    ...(!isCreator && { contributorType } && { contributorType }),
-  };
+  if (isPerson) {
+    const fullName = `${submittedCreatibutor.family_name}, ${submittedCreatibutor.given_name}`;
+    const affiliations = _get(submittedCreatibutor, affiliationsFieldPath, []);
+    const identifiers = _get(
+      submittedCreatibutor,
+      personalIdentifiersFieldPath,
+      []
+    );
+    return {
+      nameType,
+      fullName,
+      authorityIdentifiers: identifiers,
+      affiliations: affiliations.map((aff) => aff?.data || aff),
+      ...(!isCreator && { contributorType } && { contributorType }),
+    };
+  } else {
+    const affiliation = _get(
+      submittedCreatibutor,
+      affiliationFullNameFieldPath,
+      ""
+    );
+    const identifiers = _get(
+      submittedCreatibutor,
+      organizationIdentifiersFieldPath,
+      []
+    );
+
+    return {
+      nameType,
+      authorityIdentifiers: identifiers,
+      fullName:
+        getTitleFromMultilingualObject(affiliation?.title) ||
+        affiliation?.name ||
+        affiliation,
+      ...(!isCreator && { contributorType } && { contributorType }),
+    };
+  }
 };
 
 /**
  * Function to transform creatibutor object
  * to formik initialValues.
  */
-const deserializeCreatibutor = (initialCreatibutor, isCreator) => {
-  const identifiersFieldPath = "authorityIdentifiers";
-  const [family_name = "", given_name = ""] = _get(
-    initialCreatibutor,
-    "fullName",
-    ""
-  )
-    .trim()
-    .split(",", 2);
-
-  const result = {
-    // default type to personal
-    nameType: CREATIBUTOR_TYPE.PERSON,
-    family_name,
-    given_name,
-    ...initialCreatibutor,
-    authorityIdentifiers: _get(initialCreatibutor, identifiersFieldPath, []),
-    affiliations: _get(initialCreatibutor, "affiliations", []).map((aff) => ({
-      ...aff,
-      text: aff.title.cs,
-      value: aff.id,
-    })),
-    ...(!isCreator && {
-      contributorType: _get(initialCreatibutor, "contributorType"),
-    }),
-  };
-  return result;
+const deserializeCreatibutor = (initialCreatibutor, isCreator, isPerson) => {
+  if (isPerson) {
+    const [family_name = "", given_name = ""] = _get(
+      initialCreatibutor,
+      fullNameFieldPath,
+      ""
+    )
+      .trim()
+      .split(",", 2);
+    const result = {
+      // default type to personal
+      nameType: CREATIBUTOR_TYPE.PERSON,
+      family_name,
+      given_name,
+      ...initialCreatibutor,
+      [personalIdentifiersFieldPath]: _get(
+        initialCreatibutor,
+        identifiersFieldPath,
+        []
+      ),
+      affiliations: _get(initialCreatibutor, affiliationsFieldPath, []).map(
+        (aff) => ({
+          ...aff,
+          text: getTitleFromMultilingualObject(aff?.title),
+          value: aff?.id,
+        })
+      ),
+      ...(!isCreator && {
+        contributorType: _get(initialCreatibutor, roleFieldPath),
+      }),
+    };
+    return result;
+  } else {
+    return {
+      nameType: CREATIBUTOR_TYPE.ORGANIZATION,
+      [affiliationFullNameFieldPath]: _get(
+        initialCreatibutor,
+        fullNameFieldPath
+      ),
+      [organizationIdentifiersFieldPath]: _get(
+        initialCreatibutor,
+        identifiersFieldPath,
+        []
+      ),
+      ...(!isCreator && {
+        contributorType: _get(initialCreatibutor, "contributorType"),
+      }),
+    };
+  }
 };
 
 const serializeSuggestions = (
@@ -211,18 +276,19 @@ export const CreatibutorsModal = ({
   lastNameFieldPlaceholder,
   nameTypeHelpText,
 }) => {
-  const [open, setOpen] = React.useState(false);
-  const [action, setAction] = React.useState(initialAction);
-  const [saveAndContinueLabel, setSaveAndContinueLabel] = React.useState(
+  const [open, setOpen] = useState(false);
+  const [action, setAction] = useState(initialAction);
+  const [saveAndContinueLabel, setSaveAndContinueLabel] = useState(
     i18next.t("Save and add another")
   );
-  const [showPersonForm, setShowPersonForm] = React.useState(
+  const [showPersonForm, setShowPersonForm] = useState(
     autocompleteNames !== NamesAutocompleteOptions.SEARCH_ONLY ||
       !_isEmpty(initialCreatibutor)
   );
-  const namesAutocompleteRef = createRef();
 
+  const namesAutocompleteRef = createRef();
   const isCreator = schema === "creators";
+
   const CreatorSchema = Yup.object({
     nameType: Yup.string(),
     given_name: Yup.string().when("nameType", (nameType, schema) => {
@@ -241,6 +307,21 @@ export const CreatibutorsModal = ({
         return schema.required(i18next.t("Role is a required field."));
       }
     }),
+    affiliationNameFieldPath: Yup.mixed().test(
+      "text",
+      i18next.t("Affiliation name is a required field."),
+      (value, testContext) => {
+        if (testContext.parent.nameType === CREATIBUTOR_TYPE.ORGANIZATION) {
+          return (
+            !_isEmpty(value) ||
+            typeof value === "object" ||
+            typeof value === "string"
+          );
+        } else {
+          return true;
+        }
+      }
+    ),
   });
 
   const openModal = () => {
@@ -262,10 +343,9 @@ export const CreatibutorsModal = ({
   const displayActionLabel = action === ModalActions.ADD ? addLabel : editLabel;
 
   const onSubmit = (values, formikBag) => {
-    const typeFieldPath = `${personOrOrgPath}nameType`;
     const isPerson = _get(values, typeFieldPath) === CREATIBUTOR_TYPE.PERSON;
-
     onCreatibutorChange(serializeCreatibutor(values, isCreator, isPerson));
+
     formikBag.setSubmitting(false);
     formikBag.resetForm();
     switch (action) {
@@ -323,25 +403,21 @@ export const CreatibutorsModal = ({
   };
 
   const ActionLabel = () => displayActionLabel;
-  const personOrOrgPath = ``;
-  const typeFieldPath = `${personOrOrgPath}nameType`;
-  const familyNameFieldPath = `${personOrOrgPath}family_name`;
-  const givenNameFieldPath = `${personOrOrgPath}given_name`;
-  const nameFieldPath = `${personOrOrgPath}fullName`;
-  const identifiersFieldPath = `${personOrOrgPath}authorityIdentifiers`;
-  const affiliationsFieldPath = "affiliations";
-  const roleFieldPath = "contributorType";
 
   return (
     <Formik
-      initialValues={deserializeCreatibutor(initialCreatibutor, isCreator)}
+      initialValues={deserializeCreatibutor(
+        initialCreatibutor,
+        isCreator,
+        _get(initialCreatibutor, typeFieldPath) === CREATIBUTOR_TYPE.PERSON
+      )}
       onSubmit={onSubmit}
       enableReinitialize
       validationSchema={CreatorSchema}
       validateOnChange={false}
       validateOnBlur={false}
     >
-      {({ values, resetForm, handleSubmit, errors }) => (
+      {({ values, resetForm, handleSubmit }) => (
         <Modal
           centered={false}
           onOpen={() => openModal()}
@@ -409,7 +485,7 @@ export const CreatibutorsModal = ({
                   }
                 />
               </Form.Group>
-              {_get(values, typeFieldPath, "") === CREATIBUTOR_TYPE.PERSON ? (
+              {_get(values, typeFieldPath, "") === CREATIBUTOR_TYPE.PERSON && (
                 <div>
                   {autocompleteNames !== NamesAutocompleteOptions.OFF && (
                     <RemoteSelectField
@@ -480,64 +556,94 @@ export const CreatibutorsModal = ({
                         />
                       </Form.Group>
                       <Form.Group widths="equal">
-                        <CreatibutorsIdentifiers
-                          fieldPath={identifiersFieldPath}
+                        <IdentifiersField
+                          className="modal-identifiers-field"
+                          options={personIdentifiersSchema}
+                          fieldPath={personalIdentifiersFieldPath}
+                          label={i18next.t("Personal identifier")}
+                          helpText={i18next.t(
+                            "Choose from the menu identifier type. Write the identifier without prefix (i.e. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
+                          )}
+                          selectOnBlur={false}
+                          placeholder={i18next.t("Personal identifier")}
                         />
                       </Form.Group>
+                      <VocabularySelectField
+                        type="institutions"
+                        label={
+                          <FieldLabel
+                            htmlFor={affiliationsFieldPath}
+                            icon=""
+                            label={i18next.t("Affiliations")}
+                          />
+                        }
+                        fieldPath={affiliationsFieldPath}
+                        placeholder={i18next.t(
+                          "Start writing name of the institution, then choose from the options."
+                        )}
+                        multiple
+                        clearable
+                      />
                     </div>
                   )}
                 </div>
-              ) : (
-                <>
-                  <TextField
-                    label={i18next.t("Name")}
-                    placeholder={i18next.t("Organization name")}
-                    fieldPath={nameFieldPath}
-                  />
-                  <CreatibutorsIdentifiers
-                    fieldPath={identifiersFieldPath}
-                    placeholder={i18next.t("e.g. ROR, ISNI or GND.")}
-                  />
-                </>
               )}
-              {(_get(values, typeFieldPath) === CREATIBUTOR_TYPE.ORGANIZATION ||
-                (showPersonForm &&
-                  _get(values, typeFieldPath) === CREATIBUTOR_TYPE.PERSON)) && (
+              {_get(values, typeFieldPath) ===
+                CREATIBUTOR_TYPE.ORGANIZATION && (
                 <div>
                   <VocabularySelectField
+                    additionLabel={i18next.t(
+                      "Add institution name (free text): "
+                    )}
                     type="institutions"
                     label={
                       <FieldLabel
-                        htmlFor={affiliationsFieldPath}
+                        htmlFor={affiliationFullNameFieldPath}
                         icon=""
-                        label={i18next.t("Affiliations")}
+                        label={i18next.t("Affiliation")}
                       />
                     }
-                    fieldPath={affiliationsFieldPath}
+                    fieldPath={affiliationFullNameFieldPath}
                     placeholder={i18next.t(
                       "Start writing name of the institution, then choose from the options."
                     )}
-                    multiple
+                    clearable
+                    allowAdditions
+                    selection
+                    deburr
                   />
-                  {!isCreator && (
-                    <LocalVocabularySelectField
-                      type="contributor-types"
-                      placeholder={i18next.t(
-                        "Choose contributor's role from the list (editor, illustrator...)"
-                      )}
-                      fieldPath={roleFieldPath}
-                      label={
-                        <FieldLabel
-                          htmlFor={roleFieldPath}
-                          icon=""
-                          label={i18next.t("Role")}
-                        />
-                      }
-                      clearable
-                      optionsListName="contributor-types"
-                    />
-                  )}
+                  <IdentifiersField
+                    className="modal-identifiers-field"
+                    options={organizationIdentifiersSchema}
+                    fieldPath={organizationIdentifiersFieldPath}
+                    label={i18next.t("Organizational identifiers")}
+                    helpText={i18next.t(
+                      "Choose from the menu identifier type. Write the identifier without prefix (i.e. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
+                    )}
+                    selectOnBlur={false}
+                    identifierTypePlaceholder={i18next.t(
+                      "e.g. ISNI, ROR, ICO."
+                    )}
+                  />
                 </div>
+              )}
+              {!isCreator && (
+                <LocalVocabularySelectField
+                  type="contributor-types"
+                  placeholder={i18next.t(
+                    "Choose contributor's role from the list (editor, illustrator...)"
+                  )}
+                  fieldPath={roleFieldPath}
+                  label={
+                    <FieldLabel
+                      htmlFor={roleFieldPath}
+                      icon=""
+                      label={i18next.t("Role")}
+                    />
+                  }
+                  clearable
+                  optionsListName="contributor-types"
+                />
               )}
             </Form>
           </Modal.Content>
@@ -615,4 +721,7 @@ CreatibutorsModal.defaultProps = {
     authorityIdentifiers: [],
   },
   autocompleteNames: "search",
+  nameTypeHelpText: i18next.t(
+    "Choose if the author is a person or an organization."
+  ),
 };

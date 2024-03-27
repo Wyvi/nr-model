@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Form, Grid, Modal, Popup, Icon } from "semantic-ui-react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import PropTypes from "prop-types";
 import { MultilingualTextInput } from "@js/oarepo_ui";
 import { requiredMessage } from "@js/oarepo_ui";
@@ -101,7 +101,7 @@ export const SubjectsModal = ({ trigger, handleSubjectAdd }) => {
           </Modal.Header>
           <Modal.Content>
             <Form>
-              <Form.Field width={16}>
+              <Form.Field width={16} className="subjects-modal-fields">
                 <MultilingualTextInput
                   fieldPath="keywords"
                   lngFieldWidth={3}
