@@ -45,55 +45,13 @@ CommonMetadata:
       ^required: true
       ^label.cs: Autoři
       ^label.en: Authors
-      use: 'nr-datatypes#NRAuthority'
-      marshmallow:
-        class: nr_metadata.common.services.records.schema_common.NRCreatorSchema
-      ui:
-        detail: creator
-        marshmallow:
-          class: nr_metadata.common.services.records.ui_schema_common.NRCreatorUISchema
+      use: 'nr-datatypes#NRCreator'
 
     contributors[]:
-      use: 'nr-datatypes#NRAuthority'
+      use: 'nr-datatypes#NRContributor'
       ^label.cs: Přispěvatelé
       ^label.en: Contributors
       #^uniqueItems: true
-      schemas:
-        Personal:
-          ui:
-            detail: nr_contributor_person
-            marshmallow:
-              class: nr_metadata.common.services.records.ui_schema_common.NRContributorPersonUISchema
-          marshmallow:
-            class: nr_metadata.common.services.records.schema_common.NRContributorPersonSchema
-          properties:
-            contributorType:
-              use: 'nr-datatypes#NRContributorType'
-            fullName:
-              type: keyword
-              label.cs: Jméno přispěvatele
-              label.en: Contributor name
-        Organizational:
-          ui:
-            detail: nr_contributor_organization
-            marshmallow:
-              class: nr_metadata.common.services.records.ui_schema_common.NRContributorOrganizationUISchema
-          marshmallow:
-            class: nr_metadata.common.services.records.schema_common.NRContributorOrganizationSchema
-          properties:
-            contributorType:
-              use: 'nr-datatypes#NRContributorType'
-            fullName:
-              type: keyword
-              label.cs: Jméno přispěvatele
-              label.en: Contributor name
-
-      ui:
-        detail: contributor
-        marshmallow:
-          class: nr_metadata.common.services.records.ui_schema_common.NRContributorUISchema
-      marshmallow:
-        class: nr_metadata.common.services.records.schema_common.NRContributorSchema
 
     resourceType:
       # Taxonomy driven typology of objects that's possible to store in the repository
