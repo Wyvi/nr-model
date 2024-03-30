@@ -176,6 +176,57 @@ NRAuthority:
   marshmallow:
     class: nr_metadata.common.services.records.ui_schema_datatypes.NRAuthoritySchema
 
+NRCreator:
+  $id: NRCreator
+  use: 'nr-datatypes#NRAuthority'
+  marshmallow:
+    class: nr_metadata.common.services.records.schema_datatypes.NRCreatorSchema
+  ui:
+    detail: creator
+    marshmallow:
+      class: nr_metadata.common.services.records.ui_schema_datatypes.NRCreatorUISchema
+
+NRContributor:
+  $id: NRContributor
+  use: 'nr-datatypes#NRAuthority'
+  schemas:
+    Personal:
+      ui:
+        detail: nr_contributor_person
+        marshmallow:
+          class: nr_metadata.common.services.records.ui_schema_datatypes.NRContributorPersonUISchema
+      marshmallow:
+        class: nr_metadata.common.services.records.schema_datatypes.NRContributorPersonSchema
+      properties:
+        contributorType:
+          use: 'nr-datatypes#NRContributorType'
+        fullName:
+          type: keyword
+          label.cs: Jméno přispěvatele
+          label.en: Contributor name
+    Organizational:
+      ui:
+        detail: nr_contributor_organization
+        marshmallow:
+          class: nr_metadata.common.services.records.ui_schema_datatypes.NRContributorOrganizationUISchema
+      marshmallow:
+        class: nr_metadata.common.services.records.schema_datatypes.NRContributorOrganizationSchema
+      properties:
+        contributorType:
+          use: 'nr-datatypes#NRContributorType'
+        fullName:
+          type: keyword
+          label.cs: Jméno přispěvatele
+          label.en: Contributor name
+
+  ui:
+    detail: contributor
+    marshmallow:
+      class: nr_metadata.common.services.records.ui_schema_datatypes.NRContributorUISchema
+  marshmallow:
+    class: nr_metadata.common.services.records.schema_datatypes.NRContributorSchema
+
+
 NRObjectPID:
   $id: NRObjectPID
   label.cs: Identifikátor objektu

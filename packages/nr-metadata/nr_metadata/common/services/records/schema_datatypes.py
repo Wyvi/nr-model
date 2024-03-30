@@ -53,6 +53,28 @@ class NRRelatedItemSchema(DictOnlySchema):
     itemYear = ma_fields.Integer()
 
 
+class NRContributorSchema(PolymorphicSchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    Organizational = ma_fields.Nested(lambda: NRContributorOrganizationSchema())
+
+    Personal = ma_fields.Nested(lambda: NRContributorPersonSchema())
+
+    type_field = "nameType"
+
+
+class NRCreatorSchema(PolymorphicSchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    Organizational = ma_fields.Nested(lambda: NROrganizationSchema())
+
+    Personal = ma_fields.Nested(lambda: NRPersonSchema())
+
+    type_field = "nameType"
+
+
 class NREventSchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
@@ -90,6 +112,46 @@ class NRRelatedItemCreatorSchema(PolymorphicSchema):
     Personal = ma_fields.Nested(lambda: NRPersonSchema())
 
     type_field = "nameType"
+
+
+class NRContributorOrganizationSchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NROrganizationIdentifierSchema())
+    )
+
+    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularySchema())
+
+    fullName = ma_fields.String(required=True)
+
+    nameType = ma_fields.String(
+        validate=[OneOf(["Organizational", "Organizational", "Organizational"])]
+    )
+
+
+class NRContributorPersonSchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    affiliations = ma_fields.List(
+        ma_fields.Nested(lambda: NRAffiliationVocabularySchema())
+    )
+
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NRPersonIdentifierSchema())
+    )
+
+    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularySchema())
+
+    familyName = ma_fields.String()
+
+    fullName = ma_fields.String(required=True)
+
+    givenName = ma_fields.String()
+
+    nameType = ma_fields.String(validate=[OneOf(["Personal", "Personal", "Personal"])])
 
 
 class NRFundingReferenceSchema(DictOnlySchema):
@@ -141,7 +203,7 @@ class NRPersonSchema(DictOnlySchema):
 
     givenName = ma_fields.String()
 
-    nameType = ma_fields.String(validate=[OneOf(["Personal"])])
+    nameType = ma_fields.String(validate=[OneOf(["Personal", "Personal", "Personal"])])
 
 
 class NRRelatedItemContributorOrganizationSchema(DictOnlySchema):
@@ -286,7 +348,9 @@ class NROrganizationSchema(DictOnlySchema):
 
     fullName = ma_fields.String(required=True)
 
-    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
+    nameType = ma_fields.String(
+        validate=[OneOf(["Organizational", "Organizational", "Organizational"])]
+    )
 
 
 class NRResourceTypeVocabularySchema(DictOnlySchema):

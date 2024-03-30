@@ -406,21 +406,17 @@
                     "abstract": {
                         "type": "array",
                         "required": true,
+                        "label.cs": "Abstrakt",
+                        "label.en": "Abstract",
                         "marshmallow": {
-                            "read": false,
-                            "write": false,
                             "field-class": "oarepo_runtime.services.schema.i18n.MultilingualField"
                         },
                         "ui": {
+                            "detail": "multilingual",
                             "marshmallow": {
-                                "read": false,
-                                "write": false,
                                 "field-class": "oarepo_runtime.services.schema.i18n_ui.MultilingualUIField"
-                            },
-                            "detail": "multilingual"
+                            }
                         },
-                        "label.cs": "Abstrakt",
-                        "label.en": "Abstract",
                         "items": {
                             "type": "i18nStr",
                             "marshmallow": {
@@ -712,8 +708,6 @@
                                             "ui": {
                                                 "marshmallow": {
                                                     "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorTypeVocabularyUISchema",
-                                                    "read": false,
-                                                    "write": false,
                                                     "unknown": "INCLUDE",
                                                     "generate": true
                                                 },
@@ -722,8 +716,6 @@
                                             },
                                             "marshmallow": {
                                                 "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorTypeVocabularySchema",
-                                                "read": false,
-                                                "write": false,
                                                 "unknown": "INCLUDE",
                                                 "generate": true
                                             },
@@ -749,132 +741,11 @@
                                         "fullName": {
                                             "type": "keyword",
                                             "required": true,
-                                            "marshmallow": {
-                                                "read": false,
-                                                "write": false
-                                            },
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                }
-                                            },
                                             "sample": {
                                                 "faker": "name"
                                             },
                                             "label.cs": "Jméno přispěvatele",
                                             "label.en": "Contributor name"
-                                        },
-                                        "nameType": {
-                                            "type": "keyword",
-                                            "marshmallow": {
-                                                "read": false,
-                                                "write": false
-                                            },
-                                            "enum": [
-                                                "Personal"
-                                            ],
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                }
-                                            },
-                                            "label.cs": "Typ",
-                                            "label.en": "Type"
-                                        },
-                                        "givenName": {
-                                            "type": "keyword",
-                                            "marshmallow": {
-                                                "read": false,
-                                                "write": false
-                                            },
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                }
-                                            }
-                                        },
-                                        "familyName": {
-                                            "type": "keyword",
-                                            "marshmallow": {
-                                                "read": false,
-                                                "write": false
-                                            },
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                }
-                                            }
-                                        },
-                                        "authorityIdentifiers": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "identifier": {
-                                                        "type": "keyword",
-                                                        "required": true,
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        },
-                                                        "sample": {
-                                                            "faker": "isbn13"
-                                                        },
-                                                        "label.cs": "Identifikátor",
-                                                        "label.en": "Identifier",
-                                                        "i18n.key": "identifier"
-                                                    },
-                                                    "scheme": {
-                                                        "type": "keyword",
-                                                        "required": true,
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
-                                                        "enum": [
-                                                            "orcid",
-                                                            "scopusID",
-                                                            "researcherID",
-                                                            "czenasAutID",
-                                                            "vedidk",
-                                                            "institutionalID",
-                                                            "ISNI"
-                                                        ],
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        },
-                                                        "label.cs": "Typ identifikátoru",
-                                                        "label.en": "Identifier type",
-                                                        "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                        "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                        "i18n.key": "identifier_type"
-                                                    }
-                                                },
-                                                "ui": {
-                                                    "marshmallow": {
-                                                        "generate": false,
-                                                        "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
-                                                    },
-                                                    "detail": "nr_person_identifier"
-                                                },
-                                                "marshmallow": {
-                                                    "generate": false,
-                                                    "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
-                                                }
-                                            }
                                         },
                                         "affiliations": {
                                             "type": "array",
@@ -970,8 +841,6 @@
                                                 "ui": {
                                                     "marshmallow": {
                                                         "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
-                                                        "read": false,
-                                                        "write": false,
                                                         "unknown": "INCLUDE",
                                                         "generate": true
                                                     },
@@ -980,8 +849,6 @@
                                                 },
                                                 "marshmallow": {
                                                     "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
-                                                    "read": false,
-                                                    "write": false,
                                                     "unknown": "INCLUDE",
                                                     "generate": true
                                                 },
@@ -1004,24 +871,79 @@
                                                     ]
                                                 }
                                             }
+                                        },
+                                        "authorityIdentifiers": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "identifier": {
+                                                        "type": "keyword",
+                                                        "required": true,
+                                                        "sample": {
+                                                            "faker": "isbn13"
+                                                        },
+                                                        "label.cs": "Identifikátor",
+                                                        "label.en": "Identifier",
+                                                        "i18n.key": "identifier"
+                                                    },
+                                                    "scheme": {
+                                                        "type": "keyword",
+                                                        "required": true,
+                                                        "enum": [
+                                                            "orcid",
+                                                            "scopusID",
+                                                            "researcherID",
+                                                            "czenasAutID",
+                                                            "vedidk",
+                                                            "institutionalID",
+                                                            "ISNI"
+                                                        ],
+                                                        "label.cs": "Typ identifikátoru",
+                                                        "label.en": "Identifier type",
+                                                        "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                                        "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
+                                                        "i18n.key": "identifier_type"
+                                                    }
+                                                },
+                                                "ui": {
+                                                    "marshmallow": {
+                                                        "generate": false,
+                                                        "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
+                                                    },
+                                                    "detail": "nr_person_identifier"
+                                                },
+                                                "marshmallow": {
+                                                    "generate": false,
+                                                    "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
+                                                }
+                                            }
+                                        },
+                                        "familyName": {
+                                            "type": "keyword"
+                                        },
+                                        "givenName": {
+                                            "type": "keyword"
+                                        },
+                                        "nameType": {
+                                            "type": "keyword",
+                                            "enum": [
+                                                "Personal"
+                                            ],
+                                            "label.cs": "Typ",
+                                            "label.en": "Type"
                                         }
                                     },
                                     "ui": {
                                         "marshmallow": {
-                                            "generate": true,
-                                            "class": "nr_metadata.common.services.records.ui_schema_common.NRContributorPersonUISchema",
-                                            "base-classes": [
-                                                "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonUISchema"
-                                            ]
+                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorPersonUISchema",
+                                            "generate": true
                                         },
                                         "detail": "nr_contributor_person"
                                     },
                                     "marshmallow": {
-                                        "generate": true,
-                                        "class": "nr_metadata.common.services.records.schema_common.NRContributorPersonSchema",
-                                        "base-classes": [
-                                            "nr_metadata.common.services.records.schema_datatypes.NRPersonSchema"
-                                        ]
+                                        "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorPersonSchema",
+                                        "generate": true
                                     }
                                 },
                                 "Organizational": {
@@ -1034,8 +956,6 @@
                                             "ui": {
                                                 "marshmallow": {
                                                     "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorTypeVocabularyUISchema",
-                                                    "read": false,
-                                                    "write": false,
                                                     "unknown": "INCLUDE",
                                                     "generate": false
                                                 },
@@ -1044,8 +964,6 @@
                                             },
                                             "marshmallow": {
                                                 "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorTypeVocabularySchema",
-                                                "read": false,
-                                                "write": false,
                                                 "unknown": "INCLUDE",
                                                 "generate": false
                                             },
@@ -1071,42 +989,11 @@
                                         "fullName": {
                                             "type": "keyword",
                                             "required": true,
-                                            "marshmallow": {
-                                                "read": false,
-                                                "write": false
-                                            },
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                }
-                                            },
                                             "sample": {
                                                 "faker": "name"
                                             },
                                             "label.cs": "Jméno přispěvatele",
                                             "label.en": "Contributor name"
-                                        },
-                                        "nameType": {
-                                            "type": "keyword",
-                                            "marshmallow": {
-                                                "read": false,
-                                                "write": false
-                                            },
-                                            "enum": [
-                                                "Organizational"
-                                            ],
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                }
-                                            },
-                                            "sample": [
-                                                "Organizational"
-                                            ],
-                                            "label.cs": "Typ",
-                                            "label.en": "Type"
                                         },
                                         "authorityIdentifiers": {
                                             "type": "array",
@@ -1116,16 +1003,6 @@
                                                     "identifier": {
                                                         "type": "keyword",
                                                         "required": true,
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        },
                                                         "sample": {
                                                             "faker": "isbn13"
                                                         },
@@ -1136,22 +1013,12 @@
                                                     "scheme": {
                                                         "type": "keyword",
                                                         "required": true,
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
                                                         "enum": [
                                                             "ISNI",
                                                             "ROR",
                                                             "ICO",
                                                             "DOI"
                                                         ],
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        },
                                                         "label.cs": "Typ identifikátoru",
                                                         "label.en": "Identifier type",
                                                         "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
@@ -1171,31 +1038,36 @@
                                                     "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                                 }
                                             }
+                                        },
+                                        "nameType": {
+                                            "type": "keyword",
+                                            "enum": [
+                                                "Organizational"
+                                            ],
+                                            "sample": [
+                                                "Organizational"
+                                            ],
+                                            "label.cs": "Typ",
+                                            "label.en": "Type"
                                         }
                                     },
                                     "ui": {
                                         "marshmallow": {
-                                            "generate": true,
-                                            "class": "nr_metadata.common.services.records.ui_schema_common.NRContributorOrganizationUISchema",
-                                            "base-classes": [
-                                                "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationUISchema"
-                                            ]
+                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorOrganizationUISchema",
+                                            "generate": true
                                         },
                                         "detail": "nr_contributor_organization"
                                     },
                                     "marshmallow": {
-                                        "generate": true,
-                                        "class": "nr_metadata.common.services.records.schema_common.NRContributorOrganizationSchema",
-                                        "base-classes": [
-                                            "nr_metadata.common.services.records.schema_datatypes.NROrganizationSchema"
-                                        ]
+                                        "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorOrganizationSchema",
+                                        "generate": true
                                     }
                                 }
                             },
                             "discriminator": "nameType",
                             "ui": {
                                 "marshmallow": {
-                                    "class": "nr_metadata.common.services.records.ui_schema_common.NRContributorUISchema",
+                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorUISchema",
                                     "read": false,
                                     "write": false,
                                     "generate": true
@@ -1203,7 +1075,7 @@
                                 "detail": "contributor"
                             },
                             "marshmallow": {
-                                "class": "nr_metadata.common.services.records.schema_common.NRContributorSchema",
+                                "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorSchema",
                                 "read": false,
                                 "write": false,
                                 "generate": true
@@ -1304,8 +1176,6 @@
                                         "ui": {
                                             "marshmallow": {
                                                 "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
-                                                "read": false,
-                                                "write": false,
                                                 "unknown": "INCLUDE",
                                                 "generate": true
                                             },
@@ -1314,8 +1184,6 @@
                                         },
                                         "marshmallow": {
                                             "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
-                                            "read": false,
-                                            "write": false,
                                             "unknown": "INCLUDE",
                                             "generate": true
                                         },
@@ -1505,16 +1373,6 @@
                                             "identifier": {
                                                 "type": "keyword",
                                                 "required": true,
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                },
-                                                "ui": {
-                                                    "marshmallow": {
-                                                        "read": false,
-                                                        "write": false
-                                                    }
-                                                },
                                                 "sample": {
                                                     "faker": "isbn13"
                                                 },
@@ -1525,22 +1383,12 @@
                                             "scheme": {
                                                 "type": "keyword",
                                                 "required": true,
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                },
                                                 "enum": [
                                                     "ISNI",
                                                     "ROR",
                                                     "ICO",
                                                     "DOI"
                                                 ],
-                                                "ui": {
-                                                    "marshmallow": {
-                                                        "read": false,
-                                                        "write": false
-                                                    }
-                                                },
                                                 "label.cs": "Typ identifikátoru",
                                                 "label.en": "Identifier type",
                                                 "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
@@ -1556,8 +1404,6 @@
                                     "ui": {
                                         "marshmallow": {
                                             "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorTypeVocabularyUISchema",
-                                            "read": false,
-                                            "write": false,
                                             "unknown": "INCLUDE",
                                             "generate": false
                                         },
@@ -1566,8 +1412,6 @@
                                     },
                                     "marshmallow": {
                                         "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorTypeVocabularySchema",
-                                        "read": false,
-                                        "write": false,
                                         "unknown": "INCLUDE",
                                         "generate": false
                                     },
@@ -1665,31 +1509,11 @@
                                     }
                                 },
                                 "familyName": {
-                                    "type": "keyword",
-                                    "marshmallow": {
-                                        "read": false,
-                                        "write": false
-                                    },
-                                    "ui": {
-                                        "marshmallow": {
-                                            "read": false,
-                                            "write": false
-                                        }
-                                    }
+                                    "type": "keyword"
                                 },
                                 "fullName": {
                                     "type": "keyword",
                                     "required": true,
-                                    "marshmallow": {
-                                        "read": false,
-                                        "write": false
-                                    },
-                                    "ui": {
-                                        "marshmallow": {
-                                            "read": false,
-                                            "write": false
-                                        }
-                                    },
                                     "sample": {
                                         "faker": "name"
                                     },
@@ -1697,33 +1521,13 @@
                                     "label.en": "Contributor name"
                                 },
                                 "givenName": {
-                                    "type": "keyword",
-                                    "marshmallow": {
-                                        "read": false,
-                                        "write": false
-                                    },
-                                    "ui": {
-                                        "marshmallow": {
-                                            "read": false,
-                                            "write": false
-                                        }
-                                    }
+                                    "type": "keyword"
                                 },
                                 "nameType": {
                                     "type": "keyword",
-                                    "marshmallow": {
-                                        "read": false,
-                                        "write": false
-                                    },
                                     "enum": [
                                         "Organizational"
                                     ],
-                                    "ui": {
-                                        "marshmallow": {
-                                            "read": false,
-                                            "write": false
-                                        }
-                                    },
                                     "sample": [
                                         "Organizational"
                                     ],
@@ -1752,35 +1556,15 @@
                                     "properties": {
                                         "nameType": {
                                             "type": "keyword",
-                                            "marshmallow": {
-                                                "read": false,
-                                                "write": false
-                                            },
                                             "enum": [
                                                 "Personal"
                                             ],
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                }
-                                            },
                                             "label.cs": "Typ",
                                             "label.en": "Type"
                                         },
                                         "fullName": {
                                             "type": "keyword",
                                             "required": true,
-                                            "marshmallow": {
-                                                "read": false,
-                                                "write": false
-                                            },
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                }
-                                            },
                                             "sample": {
                                                 "faker": "name"
                                             },
@@ -1788,30 +1572,10 @@
                                             "label.en": "Author name"
                                         },
                                         "givenName": {
-                                            "type": "keyword",
-                                            "marshmallow": {
-                                                "read": false,
-                                                "write": false
-                                            },
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                }
-                                            }
+                                            "type": "keyword"
                                         },
                                         "familyName": {
-                                            "type": "keyword",
-                                            "marshmallow": {
-                                                "read": false,
-                                                "write": false
-                                            },
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                }
-                                            }
+                                            "type": "keyword"
                                         },
                                         "authorityIdentifiers": {
                                             "type": "array",
@@ -1821,16 +1585,6 @@
                                                     "identifier": {
                                                         "type": "keyword",
                                                         "required": true,
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        },
                                                         "sample": {
                                                             "faker": "isbn13"
                                                         },
@@ -1841,10 +1595,6 @@
                                                     "scheme": {
                                                         "type": "keyword",
                                                         "required": true,
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
                                                         "enum": [
                                                             "orcid",
                                                             "scopusID",
@@ -1854,12 +1604,6 @@
                                                             "institutionalID",
                                                             "ISNI"
                                                         ],
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        },
                                                         "label.cs": "Typ identifikátoru",
                                                         "label.en": "Identifier type",
                                                         "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
@@ -1974,8 +1718,6 @@
                                                 "ui": {
                                                     "marshmallow": {
                                                         "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
-                                                        "read": false,
-                                                        "write": false,
                                                         "unknown": "INCLUDE",
                                                         "generate": false
                                                     },
@@ -1984,8 +1726,6 @@
                                                 },
                                                 "marshmallow": {
                                                     "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
-                                                    "read": false,
-                                                    "write": false,
                                                     "unknown": "INCLUDE",
                                                     "generate": false
                                                 },
@@ -2012,14 +1752,14 @@
                                     },
                                     "ui": {
                                         "marshmallow": {
-                                            "generate": false,
-                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonUISchema"
+                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonUISchema",
+                                            "generate": true
                                         },
                                         "detail": "nr_person"
                                     },
                                     "marshmallow": {
-                                        "generate": false,
-                                        "class": "nr_metadata.common.services.records.schema_datatypes.NRPersonSchema"
+                                        "class": "nr_metadata.common.services.records.schema_datatypes.NRPersonSchema",
+                                        "generate": true
                                     }
                                 },
                                 "Organizational": {
@@ -2027,19 +1767,9 @@
                                     "properties": {
                                         "nameType": {
                                             "type": "keyword",
-                                            "marshmallow": {
-                                                "read": false,
-                                                "write": false
-                                            },
                                             "enum": [
                                                 "Organizational"
                                             ],
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                }
-                                            },
                                             "sample": [
                                                 "Organizational"
                                             ],
@@ -2049,16 +1779,6 @@
                                         "fullName": {
                                             "type": "keyword",
                                             "required": true,
-                                            "marshmallow": {
-                                                "read": false,
-                                                "write": false
-                                            },
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                }
-                                            },
                                             "sample": {
                                                 "faker": "name"
                                             },
@@ -2073,16 +1793,6 @@
                                                     "identifier": {
                                                         "type": "keyword",
                                                         "required": true,
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        },
                                                         "sample": {
                                                             "faker": "isbn13"
                                                         },
@@ -2093,22 +1803,12 @@
                                                     "scheme": {
                                                         "type": "keyword",
                                                         "required": true,
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
                                                         "enum": [
                                                             "ISNI",
                                                             "ROR",
                                                             "ICO",
                                                             "DOI"
                                                         ],
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        },
                                                         "label.cs": "Typ identifikátoru",
                                                         "label.en": "Identifier type",
                                                         "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
@@ -2132,21 +1832,21 @@
                                     },
                                     "ui": {
                                         "marshmallow": {
-                                            "generate": false,
-                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationUISchema"
+                                            "class": "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationUISchema",
+                                            "generate": true
                                         },
                                         "detail": "nr_organization"
                                     },
                                     "marshmallow": {
-                                        "generate": false,
-                                        "class": "nr_metadata.common.services.records.schema_datatypes.NROrganizationSchema"
+                                        "class": "nr_metadata.common.services.records.schema_datatypes.NROrganizationSchema",
+                                        "generate": true
                                     }
                                 }
                             },
                             "discriminator": "nameType",
                             "ui": {
                                 "marshmallow": {
-                                    "class": "nr_metadata.common.services.records.ui_schema_common.NRCreatorUISchema",
+                                    "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRCreatorUISchema",
                                     "read": false,
                                     "write": false,
                                     "generate": true
@@ -2154,7 +1854,7 @@
                                 "detail": "creator"
                             },
                             "marshmallow": {
-                                "class": "nr_metadata.common.services.records.schema_common.NRCreatorSchema",
+                                "class": "nr_metadata.common.services.records.schema_datatypes.NRCreatorSchema",
                                 "read": false,
                                 "write": false,
                                 "generate": true
@@ -2255,8 +1955,6 @@
                                         "ui": {
                                             "marshmallow": {
                                                 "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
-                                                "read": false,
-                                                "write": false,
                                                 "unknown": "INCLUDE",
                                                 "generate": false
                                             },
@@ -2265,8 +1963,6 @@
                                         },
                                         "marshmallow": {
                                             "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
-                                            "read": false,
-                                            "write": false,
                                             "unknown": "INCLUDE",
                                             "generate": false
                                         },
@@ -2456,16 +2152,6 @@
                                             "identifier": {
                                                 "type": "keyword",
                                                 "required": true,
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                },
-                                                "ui": {
-                                                    "marshmallow": {
-                                                        "read": false,
-                                                        "write": false
-                                                    }
-                                                },
                                                 "sample": {
                                                     "faker": "isbn13"
                                                 },
@@ -2476,22 +2162,12 @@
                                             "scheme": {
                                                 "type": "keyword",
                                                 "required": true,
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                },
                                                 "enum": [
                                                     "ISNI",
                                                     "ROR",
                                                     "ICO",
                                                     "DOI"
                                                 ],
-                                                "ui": {
-                                                    "marshmallow": {
-                                                        "read": false,
-                                                        "write": false
-                                                    }
-                                                },
                                                 "label.cs": "Typ identifikátoru",
                                                 "label.en": "Identifier type",
                                                 "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
@@ -2502,31 +2178,11 @@
                                     }
                                 },
                                 "familyName": {
-                                    "type": "keyword",
-                                    "marshmallow": {
-                                        "read": false,
-                                        "write": false
-                                    },
-                                    "ui": {
-                                        "marshmallow": {
-                                            "read": false,
-                                            "write": false
-                                        }
-                                    }
+                                    "type": "keyword"
                                 },
                                 "fullName": {
                                     "type": "keyword",
                                     "required": true,
-                                    "marshmallow": {
-                                        "read": false,
-                                        "write": false
-                                    },
-                                    "ui": {
-                                        "marshmallow": {
-                                            "read": false,
-                                            "write": false
-                                        }
-                                    },
                                     "sample": {
                                         "faker": "name"
                                     },
@@ -2534,33 +2190,13 @@
                                     "label.en": "Author name"
                                 },
                                 "givenName": {
-                                    "type": "keyword",
-                                    "marshmallow": {
-                                        "read": false,
-                                        "write": false
-                                    },
-                                    "ui": {
-                                        "marshmallow": {
-                                            "read": false,
-                                            "write": false
-                                        }
-                                    }
+                                    "type": "keyword"
                                 },
                                 "nameType": {
                                     "type": "keyword",
-                                    "marshmallow": {
-                                        "read": false,
-                                        "write": false
-                                    },
                                     "enum": [
                                         "Organizational"
                                     ],
-                                    "ui": {
-                                        "marshmallow": {
-                                            "read": false,
-                                            "write": false
-                                        }
-                                    },
                                     "sample": [
                                         "Organizational"
                                     ],
@@ -2653,6 +2289,8 @@
                                 "generate": false,
                                 "class": "nr_metadata.common.services.records.schema_datatypes.NREventSchema"
                             },
+                            "label.cs": "Událost",
+                            "label.en": "Event",
                             "properties": {
                                 "eventDate": {
                                     "type": "edtf-interval",
@@ -2684,6 +2322,8 @@
                                         "generate": false,
                                         "class": "nr_metadata.common.services.records.schema_datatypes.NRLocationSchema"
                                     },
+                                    "label.cs": "Umístění",
+                                    "label.en": "Location",
                                     "properties": {
                                         "country": {
                                             "type": "vocabulary",
@@ -2871,6 +2511,8 @@
                                 "generate": false,
                                 "class": "nr_metadata.common.services.records.schema_datatypes.NRFundingReferenceSchema"
                             },
+                            "label.cs": "Projekt nebo financování",
+                            "label.en": "Funding",
                             "properties": {
                                 "funder": {
                                     "type": "vocabulary",
@@ -3052,6 +2694,8 @@
                                 "generate": false,
                                 "class": "nr_metadata.common.services.records.schema_datatypes.NRGeoLocationSchema"
                             },
+                            "label.cs": "Geolokace",
+                            "label.en": "Geolocation",
                             "properties": {
                                 "geoLocationPlace": {
                                     "type": "keyword",
@@ -3336,6 +2980,8 @@
                                 "generate": false,
                                 "class": "nr_metadata.schema.identifiers.NRObjectIdentifierSchema"
                             },
+                            "label.cs": "Identifikátor objektu",
+                            "label.en": "Object identifier",
                             "properties": {
                                 "identifier": {
                                     "type": "keyword",
@@ -3689,6 +3335,9 @@
                                 "generate": false,
                                 "class": "nr_metadata.common.services.records.schema_datatypes.NRRelatedItemSchema"
                             },
+                            "description": "linkdata, propojení přidružených dokumentů a datasetů.",
+                            "label.cs": "Vazba na/z dalších zdrojů:",
+                            "label.en": "Link to/from other resources:",
                             "properties": {
                                 "itemContributors": {
                                     "type": "array",
@@ -3707,8 +3356,6 @@
                                                         "ui": {
                                                             "marshmallow": {
                                                                 "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorTypeVocabularyUISchema",
-                                                                "read": false,
-                                                                "write": false,
                                                                 "unknown": "INCLUDE",
                                                                 "generate": false
                                                             },
@@ -3717,8 +3364,6 @@
                                                         },
                                                         "marshmallow": {
                                                             "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorTypeVocabularySchema",
-                                                            "read": false,
-                                                            "write": false,
                                                             "unknown": "INCLUDE",
                                                             "generate": false
                                                         },
@@ -3739,136 +3384,6 @@
                                                             "args": [
                                                                 "vocabulary='contributor-types'"
                                                             ]
-                                                        }
-                                                    },
-                                                    "nameType": {
-                                                        "type": "keyword",
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
-                                                        "enum": [
-                                                            "Personal"
-                                                        ],
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        },
-                                                        "label.cs": "Typ",
-                                                        "label.en": "Type"
-                                                    },
-                                                    "fullName": {
-                                                        "type": "keyword",
-                                                        "required": true,
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        },
-                                                        "sample": {
-                                                            "faker": "name"
-                                                        },
-                                                        "label.cs": "Jméno autora",
-                                                        "label.en": "Author name"
-                                                    },
-                                                    "givenName": {
-                                                        "type": "keyword",
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        }
-                                                    },
-                                                    "familyName": {
-                                                        "type": "keyword",
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        }
-                                                    },
-                                                    "authorityIdentifiers": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "identifier": {
-                                                                    "type": "keyword",
-                                                                    "required": true,
-                                                                    "marshmallow": {
-                                                                        "read": false,
-                                                                        "write": false
-                                                                    },
-                                                                    "ui": {
-                                                                        "marshmallow": {
-                                                                            "read": false,
-                                                                            "write": false
-                                                                        }
-                                                                    },
-                                                                    "sample": {
-                                                                        "faker": "isbn13"
-                                                                    },
-                                                                    "label.cs": "Identifikátor",
-                                                                    "label.en": "Identifier",
-                                                                    "i18n.key": "identifier"
-                                                                },
-                                                                "scheme": {
-                                                                    "type": "keyword",
-                                                                    "required": true,
-                                                                    "marshmallow": {
-                                                                        "read": false,
-                                                                        "write": false
-                                                                    },
-                                                                    "enum": [
-                                                                        "orcid",
-                                                                        "scopusID",
-                                                                        "researcherID",
-                                                                        "czenasAutID",
-                                                                        "vedidk",
-                                                                        "institutionalID",
-                                                                        "ISNI"
-                                                                    ],
-                                                                    "ui": {
-                                                                        "marshmallow": {
-                                                                            "read": false,
-                                                                            "write": false
-                                                                        }
-                                                                    },
-                                                                    "label.cs": "Typ identifikátoru",
-                                                                    "label.en": "Identifier type",
-                                                                    "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                                    "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                                    "i18n.key": "identifier_type"
-                                                                }
-                                                            },
-                                                            "ui": {
-                                                                "marshmallow": {
-                                                                    "generate": false,
-                                                                    "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
-                                                                },
-                                                                "detail": "nr_person_identifier"
-                                                            },
-                                                            "marshmallow": {
-                                                                "generate": false,
-                                                                "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
-                                                            }
                                                         }
                                                     },
                                                     "affiliations": {
@@ -3965,8 +3480,6 @@
                                                             "ui": {
                                                                 "marshmallow": {
                                                                     "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
-                                                                    "read": false,
-                                                                    "write": false,
                                                                     "unknown": "INCLUDE",
                                                                     "generate": false
                                                                 },
@@ -3975,8 +3488,6 @@
                                                             },
                                                             "marshmallow": {
                                                                 "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
-                                                                "read": false,
-                                                                "write": false,
                                                                 "unknown": "INCLUDE",
                                                                 "generate": false
                                                             },
@@ -3999,24 +3510,88 @@
                                                                 ]
                                                             }
                                                         }
+                                                    },
+                                                    "authorityIdentifiers": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "identifier": {
+                                                                    "type": "keyword",
+                                                                    "required": true,
+                                                                    "sample": {
+                                                                        "faker": "isbn13"
+                                                                    },
+                                                                    "label.cs": "Identifikátor",
+                                                                    "label.en": "Identifier",
+                                                                    "i18n.key": "identifier"
+                                                                },
+                                                                "scheme": {
+                                                                    "type": "keyword",
+                                                                    "required": true,
+                                                                    "enum": [
+                                                                        "orcid",
+                                                                        "scopusID",
+                                                                        "researcherID",
+                                                                        "czenasAutID",
+                                                                        "vedidk",
+                                                                        "institutionalID",
+                                                                        "ISNI"
+                                                                    ],
+                                                                    "label.cs": "Typ identifikátoru",
+                                                                    "label.en": "Identifier type",
+                                                                    "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                                                    "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
+                                                                    "i18n.key": "identifier_type"
+                                                                }
+                                                            },
+                                                            "ui": {
+                                                                "marshmallow": {
+                                                                    "generate": false,
+                                                                    "class": "nr_metadata.ui_schema.identifiers.NRPersonIdentifierUISchema"
+                                                                },
+                                                                "detail": "nr_person_identifier"
+                                                            },
+                                                            "marshmallow": {
+                                                                "generate": false,
+                                                                "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
+                                                            }
+                                                        }
+                                                    },
+                                                    "familyName": {
+                                                        "type": "keyword"
+                                                    },
+                                                    "fullName": {
+                                                        "type": "keyword",
+                                                        "required": true,
+                                                        "sample": {
+                                                            "faker": "name"
+                                                        },
+                                                        "label.cs": "Jméno autora",
+                                                        "label.en": "Author name"
+                                                    },
+                                                    "givenName": {
+                                                        "type": "keyword"
+                                                    },
+                                                    "nameType": {
+                                                        "type": "keyword",
+                                                        "enum": [
+                                                            "Personal"
+                                                        ],
+                                                        "label.cs": "Typ",
+                                                        "label.en": "Type"
                                                     }
                                                 },
                                                 "ui": {
                                                     "marshmallow": {
-                                                        "generate": true,
                                                         "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRRelatedItemContributorPersonUISchema",
-                                                        "base-classes": [
-                                                            "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonUISchema"
-                                                        ]
+                                                        "generate": true
                                                     },
                                                     "detail": "nr_contributor_person"
                                                 },
                                                 "marshmallow": {
-                                                    "generate": true,
                                                     "class": "nr_metadata.common.services.records.schema_datatypes.NRRelatedItemContributorPersonSchema",
-                                                    "base-classes": [
-                                                        "nr_metadata.common.services.records.schema_datatypes.NRPersonSchema"
-                                                    ]
+                                                    "generate": true
                                                 }
                                             },
                                             "Organizational": {
@@ -4029,8 +3604,6 @@
                                                         "ui": {
                                                             "marshmallow": {
                                                                 "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorTypeVocabularyUISchema",
-                                                                "read": false,
-                                                                "write": false,
                                                                 "unknown": "INCLUDE",
                                                                 "generate": false
                                                             },
@@ -4039,8 +3612,6 @@
                                                         },
                                                         "marshmallow": {
                                                             "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorTypeVocabularySchema",
-                                                            "read": false,
-                                                            "write": false,
                                                             "unknown": "INCLUDE",
                                                             "generate": false
                                                         },
@@ -4063,46 +3634,6 @@
                                                             ]
                                                         }
                                                     },
-                                                    "nameType": {
-                                                        "type": "keyword",
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
-                                                        "enum": [
-                                                            "Organizational"
-                                                        ],
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        },
-                                                        "sample": [
-                                                            "Organizational"
-                                                        ],
-                                                        "label.cs": "Typ",
-                                                        "label.en": "Type"
-                                                    },
-                                                    "fullName": {
-                                                        "type": "keyword",
-                                                        "required": true,
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        },
-                                                        "sample": {
-                                                            "faker": "name"
-                                                        },
-                                                        "label.cs": "Jméno autora",
-                                                        "label.en": "Author name"
-                                                    },
                                                     "authorityIdentifiers": {
                                                         "type": "array",
                                                         "items": {
@@ -4111,16 +3642,6 @@
                                                                 "identifier": {
                                                                     "type": "keyword",
                                                                     "required": true,
-                                                                    "marshmallow": {
-                                                                        "read": false,
-                                                                        "write": false
-                                                                    },
-                                                                    "ui": {
-                                                                        "marshmallow": {
-                                                                            "read": false,
-                                                                            "write": false
-                                                                        }
-                                                                    },
                                                                     "sample": {
                                                                         "faker": "isbn13"
                                                                     },
@@ -4131,22 +3652,12 @@
                                                                 "scheme": {
                                                                     "type": "keyword",
                                                                     "required": true,
-                                                                    "marshmallow": {
-                                                                        "read": false,
-                                                                        "write": false
-                                                                    },
                                                                     "enum": [
                                                                         "ISNI",
                                                                         "ROR",
                                                                         "ICO",
                                                                         "DOI"
                                                                     ],
-                                                                    "ui": {
-                                                                        "marshmallow": {
-                                                                            "read": false,
-                                                                            "write": false
-                                                                        }
-                                                                    },
                                                                     "label.cs": "Typ identifikátoru",
                                                                     "label.en": "Identifier type",
                                                                     "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
@@ -4166,24 +3677,38 @@
                                                                 "class": "nr_metadata.schema.identifiers.NROrganizationIdentifierSchema"
                                                             }
                                                         }
+                                                    },
+                                                    "fullName": {
+                                                        "type": "keyword",
+                                                        "required": true,
+                                                        "sample": {
+                                                            "faker": "name"
+                                                        },
+                                                        "label.cs": "Jméno autora",
+                                                        "label.en": "Author name"
+                                                    },
+                                                    "nameType": {
+                                                        "type": "keyword",
+                                                        "enum": [
+                                                            "Organizational"
+                                                        ],
+                                                        "sample": [
+                                                            "Organizational"
+                                                        ],
+                                                        "label.cs": "Typ",
+                                                        "label.en": "Type"
                                                     }
                                                 },
                                                 "ui": {
                                                     "marshmallow": {
-                                                        "generate": true,
                                                         "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRRelatedItemContributorOrganizationUISchema",
-                                                        "base-classes": [
-                                                            "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationUISchema"
-                                                        ]
+                                                        "generate": true
                                                     },
                                                     "detail": "nr_contributor_organization"
                                                 },
                                                 "marshmallow": {
-                                                    "generate": true,
                                                     "class": "nr_metadata.common.services.records.schema_datatypes.NRRelatedItemContributorOrganizationSchema",
-                                                    "base-classes": [
-                                                        "nr_metadata.common.services.records.schema_datatypes.NROrganizationSchema"
-                                                    ]
+                                                    "generate": true
                                                 }
                                             }
                                         },
@@ -4299,8 +3824,6 @@
                                                     "ui": {
                                                         "marshmallow": {
                                                             "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
-                                                            "read": false,
-                                                            "write": false,
                                                             "unknown": "INCLUDE",
                                                             "generate": false
                                                         },
@@ -4309,8 +3832,6 @@
                                                     },
                                                     "marshmallow": {
                                                         "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
-                                                        "read": false,
-                                                        "write": false,
                                                         "unknown": "INCLUDE",
                                                         "generate": false
                                                     },
@@ -4500,16 +4021,6 @@
                                                         "identifier": {
                                                             "type": "keyword",
                                                             "required": true,
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            },
-                                                            "ui": {
-                                                                "marshmallow": {
-                                                                    "read": false,
-                                                                    "write": false
-                                                                }
-                                                            },
                                                             "sample": {
                                                                 "faker": "isbn13"
                                                             },
@@ -4520,22 +4031,12 @@
                                                         "scheme": {
                                                             "type": "keyword",
                                                             "required": true,
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            },
                                                             "enum": [
                                                                 "ISNI",
                                                                 "ROR",
                                                                 "ICO",
                                                                 "DOI"
                                                             ],
-                                                            "ui": {
-                                                                "marshmallow": {
-                                                                    "read": false,
-                                                                    "write": false
-                                                                }
-                                                            },
                                                             "label.cs": "Typ identifikátoru",
                                                             "label.en": "Identifier type",
                                                             "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
@@ -4551,8 +4052,6 @@
                                                 "ui": {
                                                     "marshmallow": {
                                                         "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRContributorTypeVocabularyUISchema",
-                                                        "read": false,
-                                                        "write": false,
                                                         "unknown": "INCLUDE",
                                                         "generate": false
                                                     },
@@ -4561,8 +4060,6 @@
                                                 },
                                                 "marshmallow": {
                                                     "class": "nr_metadata.common.services.records.schema_datatypes.NRContributorTypeVocabularySchema",
-                                                    "read": false,
-                                                    "write": false,
                                                     "unknown": "INCLUDE",
                                                     "generate": false
                                                 },
@@ -4660,31 +4157,11 @@
                                                 }
                                             },
                                             "familyName": {
-                                                "type": "keyword",
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                },
-                                                "ui": {
-                                                    "marshmallow": {
-                                                        "read": false,
-                                                        "write": false
-                                                    }
-                                                }
+                                                "type": "keyword"
                                             },
                                             "fullName": {
                                                 "type": "keyword",
                                                 "required": true,
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                },
-                                                "ui": {
-                                                    "marshmallow": {
-                                                        "read": false,
-                                                        "write": false
-                                                    }
-                                                },
                                                 "sample": {
                                                     "faker": "name"
                                                 },
@@ -4692,33 +4169,13 @@
                                                 "label.en": "Author name"
                                             },
                                             "givenName": {
-                                                "type": "keyword",
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                },
-                                                "ui": {
-                                                    "marshmallow": {
-                                                        "read": false,
-                                                        "write": false
-                                                    }
-                                                }
+                                                "type": "keyword"
                                             },
                                             "nameType": {
                                                 "type": "keyword",
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                },
                                                 "enum": [
                                                     "Organizational"
                                                 ],
-                                                "ui": {
-                                                    "marshmallow": {
-                                                        "read": false,
-                                                        "write": false
-                                                    }
-                                                },
                                                 "sample": [
                                                     "Organizational"
                                                 ],
@@ -4740,35 +4197,15 @@
                                                 "properties": {
                                                     "nameType": {
                                                         "type": "keyword",
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
                                                         "enum": [
                                                             "Personal"
                                                         ],
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        },
                                                         "label.cs": "Typ",
                                                         "label.en": "Type"
                                                     },
                                                     "fullName": {
                                                         "type": "keyword",
                                                         "required": true,
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        },
                                                         "sample": {
                                                             "faker": "name"
                                                         },
@@ -4776,30 +4213,10 @@
                                                         "label.en": "Author name"
                                                     },
                                                     "givenName": {
-                                                        "type": "keyword",
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        }
+                                                        "type": "keyword"
                                                     },
                                                     "familyName": {
-                                                        "type": "keyword",
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        }
+                                                        "type": "keyword"
                                                     },
                                                     "authorityIdentifiers": {
                                                         "type": "array",
@@ -4809,16 +4226,6 @@
                                                                 "identifier": {
                                                                     "type": "keyword",
                                                                     "required": true,
-                                                                    "marshmallow": {
-                                                                        "read": false,
-                                                                        "write": false
-                                                                    },
-                                                                    "ui": {
-                                                                        "marshmallow": {
-                                                                            "read": false,
-                                                                            "write": false
-                                                                        }
-                                                                    },
                                                                     "sample": {
                                                                         "faker": "isbn13"
                                                                     },
@@ -4829,10 +4236,6 @@
                                                                 "scheme": {
                                                                     "type": "keyword",
                                                                     "required": true,
-                                                                    "marshmallow": {
-                                                                        "read": false,
-                                                                        "write": false
-                                                                    },
                                                                     "enum": [
                                                                         "orcid",
                                                                         "scopusID",
@@ -4842,12 +4245,6 @@
                                                                         "institutionalID",
                                                                         "ISNI"
                                                                     ],
-                                                                    "ui": {
-                                                                        "marshmallow": {
-                                                                            "read": false,
-                                                                            "write": false
-                                                                        }
-                                                                    },
                                                                     "label.cs": "Typ identifikátoru",
                                                                     "label.en": "Identifier type",
                                                                     "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
@@ -4962,8 +4359,6 @@
                                                             "ui": {
                                                                 "marshmallow": {
                                                                     "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
-                                                                    "read": false,
-                                                                    "write": false,
                                                                     "unknown": "INCLUDE",
                                                                     "generate": false
                                                                 },
@@ -4972,8 +4367,6 @@
                                                             },
                                                             "marshmallow": {
                                                                 "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
-                                                                "read": false,
-                                                                "write": false,
                                                                 "unknown": "INCLUDE",
                                                                 "generate": false
                                                             },
@@ -5000,14 +4393,14 @@
                                                 },
                                                 "ui": {
                                                     "marshmallow": {
-                                                        "generate": false,
-                                                        "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonUISchema"
+                                                        "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRPersonUISchema",
+                                                        "generate": false
                                                     },
                                                     "detail": "nr_person"
                                                 },
                                                 "marshmallow": {
-                                                    "generate": false,
-                                                    "class": "nr_metadata.common.services.records.schema_datatypes.NRPersonSchema"
+                                                    "class": "nr_metadata.common.services.records.schema_datatypes.NRPersonSchema",
+                                                    "generate": false
                                                 }
                                             },
                                             "Organizational": {
@@ -5015,19 +4408,9 @@
                                                 "properties": {
                                                     "nameType": {
                                                         "type": "keyword",
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
                                                         "enum": [
                                                             "Organizational"
                                                         ],
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        },
                                                         "sample": [
                                                             "Organizational"
                                                         ],
@@ -5037,16 +4420,6 @@
                                                     "fullName": {
                                                         "type": "keyword",
                                                         "required": true,
-                                                        "marshmallow": {
-                                                            "read": false,
-                                                            "write": false
-                                                        },
-                                                        "ui": {
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            }
-                                                        },
                                                         "sample": {
                                                             "faker": "name"
                                                         },
@@ -5061,16 +4434,6 @@
                                                                 "identifier": {
                                                                     "type": "keyword",
                                                                     "required": true,
-                                                                    "marshmallow": {
-                                                                        "read": false,
-                                                                        "write": false
-                                                                    },
-                                                                    "ui": {
-                                                                        "marshmallow": {
-                                                                            "read": false,
-                                                                            "write": false
-                                                                        }
-                                                                    },
                                                                     "sample": {
                                                                         "faker": "isbn13"
                                                                     },
@@ -5081,22 +4444,12 @@
                                                                 "scheme": {
                                                                     "type": "keyword",
                                                                     "required": true,
-                                                                    "marshmallow": {
-                                                                        "read": false,
-                                                                        "write": false
-                                                                    },
                                                                     "enum": [
                                                                         "ISNI",
                                                                         "ROR",
                                                                         "ICO",
                                                                         "DOI"
                                                                     ],
-                                                                    "ui": {
-                                                                        "marshmallow": {
-                                                                            "read": false,
-                                                                            "write": false
-                                                                        }
-                                                                    },
                                                                     "label.cs": "Typ identifikátoru",
                                                                     "label.en": "Identifier type",
                                                                     "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
@@ -5120,14 +4473,14 @@
                                                 },
                                                 "ui": {
                                                     "marshmallow": {
-                                                        "generate": false,
-                                                        "class": "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationUISchema"
+                                                        "class": "nr_metadata.common.services.records.ui_schema_datatypes.NROrganizationUISchema",
+                                                        "generate": false
                                                     },
                                                     "detail": "nr_organization"
                                                 },
                                                 "marshmallow": {
-                                                    "generate": false,
-                                                    "class": "nr_metadata.common.services.records.schema_datatypes.NROrganizationSchema"
+                                                    "class": "nr_metadata.common.services.records.schema_datatypes.NROrganizationSchema",
+                                                    "generate": false
                                                 }
                                             }
                                         },
@@ -5243,8 +4596,6 @@
                                                     "ui": {
                                                         "marshmallow": {
                                                             "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRAffiliationVocabularyUISchema",
-                                                            "read": false,
-                                                            "write": false,
                                                             "unknown": "INCLUDE",
                                                             "generate": false
                                                         },
@@ -5253,8 +4604,6 @@
                                                     },
                                                     "marshmallow": {
                                                         "class": "nr_metadata.common.services.records.schema_datatypes.NRAffiliationVocabularySchema",
-                                                        "read": false,
-                                                        "write": false,
                                                         "unknown": "INCLUDE",
                                                         "generate": false
                                                     },
@@ -5444,16 +4793,6 @@
                                                         "identifier": {
                                                             "type": "keyword",
                                                             "required": true,
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            },
-                                                            "ui": {
-                                                                "marshmallow": {
-                                                                    "read": false,
-                                                                    "write": false
-                                                                }
-                                                            },
                                                             "sample": {
                                                                 "faker": "isbn13"
                                                             },
@@ -5464,22 +4803,12 @@
                                                         "scheme": {
                                                             "type": "keyword",
                                                             "required": true,
-                                                            "marshmallow": {
-                                                                "read": false,
-                                                                "write": false
-                                                            },
                                                             "enum": [
                                                                 "ISNI",
                                                                 "ROR",
                                                                 "ICO",
                                                                 "DOI"
                                                             ],
-                                                            "ui": {
-                                                                "marshmallow": {
-                                                                    "read": false,
-                                                                    "write": false
-                                                                }
-                                                            },
                                                             "label.cs": "Typ identifikátoru",
                                                             "label.en": "Identifier type",
                                                             "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
@@ -5490,31 +4819,11 @@
                                                 }
                                             },
                                             "familyName": {
-                                                "type": "keyword",
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                },
-                                                "ui": {
-                                                    "marshmallow": {
-                                                        "read": false,
-                                                        "write": false
-                                                    }
-                                                }
+                                                "type": "keyword"
                                             },
                                             "fullName": {
                                                 "type": "keyword",
                                                 "required": true,
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                },
-                                                "ui": {
-                                                    "marshmallow": {
-                                                        "read": false,
-                                                        "write": false
-                                                    }
-                                                },
                                                 "sample": {
                                                     "faker": "name"
                                                 },
@@ -5522,33 +4831,13 @@
                                                 "label.en": "Author name"
                                             },
                                             "givenName": {
-                                                "type": "keyword",
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                },
-                                                "ui": {
-                                                    "marshmallow": {
-                                                        "read": false,
-                                                        "write": false
-                                                    }
-                                                }
+                                                "type": "keyword"
                                             },
                                             "nameType": {
                                                 "type": "keyword",
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                },
                                                 "enum": [
                                                     "Organizational"
                                                 ],
-                                                "ui": {
-                                                    "marshmallow": {
-                                                        "read": false,
-                                                        "write": false
-                                                    }
-                                                },
                                                 "sample": [
                                                     "Organizational"
                                                 ],
@@ -5603,6 +4892,8 @@
                                             "generate": false,
                                             "class": "nr_metadata.schema.identifiers.NRObjectIdentifierSchema"
                                         },
+                                        "label.cs": "Identifikátor objektu",
+                                        "label.en": "Object identifier",
                                         "properties": {
                                             "identifier": {
                                                 "type": "keyword",
@@ -6241,6 +5532,8 @@
                                 "generate": false,
                                 "class": "nr_metadata.common.services.records.schema_datatypes.NRSeriesSchema"
                             },
+                            "label.cs": "Edice",
+                            "label.en": "Series",
                             "properties": {
                                 "seriesTitle": {
                                     "type": "keyword",
@@ -6428,6 +5721,8 @@
                                 "generate": false,
                                 "class": "nr_metadata.common.services.records.schema_datatypes.NRSubjectSchema"
                             },
+                            "label.cs": "Klíčové slovo",
+                            "label.en": "Keyword",
                             "properties": {
                                 "classificationCode": {
                                     "type": "keyword",
@@ -6549,6 +5844,8 @@
                                 "generate": false,
                                 "class": "nr_metadata.schema.identifiers.NRSystemIdentifierSchema"
                             },
+                            "label.cs": "Systémový identifikátor",
+                            "label.en": "System identifier",
                             "properties": {
                                 "identifier": {
                                     "type": "keyword",

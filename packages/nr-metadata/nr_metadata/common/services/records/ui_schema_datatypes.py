@@ -65,6 +65,94 @@ class NRRelatedItemUISchema(DictOnlySchema):
     itemYear = ma_fields.Integer()
 
 
+class NRContributorOrganizationUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NROrganizationIdentifierUISchema())
+    )
+
+    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularyUISchema())
+
+    fullName = ma_fields.String(required=True)
+
+    nameType = ma_fields.String(
+        validate=[OneOf(["Organizational", "Organizational", "Organizational"])]
+    )
+
+
+class NRContributorPersonUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    affiliations = ma_fields.List(
+        ma_fields.Nested(lambda: NRAffiliationVocabularyUISchema())
+    )
+
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NRPersonIdentifierUISchema())
+    )
+
+    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularyUISchema())
+
+    familyName = ma_fields.String()
+
+    fullName = ma_fields.String(required=True)
+
+    givenName = ma_fields.String()
+
+    nameType = ma_fields.String(validate=[OneOf(["Personal", "Personal", "Personal"])])
+
+
+class NRContributorUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    affiliations = ma_fields.List(
+        ma_fields.Nested(lambda: NRAffiliationVocabularyUISchema())
+    )
+
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NROrganizationIdentifierUISchema())
+    )
+
+    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularyUISchema())
+
+    familyName = ma_fields.String()
+
+    fullName = ma_fields.String(required=True)
+
+    givenName = ma_fields.String()
+
+    nameType = ma_fields.String(
+        validate=[OneOf(["Organizational", "Organizational", "Organizational"])]
+    )
+
+
+class NRCreatorUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+    affiliations = ma_fields.List(
+        ma_fields.Nested(lambda: NRAffiliationVocabularyUISchema())
+    )
+
+    authorityIdentifiers = ma_fields.List(
+        ma_fields.Nested(lambda: NROrganizationIdentifierUISchema())
+    )
+
+    familyName = ma_fields.String()
+
+    fullName = ma_fields.String(required=True)
+
+    givenName = ma_fields.String()
+
+    nameType = ma_fields.String(
+        validate=[OneOf(["Organizational", "Organizational", "Organizational"])]
+    )
+
+
 class NRFundingReferenceUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
@@ -114,7 +202,7 @@ class NRPersonUISchema(DictOnlySchema):
 
     givenName = ma_fields.String()
 
-    nameType = ma_fields.String(validate=[OneOf(["Personal"])])
+    nameType = ma_fields.String(validate=[OneOf(["Personal", "Personal", "Personal"])])
 
 
 class NRRelatedItemContributorOrganizationUISchema(DictOnlySchema):
@@ -299,7 +387,9 @@ class NROrganizationUISchema(DictOnlySchema):
 
     fullName = ma_fields.String(required=True)
 
-    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
+    nameType = ma_fields.String(
+        validate=[OneOf(["Organizational", "Organizational", "Organizational"])]
+    )
 
 
 class NRResourceTypeVocabularyUISchema(DictOnlySchema):
