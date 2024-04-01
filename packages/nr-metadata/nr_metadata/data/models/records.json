@@ -2657,7 +2657,7 @@
                                         }
                                     },
                                     "label.cs": "Číslo projektu",
-                                    "label.en": "Project double"
+                                    "label.en": "Project identifier"
                                 },
                                 "projectName": {
                                     "type": "fulltext",
