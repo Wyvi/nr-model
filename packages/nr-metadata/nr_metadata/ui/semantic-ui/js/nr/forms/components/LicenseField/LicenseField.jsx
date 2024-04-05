@@ -40,6 +40,7 @@ export const LicenseField = ({
   return (
     <Form.Field required={required}>
       <FieldLabel htmlFor={fieldPath} icon={labelIcon} label={label} />
+      <label className="helptext">{helpText}</label>
       {license && (
         <LicenseFieldItem
           key={license.id}
@@ -62,7 +63,6 @@ export const LicenseField = ({
         handleLicenseChange={handleLicenseChange}
         serializeLicenses={serializeLicenses}
       />
-      <label className="helptext">{helpText}</label>
     </Form.Field>
   );
 };

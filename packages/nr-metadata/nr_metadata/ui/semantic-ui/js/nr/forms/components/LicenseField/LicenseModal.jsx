@@ -10,7 +10,6 @@ import { i18next } from "@translations/i18next";
 import { Formik } from "formik";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { TextAreaField, TextField } from "react-invenio-forms";
 import { OverridableContext } from "react-overridable";
 import {
   EmptyResults,
@@ -21,18 +20,13 @@ import {
   SearchBar,
   Toggle,
 } from "react-searchkit";
-import { Button, Form, Grid, Header, Menu, Modal } from "semantic-ui-react";
+import { Button, Grid, Header, Menu, Modal } from "semantic-ui-react";
 import * as Yup from "yup";
 import { LicenseFilter } from "./LicenseFilter";
 import { LicenseResults } from "./LicenseResults";
 
 const overriddenComponents = {
   "SearchFilters.Toggle": LicenseFilter,
-};
-
-const ModalActions = {
-  ADD: "add",
-  EDIT: "edit",
 };
 
 const LicenseSchema = Yup.object().shape({
@@ -130,24 +124,14 @@ export class LicenseModal extends Component {
                       <Grid.Column width={8} textAlign="right" floated="right">
                         <Menu compact>
                           <Toggle
-                            title={i18next.t("Recommended")}
-                            label="recommended"
-                            filterValue={["tags", "recommended"]}
+                            title={i18next.t("Featured")}
+                            label="featured"
+                            filterValue={["tags", "featured"]}
                           />
                           <Toggle
                             title={i18next.t("All")}
                             label="all"
-                            filterValue={["tags", "all"]}
-                          />
-                          <Toggle
-                            title={i18next.t("Data")}
-                            label="data"
-                            filterValue={["tags", "data"]}
-                          />
-                          <Toggle
-                            title={i18next.t("Software")}
-                            label="software"
-                            filterValue={["tags", "software"]}
+                            filterValue={["tags", ""]}
                           />
                         </Menu>
                       </Grid.Column>

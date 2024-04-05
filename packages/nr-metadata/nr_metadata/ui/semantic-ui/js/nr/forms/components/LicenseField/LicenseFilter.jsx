@@ -18,7 +18,8 @@ export const LicenseFilter = ({
 }) => {
   const _isChecked = (userSelectionFilters) => {
     const isFilterActive =
-      userSelectionFilters.filter((filter) => filter[1] === filterValue[1]).length > 0;
+      userSelectionFilters.filter((filter) => filter[1] === filterValue[1])
+        .length > 0;
     return isFilterActive;
   };
 
@@ -28,7 +29,7 @@ export const LicenseFilter = ({
 
   const isChecked = _isChecked(userSelectionFilters);
   return isChecked ? (
-    <Menu.Item name={label} active as={Button} primary onClick={onToggleClicked}>
+    <Menu.Item name={label} active primary onClick={onToggleClicked}>
       {title}
     </Menu.Item>
   ) : (

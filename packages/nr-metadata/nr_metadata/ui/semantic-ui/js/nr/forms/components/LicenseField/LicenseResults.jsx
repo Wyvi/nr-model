@@ -9,7 +9,7 @@ import React from "react";
 import { Item, Header, Radio } from "semantic-ui-react";
 import { withState } from "react-searchkit";
 import _get from "lodash/get";
-import { FastField } from "formik";
+import { FastField } from "formik";k
 
 export const LicenseResults = withState(
   ({ currentResultsState: results, serializeLicenses }) => {
