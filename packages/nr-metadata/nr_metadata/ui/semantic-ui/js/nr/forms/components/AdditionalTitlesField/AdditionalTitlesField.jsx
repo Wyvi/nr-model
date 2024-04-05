@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Form } from "semantic-ui-react";
 import { ArrayField, SelectField } from "react-invenio-forms";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import {
   I18nTextInputField,
   ArrayFieldItem,

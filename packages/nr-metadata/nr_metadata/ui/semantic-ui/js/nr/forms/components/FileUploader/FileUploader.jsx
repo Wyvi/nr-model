@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import { Message, Icon, Button } from "semantic-ui-react";
 import { FileUploaderTable } from "./FileUploaderTable";
 import { UploadFileButton } from "./FileUploaderButtons";

@@ -21,6 +21,7 @@ from nr_metadata.common.services.records.ui_schema_datatypes import (
     NRExternalLocationUISchema,
     NRFundingReferenceUISchema,
     NRGeoLocationUISchema,
+    NRLanguageVocabularyUISchema,
     NRRelatedItemUISchema,
     NRSeriesUISchema,
     NRSubjectUISchema,
@@ -60,6 +61,10 @@ class NRDocumentMetadataUISchema(NRCommonMetadataUISchema):
     )
 
     geoLocations = ma_fields.List(ma_fields.Nested(lambda: NRGeoLocationUISchema()))
+
+    languages = ma_fields.List(
+        ma_fields.Nested(lambda: NRLanguageVocabularyUISchema()), required=True
+    )
 
     objectIdentifiers = ma_fields.List(
         ma_fields.Nested(lambda: NRObjectIdentifierUISchema())

@@ -20,6 +20,7 @@ from nr_metadata.common.services.records.schema_datatypes import (
     NRExternalLocationSchema,
     NRFundingReferenceSchema,
     NRGeoLocationSchema,
+    NRLanguageVocabularySchema,
     NRRelatedItemSchema,
     NRSeriesSchema,
     NRSubjectSchema,
@@ -60,6 +61,12 @@ class NRDocumentMetadataSchema(NRCommonMetadataSchema):
     )
 
     geoLocations = ma_fields.List(ma_fields.Nested(lambda: NRGeoLocationSchema()))
+
+    languages = ma_fields.List(
+        ma_fields.Nested(lambda: NRLanguageVocabularySchema()),
+        required=True,
+        validate=[ma.validate.Length(min=1)],
+    )
 
     objectIdentifiers = ma_fields.List(
         ma_fields.Nested(lambda: NRObjectIdentifierSchema())

@@ -264,15 +264,15 @@
                 },
                 "dateCollected": {
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date"
                 },
                 "dateCreated": {
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date"
                 },
                 "dateIssued": {
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date"
                 },
                 "dateValidTo": {
                     "type": "string",
@@ -297,7 +297,7 @@
                         "properties": {
                             "eventDate": {
                                 "type": "string",
-                                "format": "date-time"
+                                "format": "date"
                             },
                             "eventLocation": {
                                 "type": "object",

@@ -6,7 +6,7 @@ import { SearchFacetLink } from "./SearchFacetLink";
 import _groupBy from "lodash/groupBy";
 import _toPairs from "lodash/toPairs";
 import _join from "lodash/join";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import PropTypes from "prop-types";
 
 const CreatibutorSearchLink = ({
@@ -16,7 +16,7 @@ const CreatibutorSearchLink = ({
 }) => (
   <SearchFacetLink
     searchUrl={searchUrl}
-    searchFacet={`metadata_${searchField}_fullName`}
+    searchFacet="syntheticFields_people"
     value={personName}
     className={`${searchField}-link`}
     title={`${personName}: ${i18next.t("Find more records by this person")}`}

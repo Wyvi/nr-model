@@ -17,7 +17,7 @@ import { DndProvider } from "react-dnd";
 
 import { CreatibutorsModal } from "./CreatibutorsModal";
 import { CreatibutorsFieldItem } from "./CreatibutorsFieldItem";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 
 const creatibutorNameDisplay = (value) => {
   const name = _get(value, `fullName`);
@@ -76,6 +76,7 @@ class CreatibutorsFieldForm extends Component {
                 <CreatibutorsFieldItem
                   key={key}
                   identifiersError={identifiersError}
+                  nameTypeHelpText={nameTypeHelpText}
                   {...{
                     displayName,
                     index,
@@ -197,7 +198,4 @@ CreatibutorsField.defaultProps = {
   addButtonLabel: i18next.t("Add creator"),
   nameFieldPlaceholder: i18next.t("Write author's name."),
   lastNameFieldPlaceholder: i18next.t("Write author's last name."),
-  nameTypeHelpText: i18next.t(
-    "Choose if the author is a person or an organization."
-  ),
 };

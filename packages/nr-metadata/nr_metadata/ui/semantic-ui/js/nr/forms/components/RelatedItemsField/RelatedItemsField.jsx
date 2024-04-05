@@ -17,7 +17,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import { RelatedItemsModal } from "./RelatedItemsModal";
 import { RelatedItemsFieldItem } from "./RelatedItemsFieldItem";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 
 const relatedItemNameDisplay = (value) => {
   const name = _get(value, `itemTitle`);

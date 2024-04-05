@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { Form, Icon, Button, Divider } from "semantic-ui-react";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import { SubjectsModal } from "./SubjectsModal";
 import { useFormikContext, getIn } from "formik";
 import _difference from "lodash/difference";

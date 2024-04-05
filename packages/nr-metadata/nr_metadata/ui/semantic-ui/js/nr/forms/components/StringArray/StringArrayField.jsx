@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { FieldLabel, TextField } from "react-invenio-forms";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import { useFormikContext, getIn, FieldArray } from "formik";
 import { Icon, Form } from "semantic-ui-react";
 import { ArrayFieldItem, useShowEmptyValue } from "@js/oarepo_ui";

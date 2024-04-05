@@ -6,7 +6,7 @@
 // Invenio-RDM-Records is free software; you can redistribute it and/or modify it
 // under the terms of the MIT License; see LICENSE file for more details.
 
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import _get from "lodash/get";
 import React from "react";
 import { useDrag, useDrop } from "react-dnd";
@@ -28,6 +28,7 @@ export const CreatibutorsFieldItem = ({
   displayName,
   schema,
   autocompleteNames,
+  nameTypeHelpText,
 }) => {
   const dropRef = React.useRef(null);
   // eslint-disable-next-line no-unused-vars
@@ -67,7 +68,7 @@ export const CreatibutorsFieldItem = ({
       role && (
         <Label size="tiny">
           {
-            vocabularies["contributor-roles"].all.find(
+            vocabularies["contributor-types"].all.find(
               (item) => item.value === role.id
             ).text
           }
@@ -97,6 +98,7 @@ export const CreatibutorsFieldItem = ({
             onCreatibutorChange={(selectedCreatibutor) => {
               replaceCreatibutor(index, selectedCreatibutor);
             }}
+            nameTypeHelpText={nameTypeHelpText}
             initialCreatibutor={initialCreatibutor}
             schema={schema}
             autocompleteNames={autocompleteNames}
@@ -156,7 +158,7 @@ export const CreatibutorsFieldItem = ({
                     height="16"
                   />
                 )} */}
-                {displayName} {renderRole(initialCreatibutor?.role)}
+                {displayName} {renderRole(initialCreatibutor?.contributorType)}
               </span>
             </List.Description>
             {firstError && (
@@ -184,6 +186,7 @@ CreatibutorsFieldItem.propTypes = {
   displayName: PropTypes.string,
   schema: PropTypes.string.isRequired,
   autocompleteNames: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  nameTypeHelpText: PropTypes.string,
 };
 
 CreatibutorsFieldItem.defaultProps = {

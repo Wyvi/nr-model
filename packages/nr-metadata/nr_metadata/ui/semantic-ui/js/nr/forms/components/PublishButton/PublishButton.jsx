@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Button, Modal, Message, Icon, Form } from "semantic-ui-react";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import { useConfirmationModal, useDepositApiClient } from "@js/oarepo_ui";
 import { TextField, FieldLabel } from "react-invenio-forms";
 import PropTypes from "prop-types";

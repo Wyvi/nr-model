@@ -43,6 +43,7 @@ OAREPO_VERSION_MAX=$((OAREPO_VERSION+1))
 compile_nr_metadata() {
   cd "$base_dir/packages/nr-metadata"
   create_builder_venv
+
   rm -rf nr_metadata/common
   rm -rf nr_metadata/documents
   rm -rf nr_metadata/data
@@ -127,6 +128,7 @@ create_builder_venv() {
     install_package "$MODEL_BUILDER_VENV" oarepo-model-builder-ui
     install_package "$MODEL_BUILDER_VENV" oarepo-model-builder-multilingual
     install_package "$MODEL_BUILDER_VENV" oarepo-model-builder-polymorphic
+    install_package "$MODEL_BUILDER_VENV" oarepo-model-builder-relations
   fi
 }
 
@@ -151,6 +153,7 @@ create_builder_test_builder_venv() {
     install_package "$MODEL_BUILDER_TEST_BUILDER_VENV" oarepo-model-builder-ui
     install_package "$MODEL_BUILDER_TEST_BUILDER_VENV" oarepo-model-builder-multilingual
     install_package "$MODEL_BUILDER_TEST_BUILDER_VENV" oarepo-model-builder-polymorphic
+    install_package "$MODEL_BUILDER_TEST_BUILDER_VENV" oarepo-model-builder-relations
   fi
   "$MODEL_BUILDER_TEST_BUILDER_VENV"/bin/pip install dist/oarepo_model_builder_nr*.whl
 }

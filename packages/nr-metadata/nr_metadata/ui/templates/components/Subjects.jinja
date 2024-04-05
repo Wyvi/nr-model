@@ -20,8 +20,7 @@
                             "title":  _("Find more records with this subject"),
                             "label": subject.subject.value
                     } %}
-                    {% set searchFacet = "metadata_subjects_subject_" ~ lang ~ "_keyword" %}
-                    <SearchLink search_link={search_link} className="subject-link" searchFacet={searchFacet} data = {data}>
+                    <SearchLink search_link={search_link} className="subject-link" searchFacet="syntheticFields_keywords" data = {data}>
                     </SearchLink>
 
                 </div>

@@ -7,7 +7,7 @@
    <div role="list" class="ui horizontal separated creatibutors list">
 
             {% for person in creators %}
-                <Person person={person} search_link={search_link} searchFacet="metadata_creators_fullName"></Person>
+                <Person person={person} search_link={search_link} searchFacet="syntheticFields_people"></Person>
             {% endfor %}
     </div>
      {% if contributors %}
@@ -16,7 +16,7 @@
 
                 {% for fullName, matches in contributors | groupby('fullName') %}
                   {% set roles= matches |  map(attribute='role') | select('defined') | list %}
-                  <Person person={matches[0]} search_link={search_link} searchFacet="metadata_contributors_fullName" roles ={roles}></Person>
+                  <Person person={matches[0]} search_link={search_link} searchFacet="syntheticFields_people" roles ={roles}></Person>
 
                 {% endfor %}
             </div>

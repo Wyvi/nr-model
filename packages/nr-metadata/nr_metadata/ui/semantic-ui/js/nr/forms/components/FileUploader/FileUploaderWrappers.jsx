@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { h, render } from "preact";
 import PropTypes from "prop-types";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 
 export const FileUploadWrapper = ({
   preactComponent,
