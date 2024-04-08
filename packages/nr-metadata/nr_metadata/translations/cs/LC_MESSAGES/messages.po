@@ -3900,3 +3900,18 @@ msgstr "Zapisujte slova popisující zdroj, zvolte vždy jazyk."
 
 msgid "Alternative title"
 msgstr "Alternativní název"
+
+msgid "Choose license"
+msgstr "Vyberte licenci"
+
+msgid "License"
+msgstr "Licence"
+
+msgid "You must choose one license."
+msgstr "Musíte si vybrat jednu licenci."
+
+msgid "Featured"
+msgstr "Doporučené"
+
+msgid "All"
+msgstr "Všechny"

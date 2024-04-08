@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-22 10:27+0100\n"
+"POT-Creation-Date: 2024-04-08 10:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1433,6 +1433,30 @@ msgstr ""
 msgid "e.g. 10.1086/679716 for a DOI"
 msgstr ""
 
+msgid "Choose license"
+msgstr ""
+
+msgid "License"
+msgstr ""
+
+msgid ""
+"If a Creative Commons license is associated with the resource, select the "
+"appropriate license option from the menu. We recommend choosing the latest "
+"versions, namely 3.0 Czech and 4.0 International."
+msgstr ""
+
+msgid "You must choose one license."
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Featured"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "Publish"
 msgstr ""
 
@@ -1619,9 +1643,6 @@ msgid "DOI profile"
 msgstr ""
 
 msgid "GND profile"
-msgstr ""
-
-msgid "Search"
 msgstr ""
 
 msgid "Find all records"

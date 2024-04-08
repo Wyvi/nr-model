@@ -1755,3 +1755,24 @@ msgstr ""
 
 msgid "by this document type"
 msgstr ""
+
+msgid "Choose license"
+msgstr ""
+
+msgid "License"
+msgstr ""
+
+msgid ""
+"If a Creative Commons license is associated with the resource, select the "
+"appropriate license option from the menu. We recommend choosing the latest "
+"versions, namely 3.0 Czech and 4.0 International."
+msgstr ""
+
+msgid "You must choose one license."
+msgstr ""
+
+msgid "Featured"
+msgstr ""
+
+msgid "All"
+msgstr ""
