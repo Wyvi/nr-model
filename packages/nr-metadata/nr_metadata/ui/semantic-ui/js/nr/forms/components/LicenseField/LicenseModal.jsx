@@ -24,9 +24,11 @@ import { Button, Grid, Header, Menu, Modal } from "semantic-ui-react";
 import * as Yup from "yup";
 import { LicenseFilter } from "./LicenseFilter";
 import { LicenseResults } from "./LicenseResults";
+import { EmptyResultsElement } from "@js/oarepo_ui";
 
 const overriddenComponents = {
   "SearchFilters.Toggle": LicenseFilter,
+  "EmptyResults.element": EmptyResultsElement,
 };
 
 const LicenseSchema = Yup.object().shape({
@@ -119,7 +121,7 @@ export class LicenseModal extends Component {
                         />
                       </Grid.Column>
                       <Grid.Column width={8} textAlign="right" floated="right">
-                        <Menu compact size="tiny" className="shadowless">
+                        <Menu compact size="tiny" className="license-toggler">
                           <Toggle
                             title={i18next.t("Featured")}
                             label="featured"
