@@ -7,7 +7,7 @@
 // under the terms of the MIT License; see LICENSE file for more details.
 
 import { i18next } from "@translations/nr/i18next";
-import { Formik } from "formik";
+import { Formik, getIn } from "formik";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { OverridableContext } from "react-overridable";
@@ -20,7 +20,15 @@ import {
   SearchBar,
   Toggle,
 } from "react-searchkit";
-import { Button, Grid, Header, Menu, Modal } from "semantic-ui-react";
+import {
+  Button,
+  Grid,
+  Header,
+  Menu,
+  Modal,
+  Message,
+  Icon,
+} from "semantic-ui-react";
 import * as Yup from "yup";
 import { LicenseFilter } from "./LicenseFilter";
 import { LicenseResults } from "./LicenseResults";
@@ -79,7 +87,7 @@ export class LicenseModal extends Component {
         validateOnChange={false}
         validateOnBlur={false}
       >
-        {({ handleSubmit, resetForm }) => (
+        {({ handleSubmit, resetForm, errors }) => (
           <Modal
             onOpen={() => this.openModal()}
             open={open}
@@ -90,7 +98,7 @@ export class LicenseModal extends Component {
           >
             <Modal.Header as="h6" className="pt-10 pb-10">
               <Grid>
-                <Grid.Column floated="left">
+                <Grid.Column width={8} floated="left">
                   <Header as="h2">{i18next.t("Choose license")}</Header>
                 </Grid.Column>
               </Grid>
@@ -99,7 +107,6 @@ export class LicenseModal extends Component {
               <OverridableContext.Provider value={overriddenComponents}>
                 <ReactSearchKit
                   searchApi={searchApi}
-                  appName="licenses"
                   urlHandlerApi={{ enabled: false }}
                   initialQueryState={searchConfig.initialQueryState}
                 >
@@ -136,6 +143,16 @@ export class LicenseModal extends Component {
                         </Menu>
                       </Grid.Column>
                     </Grid.Row>
+                    {getIn(errors, "selectedLicense", {}).id && (
+                      <Grid.Row>
+                        <Grid.Column width={8}>
+                          <Message compact warning>
+                            <Icon name="warning sign" />
+                            {getIn(errors, "selectedLicense", {}).id}
+                          </Message>
+                        </Grid.Column>
+                      </Grid.Row>
+                    )}
                     <Grid.Row verticalAlign="middle">
                       <Grid.Column>
                         <ResultsLoader>
