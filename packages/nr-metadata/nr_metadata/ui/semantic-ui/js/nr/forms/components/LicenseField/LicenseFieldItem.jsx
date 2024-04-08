@@ -8,22 +8,15 @@
 
 import React from "react";
 import { Button, Grid } from "semantic-ui-react";
-import { LicenseModal } from "./LicenseModal";
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import PropTypes from "prop-types";
 import { useFormikContext } from "formik";
 import { getTitleFromMultilingualObject } from "@js/oarepo_ui";
 
-export const LicenseFieldItem = ({
-  license,
-  searchConfig,
-  serializeLicenses,
-  handleLicenseChange,
-  fieldPath,
-}) => {
+export const LicenseFieldItem = ({ license, fieldPath }) => {
   const { setFieldValue } = useFormikContext();
   return (
-    <Grid className="flex" key={license.key}>
+    <Grid key={license.key}>
       <Grid.Column width={10}>
         {getTitleFromMultilingualObject(license.title)}
       </Grid.Column>
@@ -44,12 +37,5 @@ export const LicenseFieldItem = ({
 
 LicenseFieldItem.propTypes = {
   license: PropTypes.object.isRequired,
-  searchConfig: PropTypes.object.isRequired,
-  serializeLicenses: PropTypes.func,
-  handleLicenseChange: PropTypes.func.isRequired,
   fieldPath: PropTypes.string.isRequired,
-};
-
-LicenseFieldItem.defaultProps = {
-  serializeLicenses: undefined,
 };

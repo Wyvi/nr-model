@@ -6,7 +6,7 @@
 // React-Invenio-Deposit is free software; you can redistribute it and/or modify it
 // under the terms of the MIT License; see LICENSE file for more details.
 
-import { i18next } from "@translations/i18next";
+import { i18next } from "@translations/nr/i18next";
 import { Formik } from "formik";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
@@ -49,9 +49,6 @@ export class LicenseModal extends Component {
   };
 
   onSubmit = (values) => {
-    // We have to close the modal first because onLicenseChange and passing
-    // license as an object makes React get rid of this component. Otherwise
-    // we get a memory leak warning.
     const { handleLicenseChange } = this.props;
     this.closeModal();
     handleLicenseChange(values.selectedLicense);
@@ -61,7 +58,7 @@ export class LicenseModal extends Component {
     const {
       trigger,
       searchConfig,
-      serializeLicenses,
+      serializeLicense,
       initialLicense: initialLicenseProp,
     } = this.props;
     const { open } = this.state;
@@ -122,7 +119,7 @@ export class LicenseModal extends Component {
                         />
                       </Grid.Column>
                       <Grid.Column width={8} textAlign="right" floated="right">
-                        <Menu compact>
+                        <Menu compact size="tiny" className="shadowless">
                           <Toggle
                             title={i18next.t("Featured")}
                             label="featured"
@@ -131,6 +128,7 @@ export class LicenseModal extends Component {
                           <Toggle
                             title={i18next.t("All")}
                             label="all"
+                            // TODO: we don't have tags=all, so this is a hack to display all licenses
                             filterValue={["tags", ""]}
                           />
                         </Menu>
@@ -141,11 +139,7 @@ export class LicenseModal extends Component {
                         <ResultsLoader>
                           <EmptyResults />
                           <Error />
-                          <LicenseResults
-                            {...(serializeLicenses && {
-                              serializeLicenses,
-                            })}
-                          />
+                          <LicenseResults serializeLicense={serializeLicense} />
                         </ResultsLoader>
                       </Grid.Column>
                     </Grid.Row>
@@ -182,7 +176,7 @@ export class LicenseModal extends Component {
 }
 
 LicenseModal.propTypes = {
-  initialLicense: PropTypes.object,
+  initialLicense: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   trigger: PropTypes.object.isRequired,
   handleLicenseChange: PropTypes.func.isRequired,
   searchConfig: PropTypes.shape({
@@ -195,10 +189,10 @@ LicenseModal.propTypes = {
       filters: PropTypes.arrayOf(PropTypes.array),
     }).isRequired,
   }).isRequired,
-  serializeLicenses: PropTypes.func,
+  serializeLicense: PropTypes.func,
 };
 
 LicenseModal.defaultProps = {
   initialLicense: undefined,
-  serializeLicenses: undefined,
+  serializeLicense: undefined,
 };

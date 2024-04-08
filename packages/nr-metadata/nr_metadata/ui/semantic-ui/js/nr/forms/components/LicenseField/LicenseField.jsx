@@ -13,9 +13,7 @@ import { FieldLabel } from "react-invenio-forms";
 import { Button, Form, Icon } from "semantic-ui-react";
 import { LicenseModal } from "./LicenseModal";
 import { LicenseFieldItem } from "./LicenseFieldItem";
-import { i18next } from "@translations/i18next";
-
-export const visibleLicense = ({ id, title }) => ({ id, title: title });
+import { i18next } from "@translations/nr/i18next";
 
 export const LicenseField = ({
   label,
@@ -23,17 +21,13 @@ export const LicenseField = ({
   fieldPath,
   required,
   searchConfig,
-  serializeLicenses,
+  serializeLicense,
   helpText,
 }) => {
   const { values, setFieldValue } = useFormikContext();
-  let licenseUI;
   const license = getIn(values, fieldPath, {})?.id
     ? getIn(values, fieldPath, {})
     : "";
-  if (license) {
-    licenseUI = new visibleLicense(license);
-  }
   const handleLicenseChange = (selectedLicense) => {
     setFieldValue(fieldPath, selectedLicense);
   };
@@ -44,24 +38,27 @@ export const LicenseField = ({
       {license && (
         <LicenseFieldItem
           key={license.id}
-          license={licenseUI}
-          searchConfig={searchConfig}
-          serializeLicenses={serializeLicenses}
-          handleLicenseChange={handleLicenseChange}
+          license={license}
           fieldPath={fieldPath}
         />
       )}
       <LicenseModal
         searchConfig={searchConfig}
-        initialLicense={licenseUI}
+        initialLicense={license}
         trigger={
-          <Button type="button" key="license" icon labelPosition="left">
+          <Button
+            type="button"
+            key="license"
+            icon
+            labelPosition="left"
+            className="mt-10"
+          >
             <Icon name="add" />
             {i18next.t("Choose license")}
           </Button>
         }
         handleLicenseChange={handleLicenseChange}
-        serializeLicenses={serializeLicenses}
+        serializeLicense={serializeLicense}
       />
     </Form.Field>
   );
@@ -73,14 +70,14 @@ LicenseField.propTypes = {
   fieldPath: PropTypes.string.isRequired,
   required: PropTypes.bool,
   searchConfig: PropTypes.object.isRequired,
-  serializeLicenses: PropTypes.func,
+  serializeLicense: PropTypes.func,
   helpText: PropTypes.string,
 };
 
 LicenseField.defaultProps = {
   labelIcon: "drivers license",
   label: i18next.t("License"),
-  serializeLicenses: undefined,
+  serializeLicense: undefined,
   required: false,
   helpText: i18next.t(
     "If a Creative Commons license is associated with the resource, select the appropriate license option from the menu. We recommend choosing the latest versions, namely 3.0 Czech and 4.0 International."
