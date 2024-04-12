@@ -7,7 +7,6 @@ export * from "./SubjectsField";
 export * from "./SeriesField";
 export * from "./EventsField";
 export * from "./IdentifiersField";
-export * from "./PublishButton";
 export * from "./CreatibutorsField";
 export * from "./RelatedItemsField";
 export * from "./FileUploader";
