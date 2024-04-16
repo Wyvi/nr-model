@@ -29,7 +29,7 @@ export const LicenseField = ({
     ? getIn(values, fieldPath, {})
     : "";
   const handleLicenseChange = (selectedLicense) => {
-    setFieldValue(fieldPath, selectedLicense);
+    setFieldValue(fieldPath, {id: selectedLicense.id});
   };
   return (
     <Form.Field required={required}>

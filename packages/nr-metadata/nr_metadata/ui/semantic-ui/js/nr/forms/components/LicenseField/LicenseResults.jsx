@@ -10,7 +10,6 @@ import { Item, Header, Radio } from "semantic-ui-react";
 import { withState } from "react-searchkit";
 import _get from "lodash/get";
 import { FastField } from "formik";
-import { getTitleFromMultilingualObject } from "@js/oarepo_ui";
 
 export const LicenseResults = withState(
   ({ currentResultsState: results, serializeLicense }) => {
@@ -25,11 +24,10 @@ export const LicenseResults = withState(
         {({ form: { values, setFieldValue } }) => (
           <Item.Group>
             {results.data.hits.map((result) => {
-              const title = getTitleFromMultilingualObject(result.title);
-              const { id } = result;
+              const { id, title } = result;
               return (
                 <Item
-                  key={result.id}
+                  key={id}
                   onClick={() =>
                     setFieldValue(
                       "selectedLicense",

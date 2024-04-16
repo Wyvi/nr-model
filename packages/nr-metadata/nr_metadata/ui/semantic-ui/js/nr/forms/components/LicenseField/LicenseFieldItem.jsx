@@ -7,7 +7,7 @@
 // under the terms of the MIT License; see LICENSE file for more details.
 
 import React from "react";
-import { Button, Grid, Image } from "semantic-ui-react";
+import { Button, Grid, Image, Icon } from "semantic-ui-react";
 import { i18next } from "@translations/nr/i18next";
 import PropTypes from "prop-types";
 import { useFormikContext } from "formik";
@@ -23,17 +23,18 @@ export const LicenseFieldItem = ({ license, fieldPath }) => {
     },
   } = useFormConfig();
   const licenseUI = all.find((r) => r.value === license.id);
-
   return (
     <Grid key={license.key}>
       <Grid.Row only="computer tablet" verticalAlign="middle">
-        <Grid.Column stretched width={2}>
-          <Image src={licenseUI.icon} size="tiny" />
+        <Grid.Column width={2}>
+          {licenseUI?.icon ? (
+            <Image src={licenseUI.icon} size="tiny" />
+          ) : (
+            <Icon name="drivers license" size="large" />
+          )}
         </Grid.Column>
-        <Grid.Column stretched width={10}>
-          {licenseUI.text}
-        </Grid.Column>
-        <Grid.Column stretched textAlign="right" width={4}>
+        <Grid.Column width={10}>{licenseUI?.text}</Grid.Column>
+        <Grid.Column textAlign="right" width={4}>
           <Button
             size="mini"
             type="button"
@@ -47,7 +48,11 @@ export const LicenseFieldItem = ({ license, fieldPath }) => {
       </Grid.Row>
       <Grid.Row only="mobile" verticalAlign="middle">
         <Grid.Column width={8}>
-          <Image src={licenseUI.icon} size="tiny" />
+          {licenseUI?.icon ? (
+            <Image src={licenseUI.icon} size="tiny" />
+          ) : (
+            <Icon name="drivers license" size="large" />
+          )}
         </Grid.Column>
         <Grid.Column textAlign="right" width={8}>
           <Button
@@ -62,7 +67,7 @@ export const LicenseFieldItem = ({ license, fieldPath }) => {
         </Grid.Column>
       </Grid.Row>
       <Grid.Row only="mobile" verticalAlign="middle">
-        <Grid.Column>{licenseUI.text}</Grid.Column>
+        <Grid.Column>{licenseUI?.text}</Grid.Column>
       </Grid.Row>
     </Grid>
   );
