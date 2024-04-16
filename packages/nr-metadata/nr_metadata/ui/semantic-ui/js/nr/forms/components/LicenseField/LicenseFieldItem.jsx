@@ -28,7 +28,7 @@ export const LicenseFieldItem = ({ license, fieldPath }) => {
     <Grid key={license.key}>
       <Grid.Row only="computer tablet" verticalAlign="middle">
         <Grid.Column stretched width={2}>
-          <Image src={licenseUI.icon} size="tiny" fluid />
+          <Image src={licenseUI.icon} size="tiny" />
         </Grid.Column>
         <Grid.Column stretched width={10}>
           {licenseUI.text}
@@ -47,7 +47,7 @@ export const LicenseFieldItem = ({ license, fieldPath }) => {
       </Grid.Row>
       <Grid.Row only="mobile" verticalAlign="middle">
         <Grid.Column width={8}>
-          <Image src={licenseUI.icon} size="tiny" fluid />
+          <Image src={licenseUI.icon} size="tiny" />
         </Grid.Column>
         <Grid.Column textAlign="right" width={8}>
           <Button
