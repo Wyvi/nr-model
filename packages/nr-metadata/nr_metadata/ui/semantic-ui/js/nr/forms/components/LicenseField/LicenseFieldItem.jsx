@@ -7,30 +7,63 @@
 // under the terms of the MIT License; see LICENSE file for more details.
 
 import React from "react";
-import { Button, Grid } from "semantic-ui-react";
+import { Button, Grid, Image } from "semantic-ui-react";
 import { i18next } from "@translations/nr/i18next";
 import PropTypes from "prop-types";
 import { useFormikContext } from "formik";
-import { getTitleFromMultilingualObject } from "@js/oarepo_ui";
+import { useFormConfig } from "@js/oarepo_ui";
 
 export const LicenseFieldItem = ({ license, fieldPath }) => {
   const { setFieldValue } = useFormikContext();
+  const {
+    formConfig: {
+      vocabularies: {
+        rights: { all },
+      },
+    },
+  } = useFormConfig();
+  const licenseUI = all.find((r) => r.value === license.id);
+
   return (
     <Grid key={license.key}>
-      <Grid.Column width={10}>
-        {getTitleFromMultilingualObject(license.title)}
-      </Grid.Column>
-      <Grid.Column textAlign="right" width={6}>
-        <Button
-          size="mini"
-          type="button"
-          onClick={() => {
-            setFieldValue(fieldPath, "");
-          }}
-        >
-          {i18next.t("Remove")}
-        </Button>
-      </Grid.Column>
+      <Grid.Row only="computer tablet" verticalAlign="middle">
+        <Grid.Column stretched width={2}>
+          <Image src={licenseUI.icon} size="tiny" fluid />
+        </Grid.Column>
+        <Grid.Column stretched width={10}>
+          {licenseUI.text}
+        </Grid.Column>
+        <Grid.Column stretched textAlign="right" width={4}>
+          <Button
+            size="mini"
+            type="button"
+            onClick={() => {
+              setFieldValue(fieldPath, "");
+            }}
+          >
+            {i18next.t("Remove")}
+          </Button>
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row only="mobile" verticalAlign="middle">
+        <Grid.Column width={8}>
+          <Image src={licenseUI.icon} size="tiny" fluid />
+        </Grid.Column>
+        <Grid.Column textAlign="right" width={8}>
+          <Button
+            size="mini"
+            type="button"
+            onClick={() => {
+              setFieldValue(fieldPath, "");
+            }}
+          >
+            {i18next.t("Remove")}
+          </Button>
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row only="mobile" verticalAlign="middle">
+        <Grid.Column>{licenseUI.text}</Grid.Column>
+      </Grid.Row>
     </Grid>
   );
 };

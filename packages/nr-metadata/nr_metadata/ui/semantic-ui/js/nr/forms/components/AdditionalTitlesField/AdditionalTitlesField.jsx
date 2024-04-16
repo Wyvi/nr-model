@@ -71,7 +71,11 @@ export const AdditionalTitlesField = ({
               <SelectField
                 selectOnBlur={false}
                 fieldPath={`${fieldPathPrefix}.titleType`}
-                label={i18next.t("Title type")}
+                label={
+                  <label htmlFor={`${fieldPathPrefix}.titleType`}>
+                    {i18next.t("Title type")}
+                  </label>
+                }
                 optimized
                 options={subtitleTypes}
                 required
