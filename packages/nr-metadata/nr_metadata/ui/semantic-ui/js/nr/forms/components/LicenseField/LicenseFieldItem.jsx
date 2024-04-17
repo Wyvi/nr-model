@@ -23,7 +23,6 @@ export const LicenseFieldItem = ({ license, fieldPath }) => {
     },
   } = useFormConfig();
   const licenseUI = all.find((r) => r.value === license.id);
-  licenseUI.icon = undefined;
   return (
     <Grid key={license.key}>
       <Grid.Row verticalAlign="middle">
