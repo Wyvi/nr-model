@@ -23,17 +23,23 @@ export const LicenseFieldItem = ({ license, fieldPath }) => {
     },
   } = useFormConfig();
   const licenseUI = all.find((r) => r.value === license.id);
+  licenseUI.icon = undefined;
   return (
     <Grid key={license.key}>
-      <Grid.Row only="computer tablet" verticalAlign="middle">
-        <Grid.Column width={2}>
+      <Grid.Row verticalAlign="middle">
+        <Grid.Column width={12}>
           {licenseUI?.icon ? (
-            <Image src={licenseUI.icon} size="tiny" />
+            <Image
+              src={licenseUI.icon}
+              size="tiny"
+              inline
+              className="rel-mr-1"
+            />
           ) : (
             <Icon name="drivers license" size="large" />
           )}
+          <span className="inline-block pt-10">{licenseUI?.text}</span>
         </Grid.Column>
-        <Grid.Column width={10}>{licenseUI?.text}</Grid.Column>
         <Grid.Column textAlign="right" width={4}>
           <Button
             size="mini"
@@ -45,29 +51,6 @@ export const LicenseFieldItem = ({ license, fieldPath }) => {
             {i18next.t("Remove")}
           </Button>
         </Grid.Column>
-      </Grid.Row>
-      <Grid.Row only="mobile" verticalAlign="middle">
-        <Grid.Column width={8}>
-          {licenseUI?.icon ? (
-            <Image src={licenseUI.icon} size="tiny" />
-          ) : (
-            <Icon name="drivers license" size="large" />
-          )}
-        </Grid.Column>
-        <Grid.Column textAlign="right" width={8}>
-          <Button
-            size="mini"
-            type="button"
-            onClick={() => {
-              setFieldValue(fieldPath, "");
-            }}
-          >
-            {i18next.t("Remove")}
-          </Button>
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row only="mobile" verticalAlign="middle">
-        <Grid.Column>{licenseUI?.text}</Grid.Column>
       </Grid.Row>
     </Grid>
   );
