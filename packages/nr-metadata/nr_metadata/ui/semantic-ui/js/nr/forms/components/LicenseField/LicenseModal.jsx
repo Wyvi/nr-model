@@ -19,6 +19,8 @@ import {
   ResultsLoader,
   SearchBar,
   Toggle,
+  Pagination,
+  withState,
 } from "react-searchkit";
 import {
   Button,
@@ -39,6 +41,18 @@ const overriddenComponents = {
   "EmptyResults.element": EmptyResultsElement,
 };
 
+const PaginationWrapper = withState(
+  ({
+    currentResultsState: {
+      data: { total },
+    },
+  }) =>
+    total > 25 && (
+      <div className="text-align-center">
+        <Pagination options={{ size: "mini" }} />
+      </div>
+    )
+);
 const LicenseSchema = Yup.object().shape({
   selectedLicense: Yup.object().shape({
     id: Yup.string().required(i18next.t("You must choose one license.")),
@@ -159,6 +173,7 @@ export class LicenseModal extends Component {
                           <EmptyResults />
                           <Error />
                           <LicenseResults serializeLicense={serializeLicense} />
+                          <PaginationWrapper />
                         </ResultsLoader>
                       </Grid.Column>
                     </Grid.Row>
