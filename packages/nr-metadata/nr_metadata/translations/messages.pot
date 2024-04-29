@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-22 10:27+0100\n"
+"POT-Creation-Date: 2024-04-16 08:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1433,22 +1433,28 @@ msgstr ""
 msgid "e.g. 10.1086/679716 for a DOI"
 msgstr ""
 
-msgid "Publish"
+msgid "Choose license"
 msgstr ""
 
-msgid "Write the version (first, second ...)."
-msgstr ""
-
-msgid "Version"
-msgstr ""
-
-msgid "Are you sure you wish to publish this draft?"
+msgid "License"
 msgstr ""
 
 msgid ""
-"Once the record is published you will no longer be able to change the files "
-"in the upload! However, you will still be able to update the record's "
-"metadata later."
+"If a Creative Commons license is associated with the resource, select the "
+"appropriate license option from the menu. We recommend choosing the latest "
+"versions, namely 3.0 Czech and 4.0 International."
+msgstr ""
+
+msgid "You must choose one license."
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Featured"
+msgstr ""
+
+msgid "All"
 msgstr ""
 
 msgid "Related items"
@@ -1619,9 +1625,6 @@ msgid "DOI profile"
 msgstr ""
 
 msgid "GND profile"
-msgstr ""
-
-msgid "Search"
 msgstr ""
 
 msgid "Find all records"

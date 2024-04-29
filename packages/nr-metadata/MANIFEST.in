@@ -8,3 +8,5 @@ recursive-include nr_metadata *.js
 recursive-include nr_metadata *.jsx
 recursive-include nr_metadata *.less
 recursive-include nr_metadata *.jinja
+recursive-include nr_metadata *.variables
+recursive-include nr_metadata *.overrides

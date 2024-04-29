@@ -3763,8 +3763,8 @@ msgid ""
 "File addition, removal or modification are not allowed after you have "
 "published your draft."
 msgstr ""
-"Přidávání, odstraňování nebo úpravy souborů nejsou povoleny poté, co "
-"jstepublikoval váš koncept."
+"Přidávání, odstraňování nebo úpravy souborů nejsou povoleny poté, co jste "
+"publikoval váš koncept."
 
 msgid "If you wish to upload files, you must<1>save</1>your draft first."
 msgstr "Chcete-li nahrát soubory, musíte nejprve <1>uložit</1> svůj koncept."
@@ -3900,3 +3900,18 @@ msgstr "Zapisujte slova popisující zdroj, zvolte vždy jazyk."
 
 msgid "Alternative title"
 msgstr "Alternativní název"
+
+msgid "Choose license"
+msgstr "Vyberte licenci"
+
+msgid "License"
+msgstr "Licence"
+
+msgid "You must choose one license."
+msgstr "Musíte si vybrat jednu licenci."
+
+msgid "Featured"
+msgstr "Doporučené"
+
+msgid "All"
+msgstr "Všechny"
