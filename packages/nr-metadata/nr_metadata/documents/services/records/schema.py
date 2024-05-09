@@ -5,10 +5,7 @@ from marshmallow import fields as ma_fields
 from marshmallow.fields import String
 from marshmallow_utils.fields import TrimmedString
 from oarepo_runtime.services.schema.marshmallow import BaseRecordSchema, DictOnlySchema
-from oarepo_runtime.services.schema.validation import (
-    CachedMultilayerEDTFValidator,
-    validate_date,
-)
+from oarepo_runtime.services.schema.validation import CachedMultilayerEDTFValidator
 from oarepo_vocabularies.services.schema import HierarchySchema
 
 from nr_metadata.common.services.records.schema_common import (
@@ -20,7 +17,6 @@ from nr_metadata.common.services.records.schema_datatypes import (
     NRExternalLocationSchema,
     NRFundingReferenceSchema,
     NRGeoLocationSchema,
-    NRLanguageVocabularySchema,
     NRRelatedItemSchema,
     NRSeriesSchema,
     NRSubjectSchema,
@@ -62,12 +58,6 @@ class NRDocumentMetadataSchema(NRCommonMetadataSchema):
 
     geoLocations = ma_fields.List(ma_fields.Nested(lambda: NRGeoLocationSchema()))
 
-    languages = ma_fields.List(
-        ma_fields.Nested(lambda: NRLanguageVocabularySchema()),
-        required=True,
-        validate=[ma.validate.Length(min=1)],
-    )
-
     objectIdentifiers = ma_fields.List(
         ma_fields.Nested(lambda: NRObjectIdentifierSchema())
     )
@@ -91,7 +81,9 @@ class NRThesisSchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
-    dateDefended = ma_fields.String(validate=[validate_date("%Y-%m-%d")])
+    dateDefended = TrimmedString(
+        validate=[CachedMultilayerEDTFValidator(types=(EDTFDate,))]
+    )
 
     defended = ma_fields.Boolean()
 

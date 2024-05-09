@@ -77,9 +77,7 @@ class NRContributorOrganizationUISchema(DictOnlySchema):
 
     fullName = ma_fields.String(required=True)
 
-    nameType = ma_fields.String(
-        validate=[OneOf(["Organizational", "Organizational", "Organizational"])]
-    )
+    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
 
 
 class NRContributorPersonUISchema(DictOnlySchema):
@@ -102,7 +100,7 @@ class NRContributorPersonUISchema(DictOnlySchema):
 
     givenName = ma_fields.String()
 
-    nameType = ma_fields.String(validate=[OneOf(["Personal", "Personal", "Personal"])])
+    nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
 
 class NRContributorUISchema(DictOnlySchema):
@@ -125,9 +123,7 @@ class NRContributorUISchema(DictOnlySchema):
 
     givenName = ma_fields.String()
 
-    nameType = ma_fields.String(
-        validate=[OneOf(["Organizational", "Organizational", "Organizational"])]
-    )
+    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
 
 
 class NRCreatorUISchema(DictOnlySchema):
@@ -148,9 +144,7 @@ class NRCreatorUISchema(DictOnlySchema):
 
     givenName = ma_fields.String()
 
-    nameType = ma_fields.String(
-        validate=[OneOf(["Organizational", "Organizational", "Organizational"])]
-    )
+    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
 
 
 class NRFundingReferenceUISchema(DictOnlySchema):
@@ -202,7 +196,7 @@ class NRPersonUISchema(DictOnlySchema):
 
     givenName = ma_fields.String()
 
-    nameType = ma_fields.String(validate=[OneOf(["Personal", "Personal", "Personal"])])
+    nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
 
 class NRRelatedItemContributorOrganizationUISchema(DictOnlySchema):
@@ -387,9 +381,7 @@ class NROrganizationUISchema(DictOnlySchema):
 
     fullName = ma_fields.String(required=True)
 
-    nameType = ma_fields.String(
-        validate=[OneOf(["Organizational", "Organizational", "Organizational"])]
-    )
+    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
 
 
 class NRResourceTypeVocabularyUISchema(DictOnlySchema):

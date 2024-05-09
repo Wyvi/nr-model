@@ -1,7 +1,6 @@
 import marshmallow as ma
 from marshmallow import fields as ma_fields
 from marshmallow.fields import String
-from oarepo_runtime.services.schema.i18n_ui import I18nStrUIField, MultilingualUIField
 from oarepo_runtime.services.schema.marshmallow import DictOnlySchema
 from oarepo_runtime.services.schema.ui import (
     InvenioUISchema,
@@ -42,8 +41,6 @@ class NRDataRecordUISchema(InvenioUISchema):
 class NRDataMetadataUISchema(NRCommonMetadataUISchema):
     class Meta:
         unknown = ma.RAISE
-
-    abstract = MultilingualUIField(I18nStrUIField(), required=True)
 
     additionalTitles = ma_fields.List(
         ma_fields.Nested(lambda: AdditionalTitlesUISchema())

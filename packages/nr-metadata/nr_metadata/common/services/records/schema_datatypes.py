@@ -126,9 +126,7 @@ class NRContributorOrganizationSchema(DictOnlySchema):
 
     fullName = ma_fields.String(required=True)
 
-    nameType = ma_fields.String(
-        validate=[OneOf(["Organizational", "Organizational", "Organizational"])]
-    )
+    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
 
 
 class NRContributorPersonSchema(DictOnlySchema):
@@ -151,7 +149,7 @@ class NRContributorPersonSchema(DictOnlySchema):
 
     givenName = ma_fields.String()
 
-    nameType = ma_fields.String(validate=[OneOf(["Personal", "Personal", "Personal"])])
+    nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
 
 class NRFundingReferenceSchema(DictOnlySchema):
@@ -203,7 +201,7 @@ class NRPersonSchema(DictOnlySchema):
 
     givenName = ma_fields.String()
 
-    nameType = ma_fields.String(validate=[OneOf(["Personal", "Personal", "Personal"])])
+    nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
 
 class NRRelatedItemContributorOrganizationSchema(DictOnlySchema):
@@ -348,9 +346,7 @@ class NROrganizationSchema(DictOnlySchema):
 
     fullName = ma_fields.String(required=True)
 
-    nameType = ma_fields.String(
-        validate=[OneOf(["Organizational", "Organizational", "Organizational"])]
-    )
+    nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
 
 
 class NRResourceTypeVocabularySchema(DictOnlySchema):
