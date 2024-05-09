@@ -26,7 +26,7 @@ NRDocumentMetadata:
         class: nr_metadata.documents.services.records.schema.NRThesisSchema
       properties:
         dateDefended:
-          type: date
+          use: 'nr-datatypes#NRDate'
           label.cs: Datum obhajoby
           label.en: Date defended
         defended:

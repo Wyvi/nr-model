@@ -4,7 +4,6 @@ from invenio_vocabularies.services.schema import i18n_strings
 from marshmallow import fields as ma_fields
 from marshmallow.fields import String
 from marshmallow_utils.fields import TrimmedString
-from oarepo_runtime.services.schema.i18n import I18nStrField, MultilingualField
 from oarepo_runtime.services.schema.marshmallow import BaseRecordSchema, DictOnlySchema
 from oarepo_runtime.services.schema.validation import (
     CachedMultilayerEDTFValidator,
@@ -40,8 +39,6 @@ class NRDataRecordSchema(BaseRecordSchema):
 class NRDataMetadataSchema(NRCommonMetadataSchema):
     class Meta:
         unknown = ma.RAISE
-
-    abstract = MultilingualField(I18nStrField(), required=True)
 
     additionalTitles = ma_fields.List(
         ma_fields.Nested(lambda: AdditionalTitlesSchema())
