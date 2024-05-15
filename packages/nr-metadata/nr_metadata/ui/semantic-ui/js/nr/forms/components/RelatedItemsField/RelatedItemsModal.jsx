@@ -181,7 +181,7 @@ export const RelatedItemsModal = ({
                 options={objectIdentifiersSchema}
                 fieldPath="itemPIDs"
                 identifierLabel={i18next.t("Object identifier")}
-                label={i18next.t("Object identifiers")}
+                label={i18next.t("Identifier")}
                 helpText={i18next.t(
                   "Persistent identifier/s of object as ISBN, DOI, etc."
                 )}

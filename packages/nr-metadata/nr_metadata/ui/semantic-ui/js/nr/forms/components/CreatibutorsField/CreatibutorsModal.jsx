@@ -532,11 +532,7 @@ export const CreatibutorsModal = ({
                           }
                           placeholder={lastNameFieldPlaceholder}
                           fieldPath={familyNameFieldPath}
-                          required={
-                            isCreator &&
-                            _get(values, typeFieldPath) ===
-                              CREATIBUTOR_TYPE.PERSON
-                          }
+                          required
                         />
                         <TextField
                           label={
@@ -548,11 +544,7 @@ export const CreatibutorsModal = ({
                           }
                           placeholder={nameFieldPlaceholder}
                           fieldPath={givenNameFieldPath}
-                          required={
-                            isCreator &&
-                            _get(values, typeFieldPath) ===
-                              CREATIBUTOR_TYPE.PERSON
-                          }
+                          required
                         />
                       </Form.Group>
                       <Form.Group widths="equal">
@@ -611,6 +603,7 @@ export const CreatibutorsModal = ({
                     allowAdditions
                     selection
                     deburr
+                    required
                   />
                   <IdentifiersField
                     className="modal-identifiers-field"
@@ -643,6 +636,7 @@ export const CreatibutorsModal = ({
                   }
                   clearable
                   optionsListName="contributor-types"
+                  required
                 />
               )}
             </Form>
