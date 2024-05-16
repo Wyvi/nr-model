@@ -1776,3 +1776,6 @@ msgstr ""
 
 msgid "All"
 msgstr ""
+
+msgid "Both identifier and identifier type must be filled."
+msgstr ""

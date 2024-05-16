@@ -3915,3 +3915,6 @@ msgstr "Doporučené"
 
 msgid "All"
 msgstr "Všechny"
+
+msgid "Both identifier and identifier type must be filled."
+msgstr "Musí být vyplněn identifikátor i typ identifikátoru."

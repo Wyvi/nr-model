@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-14 20:51+0200\n"
+"POT-Creation-Date: 2024-05-16 13:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1415,6 +1415,9 @@ msgstr ""
 msgid "ICO"
 msgstr ""
 
+msgid "Both identifier and identifier type must be filled."
+msgstr ""
+
 msgid "Add identifier"
 msgstr ""
 
@@ -1478,15 +1481,6 @@ msgstr ""
 msgid "Year must be in format YYYY"
 msgstr ""
 
-msgid "Object identifier"
-msgstr ""
-
-msgid "Object identifiers must be unique"
-msgstr ""
-
-msgid "Object identifiers"
-msgstr ""
-
 msgid "Contributors"
 msgstr ""
 
@@ -1494,6 +1488,9 @@ msgid "Add contributor"
 msgstr ""
 
 msgid "Edit contributor"
+msgstr ""
+
+msgid "Object identifier"
 msgstr ""
 
 msgid "Persistent identifier/s of object as ISBN, DOI, etc."
@@ -1685,6 +1682,12 @@ msgid "Subjects must be unique"
 msgstr ""
 
 msgid "Series titles must be unique"
+msgstr ""
+
+msgid "Object identifiers must be unique"
+msgstr ""
+
+msgid "Object identifiers"
 msgstr ""
 
 msgid "System identifier"

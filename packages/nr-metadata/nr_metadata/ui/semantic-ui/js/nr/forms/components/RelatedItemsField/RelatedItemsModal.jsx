@@ -14,39 +14,20 @@ import * as Yup from "yup";
 import { i18next } from "@translations/nr/i18next";
 import { TextField, FieldLabel, GroupField } from "react-invenio-forms";
 import { CreatibutorsField } from "../CreatibutorsField";
-import { IdentifiersField, objectIdentifiersSchema } from "../IdentifiersField";
+import {
+  IdentifiersField,
+  objectIdentifiersSchema,
+  IdentifiersValidationSchema,
+} from "../IdentifiersField";
 import { LocalVocabularySelectField } from "@js/oarepo_vocabularies";
 import PropTypes from "prop-types";
-import { unique, requiredMessage } from "@js/oarepo_ui";
+import { requiredMessage } from "@js/oarepo_ui";
 
 const RelatedItemsSchema = Yup.object({
   itemTitle: Yup.string().required(requiredMessage).label(i18next.t("Title")),
   itemURL: Yup.string().url(i18next.t("Please provide an URL in valid format")),
   itemYear: Yup.number().typeError(i18next.t("Year must be in format YYYY")),
-  itemPIDs: Yup.array()
-    .of(
-      Yup.object().shape({
-        identifier: Yup.string()
-          .required(requiredMessage)
-          .label(i18next.t("Identifier type")),
-        scheme: Yup.string()
-          .required(requiredMessage)
-          .label(i18next.t("Object identifier")),
-      })
-    )
-    .test(
-      "unique-objectIdentifiers",
-      () => {},
-      (value, context) =>
-        unique(
-          value,
-          context,
-          "identifier",
-          i18next.t("Object identifiers must be unique")
-        )
-    )
-    .label(i18next.t("Object identifiers")),
-
+  itemPIDs: IdentifiersValidationSchema,
   itemVolume: Yup.string(),
   itemIssue: Yup.string(),
   itemStartPage: Yup.string(),

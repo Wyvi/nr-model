@@ -4,6 +4,7 @@ import { ArrayField, SelectField, TextField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
 import { ArrayFieldItem } from "@js/oarepo_ui";
 import { useFormikContext, getIn } from "formik";
+import * as Yup from "yup";
 
 export const objectIdentifiersSchema = [
   { value: "DOI", text: i18next.t("DOI"), key: "DOI" },
@@ -38,6 +39,27 @@ export const organizationIdentifiersSchema = [
   { value: "ICO", text: i18next.t("ICO"), key: "ICO" },
   { value: "DOI", text: i18next.t("DOI"), key: "DOI" },
 ];
+
+export const IdentifiersValidationSchema = Yup.array().of(
+  Yup.object().shape({
+    identifier: Yup.string().test(
+      "Test if both identifier and identifier type are provided",
+      i18next.t("Both identifier and identifier type must be filled."),
+      (value, context) => {
+        if (!value && !context.parent.scheme) return true;
+        return !(!value && context.parent.scheme);
+      }
+    ),
+    scheme: Yup.string().test(
+      "Test if both identifier and identifier type are provided",
+      i18next.t("Both identifier and identifier type must be filled."),
+      (value, context) => {
+        if (!value && !context.parent.identifier) return true;
+        return !(!value && context.parent.identifier);
+      }
+    ),
+  })
+);
 export const IdentifiersField = ({
   fieldPath,
   helpText,

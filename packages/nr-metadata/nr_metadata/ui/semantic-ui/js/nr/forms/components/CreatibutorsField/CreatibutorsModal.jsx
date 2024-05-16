@@ -40,6 +40,7 @@ import {
   IdentifiersField,
   personIdentifiersSchema,
   organizationIdentifiersSchema,
+  IdentifiersValidationSchema,
 } from "../IdentifiersField";
 import { getTitleFromMultilingualObject } from "@js/oarepo_ui";
 
@@ -289,7 +290,7 @@ export const CreatibutorsModal = ({
   const namesAutocompleteRef = createRef();
   const isCreator = schema === "creators";
 
-  const CreatorSchema = Yup.object({
+  const CreatibutorsPersonSchema = Yup.object({
     nameType: Yup.string(),
     given_name: Yup.string().when("nameType", (nameType, schema) => {
       if (nameType === CREATIBUTOR_TYPE.PERSON) {
@@ -307,21 +308,28 @@ export const CreatibutorsModal = ({
         return schema.required(i18next.t("Role is a required field."));
       }
     }),
+    personalIdentifiers: IdentifiersValidationSchema,
+  });
+
+  const CreatibutorsOrganizationSchema = Yup.object({
+    nameType: Yup.string(),
+    contributorType: Yup.object().when("_", (_, schema) => {
+      if (!isCreator) {
+        return schema.required(i18next.t("Role is a required field."));
+      }
+    }),
     affiliationNameFieldPath: Yup.mixed().test(
       "text",
       i18next.t("Affiliation name is a required field."),
       (value, testContext) => {
-        if (testContext.parent.nameType === CREATIBUTOR_TYPE.ORGANIZATION) {
-          return (
-            !_isEmpty(value) ||
-            typeof value === "object" ||
-            typeof value === "string"
-          );
-        } else {
-          return true;
-        }
+        return (
+          !_isEmpty(value) ||
+          typeof value === "object" ||
+          typeof value === "string"
+        );
       }
     ),
+    organizationalIdentifiers: IdentifiersValidationSchema,
   });
 
   const openModal = () => {
@@ -403,17 +411,23 @@ export const CreatibutorsModal = ({
   };
 
   const ActionLabel = () => displayActionLabel;
+  const [isPerson, setIsPerson] = useState(
+    _get(initialCreatibutor, typeFieldPath) === CREATIBUTOR_TYPE.PERSON
+  );
 
+  const initialValues = deserializeCreatibutor(
+    initialCreatibutor,
+    isCreator,
+    isPerson
+  );
   return (
     <Formik
-      initialValues={deserializeCreatibutor(
-        initialCreatibutor,
-        isCreator,
-        _get(initialCreatibutor, typeFieldPath) === CREATIBUTOR_TYPE.PERSON
-      )}
+      initialValues={initialValues}
       onSubmit={onSubmit}
       enableReinitialize
-      validationSchema={CreatorSchema}
+      validationSchema={
+        isPerson ? CreatibutorsPersonSchema : CreatibutorsOrganizationSchema
+      }
       validateOnChange={false}
       validateOnBlur={false}
     >
@@ -456,6 +470,7 @@ export const CreatibutorsModal = ({
                       typeFieldPath,
                       CREATIBUTOR_TYPE.PERSON
                     );
+                    setIsPerson(true);
                   }}
                   optimized
                 />
@@ -472,6 +487,7 @@ export const CreatibutorsModal = ({
                       typeFieldPath,
                       CREATIBUTOR_TYPE.ORGANIZATION
                     );
+                    setIsPerson(false);
                   }}
                   optimized
                 />
