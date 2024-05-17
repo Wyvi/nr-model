@@ -12,7 +12,6 @@ export const objectIdentifiersSchema = [
   { value: "ISBN", text: i18next.t("ISBN"), key: "ISBN" },
   { value: "ISSN", text: i18next.t("ISSN"), key: "ISSN" },
   { value: "RIV", text: i18next.t("RIV"), key: "RIV" },
-  { value: "IGSN", text: i18next.t("IGSN"), key: "IGSN" },
 ];
 
 export const personIdentifiersSchema = [
