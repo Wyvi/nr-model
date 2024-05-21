@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-16 13:42+0200\n"
+"POT-Creation-Date: 2024-05-21 14:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1114,6 +1114,7 @@ msgid "on"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/Person.jinja:3
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/Person.jinja:6
 msgid "Find more records by this person"
 msgstr ""
 
@@ -1222,12 +1223,6 @@ msgid "Add institution name (free text): "
 msgstr ""
 
 msgid "Affiliation"
-msgstr ""
-
-msgid "Organizational identifiers"
-msgstr ""
-
-msgid "e.g. ISNI, ROR, ICO."
 msgstr ""
 
 msgid "Choose contributor's role from the list (editor, illustrator...)"
@@ -1385,9 +1380,6 @@ msgstr ""
 msgid "RIV"
 msgstr ""
 
-msgid "IGSN"
-msgstr ""
-
 msgid "ORCID"
 msgstr ""
 
@@ -1478,7 +1470,10 @@ msgstr ""
 msgid "Please provide an URL in valid format"
 msgstr ""
 
-msgid "Year must be in format YYYY"
+msgid "Year must be a number."
+msgstr ""
+
+msgid "Year must be in format YYYY."
 msgstr ""
 
 msgid "Contributors"

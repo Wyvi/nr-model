@@ -3918,3 +3918,9 @@ msgstr "Všechny"
 
 msgid "Both identifier and identifier type must be filled."
 msgstr "Musí být vyplněn identifikátor i typ identifikátoru."
+
+msgid "Year must be a number."
+msgstr "Rok musí být číslo."
+
+msgid "Year must be in format YYYY."
+msgstr "Rok musí být ve formátu YYYY."

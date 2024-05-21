@@ -1779,3 +1779,9 @@ msgstr ""
 
 msgid "Both identifier and identifier type must be filled."
 msgstr ""
+
+msgid "Year must be a number."
+msgstr ""
+
+msgid "Year must be in format YYYY."
+msgstr ""
