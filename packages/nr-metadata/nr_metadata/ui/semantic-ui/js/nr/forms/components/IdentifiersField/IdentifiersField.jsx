@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ArrayField, SelectField, TextField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
-import { ArrayFieldItem } from "@js/oarepo_ui";
+import { ArrayFieldItem, useValidateOnBlur } from "@js/oarepo_ui";
 import { useFormikContext, getIn } from "formik";
 import * as Yup from "yup";
 
@@ -69,10 +69,12 @@ export const IdentifiersField = ({
   identifierTypePlaceholder,
   identifierPlaceholder,
   defaultNewValue,
+  validateOnBlur,
   ...uiProps
 }) => {
   const { setFieldTouched, values } = useFormikContext();
   const identifiers = getIn(values, fieldPath, []);
+  const handleValidateAndBlur = useValidateOnBlur();
 
   return (
     <ArrayField
@@ -99,7 +101,11 @@ export const IdentifiersField = ({
                   !identifiers.map((i) => i.scheme).includes(o.value) ||
                   o.value === getIn(values, `${fieldPathPrefix}.scheme`)
               )}
-              onBlur={() => setFieldTouched(`${fieldPathPrefix}.scheme`)}
+              onBlur={
+                validateOnBlur
+                  ? () => handleValidateAndBlur(`${fieldPathPrefix}.scheme`)
+                  : () => setFieldTouched(`${fieldPathPrefix}.scheme`)
+              }
               placeholder={identifierTypePlaceholder}
               {...uiProps}
             />
@@ -109,6 +115,11 @@ export const IdentifiersField = ({
               fieldPath={`${fieldPathPrefix}.identifier`}
               placeholder={identifierPlaceholder}
               label={identifierLabel}
+              onBlur={
+                validateOnBlur
+                  ? () => handleValidateAndBlur(`${fieldPathPrefix}.identifier`)
+                  : () => setFieldTouched(`${fieldPathPrefix}.identifier`)
+              }
             />
           </ArrayFieldItem>
         );
@@ -127,6 +138,7 @@ IdentifiersField.propTypes = {
   identifierTypePlaceholder: PropTypes.string,
   identifierPlaceholder: PropTypes.string,
   defaultNewValue: PropTypes.object,
+  validateOnBlur: PropTypes.bool,
 };
 
 IdentifiersField.defaultProps = {
@@ -135,4 +147,5 @@ IdentifiersField.defaultProps = {
   identifierTypePlaceholder: i18next.t("e.g. ORCID, ISNI or ScopusID."),
   identifierPlaceholder: i18next.t("e.g. 10.1086/679716 for a DOI"),
   defaultNewValue: { scheme: "", identifier: "" },
+  validateOnBlur: false,
 };
