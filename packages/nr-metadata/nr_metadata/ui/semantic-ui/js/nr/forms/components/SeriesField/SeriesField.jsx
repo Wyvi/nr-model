@@ -5,7 +5,7 @@ import { i18next } from "@translations/nr/i18next";
 import { ArrayFieldItem, sanitizeInput } from "@js/oarepo_ui";
 import { useFormikContext, getIn } from "formik";
 
-export const SeriesField = ({ fieldPath, helpText }) => {
+export const SeriesField = ({ fieldPath, helpText, validTags }) => {
   const { values, setFieldValue, setFieldTouched } = useFormikContext();
 
   return (
@@ -27,7 +27,7 @@ export const SeriesField = ({ fieldPath, helpText }) => {
               onBlur={() => {
                 const cleanedContent = sanitizeInput(
                   getIn(values, `${fieldPathPrefix}.seriesTitle`),
-                  `${fieldPathPrefix}.seriesTitle`
+                  validTags
                 );
                 setFieldValue(`${fieldPathPrefix}.seriesTitle`, cleanedContent);
                 setFieldTouched(`${fieldPathPrefix}.seriesTitle`, true);
@@ -48,6 +48,7 @@ export const SeriesField = ({ fieldPath, helpText }) => {
 SeriesField.propTypes = {
   fieldPath: PropTypes.string.isRequired,
   helpText: PropTypes.string,
+  validTags: PropTypes.array,
 };
 
 SeriesField.defaultProps = {

@@ -19,6 +19,7 @@ export const StringArrayField = ({
   helpText,
   labelIcon,
   showEmptyValue,
+  validTags,
   ...uiProps
 }) => {
   const { values, setFieldValue, setFieldTouched } = useFormikContext();
@@ -47,7 +48,8 @@ export const StringArrayField = ({
                     fluid
                     onBlur={() => {
                       const cleanedContent = sanitizeInput(
-                        getIn(values, indexPath)
+                        getIn(values, indexPath),
+                        validTags
                       );
                       setFieldValue(indexPath, cleanedContent);
                       setFieldTouched(indexPath, true);
@@ -85,6 +87,7 @@ StringArrayField.propTypes = {
   labelIcon: PropTypes.string,
   required: PropTypes.bool,
   showEmptyValue: PropTypes.bool,
+  validTags: PropTypes.array,
 };
 
 StringArrayField.defaultProps = {

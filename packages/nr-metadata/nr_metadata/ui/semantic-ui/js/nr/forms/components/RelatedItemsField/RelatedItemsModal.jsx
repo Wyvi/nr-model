@@ -68,6 +68,7 @@ export const RelatedItemsModal = ({
   editLabel,
   onRelatedItemChange,
   trigger,
+  validTags,
 }) => {
   const [open, setOpen] = React.useState(false);
   const [action, setAction] = React.useState(initialAction);
@@ -91,7 +92,7 @@ export const RelatedItemsModal = ({
 
   const onSubmit = (values, formikBag) => {
     const fieldValue = getIn(values, "itemTitle");
-    const cleanedContent = sanitizeInput(fieldValue);
+    const cleanedContent = sanitizeInput(fieldValue, validTags);
     const updatedValues = { ...values, itemTitle: cleanedContent };
     onRelatedItemChange(updatedValues);
     formikBag.setSubmitting(false);
@@ -347,6 +348,7 @@ RelatedItemsModal.propTypes = {
   editLabel: PropTypes.string,
   onRelatedItemChange: PropTypes.func,
   trigger: PropTypes.node,
+  validTags: PropTypes.array,
 };
 
 RelatedItemsModal.defaultProps = {

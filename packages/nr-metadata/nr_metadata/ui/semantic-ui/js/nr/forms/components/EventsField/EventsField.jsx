@@ -11,7 +11,7 @@ import {
 } from "@js/oarepo_ui";
 import { useFormikContext, getIn } from "formik";
 
-export const EventsField = ({ fieldPath, helpText }) => {
+export const EventsField = ({ fieldPath, helpText, validTags }) => {
   const { values, setFieldValue, setFieldTouched } = useFormikContext();
 
   return (
@@ -38,7 +38,8 @@ export const EventsField = ({ fieldPath, helpText }) => {
               placeholder={i18next.t("Write down the main name of the event.")}
               onBlur={() => {
                 const cleanedContent = sanitizeInput(
-                  getIn(values, `${fieldPathPrefix}.eventNameOriginal`)
+                  getIn(values, `${fieldPathPrefix}.eventNameOriginal`),
+                  validTags
                 );
                 setFieldValue(
                   `${fieldPathPrefix}.eventNameOriginal`,
