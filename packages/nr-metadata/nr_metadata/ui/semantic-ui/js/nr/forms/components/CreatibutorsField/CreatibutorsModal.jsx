@@ -572,15 +572,18 @@ export const CreatibutorsModal = ({
                         type="institutions"
                         label={
                           <FieldLabel
-                            htmlFor={affiliationsFieldPath}
-                            icon=""
-                            label={i18next.t("Affiliations")}
+                          htmlFor={affiliationsFieldPath}
+                          icon=""
+                          label={i18next.t("Affiliations")}
                           />
                         }
                         fieldPath={affiliationsFieldPath}
                         placeholder={i18next.t(
                           "Start writing name of the institution, then choose from the options."
                         )}
+                        externalApiModalTitle={i18next.t("Search in ROR database")}
+                        externalApiButtonContent={i18next.t("Search in ROR database")}
+                        externalAuthority
                         multiple
                         clearable
                       />
@@ -607,6 +610,9 @@ export const CreatibutorsModal = ({
                     placeholder={i18next.t(
                       "Start writing name of the institution, then choose from the options."
                     )}
+                    externalApiModalTitle={i18next.t("Search in ROR database")}
+                    externalApiButtonContent={i18next.t("Search in ROR database")}
+                    externalAuthority
                     clearable
                     allowAdditions
                     selection
