@@ -2,9 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ArrayField, TextField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
-import { ArrayFieldItem } from "@js/oarepo_ui";
+import { ArrayFieldItem, sanitizeInput } from "@js/oarepo_ui";
+import { useFormikContext, getIn } from "formik";
 
-export const SeriesField = ({ fieldPath, helpText }) => {
+export const SeriesField = ({ fieldPath, helpText, validTags }) => {
+  const { values, setFieldValue, setFieldTouched } = useFormikContext();
+
   return (
     <ArrayField
       addButtonLabel={i18next.t("Add series")}
@@ -22,6 +25,14 @@ export const SeriesField = ({ fieldPath, helpText }) => {
               fieldPath={`${fieldPathPrefix}.seriesTitle`}
               label={i18next.t("Series title")}
               required
+              onBlur={() => {
+                const cleanedContent = sanitizeInput(
+                  getIn(values, `${fieldPathPrefix}.seriesTitle`),
+                  validTags
+                );
+                setFieldValue(`${fieldPathPrefix}.seriesTitle`, cleanedContent);
+                setFieldTouched(`${fieldPathPrefix}.seriesTitle`, true);
+              }}
             />
             <TextField
               width={8}
@@ -38,6 +49,7 @@ export const SeriesField = ({ fieldPath, helpText }) => {
 SeriesField.propTypes = {
   fieldPath: PropTypes.string.isRequired,
   helpText: PropTypes.string,
+  validTags: PropTypes.array,
 };
 
 SeriesField.defaultProps = {
