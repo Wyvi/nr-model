@@ -24,6 +24,7 @@ export const SeriesField = ({ fieldPath, helpText, validTags }) => {
               width={8}
               fieldPath={`${fieldPathPrefix}.seriesTitle`}
               label={i18next.t("Series title")}
+              required
               onBlur={() => {
                 const cleanedContent = sanitizeInput(
                   getIn(values, `${fieldPathPrefix}.seriesTitle`),

@@ -68,6 +68,7 @@ export const EventsField = ({ fieldPath, helpText, validTags }) => {
                 fieldPath={`${fieldPathPrefix}.eventLocation.place`}
                 label={i18next.t("Place")}
                 placeholder={i18next.t("Write down the place of the event.")}
+                required
               />
               <LocalVocabularySelectField
                 selectOnBlur={false}

@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ArrayField, SelectField, TextField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
-import { ArrayFieldItem } from "@js/oarepo_ui";
-import { useFormikContext } from "formik";
+import { ArrayFieldItem, useValidateOnBlur } from "@js/oarepo_ui";
+import { useFormikContext, getIn } from "formik";
+import * as Yup from "yup";
 
 export const objectIdentifiersSchema = [
   { value: "DOI", text: i18next.t("DOI"), key: "DOI" },
@@ -11,7 +12,6 @@ export const objectIdentifiersSchema = [
   { value: "ISBN", text: i18next.t("ISBN"), key: "ISBN" },
   { value: "ISSN", text: i18next.t("ISSN"), key: "ISSN" },
   { value: "RIV", text: i18next.t("RIV"), key: "RIV" },
-  { value: "IGSN", text: i18next.t("IGSN"), key: "IGSN" },
 ];
 
 export const personIdentifiersSchema = [
@@ -38,6 +38,27 @@ export const organizationIdentifiersSchema = [
   { value: "ICO", text: i18next.t("ICO"), key: "ICO" },
   { value: "DOI", text: i18next.t("DOI"), key: "DOI" },
 ];
+
+export const IdentifiersValidationSchema = Yup.array().of(
+  Yup.object().shape({
+    identifier: Yup.string().test(
+      "Test if both identifier and identifier type are provided",
+      i18next.t("Both identifier and identifier type must be filled."),
+      (value, context) => {
+        if (!value && !context.parent.scheme) return true;
+        return !(!value && context.parent.scheme);
+      }
+    ),
+    scheme: Yup.string().test(
+      "Test if both identifier and identifier type are provided",
+      i18next.t("Both identifier and identifier type must be filled."),
+      (value, context) => {
+        if (!value && !context.parent.identifier) return true;
+        return !(!value && context.parent.identifier);
+      }
+    ),
+  })
+);
 export const IdentifiersField = ({
   fieldPath,
   helpText,
@@ -48,9 +69,13 @@ export const IdentifiersField = ({
   identifierTypePlaceholder,
   identifierPlaceholder,
   defaultNewValue,
+  validateOnBlur,
   ...uiProps
 }) => {
-  const { setFieldTouched } = useFormikContext();
+  const { setFieldTouched, values } = useFormikContext();
+  const identifiers = getIn(values, fieldPath, []);
+  const handleValidateAndBlur = useValidateOnBlur();
+
   return (
     <ArrayField
       addButtonLabel={i18next.t("Add identifier")}
@@ -71,8 +96,16 @@ export const IdentifiersField = ({
               fieldPath={`${fieldPathPrefix}.scheme`}
               label={i18next.t("Identifier type")}
               required
-              options={options}
-              onBlur={() => setFieldTouched(`${fieldPathPrefix}.scheme`)}
+              options={options.filter(
+                (o) =>
+                  !identifiers.map((i) => i.scheme).includes(o.value) ||
+                  o.value === getIn(values, `${fieldPathPrefix}.scheme`)
+              )}
+              onBlur={
+                validateOnBlur
+                  ? () => handleValidateAndBlur(`${fieldPathPrefix}.scheme`)
+                  : () => setFieldTouched(`${fieldPathPrefix}.scheme`)
+              }
               placeholder={identifierTypePlaceholder}
               {...uiProps}
             />
@@ -82,6 +115,11 @@ export const IdentifiersField = ({
               fieldPath={`${fieldPathPrefix}.identifier`}
               placeholder={identifierPlaceholder}
               label={identifierLabel}
+              onBlur={
+                validateOnBlur
+                  ? () => handleValidateAndBlur(`${fieldPathPrefix}.identifier`)
+                  : () => setFieldTouched(`${fieldPathPrefix}.identifier`)
+              }
             />
           </ArrayFieldItem>
         );
@@ -100,6 +138,7 @@ IdentifiersField.propTypes = {
   identifierTypePlaceholder: PropTypes.string,
   identifierPlaceholder: PropTypes.string,
   defaultNewValue: PropTypes.object,
+  validateOnBlur: PropTypes.bool,
 };
 
 IdentifiersField.defaultProps = {
@@ -108,4 +147,5 @@ IdentifiersField.defaultProps = {
   identifierTypePlaceholder: i18next.t("e.g. ORCID, ISNI or ScopusID."),
   identifierPlaceholder: i18next.t("e.g. 10.1086/679716 for a DOI"),
   defaultNewValue: { scheme: "", identifier: "" },
+  validateOnBlur: false,
 };

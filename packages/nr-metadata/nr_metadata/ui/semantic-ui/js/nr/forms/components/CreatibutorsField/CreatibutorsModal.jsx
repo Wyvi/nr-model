@@ -39,9 +39,12 @@ import PropTypes from "prop-types";
 import {
   IdentifiersField,
   personIdentifiersSchema,
-  organizationIdentifiersSchema,
+  IdentifiersValidationSchema,
 } from "../IdentifiersField";
-import { getTitleFromMultilingualObject } from "@js/oarepo_ui";
+import {
+  getTitleFromMultilingualObject,
+  handleValidateAndBlur,
+} from "@js/oarepo_ui";
 
 const ModalActions = {
   ADD: "add",
@@ -93,7 +96,6 @@ const familyNameFieldPath = "family_name";
 const givenNameFieldPath = "given_name";
 const identifiersFieldPath = "authorityIdentifiers";
 const personalIdentifiersFieldPath = "personalIdentifiers";
-const organizationIdentifiersFieldPath = "organizationalIdentifiers";
 const affiliationsFieldPath = "affiliations";
 const roleFieldPath = "contributorType";
 const affiliationFullNameFieldPath = "affiliationNameFieldPath";
@@ -128,15 +130,9 @@ const serializeCreatibutor = (submittedCreatibutor, isCreator, isPerson) => {
       affiliationFullNameFieldPath,
       ""
     );
-    const identifiers = _get(
-      submittedCreatibutor,
-      organizationIdentifiersFieldPath,
-      []
-    );
 
     return {
       nameType,
-      authorityIdentifiers: identifiers,
       fullName:
         getTitleFromMultilingualObject(affiliation?.title) ||
         affiliation?.name ||
@@ -188,11 +184,6 @@ const deserializeCreatibutor = (initialCreatibutor, isCreator, isPerson) => {
       [affiliationFullNameFieldPath]: _get(
         initialCreatibutor,
         fullNameFieldPath
-      ),
-      [organizationIdentifiersFieldPath]: _get(
-        initialCreatibutor,
-        identifiersFieldPath,
-        []
       ),
       ...(!isCreator && {
         contributorType: _get(initialCreatibutor, "contributorType"),
@@ -289,7 +280,7 @@ export const CreatibutorsModal = ({
   const namesAutocompleteRef = createRef();
   const isCreator = schema === "creators";
 
-  const CreatorSchema = Yup.object({
+  const CreatibutorsPersonSchema = Yup.object({
     nameType: Yup.string(),
     given_name: Yup.string().when("nameType", (nameType, schema) => {
       if (nameType === CREATIBUTOR_TYPE.PERSON) {
@@ -307,19 +298,25 @@ export const CreatibutorsModal = ({
         return schema.required(i18next.t("Role is a required field."));
       }
     }),
+    personalIdentifiers: IdentifiersValidationSchema,
+  });
+
+  const CreatibutorsOrganizationSchema = Yup.object({
+    nameType: Yup.string(),
+    contributorType: Yup.object().when("_", (_, schema) => {
+      if (!isCreator) {
+        return schema.required(i18next.t("Role is a required field."));
+      }
+    }),
     affiliationNameFieldPath: Yup.mixed().test(
       "text",
       i18next.t("Affiliation name is a required field."),
       (value, testContext) => {
-        if (testContext.parent.nameType === CREATIBUTOR_TYPE.ORGANIZATION) {
-          return (
-            !_isEmpty(value) ||
-            typeof value === "object" ||
-            typeof value === "string"
-          );
-        } else {
-          return true;
-        }
+        return !(
+          _isEmpty(value) ||
+          typeof value === "object" ||
+          typeof value === "string"
+        );
       }
     ),
   });
@@ -403,267 +400,287 @@ export const CreatibutorsModal = ({
   };
 
   const ActionLabel = () => displayActionLabel;
+  const [isPerson, setIsPerson] = useState(
+    _get(initialCreatibutor, typeFieldPath) === CREATIBUTOR_TYPE.PERSON
+  );
 
+  const initialValues = deserializeCreatibutor(
+    initialCreatibutor,
+    isCreator,
+    isPerson
+  );
   return (
     <Formik
-      initialValues={deserializeCreatibutor(
-        initialCreatibutor,
-        isCreator,
-        _get(initialCreatibutor, typeFieldPath) === CREATIBUTOR_TYPE.PERSON
-      )}
+      initialValues={initialValues}
       onSubmit={onSubmit}
       enableReinitialize
-      validationSchema={CreatorSchema}
+      validationSchema={
+        isPerson ? CreatibutorsPersonSchema : CreatibutorsOrganizationSchema
+      }
       validateOnChange={false}
       validateOnBlur={false}
     >
-      {({ values, resetForm, handleSubmit }) => (
-        <Modal
-          centered={false}
-          onOpen={() => openModal()}
-          open={open}
-          trigger={trigger}
-          onClose={() => {
-            closeModal();
-            resetForm();
-          }}
-          closeIcon
-          closeOnDimmerClick={false}
-          className="form-modal"
-          size="large"
-        >
-          <Modal.Header as="h6" className="pt-10 pb-10">
-            <Grid>
-              <Grid.Column floated="left" width={4}>
-                <Header as="h2">
-                  <ActionLabel />
-                </Header>
-              </Grid.Column>
-            </Grid>
-          </Modal.Header>
-          <Modal.Content>
-            <Form>
-              <Form.Group>
-                <RadioField
-                  fieldPath={typeFieldPath}
-                  label={i18next.t("Person")}
-                  checked={
-                    _get(values, typeFieldPath) === CREATIBUTOR_TYPE.PERSON
-                  }
-                  value={CREATIBUTOR_TYPE.PERSON}
-                  onChange={({ formikProps }) => {
-                    formikProps.form.setFieldValue(
-                      typeFieldPath,
-                      CREATIBUTOR_TYPE.PERSON
-                    );
-                  }}
-                  optimized
-                />
-                <RadioField
-                  fieldPath={typeFieldPath}
-                  label={i18next.t("Organization")}
-                  checked={
-                    _get(values, typeFieldPath) ===
-                    CREATIBUTOR_TYPE.ORGANIZATION
-                  }
-                  value={CREATIBUTOR_TYPE.ORGANIZATION}
-                  onChange={({ formikProps }) => {
-                    formikProps.form.setFieldValue(
-                      typeFieldPath,
+      {({
+        values,
+        resetForm,
+        handleSubmit,
+        validateField,
+        setFieldTouched,
+      }) => {
+        const handleBlur = handleValidateAndBlur(
+          validateField,
+          setFieldTouched
+        );
+        return (
+          <Modal
+            centered={false}
+            onOpen={() => openModal()}
+            open={open}
+            trigger={trigger}
+            onClose={() => {
+              closeModal();
+              resetForm();
+            }}
+            closeIcon
+            closeOnDimmerClick={false}
+            className="form-modal"
+            size="large"
+          >
+            <Modal.Header as="h6" className="pt-10 pb-10">
+              <Grid>
+                <Grid.Column floated="left" width={4}>
+                  <Header as="h2">
+                    <ActionLabel />
+                  </Header>
+                </Grid.Column>
+              </Grid>
+            </Modal.Header>
+            <Modal.Content>
+              <Form>
+                <Form.Group>
+                  <RadioField
+                    fieldPath={typeFieldPath}
+                    label={i18next.t("Person")}
+                    checked={
+                      _get(values, typeFieldPath) === CREATIBUTOR_TYPE.PERSON
+                    }
+                    value={CREATIBUTOR_TYPE.PERSON}
+                    onChange={({ formikProps }) => {
+                      formikProps.form.setFieldValue(
+                        typeFieldPath,
+                        CREATIBUTOR_TYPE.PERSON
+                      );
+                      setIsPerson(true);
+                    }}
+                    optimized
+                  />
+                  <RadioField
+                    fieldPath={typeFieldPath}
+                    label={i18next.t("Organization")}
+                    checked={
+                      _get(values, typeFieldPath) ===
                       CREATIBUTOR_TYPE.ORGANIZATION
-                    );
-                  }}
-                  optimized
-                />
-                <Popup
-                  content={nameTypeHelpText}
-                  trigger={
-                    <Icon
-                      name="question circle outline"
-                      style={{ fontSize: "1rem", paddingLeft: "0.5rem" }}
-                    ></Icon>
-                  }
-                />
-              </Form.Group>
-              {_get(values, typeFieldPath, "") === CREATIBUTOR_TYPE.PERSON && (
-                <div>
-                  {autocompleteNames !== NamesAutocompleteOptions.OFF && (
-                    <RemoteSelectField
-                      selectOnBlur={false}
-                      selectOnNavigation={false}
-                      searchInput={{
-                        autoFocus: _isEmpty(initialCreatibutor),
-                      }}
-                      fieldPath="creators"
-                      clearable
-                      multiple={false}
-                      allowAdditions={false}
-                      placeholder={i18next.t(
-                        "Search for persons by name, identifier, or affiliation..."
-                      )}
-                      noQueryMessage={i18next.t(
-                        "Search for persons by name, identifier, or affiliation..."
-                      )}
-                      required={false}
-                      // Disable UI-side filtering of search results
-                      search={(options) => options}
-                      suggestionAPIUrl="/api/names"
-                      serializeSuggestions={(suggestions) =>
-                        serializeSuggestions(
-                          suggestions,
-                          showPersonForm,
-                          autocompleteNames
-                        )
-                      }
-                      onValueChange={onPersonSearchChange}
-                      ref={namesAutocompleteRef}
-                    />
-                  )}
-                  {showPersonForm && (
-                    <div>
-                      <Form.Group widths="equal">
-                        <TextField
-                          label={
-                            <FieldLabel
-                              htmlFor={familyNameFieldPath}
-                              icon="pencil"
-                              label={i18next.t("Family name")}
-                            />
-                          }
-                          placeholder={lastNameFieldPlaceholder}
-                          fieldPath={familyNameFieldPath}
-                          required={
-                            isCreator &&
-                            _get(values, typeFieldPath) ===
-                              CREATIBUTOR_TYPE.PERSON
-                          }
-                        />
-                        <TextField
-                          label={
-                            <FieldLabel
-                              htmlFor={givenNameFieldPath}
-                              icon="pencil"
-                              label={i18next.t("Given names")}
-                            />
-                          }
-                          placeholder={nameFieldPlaceholder}
-                          fieldPath={givenNameFieldPath}
-                          required={
-                            isCreator &&
-                            _get(values, typeFieldPath) ===
-                              CREATIBUTOR_TYPE.PERSON
-                          }
-                        />
-                      </Form.Group>
-                      <Form.Group widths="equal">
-                        <IdentifiersField
-                          className="modal-identifiers-field"
-                          options={personIdentifiersSchema}
-                          fieldPath={personalIdentifiersFieldPath}
-                          label={i18next.t("Personal identifier")}
-                          helpText={i18next.t(
-                            "Choose from the menu identifier type. Write the identifier without prefix (i.e. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
-                          )}
-                          selectOnBlur={false}
-                          placeholder={i18next.t("Personal identifier")}
-                        />
-                      </Form.Group>
-                      <VocabularySelectField
-                        type="institutions"
-                        label={
-                          <FieldLabel
-                            htmlFor={affiliationsFieldPath}
-                            icon=""
-                            label={i18next.t("Affiliations")}
-                          />
-                        }
-                        fieldPath={affiliationsFieldPath}
-                        placeholder={i18next.t(
-                          "Start writing name of the institution, then choose from the options."
-                        )}
-                        multiple
+                    }
+                    value={CREATIBUTOR_TYPE.ORGANIZATION}
+                    onChange={({ formikProps }) => {
+                      formikProps.form.setFieldValue(
+                        typeFieldPath,
+                        CREATIBUTOR_TYPE.ORGANIZATION
+                      );
+                      setIsPerson(false);
+                    }}
+                    optimized
+                  />
+                  <Popup
+                    content={nameTypeHelpText}
+                    trigger={
+                      <Icon
+                        name="question circle outline"
+                        style={{ fontSize: "1rem", paddingLeft: "0.5rem" }}
+                      ></Icon>
+                    }
+                  />
+                </Form.Group>
+                {_get(values, typeFieldPath, "") ===
+                  CREATIBUTOR_TYPE.PERSON && (
+                  <div>
+                    {autocompleteNames !== NamesAutocompleteOptions.OFF && (
+                      <RemoteSelectField
+                        selectOnBlur={false}
+                        selectOnNavigation={false}
+                        searchInput={{
+                          autoFocus: _isEmpty(initialCreatibutor),
+                        }}
+                        fieldPath="creators"
                         clearable
+                        multiple={false}
+                        allowAdditions={false}
+                        placeholder={i18next.t(
+                          "Search for persons by name, identifier, or affiliation..."
+                        )}
+                        noQueryMessage={i18next.t(
+                          "Search for persons by name, identifier, or affiliation..."
+                        )}
+                        required={false}
+                        // Disable UI-side filtering of search results
+                        search={(options) => options}
+                        suggestionAPIUrl="/api/names"
+                        serializeSuggestions={(suggestions) =>
+                          serializeSuggestions(
+                            suggestions,
+                            showPersonForm,
+                            autocompleteNames
+                          )
+                        }
+                        onValueChange={onPersonSearchChange}
+                        ref={namesAutocompleteRef}
                       />
-                    </div>
-                  )}
-                </div>
-              )}
-              {_get(values, typeFieldPath) ===
-                CREATIBUTOR_TYPE.ORGANIZATION && (
-                <div>
-                  <VocabularySelectField
-                    additionLabel={i18next.t(
-                      "Add institution name (free text): "
                     )}
-                    type="institutions"
+                    {showPersonForm && (
+                      <div>
+                        <Form.Group widths="equal">
+                          <TextField
+                            label={
+                              <FieldLabel
+                                htmlFor={familyNameFieldPath}
+                                icon="pencil"
+                                label={i18next.t("Family name")}
+                              />
+                            }
+                            placeholder={lastNameFieldPlaceholder}
+                            fieldPath={familyNameFieldPath}
+                            required
+                            onBlur={() => handleBlur(familyNameFieldPath)}
+                          />
+                          <TextField
+                            label={
+                              <FieldLabel
+                                htmlFor={givenNameFieldPath}
+                                icon="pencil"
+                                label={i18next.t("Given names")}
+                              />
+                            }
+                            placeholder={nameFieldPlaceholder}
+                            fieldPath={givenNameFieldPath}
+                            required
+                            onBlur={() => handleBlur(givenNameFieldPath)}
+                          />
+                        </Form.Group>
+                        <Form.Group widths="equal">
+                          <IdentifiersField
+                            className="modal-identifiers-field"
+                            options={personIdentifiersSchema}
+                            fieldPath={personalIdentifiersFieldPath}
+                            label={i18next.t("Personal identifier")}
+                            helpText={i18next.t(
+                              "Choose from the menu identifier type. Write the identifier without prefix (i.e. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
+                            )}
+                            selectOnBlur={false}
+                            placeholder={i18next.t("Personal identifier")}
+                            validateOnBlur
+                          />
+                        </Form.Group>
+                        <VocabularySelectField
+                          type="institutions"
+                          label={
+                            <FieldLabel
+                              htmlFor={affiliationsFieldPath}
+                              icon=""
+                              label={i18next.t("Affiliations")}
+                            />
+                          }
+                          fieldPath={affiliationsFieldPath}
+                          placeholder={i18next.t(
+                            "Start writing name of the institution, then choose from the options."
+                          )}
+                          multiple
+                          clearable
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
+                {_get(values, typeFieldPath) ===
+                  CREATIBUTOR_TYPE.ORGANIZATION && (
+                  <div>
+                    <VocabularySelectField
+                      additionLabel={i18next.t(
+                        "Add institution name (free text): "
+                      )}
+                      type="institutions"
+                      label={
+                        <FieldLabel
+                          htmlFor={affiliationFullNameFieldPath}
+                          icon=""
+                          label={i18next.t("Affiliation")}
+                        />
+                      }
+                      fieldPath={affiliationFullNameFieldPath}
+                      placeholder={i18next.t(
+                        "Start writing name of the institution, then choose from the options."
+                      )}
+                      clearable
+                      selection
+                      deburr
+                      required
+                      onBlur={() => handleBlur(affiliationFullNameFieldPath)}
+                    />
+                  </div>
+                )}
+                {!isCreator && (
+                  <LocalVocabularySelectField
+                    type="contributor-types"
+                    placeholder={i18next.t(
+                      "Choose contributor's role from the list (editor, illustrator...)"
+                    )}
+                    fieldPath={roleFieldPath}
                     label={
                       <FieldLabel
-                        htmlFor={affiliationFullNameFieldPath}
+                        htmlFor={roleFieldPath}
                         icon=""
-                        label={i18next.t("Affiliation")}
+                        label={i18next.t("Role")}
                       />
                     }
-                    fieldPath={affiliationFullNameFieldPath}
-                    placeholder={i18next.t(
-                      "Start writing name of the institution, then choose from the options."
-                    )}
                     clearable
-                    allowAdditions
-                    selection
-                    deburr
+                    optionsListName="contributor-types"
+                    required
+                    onBlur={() => handleBlur(roleFieldPath)}
                   />
-                  <IdentifiersField
-                    className="modal-identifiers-field"
-                    options={organizationIdentifiersSchema}
-                    fieldPath={organizationIdentifiersFieldPath}
-                    label={i18next.t("Organizational identifiers")}
-                    helpText={i18next.t(
-                      "Choose from the menu identifier type. Write the identifier without prefix (i.e. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
-                    )}
-                    selectOnBlur={false}
-                    identifierTypePlaceholder={i18next.t(
-                      "e.g. ISNI, ROR, ICO."
-                    )}
-                  />
-                </div>
-              )}
-              {!isCreator && (
-                <LocalVocabularySelectField
-                  type="contributor-types"
-                  placeholder={i18next.t(
-                    "Choose contributor's role from the list (editor, illustrator...)"
-                  )}
-                  fieldPath={roleFieldPath}
-                  label={
-                    <FieldLabel
-                      htmlFor={roleFieldPath}
-                      icon=""
-                      label={i18next.t("Role")}
-                    />
-                  }
-                  clearable
-                  optionsListName="contributor-types"
+                )}
+              </Form>
+            </Modal.Content>
+            <Modal.Actions>
+              <Button
+                name="cancel"
+                onClick={() => {
+                  resetForm();
+                  closeModal();
+                }}
+                icon="remove"
+                content={i18next.t("Cancel")}
+                floated="left"
+              />
+              {action === ModalActions.ADD && (
+                <Button
+                  name="submit"
+                  type="submit"
+                  onClick={() => {
+                    setAction("saveAndContinue");
+                    setShowPersonForm(
+                      autocompleteNames !== NamesAutocompleteOptions.SEARCH_ONLY
+                    );
+                    handleSubmit();
+                  }}
+                  primary
+                  icon="checkmark"
+                  content={saveAndContinueLabel}
                 />
               )}
-            </Form>
-          </Modal.Content>
-          <Modal.Actions>
-            <Button
-              name="cancel"
-              onClick={() => {
-                resetForm();
-                closeModal();
-              }}
-              icon="remove"
-              content={i18next.t("Cancel")}
-              floated="left"
-            />
-            {action === ModalActions.ADD && (
               <Button
                 name="submit"
                 type="submit"
                 onClick={() => {
-                  setAction("saveAndContinue");
+                  setAction("saveAndClose");
                   setShowPersonForm(
                     autocompleteNames !== NamesAutocompleteOptions.SEARCH_ONLY
                   );
@@ -671,26 +688,12 @@ export const CreatibutorsModal = ({
                 }}
                 primary
                 icon="checkmark"
-                content={saveAndContinueLabel}
+                content={i18next.t("Save")}
               />
-            )}
-            <Button
-              name="submit"
-              type="submit"
-              onClick={() => {
-                setAction("saveAndClose");
-                setShowPersonForm(
-                  autocompleteNames !== NamesAutocompleteOptions.SEARCH_ONLY
-                );
-                handleSubmit();
-              }}
-              primary
-              icon="checkmark"
-              content={i18next.t("Save")}
-            />
-          </Modal.Actions>
-        </Modal>
-      )}
+            </Modal.Actions>
+          </Modal>
+        );
+      }}
     </Formik>
   );
 };
