@@ -10,18 +10,34 @@ import {
   useFormConfig,
 } from "@js/oarepo_ui";
 
-export const EventsField = ({ fieldPath, helpText }) => {
+export const EventsField = ({
+  fieldPath,
+  helpText,
+  useModelData,
+  addButtonLabel,
+  label,
+  eventNameOriginalLabel,
+  eventNameOriginalPlaceholder,
+  eventNameAlternateLabel,
+  eventNameAlternateAddButtonLabel,
+  eventNameAlternateHelpText,
+  eventDateLabel,
+  eventLocationPlaceLabel,
+  eventLocationPlacePlaceholder,
+  eventLocationCountryLabel,
+  eventLocationCountryPlaceholder,
+}) => {
   const {
     formConfig: { getFieldData },
   } = useFormConfig();
+
   return (
     <ArrayField
-      addButtonLabel={i18next.t("Add event")}
+      addButtonLabel={addButtonLabel}
       fieldPath={fieldPath}
-      label={i18next.t("Events")}
-      // labelIcon="pencil"
+      label={label}
       helpText={helpText}
-      {...getFieldData(fieldPath).fullRepresentation}
+      {...(useModelData ? getFieldData(fieldPath).fullRepresentation : {})}
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
@@ -34,53 +50,57 @@ export const EventsField = ({ fieldPath, helpText }) => {
             <TextField
               width={16}
               fieldPath={`${fieldPathPrefix}.eventNameOriginal`}
-              label={i18next.t("Event name")}
+              label={eventNameOriginalLabel}
               required
-              placeholder={i18next.t("Write down the main name of the event.")}
-              {...getFieldData(`${fieldPathPrefix}.eventNameOriginal`)
-                .compactRepresentation}
+              placeholder={eventNameOriginalPlaceholder}
+              {...(useModelData
+                ? getFieldData(`${fieldPathPrefix}.eventNameOriginal`)
+                    .compactRepresentation
+                : {})}
             />
             <StringArrayField
               width={16}
               fieldPath={`${fieldPathPrefix}.eventNameAlternate`}
-              label={i18next.t("Event alternate name")}
-              addButtonLabel={i18next.t("Add event alternate name")}
-              helpText={i18next.t(
-                "If event has other known names, write them here."
-              )}
-              {...getFieldData(`${fieldPathPrefix}.eventNameAlternate`)
-                .compactRepresentation}
+              label={eventNameAlternateLabel}
+              addButtonLabel={eventNameAlternateAddButtonLabel}
+              helpText={eventNameAlternateHelpText}
+              {...(useModelData
+                ? getFieldData(`${fieldPathPrefix}.eventNameAlternate`)
+                    .compactRepresentation
+                : {})}
             />
             <EDTFDaterangePicker
               required
               fieldPath={`${fieldPathPrefix}.eventDate`}
-              label={i18next.t("Event date")}
-              {...getFieldData(`${fieldPathPrefix}.eventDate`)
-                .compactRepresentation}
+              label={eventDateLabel}
+              {...(useModelData
+                ? getFieldData(`${fieldPathPrefix}.eventDate`, "calendar")
+                    .fullRepresentation
+                : {})}
             />
             <GroupField>
               <TextField
                 width={10}
                 fieldPath={`${fieldPathPrefix}.eventLocation.place`}
-                label={i18next.t("Place")}
-                placeholder={i18next.t("Write down the place of the event.")}
-                {...getFieldData(`${fieldPathPrefix}.eventLocation.place`)
-                  .compactRepresentation}
+                label={eventLocationPlaceLabel}
+                placeholder={eventLocationPlacePlaceholder}
+                {...(useModelData
+                  ? getFieldData(`${fieldPathPrefix}.eventLocation.place`)
+                      .compactRepresentation
+                  : {})}
               />
               <LocalVocabularySelectField
                 selectOnBlur={false}
                 width={6}
                 fieldPath={`${fieldPathPrefix}.eventLocation.country`}
-                label={
-                  <label htmlFor={`${fieldPathPrefix}.eventLocation.country`}>
-                    {i18next.t("Country")}
-                  </label>
-                }
+                label={eventLocationCountryLabel}
                 optionsListName="countries"
                 clearable
-                placeholder={i18next.t("Choose country from the list.")}
-                {...getFieldData(`${fieldPathPrefix}.eventLocation.country`)
-                  .compactRepresentation}
+                placeholder={eventLocationCountryPlaceholder}
+                {...(useModelData
+                  ? getFieldData(`${fieldPathPrefix}.eventLocation.country`)
+                      .compactRepresentation
+                  : {})}
               />
             </GroupField>
           </ArrayFieldItem>
@@ -93,4 +113,43 @@ export const EventsField = ({ fieldPath, helpText }) => {
 EventsField.propTypes = {
   fieldPath: PropTypes.string.isRequired,
   helpText: PropTypes.string,
+  useModelData: PropTypes.bool,
+  addButtonLabel: PropTypes.string,
+  label: PropTypes.string,
+  eventNameOriginalLabel: PropTypes.string,
+  eventNameOriginalPlaceholder: PropTypes.string,
+  eventNameAlternateLabel: PropTypes.string,
+  eventNameAlternateAddButtonLabel: PropTypes.string,
+  eventNameAlternateHelpText: PropTypes.string,
+  eventDateLabel: PropTypes.string,
+  eventLocationPlaceLabel: PropTypes.string,
+  eventLocationPlacePlaceholder: PropTypes.string,
+  eventLocationCountryLabel: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+  ]),
+  eventLocationCountryPlaceholder: PropTypes.string,
+};
+
+EventsField.defaultProps = {
+  helpText: i18next.t("Provide details about the events."),
+  useModelData: true,
+  addButtonLabel: i18next.t("Add event"),
+  label: i18next.t("Events"),
+  eventNameOriginalLabel: i18next.t("Event name"),
+  eventNameOriginalPlaceholder: i18next.t(
+    "Write down the main name of the event."
+  ),
+  eventNameAlternateLabel: i18next.t("Event alternate name"),
+  eventNameAlternateAddButtonLabel: i18next.t("Add event alternate name"),
+  eventNameAlternateHelpText: i18next.t(
+    "If event has other known names, write them here."
+  ),
+  eventDateLabel: i18next.t("Event date"),
+  eventLocationPlaceLabel: i18next.t("Place"),
+  eventLocationPlacePlaceholder: i18next.t(
+    "Write down the place of the event."
+  ),
+  eventLocationCountryLabel: i18next.t("Country"),
+  eventLocationCountryPlaceholder: i18next.t("Choose country from the list."),
 };

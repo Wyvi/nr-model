@@ -72,7 +72,7 @@ export const LicenseField = ({
 };
 
 LicenseField.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   fieldPath: PropTypes.string.isRequired,
   required: PropTypes.bool,
   searchConfig: PropTypes.object.isRequired,
