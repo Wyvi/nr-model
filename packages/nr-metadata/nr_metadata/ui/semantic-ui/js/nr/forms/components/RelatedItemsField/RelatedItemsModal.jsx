@@ -17,7 +17,8 @@ import { CreatibutorsField } from "../CreatibutorsField";
 import { IdentifiersField, objectIdentifiersSchema } from "../IdentifiersField";
 import { LocalVocabularySelectField } from "@js/oarepo_vocabularies";
 import PropTypes from "prop-types";
-import { unique, requiredMessage } from "@js/oarepo_ui";
+import { unique, requiredMessage, sanitizeInput } from "@js/oarepo_ui";
+import { getIn } from "formik";
 
 const RelatedItemsSchema = Yup.object({
   itemTitle: Yup.string().required(requiredMessage).label(i18next.t("Title")),
@@ -67,12 +68,14 @@ export const RelatedItemsModal = ({
   editLabel,
   onRelatedItemChange,
   trigger,
+  validTags,
 }) => {
   const [open, setOpen] = React.useState(false);
   const [action, setAction] = React.useState(initialAction);
   const [saveAndContinueLabel, setSaveAndContinueLabel] = React.useState(
     i18next.t("Save and add another")
   );
+
   const openModal = () => {
     setOpen(true);
   };
@@ -88,7 +91,10 @@ export const RelatedItemsModal = ({
   };
 
   const onSubmit = (values, formikBag) => {
-    onRelatedItemChange(values);
+    const fieldValue = getIn(values, "itemTitle");
+    const cleanedContent = sanitizeInput(fieldValue, validTags);
+    const updatedValues = { ...values, itemTitle: cleanedContent };
+    onRelatedItemChange(updatedValues);
     formikBag.setSubmitting(false);
     formikBag.resetForm();
     switch (action) {
@@ -342,6 +348,7 @@ RelatedItemsModal.propTypes = {
   editLabel: PropTypes.string,
   onRelatedItemChange: PropTypes.func,
   trigger: PropTypes.node,
+  validTags: PropTypes.array,
 };
 
 RelatedItemsModal.defaultProps = {
