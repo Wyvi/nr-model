@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ArrayField, SelectField, TextField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
-import { ArrayFieldItem } from "@js/oarepo_ui";
+import { ArrayFieldItem, useFormConfig } from "@js/oarepo_ui";
 import { useFormikContext } from "formik";
 
 export const objectIdentifiersSchema = [
@@ -51,6 +51,10 @@ export const IdentifiersField = ({
   ...uiProps
 }) => {
   const { setFieldTouched } = useFormikContext();
+  const {
+    formConfig: { getFieldData, ui_model },
+  } = useFormConfig();
+  console.log(fieldPath);
   return (
     <ArrayField
       addButtonLabel={i18next.t("Add identifier")}
@@ -60,9 +64,11 @@ export const IdentifiersField = ({
       helpText={helpText}
       className={className}
       defaultNewValue={defaultNewValue}
+      // {...getFieldData(fieldPath)}
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
+        console.log(fieldPathPrefix);
         return (
           <ArrayFieldItem indexPath={indexPath} arrayHelpers={arrayHelpers}>
             <SelectField
@@ -75,6 +81,7 @@ export const IdentifiersField = ({
               onBlur={() => setFieldTouched(`${fieldPathPrefix}.scheme`)}
               placeholder={identifierTypePlaceholder}
               {...uiProps}
+              // {...getFieldData(`${fieldPathPrefix}.scheme`)}
             />
             <TextField
               required
@@ -82,6 +89,7 @@ export const IdentifiersField = ({
               fieldPath={`${fieldPathPrefix}.identifier`}
               placeholder={identifierPlaceholder}
               label={identifierLabel}
+              // {...getFieldData(`${fieldPathPrefix}.identifier`)}
             />
           </ArrayFieldItem>
         );

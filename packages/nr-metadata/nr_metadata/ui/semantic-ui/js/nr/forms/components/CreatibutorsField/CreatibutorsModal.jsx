@@ -718,7 +718,6 @@ CreatibutorsModal.defaultProps = {
     nameType: CREATIBUTOR_TYPE.PERSON,
     fullName: "",
     affiliations: [],
-    authorityIdentifiers: [],
   },
   autocompleteNames: "search",
   nameTypeHelpText: i18next.t(

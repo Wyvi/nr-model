@@ -4,16 +4,24 @@ import { ArrayField, TextField, GroupField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
 import { LocalVocabularySelectField } from "@js/oarepo_vocabularies";
 import { StringArrayField } from "../StringArray/StringArrayField";
-import { ArrayFieldItem, EDTFDaterangePicker } from "@js/oarepo_ui";
+import {
+  ArrayFieldItem,
+  EDTFDaterangePicker,
+  useFormConfig,
+} from "@js/oarepo_ui";
 
 export const EventsField = ({ fieldPath, helpText }) => {
+  const {
+    formConfig: { getFieldData },
+  } = useFormConfig();
   return (
     <ArrayField
       addButtonLabel={i18next.t("Add event")}
       fieldPath={fieldPath}
       label={i18next.t("Events")}
-      labelIcon="pencil"
+      // labelIcon="pencil"
       helpText={helpText}
+      {...getFieldData(fieldPath).fullRepresentation}
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
@@ -29,6 +37,8 @@ export const EventsField = ({ fieldPath, helpText }) => {
               label={i18next.t("Event name")}
               required
               placeholder={i18next.t("Write down the main name of the event.")}
+              {...getFieldData(`${fieldPathPrefix}.eventNameOriginal`)
+                .compactRepresentation}
             />
             <StringArrayField
               width={16}
@@ -38,11 +48,15 @@ export const EventsField = ({ fieldPath, helpText }) => {
               helpText={i18next.t(
                 "If event has other known names, write them here."
               )}
+              {...getFieldData(`${fieldPathPrefix}.eventNameAlternate`)
+                .compactRepresentation}
             />
             <EDTFDaterangePicker
               required
               fieldPath={`${fieldPathPrefix}.eventDate`}
               label={i18next.t("Event date")}
+              {...getFieldData(`${fieldPathPrefix}.eventDate`)
+                .compactRepresentation}
             />
             <GroupField>
               <TextField
@@ -50,6 +64,8 @@ export const EventsField = ({ fieldPath, helpText }) => {
                 fieldPath={`${fieldPathPrefix}.eventLocation.place`}
                 label={i18next.t("Place")}
                 placeholder={i18next.t("Write down the place of the event.")}
+                {...getFieldData(`${fieldPathPrefix}.eventLocation.place`)
+                  .compactRepresentation}
               />
               <LocalVocabularySelectField
                 selectOnBlur={false}
@@ -63,6 +79,8 @@ export const EventsField = ({ fieldPath, helpText }) => {
                 optionsListName="countries"
                 clearable
                 placeholder={i18next.t("Choose country from the list.")}
+                {...getFieldData(`${fieldPathPrefix}.eventLocation.country`)
+                  .compactRepresentation}
               />
             </GroupField>
           </ArrayFieldItem>

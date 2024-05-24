@@ -21,7 +21,7 @@ export const StringArrayField = ({
   useShowEmptyValue(fieldPath, defaultNewValue, showEmptyValue);
   return (
     <Form.Field>
-      <FieldLabel label={label} icon={labelIcon} htmlFor={fieldPath} />
+      <FieldLabel label={label} />
       <FieldArray
         name={fieldPath}
         render={(arrayHelpers) => (
@@ -45,7 +45,7 @@ export const StringArrayField = ({
                 </ArrayFieldItem>
               );
             })}
-            <label className="helptext">{helpText}</label>
+            {helpText ? <label className="helptext">{helpText}</label> : null}
             <Form.Button
               type="button"
               icon

@@ -8,6 +8,7 @@ import {
   ArrayFieldItem,
   useDefaultLocale,
   useFormFieldValue,
+  useFormConfig,
 } from "@js/oarepo_ui";
 
 const subtitleTypes = [
@@ -19,10 +20,16 @@ const subtitleTypes = [
 
 export const AdditionalTitlesField = ({
   fieldPath,
-  helpText,
   prefillLanguageWithDefaultLocale,
   defaultNewValue,
+  label,
+  required,
+  addButtonLabel,
+  useModelData,
 }) => {
+  const {
+    formConfig: { getFieldData },
+  } = useFormConfig();
   const { defaultLocale } = useDefaultLocale();
   const initialValueObj = {
     title: {
@@ -38,17 +45,17 @@ export const AdditionalTitlesField = ({
 
   return (
     <ArrayField
-      addButtonLabel={i18next.t("Add additional title")}
+      addButtonLabel={addButtonLabel}
       defaultNewValue={
         prefillLanguageWithDefaultLocale
           ? getNewValue(initialValueObj)
           : defaultNewValue
       }
+      label={label}
+      required={required}
       fieldPath={fieldPath}
-      label={i18next.t("Additional titles")}
-      labelIcon="pencil"
       className="additional-titles"
-      helpText={helpText}
+      {...(useModelData ? getFieldData(fieldPath).fullRepresentation : {})}
     >
       {({ arrayHelpers, indexPath, array }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
@@ -61,10 +68,13 @@ export const AdditionalTitlesField = ({
             <Form.Field width={12}>
               <I18nTextInputField
                 fieldPath={`${fieldPathPrefix}.title`}
+                lngFieldWidth={5}
                 label={i18next.t("Title")}
                 required
-                lngFieldWidth={5}
-                className=""
+                {...(useModelData
+                  ? getFieldData(`${fieldPathPrefix}.title`)
+                      .compactRepresentation
+                  : {})}
               />
             </Form.Field>
             <Form.Field width={4}>
@@ -76,11 +86,15 @@ export const AdditionalTitlesField = ({
                     {i18next.t("Title type")}
                   </label>
                 }
+                required
                 optimized
                 options={subtitleTypes}
-                required
                 clearable
                 width={16}
+                {...(useModelData
+                  ? getFieldData(`${fieldPathPrefix}.titleType`)
+                      .compactRepresentation
+                  : {})}
               />
             </Form.Field>
           </ArrayFieldItem>
@@ -92,15 +106,15 @@ export const AdditionalTitlesField = ({
 
 AdditionalTitlesField.propTypes = {
   fieldPath: PropTypes.string.isRequired,
-  helpText: PropTypes.string,
   prefillLanguageWithDefaultLocale: PropTypes.bool,
   defaultNewValue: PropTypes.object,
+  addButtonLabel: PropTypes.string,
+  label: PropTypes.string,
+  required: PropTypes.bool,
+  useModelData: PropTypes.bool,
 };
 
 AdditionalTitlesField.defaultProps = {
-  helpText: i18next.t(
-    "If the title is given in other languages, choose the type of title and corresponding language."
-  ),
   prefillLanguageWithDefaultLocale: false,
   defaultNewValue: {
     title: {
@@ -109,4 +123,8 @@ AdditionalTitlesField.defaultProps = {
     },
     titleType: "",
   },
+  label: i18next.t("Additional titles"),
+  required: false,
+  addButtonLabel: i18next.t("Add additional title"),
+  useModelData: true,
 };

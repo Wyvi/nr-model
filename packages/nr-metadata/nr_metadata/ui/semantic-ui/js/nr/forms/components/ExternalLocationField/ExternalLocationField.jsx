@@ -1,26 +1,47 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { TextField, GroupField, FieldLabel } from "react-invenio-forms";
+import { TextField, GroupField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
 import { Form } from "semantic-ui-react";
+import { useFormConfig } from "@js/oarepo_ui";
 
-export const ExternalLocationField = ({ fieldPath, helpText }) => {
+export const ExternalLocationField = ({
+  fieldPath,
+  label,
+  helpText,
+  externalLocationUrlLabel,
+  externalLocationNoteLabel,
+  useModelData,
+}) => {
+  const {
+    formConfig: { getFieldData },
+  } = useFormConfig();
+  const { label: modelFieldLabel, helpText: modelHelpText } =
+    getFieldData(fieldPath).fullRepresentation;
   return (
     <Form.Field>
-      <FieldLabel label={i18next.t("External location")} icon="pencil" />
+      {label ?? modelFieldLabel}
       <GroupField>
         <TextField
           width={8}
           fieldPath={`${fieldPath}.externalLocationURL`}
-          label={i18next.t("Resource external location")}
+          label={externalLocationUrlLabel}
+          {...(useModelData
+            ? getFieldData(`${fieldPath}.externalLocationURL`)
+                .compactRepresentation
+            : {})}
         />
         <TextField
           width={8}
           fieldPath={`${fieldPath}.externalLocationNote`}
-          label={i18next.t("Note")}
+          label={externalLocationNoteLabel}
+          {...(useModelData
+            ? getFieldData(`${fieldPath}.externalLocationNote`)
+                .compactRepresentation
+            : {})}
         />
       </GroupField>
-      <label className="helptext">{helpText}</label>
+      <label className="helptext">{helpText ?? modelHelpText}</label>
     </Form.Field>
   );
 };
@@ -28,10 +49,14 @@ export const ExternalLocationField = ({ fieldPath, helpText }) => {
 ExternalLocationField.propTypes = {
   fieldPath: PropTypes.string.isRequired,
   helpText: PropTypes.string,
+  label: PropTypes.node,
+  externalLocationUrlLabel: PropTypes.string,
+  externalLocationNoteLabel: PropTypes.string,
+  useModelData: PropTypes.bool,
 };
 
 ExternalLocationField.defaultProps = {
-  helpText: i18next.t(
-    "Provide other URL where this resource is available (i.e. other repository, database, webpage). In the note field you can provide for example name of website or database or specify another external source for the resource. "
-  ),
+  externalLocationUrlLabel: i18next.t("Resource external location"),
+  externalLocationNoteLabel: i18next.t("Note"),
+  useModelData: true,
 };
