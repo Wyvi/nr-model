@@ -38,8 +38,10 @@ export const UploadFileButton = ({ record, handleFilesUpload }) => {
         allowedFileTypes: ["*/*"],
         startEvent: null,
         onSuccessfulUpload: (files) => {
+          console.log("succesful uploads", files);
           handleFilesUpload(files);
         },
+        onFailedUpload: (files) => console.log("Failed uploads", files),
         allowedMetaFields: [
           {
             id: "fileNote",

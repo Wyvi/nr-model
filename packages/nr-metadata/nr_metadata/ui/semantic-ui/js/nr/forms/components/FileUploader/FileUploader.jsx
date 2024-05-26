@@ -18,9 +18,7 @@ export const FileUploader = ({ messageContent, record, recordFiles }) => {
     setFilesState((prevFiles) => [...prevFiles, ...deserializedFiles]);
   };
   const handleFileDeletion = (fileObject) => {
-    const newFiles = filesState.filter(
-      (file) => file.file_id !== fileObject.file_id
-    );
+    const newFiles = filesState.filter((file) => file.key !== fileObject.key);
     setFilesState(newFiles);
   };
 
