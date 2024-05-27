@@ -102,6 +102,8 @@ const affiliationsFieldPath = "affiliations";
 const roleFieldPath = "contributorType";
 const affiliationFullNameFieldPath = "affiliationNameFieldPath";
 const fullNameFieldPath = "fullName";
+const personFullNameFieldPath = "personFullName";
+const organizatonFullNameFieldPath = "organizationFullName";
 
 /**
  * Function to transform formik creatibutor state
@@ -112,7 +114,9 @@ const serializeCreatibutor = (submittedCreatibutor, isCreator, isPerson) => {
   const nameType = _get(submittedCreatibutor, typeFieldPath);
 
   if (isPerson) {
-    const fullName = `${submittedCreatibutor.family_name}, ${submittedCreatibutor.given_name}`;
+    const personFullName = `${submittedCreatibutor.familyName}, ${submittedCreatibutor.givenName}`;
+    const familyName = _get(submittedCreatibutor, familyNameFieldPath);
+    const givenName = _get(submittedCreatibutor, givenNameFieldPath);
     const affiliations = _get(submittedCreatibutor, affiliationsFieldPath, []);
     const identifiers = _get(
       submittedCreatibutor,
@@ -121,17 +125,16 @@ const serializeCreatibutor = (submittedCreatibutor, isCreator, isPerson) => {
     );
     return {
       nameType,
-      fullName,
+      fullName: personFullName,
+      familyName,
+      givenName,
       authorityIdentifiers: identifiers,
       affiliations: affiliations.map((aff) => aff?.data || aff),
       ...(!isCreator && { contributorType } && { contributorType }),
     };
   } else {
-    const affiliation = _get(
-      submittedCreatibutor,
-      affiliationFullNameFieldPath,
-      ""
-    );
+    const affiliation = _get(submittedCreatibutor, fullNameFieldPath, "");
+    console.log(affiliation);
 
     return {
       nameType,
@@ -150,19 +153,36 @@ const serializeCreatibutor = (submittedCreatibutor, isCreator, isPerson) => {
  */
 const deserializeCreatibutor = (initialCreatibutor, isCreator, isPerson) => {
   if (isPerson) {
-    const [family_name = "", given_name = ""] = _get(
-      initialCreatibutor,
-      fullNameFieldPath,
-      ""
-    )
-      .trim()
-      .split(",", 2);
-    const result = {
+    const familyName = _get(initialCreatibutor, familyNameFieldPath, "");
+    const givenName = _get(initialCreatibutor, givenNameFieldPath, "");
+    console.log({
       // default type to personal
       nameType: CREATIBUTOR_TYPE.PERSON,
-      family_name,
-      given_name,
-      ...initialCreatibutor,
+      familyName,
+      givenName,
+      [personFullNameFieldPath]: `${familyName}, ${givenName}`,
+      [personalIdentifiersFieldPath]: _get(
+        initialCreatibutor,
+        identifiersFieldPath,
+        []
+      ),
+      affiliations: _get(initialCreatibutor, affiliationsFieldPath, []).map(
+        (aff) => ({
+          ...aff,
+          text: getTitleFromMultilingualObject(aff?.title),
+          value: aff?.id,
+        })
+      ),
+      ...(!isCreator && {
+        contributorType: _get(initialCreatibutor, roleFieldPath),
+      }),
+    });
+    return {
+      // default type to personal
+      nameType: CREATIBUTOR_TYPE.PERSON,
+      familyName,
+      givenName,
+      [personFullNameFieldPath]: `${familyName}, ${givenName}`,
       [personalIdentifiersFieldPath]: _get(
         initialCreatibutor,
         identifiersFieldPath,
@@ -179,11 +199,20 @@ const deserializeCreatibutor = (initialCreatibutor, isCreator, isPerson) => {
         contributorType: _get(initialCreatibutor, roleFieldPath),
       }),
     };
-    return result;
   } else {
+    console.log({
+      nameType: CREATIBUTOR_TYPE.ORGANIZATION,
+      [organizatonFullNameFieldPath]: _get(
+        initialCreatibutor,
+        fullNameFieldPath
+      ),
+      ...(!isCreator && {
+        contributorType: _get(initialCreatibutor, "contributorType"),
+      }),
+    });
     return {
       nameType: CREATIBUTOR_TYPE.ORGANIZATION,
-      [affiliationFullNameFieldPath]: _get(
+      [organizatonFullNameFieldPath]: _get(
         initialCreatibutor,
         fullNameFieldPath
       ),
@@ -295,7 +324,7 @@ export const CreatibutorsModal = ({
         return schema.required(i18next.t("Family name is a required field."));
       }
     }),
-    fullName: Yup.string(),
+    // fullName: Yup.string(),
     contributorType: Yup.object().when("_", (_, schema) => {
       if (!isCreator) {
         return schema.required(i18next.t("Role is a required field."));
@@ -311,7 +340,7 @@ export const CreatibutorsModal = ({
         return schema.required(i18next.t("Role is a required field."));
       }
     }),
-    affiliationNameFieldPath: Yup.mixed().test(
+    fullName: Yup.mixed().test(
       "text",
       i18next.t("Affiliation name is a required field."),
       (value, testContext) => {
@@ -417,9 +446,9 @@ export const CreatibutorsModal = ({
       initialValues={initialValues}
       onSubmit={onSubmit}
       enableReinitialize
-      validationSchema={
-        isPerson ? CreatibutorsPersonSchema : CreatibutorsOrganizationSchema
-      }
+      // validationSchema={
+      //   isPerson ? CreatibutorsPersonSchema : CreatibutorsOrganizationSchema
+      // }
       validateOnChange={false}
       validateOnBlur={false}
     >
@@ -602,6 +631,8 @@ export const CreatibutorsModal = ({
                           )}
                           multiple
                           clearable
+                          {...getFieldData(affiliationsFieldPath)
+                            .fullRepresentation}
                         />
                       </div>
                     )}
@@ -617,12 +648,12 @@ export const CreatibutorsModal = ({
                       type="institutions"
                       label={
                         <FieldLabel
-                          htmlFor={affiliationFullNameFieldPath}
+                          htmlFor={organizatonFullNameFieldPath}
                           icon=""
                           label={i18next.t("Affiliation")}
                         />
                       }
-                      fieldPath={affiliationFullNameFieldPath}
+                      fieldPath={organizatonFullNameFieldPath}
                       placeholder={i18next.t(
                         "Start writing name of the institution, then choose from the options."
                       )}
@@ -630,7 +661,8 @@ export const CreatibutorsModal = ({
                       selection
                       deburr
                       required
-                      onBlur={() => handleBlur(affiliationFullNameFieldPath)}
+                      onBlur={() => handleBlur(organizatonFullNameFieldPath)}
+                      {...getFieldData(fullNameFieldPath).fullRepresentation}
                     />
                   </div>
                 )}
@@ -652,6 +684,7 @@ export const CreatibutorsModal = ({
                     optionsListName="contributor-types"
                     required
                     onBlur={() => handleBlur(roleFieldPath)}
+                    {...getFieldData(roleFieldPath).fullRepresentation}
                   />
                 )}
               </Form>
