@@ -7,28 +7,15 @@ import { StringArrayField } from "../StringArray/StringArrayField";
 import {
   ArrayFieldItem,
   EDTFDaterangePicker,
+  sanitizeInput,
   useFormConfig,
   useFieldData,
 } from "@js/oarepo_ui";
+import { useFormikContext, getIn } from "formik";
 
-export const EventsField = ({
-  fieldPath,
-  helpText,
-  useModelData,
-  addButtonLabel,
-  label,
-  eventNameOriginalLabel,
-  eventNameOriginalPlaceholder,
-  eventNameAlternateLabel,
-  eventNameAlternateAddButtonLabel,
-  eventNameAlternateHelpText,
-  eventDateLabel,
-  eventLocationPlaceLabel,
-  eventLocationPlacePlaceholder,
-  eventLocationCountryLabel,
-  eventLocationCountryPlaceholder,
-}) => {
-  const { getFieldData } = useFieldData();
+export const EventsField = ({ fieldPath, helpText, validTags }) => {
+  const { values, setFieldValue, setFieldTouched } = useFormikContext();
+
   return (
     <ArrayField
       addButtonLabel={addButtonLabel}
@@ -55,6 +42,17 @@ export const EventsField = ({
                 ? getFieldData(`${fieldPathPrefix}.eventNameOriginal`)
                     .compactRepresentation
                 : {})}
+              onBlur={() => {
+                const cleanedContent = sanitizeInput(
+                  getIn(values, `${fieldPathPrefix}.eventNameOriginal`),
+                  validTags
+                );
+                setFieldValue(
+                  `${fieldPathPrefix}.eventNameOriginal`,
+                  cleanedContent
+                );
+                setFieldTouched(`${fieldPathPrefix}.eventNameOriginal`, true);
+              }}
             />
             <StringArrayField
               width={16}
@@ -80,12 +78,9 @@ export const EventsField = ({
               <TextField
                 width={10}
                 fieldPath={`${fieldPathPrefix}.eventLocation.place`}
-                label={eventLocationPlaceLabel}
-                placeholder={eventLocationPlacePlaceholder}
-                {...(useModelData
-                  ? getFieldData(`${fieldPathPrefix}.eventLocation.place`)
-                      .compactRepresentation
-                  : {})}
+                label={i18next.t("Place")}
+                placeholder={i18next.t("Write down the place of the event.")}
+                required
               />
               <LocalVocabularySelectField
                 selectOnBlur={false}

@@ -684,7 +684,7 @@ msgid "Event date"
 msgstr "Datum události"
 
 msgid "Place"
-msgstr "Místo"
+msgstr "Místo konání akce"
 
 msgid "Country"
 msgstr "Země"
@@ -702,7 +702,7 @@ msgid "Add funder"
 msgstr "Přidat poskytovatele financí"
 
 msgid "Funding"
-msgstr "Projekt nebo financování"
+msgstr "Projekt / Financování"
 
 msgid "Project code"
 msgstr "Číslo projektu"
@@ -807,10 +807,10 @@ msgid "Choose languages"
 msgstr "Vyberte jazyky"
 
 msgid "Resource type"
-msgstr "Typ položky"
+msgstr "Typ zdroje"
 
 msgid "Select resource type"
-msgstr "Vyberte typ položky"
+msgstr "Vyberte typ zdroje"
 
 msgid "Abstract"
 msgstr "Abstrakt"
@@ -2740,7 +2740,7 @@ msgid "Related items"
 msgstr "Související položky"
 
 msgid "Add related item"
-msgstr "Přidat související položku"
+msgstr "Přidat související zdroj"
 
 msgid "Edit related item"
 msgstr "Upravit související položku"
@@ -3707,7 +3707,7 @@ msgid "Affiliation name is a required field."
 msgstr "Název afiliace je povinné pole."
 
 msgid "Personal identifier"
-msgstr "Osobní identifikátor"
+msgstr "Identifikátor osoby"
 
 msgid ""
 "Choose from the menu identifier type. Write the identifier without prefix "
@@ -3728,10 +3728,10 @@ msgid "Affiliation"
 msgstr "Afiliace"
 
 msgid "Organizational identifiers"
-msgstr "Organizační identifikátory"
+msgstr "Identifikátor organizace"
 
 msgid "e.g. ISNI, ROR, ICO."
-msgstr "např. ISNI, ROR, ICO."
+msgstr "např. ISNI, ROR, IČO."
 
 msgid "Choose contributor's role from the list (editor, illustrator...)"
 msgstr "Vyberte z rolety roli přispěvatele (editor, ilustrátor…)."
@@ -3845,7 +3845,7 @@ msgid "ROR"
 msgstr "ROR"
 
 msgid "ICO"
-msgstr "ICO"
+msgstr "IČO"
 
 msgid "e.g. ORCID, ISNI or ScopusID."
 msgstr "např. ORCID, ISNI nebo ScopusID."
@@ -3890,7 +3890,7 @@ msgid "Free text keywords"
 msgstr "Klíčová slova (volný text)"
 
 msgid "Add keywords"
-msgstr "Přidejte klíčová slova"
+msgstr "Přidejte klíčové slovo"
 
 msgid "Keyword"
 msgstr "Klíčová slova "
@@ -3915,3 +3915,12 @@ msgstr "Doporučené"
 
 msgid "All"
 msgstr "Všechny"
+
+msgid "Both identifier and identifier type must be filled."
+msgstr "Musí být vyplněn identifikátor i typ identifikátoru."
+
+msgid "Year must be a number."
+msgstr "Rok musí být číslo."
+
+msgid "Year must be in format YYYY."
+msgstr "Rok musí být ve formátu YYYY."

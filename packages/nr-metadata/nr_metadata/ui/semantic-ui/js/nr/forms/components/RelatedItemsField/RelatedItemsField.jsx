@@ -51,6 +51,7 @@ class RelatedItemsFieldForm extends Component {
       addButtonLabel,
       required,
       helpText,
+      validTags,
     } = this.props;
 
     const relatedItemsList = getIn(values, fieldPath, []);
@@ -99,6 +100,7 @@ class RelatedItemsFieldForm extends Component {
                   {addButtonLabel}
                 </Button>
               }
+              validTags={validTags}
             />
 
             {relatedItemsError && typeof relatedItemsError == "string" && (
@@ -144,6 +146,7 @@ RelatedItemsFieldForm.propTypes = {
   push: PropTypes.func.isRequired,
   required: PropTypes.bool,
   helpText: PropTypes.string,
+  validTags: PropTypes.array,
 };
 
 RelatedItemsFieldForm.defaultProps = {
@@ -169,6 +172,7 @@ RelatedItemsField.propTypes = {
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   labelIcon: PropTypes.string,
   required: PropTypes.bool,
+  validTags: PropTypes.array,
 };
 
 RelatedItemsField.defaultProps = {
