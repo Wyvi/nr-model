@@ -8,6 +8,7 @@ import {
   ArrayFieldItem,
   EDTFDaterangePicker,
   useFormConfig,
+  useFieldData,
 } from "@js/oarepo_ui";
 
 export const EventsField = ({
@@ -27,10 +28,7 @@ export const EventsField = ({
   eventLocationCountryLabel,
   eventLocationCountryPlaceholder,
 }) => {
-  const {
-    formConfig: { getFieldData },
-  } = useFormConfig();
-
+  const { getFieldData } = useFieldData();
   return (
     <ArrayField
       addButtonLabel={addButtonLabel}

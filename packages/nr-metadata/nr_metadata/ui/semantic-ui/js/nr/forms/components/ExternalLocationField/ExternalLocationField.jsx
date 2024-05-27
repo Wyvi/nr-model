@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { TextField, GroupField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
 import { Form } from "semantic-ui-react";
-import { useFormConfig } from "@js/oarepo_ui";
+import { useFieldData } from "@js/oarepo_ui";
 
 export const ExternalLocationField = ({
   fieldPath,
@@ -13,9 +13,8 @@ export const ExternalLocationField = ({
   externalLocationNoteLabel,
   useModelData,
 }) => {
-  const {
-    formConfig: { getFieldData },
-  } = useFormConfig();
+  const { getFieldData } = useFieldData();
+
   const { label: modelFieldLabel, helpText: modelHelpText } =
     getFieldData(fieldPath).fullRepresentation;
   return (

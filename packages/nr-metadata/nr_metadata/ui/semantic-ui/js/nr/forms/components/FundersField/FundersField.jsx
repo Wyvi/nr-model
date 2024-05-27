@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { ArrayField, TextField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
 import { LocalVocabularySelectField } from "@js/oarepo_vocabularies";
-import { ArrayFieldItem, useFormConfig } from "@js/oarepo_ui";
+import { ArrayFieldItem, useFieldData } from "@js/oarepo_ui";
 
 export const FundersField = ({
   fieldPath,
@@ -20,9 +20,7 @@ export const FundersField = ({
   funderLabel,
   funderPlaceholder,
 }) => {
-  const {
-    formConfig: { getFieldData },
-  } = useFormConfig();
+  const { getFieldData } = useFieldData();
 
   return (
     <ArrayField

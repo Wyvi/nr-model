@@ -8,7 +8,7 @@ import {
   ArrayFieldItem,
   useDefaultLocale,
   useFormFieldValue,
-  useFormConfig,
+  useFieldData,
 } from "@js/oarepo_ui";
 
 const subtitleTypes = [
@@ -27,9 +27,8 @@ export const AdditionalTitlesField = ({
   addButtonLabel,
   useModelData,
 }) => {
-  const {
-    formConfig: { getFieldData },
-  } = useFormConfig();
+  const { getFieldData } = useFieldData();
+
   const { defaultLocale } = useDefaultLocale();
   const initialValueObj = {
     title: {

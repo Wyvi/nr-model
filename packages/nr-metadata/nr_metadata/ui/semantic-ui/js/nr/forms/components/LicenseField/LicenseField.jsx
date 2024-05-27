@@ -13,7 +13,7 @@ import { Button, Form, Icon } from "semantic-ui-react";
 import { LicenseModal } from "./LicenseModal";
 import { LicenseFieldItem } from "./LicenseFieldItem";
 import { i18next } from "@translations/nr/i18next";
-import { useFormConfig } from "@js/oarepo_ui";
+import { useFieldData } from "@js/oarepo_ui";
 
 export const LicenseField = ({
   label,
@@ -23,9 +23,8 @@ export const LicenseField = ({
   serializeLicense,
   helpText,
 }) => {
-  const {
-    formConfig: { getFieldData },
-  } = useFormConfig();
+  const { getFieldData } = useFieldData();
+
   const {
     label: modelLabel,
     helpText: modelHelpText,

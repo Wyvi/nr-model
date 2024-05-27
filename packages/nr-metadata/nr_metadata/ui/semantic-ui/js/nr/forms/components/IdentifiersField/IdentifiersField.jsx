@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ArrayField, SelectField, TextField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
-import { ArrayFieldItem, useFormConfig } from "@js/oarepo_ui";
+import { ArrayFieldItem, useFieldData } from "@js/oarepo_ui";
 import { useFormikContext } from "formik";
 
 export const objectIdentifiersSchema = [
@@ -51,9 +51,7 @@ export const IdentifiersField = ({
   ...uiProps
 }) => {
   const { setFieldTouched } = useFormikContext();
-  const {
-    formConfig: { getFieldData, ui_model },
-  } = useFormConfig();
+  const { getFieldData } = useFieldData();
   console.log(fieldPath);
   return (
     <ArrayField
@@ -64,11 +62,10 @@ export const IdentifiersField = ({
       helpText={helpText}
       className={className}
       defaultNewValue={defaultNewValue}
-      // {...getFieldData(fieldPath)}
+      {...getFieldData(fieldPath, "pencil").fullRepresentation}
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
-        console.log(fieldPathPrefix);
         return (
           <ArrayFieldItem indexPath={indexPath} arrayHelpers={arrayHelpers}>
             <SelectField
@@ -81,7 +78,8 @@ export const IdentifiersField = ({
               onBlur={() => setFieldTouched(`${fieldPathPrefix}.scheme`)}
               placeholder={identifierTypePlaceholder}
               {...uiProps}
-              // {...getFieldData(`${fieldPathPrefix}.scheme`)}
+              {...getFieldData(`${fieldPathPrefix}.scheme`)
+                .compactRepresentation}
             />
             <TextField
               required
@@ -89,7 +87,8 @@ export const IdentifiersField = ({
               fieldPath={`${fieldPathPrefix}.identifier`}
               placeholder={identifierPlaceholder}
               label={identifierLabel}
-              // {...getFieldData(`${fieldPathPrefix}.identifier`)}
+              {...getFieldData(`${fieldPathPrefix}.identifier`)
+                .compactRepresentation}
             />
           </ArrayFieldItem>
         );

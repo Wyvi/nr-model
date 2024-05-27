@@ -2,12 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ArrayField, TextField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
-import { ArrayFieldItem, useFormConfig } from "@js/oarepo_ui";
+import { ArrayFieldItem, useFieldData } from "@js/oarepo_ui";
 
 export const SeriesField = ({ fieldPath, helpText, useModelData }) => {
-  const {
-    formConfig: { getFieldData },
-  } = useFormConfig();
+  const { getFieldData } = useFieldData();
 
   return (
     <ArrayField
