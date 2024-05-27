@@ -3,13 +3,16 @@ import PropTypes from "prop-types";
 import { ArrayField, TextField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
 import { ArrayFieldItem, useFieldData, sanitizeInput } from "@js/oarepo_ui";
-
-export const SeriesField = ({ fieldPath, helpText, useModelData }) => {
-  const { getFieldData } = useFieldData();
 import { useFormikContext, getIn } from "formik";
 
-export const SeriesField = ({ fieldPath, helpText, validTags, useModelData }) => {
+export const SeriesField = ({
+  fieldPath,
+  helpText,
+  validTags,
+  useModelData,
+}) => {
   const { values, setFieldValue, setFieldTouched } = useFormikContext();
+  const { getFieldData } = useFieldData();
 
   return (
     <ArrayField

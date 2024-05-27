@@ -8,13 +8,20 @@ import {
   ArrayFieldItem,
   EDTFDaterangePicker,
   sanitizeInput,
-  useFormConfig,
   useFieldData,
 } from "@js/oarepo_ui";
 import { useFormikContext, getIn } from "formik";
 
-export const EventsField = ({ fieldPath, helpText, validTags }) => {
+export const EventsField = ({
+  fieldPath,
+  helpText,
+  validTags,
+  label,
+  useModelData,
+  addButtonLabel,
+}) => {
   const { values, setFieldValue, setFieldTouched } = useFormikContext();
+  const { getFieldData } = useFieldData();
 
   return (
     <ArrayField
@@ -35,9 +42,7 @@ export const EventsField = ({ fieldPath, helpText, validTags }) => {
             <TextField
               width={16}
               fieldPath={`${fieldPathPrefix}.eventNameOriginal`}
-              label={eventNameOriginalLabel}
               required
-              placeholder={eventNameOriginalPlaceholder}
               {...(useModelData
                 ? getFieldData(`${fieldPathPrefix}.eventNameOriginal`)
                     .compactRepresentation
@@ -57,9 +62,6 @@ export const EventsField = ({ fieldPath, helpText, validTags }) => {
             <StringArrayField
               width={16}
               fieldPath={`${fieldPathPrefix}.eventNameAlternate`}
-              label={eventNameAlternateLabel}
-              addButtonLabel={eventNameAlternateAddButtonLabel}
-              helpText={eventNameAlternateHelpText}
               {...(useModelData
                 ? getFieldData(`${fieldPathPrefix}.eventNameAlternate`)
                     .compactRepresentation
@@ -68,7 +70,6 @@ export const EventsField = ({ fieldPath, helpText, validTags }) => {
             <EDTFDaterangePicker
               required
               fieldPath={`${fieldPathPrefix}.eventDate`}
-              label={eventDateLabel}
               {...(useModelData
                 ? getFieldData(`${fieldPathPrefix}.eventDate`, "calendar")
                     .fullRepresentation
@@ -86,10 +87,8 @@ export const EventsField = ({ fieldPath, helpText, validTags }) => {
                 selectOnBlur={false}
                 width={6}
                 fieldPath={`${fieldPathPrefix}.eventLocation.country`}
-                label={eventLocationCountryLabel}
                 optionsListName="countries"
                 clearable
-                placeholder={eventLocationCountryPlaceholder}
                 {...(useModelData
                   ? getFieldData(`${fieldPathPrefix}.eventLocation.country`)
                       .compactRepresentation

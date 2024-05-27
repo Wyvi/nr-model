@@ -21,7 +21,11 @@ import {
 } from "../IdentifiersField";
 import { LocalVocabularySelectField } from "@js/oarepo_vocabularies";
 import PropTypes from "prop-types";
-import { unique, requiredMessage, handleValidateAndBlur, sanitizeInput } from "@js/oarepo_ui";
+import {
+  requiredMessage,
+  handleValidateAndBlur,
+  sanitizeInput,
+} from "@js/oarepo_ui";
 import { getIn } from "formik";
 
 const RelatedItemsSchema = Yup.object({

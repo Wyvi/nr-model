@@ -45,6 +45,7 @@ export const IdentifiersValidationSchema = Yup.array().of(
       "Test if both identifier and identifier type are provided",
       i18next.t("Both identifier and identifier type must be filled."),
       (value, context) => {
+        console.log("test");
         if (!value && !context.parent.scheme) return true;
         return !(!value && context.parent.scheme);
       }
@@ -53,6 +54,7 @@ export const IdentifiersValidationSchema = Yup.array().of(
       "Test if both identifier and identifier type are provided",
       i18next.t("Both identifier and identifier type must be filled."),
       (value, context) => {
+        console.log("test");
         if (!value && !context.parent.identifier) return true;
         return !(!value && context.parent.identifier);
       }
@@ -75,6 +77,7 @@ export const IdentifiersField = ({
   const { setFieldTouched, values } = useFormikContext();
   const { getFieldData } = useFieldData();
   const identifiers = getIn(values, fieldPath, []);
+  const handleValidateAndBlur = useValidateOnBlur();
 
   console.log(fieldPath);
   return (
