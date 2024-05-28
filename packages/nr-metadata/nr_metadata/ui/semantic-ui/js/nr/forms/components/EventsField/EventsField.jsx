@@ -4,9 +4,16 @@ import { ArrayField, TextField, GroupField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
 import { LocalVocabularySelectField } from "@js/oarepo_vocabularies";
 import { StringArrayField } from "../StringArray/StringArrayField";
-import { ArrayFieldItem, EDTFDaterangePicker } from "@js/oarepo_ui";
+import {
+  ArrayFieldItem,
+  EDTFDaterangePicker,
+  sanitizeInput,
+} from "@js/oarepo_ui";
+import { useFormikContext, getIn } from "formik";
 
-export const EventsField = ({ fieldPath, helpText }) => {
+export const EventsField = ({ fieldPath, helpText, validTags }) => {
+  const { values, setFieldValue, setFieldTouched } = useFormikContext();
+
   return (
     <ArrayField
       addButtonLabel={i18next.t("Add event")}
@@ -29,6 +36,17 @@ export const EventsField = ({ fieldPath, helpText }) => {
               label={i18next.t("Event name")}
               required
               placeholder={i18next.t("Write down the main name of the event.")}
+              onBlur={() => {
+                const cleanedContent = sanitizeInput(
+                  getIn(values, `${fieldPathPrefix}.eventNameOriginal`),
+                  validTags
+                );
+                setFieldValue(
+                  `${fieldPathPrefix}.eventNameOriginal`,
+                  cleanedContent
+                );
+                setFieldTouched(`${fieldPathPrefix}.eventNameOriginal`, true);
+              }}
             />
             <StringArrayField
               width={16}
@@ -50,6 +68,7 @@ export const EventsField = ({ fieldPath, helpText }) => {
                 fieldPath={`${fieldPathPrefix}.eventLocation.place`}
                 label={i18next.t("Place")}
                 placeholder={i18next.t("Write down the place of the event.")}
+                required
               />
               <LocalVocabularySelectField
                 selectOnBlur={false}
