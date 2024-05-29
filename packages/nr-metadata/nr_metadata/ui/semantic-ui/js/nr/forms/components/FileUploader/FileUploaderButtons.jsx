@@ -78,15 +78,14 @@ export const DeleteFileButton = ({ file, handleFileDeletion }) => {
       });
   };
   return isDeleting ? (
-    <Button disabled className="transparent" type="button">
-      <Icon loading name="spinner" />
-    </Button>
+    <Icon loading name="spinner" />
   ) : (
     <Button
       disabled={isDeleting}
       className="transparent"
       type="button"
       onClick={handleDelete}
+      aria-label={i18next.t("Delete file")}
     >
       <Icon aria-hidden="true" name="trash alternate" className="m-0" />
     </Button>

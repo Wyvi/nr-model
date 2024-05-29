@@ -18,16 +18,10 @@ export const FileUploader = ({
   const { formik, isSubmitting, save, isSaving } = useDepositApiClient();
   const { read } = useDepositFileApiClient();
   const { values } = formik;
-  // values.links.files =
-  //   "https://127.0.0.1:5000/api/docs/x4cjy-2bf20/draft/filesddd";
-  const draft = {
-    links: {
-      files: "https://127.0.0.1:5000/api/docs/x4cjy-2bf20/draft/filesddd",
-    },
-  };
-  const { isFetching, isError, error, refetch } = useQuery(
+
+  const { isFetching, isError, refetch } = useQuery(
     ["files"],
-    () => read(draft),
+    () => read(values),
     {
       refetchOnWindowFocus: false,
       enabled: false,
@@ -36,8 +30,6 @@ export const FileUploader = ({
       },
     }
   );
-  console.log(isError);
-  console.log(error);
 
   const recordObject = record || values;
 
@@ -57,42 +49,40 @@ export const FileUploader = ({
             (!isFetching ? (
               <React.Fragment>
                 {isError ? (
-                  <Message>
+                  <Message negative>
                     {i18next.t(
                       "Failed to fetch draft's files. Please try refreshing the page."
                     )}
                   </Message>
                 ) : (
-                  <FileUploaderTable
-                    files={filesState}
-                    handleFileDeletion={handleFileDeletion}
-                    record={recordObject}
-                    allowedFileTypes={allowedFileTypes}
-                  />
+                  <React.Fragment>
+                    <FileUploaderTable
+                      files={filesState}
+                      handleFileDeletion={handleFileDeletion}
+                      record={recordObject}
+                      allowedFileTypes={allowedFileTypes}
+                    />
+                    <UploadFileButton
+                      record={recordObject}
+                      handleFilesUpload={handleFilesUpload}
+                      allowedFileTypes={allowedFileTypes}
+                    />
+                  </React.Fragment>
                 )}
-                <UploadFileButton
-                  record={recordObject}
-                  handleFilesUpload={handleFilesUpload}
-                  allowedFileTypes={allowedFileTypes}
-                />
               </React.Fragment>
             ) : (
               <div className="flex justify-center align-items-center">
                 <Icon name="spinner" loading size="huge" />
               </div>
             ))}
-          <Message icon size="small">
-            <Icon
-              name="warning sign"
-              size="mini"
-              // style={{ fontSize: "1rem" }}
-            />
+          <Message icon>
+            <Icon name="warning sign" className="text size large" />
             <Message.Content>{messageContent}</Message.Content>
           </Message>
         </React.Fragment>
       ) : (
         <Message>
-          <Icon name="info circle" size="mini" style={{ fontSize: "1rem" }} />
+          <Icon name="info circle" className="text size large" />
           <Trans>
             If you wish to upload files, you must
             <Button

@@ -19,6 +19,8 @@ export const FileUploadWrapper = ({
             {
               className: uploadButtonClassName,
               onClick: onClick,
+              type: "button",
+              ariaLabel: i18next.t("Upload files"),
               ...props,
             },
             i18next.t("Upload files"),
@@ -63,6 +65,7 @@ export const FileEditWrapper = ({
               onClick: onClick,
               ...props,
               ariaLabel: i18next.t("Edit file"),
+              type: "button",
             },
             h("i", {
               "aria-hidden": "true",

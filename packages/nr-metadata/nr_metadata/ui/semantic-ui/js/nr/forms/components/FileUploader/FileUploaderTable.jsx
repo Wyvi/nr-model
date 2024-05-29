@@ -150,14 +150,16 @@ export const FileUploaderTable = ({ files, record, handleFileDeletion }) => {
                       </a>
                     </Table.Cell>
                   </Table.Row>
-                  <Table.Row>
-                    <Table.Cell width={6}>
-                      <strong>{i18next.t("File size")}</strong>
-                    </Table.Cell>
-                    <Table.Cell className="flex justify-center">
-                      {humanReadableBytes(size)}
-                    </Table.Cell>
-                  </Table.Row>
+                  {size && (
+                    <Table.Row>
+                      <Table.Cell width={6}>
+                        <strong>{i18next.t("File size")}</strong>
+                      </Table.Cell>
+                      <Table.Cell className="flex justify-center">
+                        {humanReadableBytes(size)}
+                      </Table.Cell>
+                    </Table.Row>
+                  )}
                   <Table.Row>
                     <Table.Cell width={6}>
                       <strong>{i18next.t("Status")}</strong>
@@ -168,26 +170,34 @@ export const FileUploaderTable = ({ files, record, handleFileDeletion }) => {
                   </Table.Row>
                   <Table.Row verticalAlign="middle">
                     <Table.Cell width={6}>
-                      <strong>{i18next.t("Actions")}</strong>
+                      <strong>{i18next.t("Delete")}</strong>
                     </Table.Cell>
                     <Table.Cell
                       textAlign="center"
                       className="flex justify-center"
                     >
-                      {status === "completed" && (
-                        <EditFileButtonCmp
-                          className="rel-mr-1"
-                          fileName={fileName}
-                          record={record}
-                        />
-                      )}
                       <DeleteFileButtonCmp
-                        className="rel-ml-1"
                         file={file}
                         handleFileDeletion={handleFileDeletion}
                       />
                     </Table.Cell>
                   </Table.Row>
+                  {status === "completed" && (
+                    <Table.Row>
+                      <Table.Cell width={6}>
+                        <strong>{i18next.t("Edit")}</strong>
+                      </Table.Cell>
+                      <Table.Cell
+                        textAlign="center"
+                        className="flex justify-center"
+                      >
+                        <EditFileButtonCmp
+                          fileName={fileName}
+                          record={record}
+                        />
+                      </Table.Cell>
+                    </Table.Row>
+                  )}
                 </Table.Body>
               </Table>
             );

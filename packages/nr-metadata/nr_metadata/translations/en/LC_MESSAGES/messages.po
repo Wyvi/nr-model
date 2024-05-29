@@ -1785,3 +1785,21 @@ msgstr ""
 
 msgid "Year must be in format YYYY."
 msgstr ""
+
+msgid "Failed to fetch draft's files. Please try refreshing the page."
+msgstr ""
+
+msgid "File uploaded successfully."
+msgstr ""
+
+msgid "File was not uploaded correctly. Please delete it and try again."
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Delete"
+msgstr ""

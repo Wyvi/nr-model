@@ -3924,3 +3924,15 @@ msgstr "Rok musí být číslo."
 
 msgid "Year must be in format YYYY."
 msgstr "Rok musí být ve formátu YYYY."
+
+msgid "Failed to fetch draft's files. Please try refreshing the page."
+msgstr "Soubory konceptu se nepodařilo načíst. Zkuste prosím obnovit stránku."
+
+msgid "File uploaded successfully."
+msgstr "Soubor byl úspěšně nahrán."
+
+msgid "File was not uploaded correctly. Please delete it and try again."
+msgstr "Soubor nebyl správně nahrán. Smažte jej a zkuste to znovu."
+
+msgid "Status"
+msgstr "Stav"
