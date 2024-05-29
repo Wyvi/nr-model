@@ -28,13 +28,13 @@ StatusIcon.propTypes = {
   status: PropTypes.string,
 };
 
-const DeleteFileButtonCmp = ({ file, handleFileDeletion }) => {
+const DeleteFileButtonCmp = ({ file, handleFileDeletion, className }) => {
   return (
     <Popup
       position="top center"
       content={i18next.t("Delete file")}
       trigger={
-        <div>
+        <div className={className}>
           <DeleteFileButton
             file={file}
             handleFileDeletion={handleFileDeletion}
@@ -48,15 +48,16 @@ const DeleteFileButtonCmp = ({ file, handleFileDeletion }) => {
 DeleteFileButtonCmp.propTypes = {
   file: PropTypes.object,
   handleFileDeletion: PropTypes.func,
+  className: PropTypes.string,
 };
 
-const EditFileButtonCmp = ({ fileName, record }) => {
+const EditFileButtonCmp = ({ fileName, record, className }) => {
   return (
     <Popup
       position="top center"
       content={i18next.t("Edit file metadata")}
       trigger={
-        <div>
+        <div className={className}>
           <EditFileButton fileName={fileName} record={record} />
         </div>
       }
@@ -67,6 +68,7 @@ const EditFileButtonCmp = ({ fileName, record }) => {
 EditFileButtonCmp.propTypes = {
   fileName: PropTypes.string,
   record: PropTypes.object,
+  className: PropTypes.string,
 };
 
 export const FileUploaderTable = ({ files, record, handleFileDeletion }) => {
@@ -174,11 +176,13 @@ export const FileUploaderTable = ({ files, record, handleFileDeletion }) => {
                     >
                       {status === "completed" && (
                         <EditFileButtonCmp
+                          className="rel-mr-1"
                           fileName={fileName}
                           record={record}
                         />
                       )}
                       <DeleteFileButtonCmp
+                        className="rel-ml-1"
                         file={file}
                         handleFileDeletion={handleFileDeletion}
                       />

@@ -63,7 +63,6 @@ export const FileEditWrapper = ({
               onClick: onClick,
               ...props,
               ariaLabel: i18next.t("Edit file"),
-              style: { backgroundColor: "transparent" },
             },
             h("i", {
               "aria-hidden": "true",
@@ -90,5 +89,5 @@ FileEditWrapper.propTypes = {
 
 FileEditWrapper.defaultProps = {
   // editWrapperClassName: "ui container centered",
-  editButtonClassName: "ui button",
+  editButtonClassName: "ui button transparent",
 };
