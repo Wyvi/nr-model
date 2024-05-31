@@ -16,8 +16,10 @@ NRDataMetadata:
     dateWithdrawn:
       type: object
       properties:
-        dateInformation: keyword
-        type: date
+        dateInformation:
+          type: keyword
+        type:
+          type: date
     abstract:
       required: true
     publishers[]:
