@@ -79,7 +79,6 @@ export const IdentifiersField = ({
   const identifiers = getIn(values, fieldPath, []);
   const handleValidateAndBlur = useValidateOnBlur();
 
-  console.log(fieldPath);
   return (
     <ArrayField
       addButtonLabel={i18next.t("Add identifier")}
