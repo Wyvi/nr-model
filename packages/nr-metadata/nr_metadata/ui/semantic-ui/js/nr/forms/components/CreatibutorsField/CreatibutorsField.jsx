@@ -14,10 +14,10 @@ import _get from "lodash/get";
 import { FieldLabel } from "react-invenio-forms";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
-
 import { CreatibutorsModal } from "./CreatibutorsModal";
 import { CreatibutorsFieldItem } from "./CreatibutorsFieldItem";
 import { i18next } from "@translations/nr/i18next";
+import { FieldDataProvider } from "@js/oarepo_ui";
 
 const creatibutorNameDisplay = (value) => {
   const name = _get(value, `fullName`);
@@ -48,6 +48,7 @@ class CreatibutorsFieldForm extends Component {
       nameFieldPlaceholder,
       lastNameFieldPlaceholder,
       nameTypeHelpText,
+      fieldPathPrefix,
     } = this.props;
 
     const creatibutorsList = getIn(values, fieldPath, []);
@@ -60,63 +61,65 @@ class CreatibutorsFieldForm extends Component {
 
     return (
       <DndProvider backend={HTML5Backend}>
-        <Form.Field
-          required={required}
-          className={creatibutorsError ? "error" : ""}
-        >
-          <FieldLabel htmlFor={fieldPath} icon={labelIcon} label={label} />
-          <List>
-            {creatibutorsList.map((value, index) => {
-              const key = `${fieldPath}.${index}`;
-              const identifiersError = creatibutorsError
-                ? creatibutorsError[index]?.authorityIdentifiers
-                : [];
-              const displayName = creatibutorNameDisplay(value);
-              return (
-                <CreatibutorsFieldItem
-                  key={key}
-                  identifiersError={identifiersError}
-                  nameTypeHelpText={nameTypeHelpText}
-                  {...{
-                    displayName,
-                    index,
-                    schema,
-                    compKey: key,
-                    initialCreatibutor: value,
-                    removeCreatibutor: formikArrayRemove,
-                    replaceCreatibutor: formikArrayReplace,
-                    moveCreatibutor: formikArrayMove,
-                    addLabel: modal.addLabel,
-                    editLabel: modal.editLabel,
-                    autocompleteNames: autocompleteNames,
-                  }}
-                />
-              );
-            })}
-            <CreatibutorsModal
-              onCreatibutorChange={this.handleOnContributorChange}
-              initialAction="add"
-              addLabel={modal.addLabel}
-              editLabel={modal.editLabel}
-              schema={schema}
-              nameFieldPlaceholder={nameFieldPlaceholder}
-              lastNameFieldPlaceholder={lastNameFieldPlaceholder}
-              nameTypeHelpText={nameTypeHelpText}
-              autocompleteNames={autocompleteNames}
-              trigger={
-                <Button type="button" icon labelPosition="left">
-                  <Icon name="add" />
-                  {addButtonLabel}
-                </Button>
-              }
-            />
-            {creatibutorsError && typeof creatibutorsError == "string" && (
-              <Label pointing="left" prompt>
-                {creatibutorsError}
-              </Label>
-            )}
-          </List>
-        </Form.Field>
+        <FieldDataProvider fieldPathPrefix={fieldPathPrefix}>
+          <Form.Field
+            required={required}
+            className={creatibutorsError ? "error" : ""}
+          >
+            <FieldLabel htmlFor={fieldPath} icon={labelIcon} label={label} />
+            <List>
+              {creatibutorsList.map((value, index) => {
+                const key = `${fieldPath}.${index}`;
+                const identifiersError = creatibutorsError
+                  ? creatibutorsError[index]?.authorityIdentifiers
+                  : [];
+                const displayName = creatibutorNameDisplay(value);
+                return (
+                  <CreatibutorsFieldItem
+                    key={key}
+                    identifiersError={identifiersError}
+                    nameTypeHelpText={nameTypeHelpText}
+                    {...{
+                      displayName,
+                      index,
+                      schema,
+                      compKey: key,
+                      initialCreatibutor: value,
+                      removeCreatibutor: formikArrayRemove,
+                      replaceCreatibutor: formikArrayReplace,
+                      moveCreatibutor: formikArrayMove,
+                      addLabel: modal.addLabel,
+                      editLabel: modal.editLabel,
+                      autocompleteNames: autocompleteNames,
+                    }}
+                  />
+                );
+              })}
+              <CreatibutorsModal
+                onCreatibutorChange={this.handleOnContributorChange}
+                initialAction="add"
+                addLabel={modal.addLabel}
+                editLabel={modal.editLabel}
+                schema={schema}
+                nameFieldPlaceholder={nameFieldPlaceholder}
+                lastNameFieldPlaceholder={lastNameFieldPlaceholder}
+                nameTypeHelpText={nameTypeHelpText}
+                autocompleteNames={autocompleteNames}
+                trigger={
+                  <Button type="button" icon labelPosition="left">
+                    <Icon name="add" />
+                    {addButtonLabel}
+                  </Button>
+                }
+              />
+              {creatibutorsError && typeof creatibutorsError == "string" && (
+                <Label pointing="left" prompt>
+                  {creatibutorsError}
+                </Label>
+              )}
+            </List>
+          </Form.Field>
+        </FieldDataProvider>
       </DndProvider>
     );
   }
@@ -157,6 +160,7 @@ CreatibutorsFieldForm.propTypes = {
   nameFieldPlaceholder: PropTypes.string,
   lastNameFieldPlaceholder: PropTypes.string,
   nameTypeHelpText: PropTypes.string,
+  fieldPathPrefix: PropTypes.string,
 };
 
 CreatibutorsFieldForm.defaultProps = {
@@ -168,6 +172,7 @@ CreatibutorsFieldForm.defaultProps = {
     editLabel: i18next.t("Edit creator"),
   },
   addButtonLabel: i18next.t("Add creator"),
+  fieldPathPrefix: "",
 };
 
 CreatibutorsField.propTypes = {
@@ -185,6 +190,7 @@ CreatibutorsField.propTypes = {
   nameFieldPlaceholder: PropTypes.string,
   lastNameFieldPlaceholder: PropTypes.string,
   nameTypeHelpText: PropTypes.string,
+  fieldPathPrefix: PropTypes.string,
 };
 
 CreatibutorsField.defaultProps = {
@@ -198,4 +204,5 @@ CreatibutorsField.defaultProps = {
   addButtonLabel: i18next.t("Add creator"),
   nameFieldPlaceholder: i18next.t("Write author's name."),
   lastNameFieldPlaceholder: i18next.t("Write author's last name."),
+  fieldPathPrefix: "",
 };

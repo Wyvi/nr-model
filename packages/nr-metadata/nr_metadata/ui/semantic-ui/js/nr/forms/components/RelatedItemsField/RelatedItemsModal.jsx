@@ -25,7 +25,6 @@ import {
   requiredMessage,
   handleValidateAndBlur,
   sanitizeInput,
-  FieldDataProvider,
   useFieldData,
 } from "@js/oarepo_ui";
 import { getIn } from "formik";
@@ -165,32 +164,30 @@ export const RelatedItemsModal = ({
                     />
                   }
                   onBlur={() => handleBlur("itemTitle")}
-                  // {...getFieldData("itemTitle").fullRepresentation}
+                  {...getFieldData("itemTitle").fullRepresentation}
                 />
-                <FieldDataProvider fieldPathPrefix="metadata.relatedItems.0.itemCreators.0">
-                  <CreatibutorsField
-                    label={i18next.t("Creators")}
-                    labelIcon="user"
-                    fieldPath="itemCreators"
-                    schema="creators"
-                    autocompleteNames="off"
-                    required={false}
-                  />
-                </FieldDataProvider>
-                <FieldDataProvider fieldPathPrefix="metadata.relatedItems.0.itemContributors.0">
-                  <CreatibutorsField
-                    label={i18next.t("Contributors")}
-                    addButtonLabel={i18next.t("Add contributor")}
-                    modal={{
-                      addLabel: i18next.t("Add contributor"),
-                      editLabel: i18next.t("Edit contributor"),
-                    }}
-                    labelIcon="user"
-                    fieldPath="itemContributors"
-                    schema="contributors"
-                    autocompleteNames="off"
-                  />
-                </FieldDataProvider>
+                <CreatibutorsField
+                  label={i18next.t("Creators")}
+                  labelIcon="user"
+                  fieldPath="itemCreators"
+                  schema="creators"
+                  autocompleteNames="off"
+                  required={false}
+                  fieldPathPrefix="metadata.relatedItems.0.itemCreators.0"
+                />
+                <CreatibutorsField
+                  label={i18next.t("Contributors")}
+                  addButtonLabel={i18next.t("Add contributor")}
+                  modal={{
+                    addLabel: i18next.t("Add contributor"),
+                    editLabel: i18next.t("Edit contributor"),
+                  }}
+                  labelIcon="user"
+                  fieldPath="itemContributors"
+                  schema="contributors"
+                  autocompleteNames="off"
+                  fieldPathPrefix="metadata.relatedItems.0.itemContributors.0"
+                />
 
                 <IdentifiersField
                   className="related-items-identifiers"
