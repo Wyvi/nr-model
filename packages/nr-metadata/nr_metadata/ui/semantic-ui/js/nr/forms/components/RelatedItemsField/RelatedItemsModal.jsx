@@ -25,6 +25,8 @@ import {
   requiredMessage,
   handleValidateAndBlur,
   sanitizeInput,
+  FieldDataProvider,
+  useFieldData,
 } from "@js/oarepo_ui";
 import { getIn } from "formik";
 
@@ -66,6 +68,7 @@ export const RelatedItemsModal = ({
   const [saveAndContinueLabel, setSaveAndContinueLabel] = React.useState(
     i18next.t("Save and add another")
   );
+  const { getFieldData } = useFieldData();
 
   const openModal = () => {
     setOpen(true);
@@ -162,28 +165,32 @@ export const RelatedItemsModal = ({
                     />
                   }
                   onBlur={() => handleBlur("itemTitle")}
+                  // {...getFieldData("itemTitle").fullRepresentation}
                 />
-                <CreatibutorsField
-                  label={i18next.t("Creators")}
-                  labelIcon="user"
-                  fieldPath="itemCreators"
-                  schema="creators"
-                  autocompleteNames="off"
-                  required={false}
-                />
-
-                <CreatibutorsField
-                  label={i18next.t("Contributors")}
-                  addButtonLabel={i18next.t("Add contributor")}
-                  modal={{
-                    addLabel: i18next.t("Add contributor"),
-                    editLabel: i18next.t("Edit contributor"),
-                  }}
-                  labelIcon="user"
-                  fieldPath="itemContributors"
-                  schema="contributors"
-                  autocompleteNames="off"
-                />
+                <FieldDataProvider fieldPathPrefix="metadata.relatedItems.0.itemCreators.0">
+                  <CreatibutorsField
+                    label={i18next.t("Creators")}
+                    labelIcon="user"
+                    fieldPath="itemCreators"
+                    schema="creators"
+                    autocompleteNames="off"
+                    required={false}
+                  />
+                </FieldDataProvider>
+                <FieldDataProvider fieldPathPrefix="metadata.relatedItems.0.itemContributors.0">
+                  <CreatibutorsField
+                    label={i18next.t("Contributors")}
+                    addButtonLabel={i18next.t("Add contributor")}
+                    modal={{
+                      addLabel: i18next.t("Add contributor"),
+                      editLabel: i18next.t("Edit contributor"),
+                    }}
+                    labelIcon="user"
+                    fieldPath="itemContributors"
+                    schema="contributors"
+                    autocompleteNames="off"
+                  />
+                </FieldDataProvider>
 
                 <IdentifiersField
                   className="related-items-identifiers"
@@ -207,6 +214,7 @@ export const RelatedItemsModal = ({
                     />
                   }
                   onBlur={() => handleBlur("itemURL")}
+                  {...getFieldData("itemURL").fullRepresentation}
                 />
                 <GroupField widths="equal">
                   <TextField
@@ -219,6 +227,7 @@ export const RelatedItemsModal = ({
                       />
                     }
                     onBlur={() => handleBlur("itemYear")}
+                    {...getFieldData("itemYear").compactRepresentation}
                   />
                   <TextField
                     fieldPath="itemVolume"
@@ -230,6 +239,7 @@ export const RelatedItemsModal = ({
                       />
                     }
                     onBlur={() => handleBlur("itemVolume")}
+                    {...getFieldData("itemVolume").compactRepresentation}
                   />
                   <TextField
                     fieldPath="itemIssue"
@@ -241,6 +251,7 @@ export const RelatedItemsModal = ({
                       />
                     }
                     onBlur={() => handleBlur("itemIssue")}
+                    {...getFieldData("itemIssue").compactRepresentation}
                   />
                   <TextField
                     fieldPath="itemStartPage"
@@ -252,6 +263,7 @@ export const RelatedItemsModal = ({
                       />
                     }
                     onBlur={() => handleBlur("itemStartPage")}
+                    {...getFieldData("itemStartPage").compactRepresentation}
                   />
                   <TextField
                     fieldPath="itemEndPage"
@@ -263,6 +275,7 @@ export const RelatedItemsModal = ({
                       />
                     }
                     onBlur={() => handleBlur("itemEndPage")}
+                    {...getFieldData("itemEndPage").compactRepresentation}
                   />
                 </GroupField>
                 <TextField
@@ -276,6 +289,7 @@ export const RelatedItemsModal = ({
                     />
                   }
                   onBlur={() => handleBlur("itemPublisher")}
+                  {...getFieldData("itemPublisher").fullRepresentation}
                 />
                 <GroupField>
                   <LocalVocabularySelectField
@@ -291,6 +305,7 @@ export const RelatedItemsModal = ({
                     placeholder={i18next.t("Choose relation type")}
                     clearable
                     optionsListName="item-relation-types"
+                    {...getFieldData("itemRelationType").compactRepresentation}
                   />
                   <LocalVocabularySelectField
                     width={16}
@@ -305,6 +320,7 @@ export const RelatedItemsModal = ({
                     }
                     placeholder={i18next.t("Select resource type")}
                     optionsListName="resource-types"
+                    {...getFieldData("itemResourceType").compactRepresentation}
                   />
                 </GroupField>
               </Form>

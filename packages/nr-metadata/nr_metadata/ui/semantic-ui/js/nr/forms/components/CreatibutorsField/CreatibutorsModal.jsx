@@ -516,8 +516,8 @@ export const CreatibutorsModal = ({
                             autocompleteNames
                           )
                         }
-                        onValueChange={onPersonSearchChange}
-                        ref={namesAutocompleteRef}
+                        onValueChange={onPersonSearchChange}   {...getFieldData(familyNameFieldPath)
+                          .compactRepresentation}
                       />
                     )}
                     {showPersonForm && (
