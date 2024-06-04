@@ -1803,3 +1803,6 @@ msgstr ""
 
 msgid "Delete"
 msgstr ""
+
+msgid "Fetching files"
+msgstr ""

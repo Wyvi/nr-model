@@ -3936,3 +3936,6 @@ msgstr "Soubor nebyl správně nahrán. Smažte jej a zkuste to znovu."
 
 msgid "Status"
 msgstr "Stav"
+
+msgid "Fetching files"
+msgstr "Získávání souborů"

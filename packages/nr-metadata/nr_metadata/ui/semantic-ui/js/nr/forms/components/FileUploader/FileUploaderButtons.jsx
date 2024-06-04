@@ -73,7 +73,7 @@ export const DeleteFileButton = ({ file, handleFileDeletion }) => {
         setIsDeleting(false);
         if (response.status === 204) handleFileDeletion(file);
       })
-      .catch(() => {
+      .finally(() => {
         setIsDeleting(false);
       });
   };
