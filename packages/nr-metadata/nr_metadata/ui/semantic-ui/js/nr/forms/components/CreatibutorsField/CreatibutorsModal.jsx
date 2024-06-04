@@ -92,10 +92,9 @@ const makeIdEntry = (identifier) => {
 };
 
 const typeFieldPath = "nameType";
-const familyNameFieldPath = "family_name";
-const givenNameFieldPath = "given_name";
+const familyNameFieldPath = "familyName";
+const givenNameFieldPath = "givenName";
 const identifiersFieldPath = "authorityIdentifiers";
-const personalIdentifiersFieldPath = "personalIdentifiers";
 const affiliationsFieldPath = "affiliations";
 const roleFieldPath = "contributorType";
 const affiliationFullNameFieldPath = "affiliationNameFieldPath";
@@ -110,16 +109,16 @@ const serializeCreatibutor = (submittedCreatibutor, isCreator, isPerson) => {
   const nameType = _get(submittedCreatibutor, typeFieldPath);
 
   if (isPerson) {
-    const fullName = `${submittedCreatibutor.family_name}, ${submittedCreatibutor.given_name}`;
+    const familyName = submittedCreatibutor[familyNameFieldPath];
+    const givenName = submittedCreatibutor[givenNameFieldPath];
+    const fullName = `${familyName}, ${givenName}`;
     const affiliations = _get(submittedCreatibutor, affiliationsFieldPath, []);
-    const identifiers = _get(
-      submittedCreatibutor,
-      personalIdentifiersFieldPath,
-      []
-    );
+    const identifiers = _get(submittedCreatibutor, identifiersFieldPath, []);
     return {
       nameType,
       fullName,
+      familyName,
+      givenName,
       authorityIdentifiers: identifiers,
       affiliations: affiliations.map((aff) => aff?.data || aff),
       ...(!isCreator && { contributorType } && { contributorType }),
@@ -148,20 +147,15 @@ const serializeCreatibutor = (submittedCreatibutor, isCreator, isPerson) => {
  */
 const deserializeCreatibutor = (initialCreatibutor, isCreator, isPerson) => {
   if (isPerson) {
-    const [family_name = "", given_name = ""] = _get(
-      initialCreatibutor,
-      fullNameFieldPath,
-      ""
-    )
-      .trim()
-      .split(",", 2);
-    const result = {
-      // default type to personal
+    const familyName = _get(initialCreatibutor, familyNameFieldPath, "");
+    const givenName = _get(initialCreatibutor, givenNameFieldPath, "");
+
+    return {
       nameType: CREATIBUTOR_TYPE.PERSON,
-      family_name,
-      given_name,
+      familyName,
+      givenName,
       ...initialCreatibutor,
-      [personalIdentifiersFieldPath]: _get(
+      [identifiersFieldPath]: _get(
         initialCreatibutor,
         identifiersFieldPath,
         []
@@ -177,7 +171,6 @@ const deserializeCreatibutor = (initialCreatibutor, isCreator, isPerson) => {
         contributorType: _get(initialCreatibutor, roleFieldPath),
       }),
     };
-    return result;
   } else {
     return {
       nameType: CREATIBUTOR_TYPE.ORGANIZATION,
@@ -280,14 +273,14 @@ export const CreatibutorsModal = ({
   const namesAutocompleteRef = createRef();
   const isCreator = schema === "creators";
 
-  const CreatibutorsPersonSchema = Yup.object({
+  const CreatorSchema = Yup.object({
     nameType: Yup.string(),
-    given_name: Yup.string().when("nameType", (nameType, schema) => {
+    givenName: Yup.string().when("nameType", (nameType, schema) => {
       if (nameType === CREATIBUTOR_TYPE.PERSON) {
         return schema.required(i18next.t("Given name is a required field."));
       }
     }),
-    family_name: Yup.string().when("nameType", (nameType, schema) => {
+    familyName: Yup.string().when("nameType", (nameType, schema) => {
       if (nameType === CREATIBUTOR_TYPE.PERSON) {
         return schema.required(i18next.t("Family name is a required field."));
       }
@@ -298,27 +291,22 @@ export const CreatibutorsModal = ({
         return schema.required(i18next.t("Role is a required field."));
       }
     }),
-    personalIdentifiers: IdentifiersValidationSchema,
-  });
-
-  const CreatibutorsOrganizationSchema = Yup.object({
-    nameType: Yup.string(),
-    contributorType: Yup.object().when("_", (_, schema) => {
-      if (!isCreator) {
-        return schema.required(i18next.t("Role is a required field."));
-      }
-    }),
     affiliationNameFieldPath: Yup.mixed().test(
       "text",
       i18next.t("Affiliation name is a required field."),
       (value, testContext) => {
-        return !(
-          _isEmpty(value) ||
-          typeof value === "object" ||
-          typeof value === "string"
-        );
+        if (testContext.parent.nameType === CREATIBUTOR_TYPE.ORGANIZATION) {
+          return value;
+        } else {
+          return true;
+        }
       }
     ),
+    [identifiersFieldPath]: Yup.array().when("nameType", {
+      is: CREATIBUTOR_TYPE.PERSON,
+      then: IdentifiersValidationSchema,
+      otherwise: Yup.array().of(Yup.object()), // Or another schema for other cases
+    }),
   });
 
   const openModal = () => {
@@ -400,23 +388,18 @@ export const CreatibutorsModal = ({
   };
 
   const ActionLabel = () => displayActionLabel;
-  const [isPerson, setIsPerson] = useState(
-    _get(initialCreatibutor, typeFieldPath) === CREATIBUTOR_TYPE.PERSON
-  );
 
   const initialValues = deserializeCreatibutor(
     initialCreatibutor,
     isCreator,
-    isPerson
+    _get(initialCreatibutor, typeFieldPath) === CREATIBUTOR_TYPE.PERSON
   );
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={onSubmit}
       enableReinitialize
-      validationSchema={
-        isPerson ? CreatibutorsPersonSchema : CreatibutorsOrganizationSchema
-      }
+      validationSchema={CreatorSchema}
       validateOnChange={false}
       validateOnBlur={false}
     >
@@ -470,7 +453,6 @@ export const CreatibutorsModal = ({
                         typeFieldPath,
                         CREATIBUTOR_TYPE.PERSON
                       );
-                      setIsPerson(true);
                     }}
                     optimized
                   />
@@ -487,7 +469,6 @@ export const CreatibutorsModal = ({
                         typeFieldPath,
                         CREATIBUTOR_TYPE.ORGANIZATION
                       );
-                      setIsPerson(false);
                     }}
                     optimized
                   />
@@ -570,7 +551,7 @@ export const CreatibutorsModal = ({
                           <IdentifiersField
                             className="modal-identifiers-field"
                             options={personIdentifiersSchema}
-                            fieldPath={personalIdentifiersFieldPath}
+                            fieldPath={identifiersFieldPath}
                             label={i18next.t("Personal identifier")}
                             helpText={i18next.t(
                               "Choose from the menu identifier type. Write the identifier without prefix (i.e. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
