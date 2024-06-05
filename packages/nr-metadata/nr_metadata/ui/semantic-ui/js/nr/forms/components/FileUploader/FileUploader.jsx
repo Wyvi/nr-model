@@ -42,7 +42,7 @@ export const FileUploader = ({
     );
   };
 
-  return values.id ? (
+  return values.id && recordObject?.files?.enabled ? (
     <Dimmer.Dimmable dimmed={isFetching}>
       <Dimmer active={isFetching} inverted>
         <Loader indeterminate>{i18next.t("Fetching files")}...</Loader>
