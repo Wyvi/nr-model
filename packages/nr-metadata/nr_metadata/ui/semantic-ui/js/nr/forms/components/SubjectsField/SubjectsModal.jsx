@@ -108,7 +108,7 @@ export const SubjectsModal = ({ trigger, handleSubjectAdd }) => {
                   required
                   showEmptyValue
                   removeButtonLabelClassName="field-label-class invenio-field-label"
-                  displayRemoveButton={false}
+                  displayFirstInputRemoveButton={false}
                 />
               </Form.Field>
             </Form>
