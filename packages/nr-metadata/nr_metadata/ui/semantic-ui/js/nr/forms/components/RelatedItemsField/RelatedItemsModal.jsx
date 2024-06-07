@@ -21,7 +21,11 @@ import {
 } from "../IdentifiersField";
 import { LocalVocabularySelectField } from "@js/oarepo_vocabularies";
 import PropTypes from "prop-types";
-import { unique, requiredMessage, handleValidateAndBlur, sanitizeInput } from "@js/oarepo_ui";
+import {
+  requiredMessage,
+  handleValidateAndBlur,
+  sanitizeInput,
+} from "@js/oarepo_ui";
 import { getIn } from "formik";
 
 const RelatedItemsSchema = Yup.object({
@@ -29,11 +33,12 @@ const RelatedItemsSchema = Yup.object({
   itemURL: Yup.string().url(i18next.t("Please provide an URL in valid format")),
   itemYear: Yup.number()
     .typeError(i18next.t("Year must be a number."))
-    .test(
-      "len",
-      i18next.t("Year must be in format YYYY."),
-      (val) => val && val.toString().length === 4
-    ),
+    .test("len", i18next.t("Year must be in format YYYY."), (val) => {
+      if (val) {
+        return val.toString().length === 4;
+      }
+      return true;
+    }),
   itemPIDs: IdentifiersValidationSchema,
   itemVolume: Yup.string(),
   itemIssue: Yup.string(),

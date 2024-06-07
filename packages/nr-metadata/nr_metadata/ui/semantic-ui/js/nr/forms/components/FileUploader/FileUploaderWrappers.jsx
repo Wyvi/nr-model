@@ -19,6 +19,8 @@ export const FileUploadWrapper = ({
             {
               className: uploadButtonClassName,
               onClick: onClick,
+              type: "button",
+              ariaLabel: i18next.t("Upload files"),
               ...props,
             },
             i18next.t("Upload files"),
@@ -63,7 +65,7 @@ export const FileEditWrapper = ({
               onClick: onClick,
               ...props,
               ariaLabel: i18next.t("Edit file"),
-              style: { backgroundColor: "transparent" },
+              type: "button",
             },
             h("i", {
               "aria-hidden": "true",
@@ -90,5 +92,5 @@ FileEditWrapper.propTypes = {
 
 FileEditWrapper.defaultProps = {
   // editWrapperClassName: "ui container centered",
-  editButtonClassName: "ui button",
+  editButtonClassName: "ui button transparent",
 };
