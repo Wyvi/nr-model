@@ -89,7 +89,11 @@ export const IdentifiersField = ({
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
         return (
-          <ArrayFieldItem indexPath={indexPath} arrayHelpers={arrayHelpers}>
+          <ArrayFieldItem
+            indexPath={indexPath}
+            arrayHelpers={arrayHelpers}
+            fieldPathPrefix={fieldPathPrefix}
+          >
             <SelectField
               clearable
               width={4}

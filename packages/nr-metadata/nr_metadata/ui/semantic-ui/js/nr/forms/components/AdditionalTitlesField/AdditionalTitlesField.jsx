@@ -57,6 +57,7 @@ export const AdditionalTitlesField = ({
             indexPath={indexPath}
             array={array}
             arrayHelpers={arrayHelpers}
+            fieldPathPrefix={fieldPathPrefix}
           >
             <Form.Field width={12}>
               <I18nTextInputField

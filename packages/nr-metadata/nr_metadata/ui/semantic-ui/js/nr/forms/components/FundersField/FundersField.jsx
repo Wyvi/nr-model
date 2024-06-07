@@ -22,6 +22,7 @@ export const FundersField = ({ fieldPath, helpText }) => {
             indexPath={indexPath}
             arrayHelpers={arrayHelpers}
             style={{ display: "block" }}
+            fieldPathPrefix={fieldPathPrefix}
           >
             <TextField
               width={16}
