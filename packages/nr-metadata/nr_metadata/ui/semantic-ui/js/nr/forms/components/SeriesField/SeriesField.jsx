@@ -19,7 +19,11 @@ export const SeriesField = ({ fieldPath, helpText, validTags }) => {
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
         return (
-          <ArrayFieldItem indexPath={indexPath} arrayHelpers={arrayHelpers}>
+          <ArrayFieldItem
+            indexPath={indexPath}
+            arrayHelpers={arrayHelpers}
+            fieldPathPrefix={fieldPathPrefix}
+          >
             <TextField
               width={8}
               fieldPath={`${fieldPathPrefix}.seriesTitle`}

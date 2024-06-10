@@ -39,6 +39,7 @@ export const StringArrayField = ({
                   key={index}
                   indexPath={index}
                   arrayHelpers={arrayHelpers}
+                  fieldPathPrefix={indexPath}
                 >
                   <TextField
                     width={16}

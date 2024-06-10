@@ -29,6 +29,7 @@ export const EventsField = ({ fieldPath, helpText, validTags }) => {
             indexPath={indexPath}
             arrayHelpers={arrayHelpers}
             className={"invenio-group-field events"}
+            fieldPathPrefix={fieldPathPrefix}
           >
             <TextField
               width={16}
