@@ -50,12 +50,11 @@ export const AdditionalTitlesField = ({
       className="additional-titles"
       helpText={helpText}
     >
-      {({ arrayHelpers, indexPath, array }) => {
+      {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
         return (
           <ArrayFieldItem
             indexPath={indexPath}
-            array={array}
             arrayHelpers={arrayHelpers}
             fieldPathPrefix={fieldPathPrefix}
           >
