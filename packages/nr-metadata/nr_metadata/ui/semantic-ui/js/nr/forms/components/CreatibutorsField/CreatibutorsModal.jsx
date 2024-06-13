@@ -574,6 +574,9 @@ export const CreatibutorsModal = ({
                           placeholder={i18next.t(
                             "Start writing name of the institution, then choose from the options."
                           )}
+                          externalApiModalTitle={i18next.t("Search in ROR database")}
+                          externalApiButtonContent={i18next.t("Search in ROR database")}
+                          externalAuthority
                           multiple
                           clearable
                         />
@@ -600,6 +603,9 @@ export const CreatibutorsModal = ({
                       placeholder={i18next.t(
                         "Start writing name of the institution, then choose from the options."
                       )}
+                      externalApiModalTitle={i18next.t("Search in ROR database")}
+                      externalApiButtonContent={i18next.t("Search in ROR database")}
+                      externalAuthority
                       clearable
                       selection
                       deburr
