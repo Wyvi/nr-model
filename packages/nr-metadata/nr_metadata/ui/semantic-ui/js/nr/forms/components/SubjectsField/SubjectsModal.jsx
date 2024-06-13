@@ -4,8 +4,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { i18next } from "@translations/nr/i18next";
 import PropTypes from "prop-types";
-import { MultilingualTextInput } from "@js/oarepo_ui";
-import { requiredMessage } from "@js/oarepo_ui";
+import { MultilingualTextInput, requiredMessage } from "@js/oarepo_ui";
 
 const SubjectsValidationSchema = Yup.object({
   keywords: Yup.array().of(
@@ -100,14 +99,16 @@ export const SubjectsModal = ({ trigger, handleSubjectAdd }) => {
             </Grid>
           </Modal.Header>
           <Modal.Content>
-            <Form>
-              <Form.Field width={16} className="subjects-modal-fields">
+            <Form className="subjects-modal-fields">
+              <Form.Field width={16}>
                 <MultilingualTextInput
                   fieldPath="keywords"
                   lngFieldWidth={3}
                   textFieldLabel={i18next.t("Subject")}
                   required
                   showEmptyValue
+                  removeButtonLabelClassName="field-label-class invenio-field-label"
+                  displayFirstInputRemoveButton={false}
                 />
               </Form.Field>
             </Form>

@@ -17,7 +17,11 @@ export const GeoLocationsField = ({ fieldPath, helpText }) => {
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
         return (
-          <ArrayFieldItem indexPath={indexPath} arrayHelpers={arrayHelpers}>
+          <ArrayFieldItem
+            indexPath={indexPath}
+            arrayHelpers={arrayHelpers}
+            fieldPathPrefix={fieldPathPrefix}
+          >
             <TextField
               width={8}
               fieldPath={`${fieldPathPrefix}.geoLocationPlace`}

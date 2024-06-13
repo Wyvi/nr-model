@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-04-16 08:52+0200\n"
+"POT-Creation-Date: 2024-06-04 21:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1114,6 +1114,7 @@ msgid "on"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/Person.jinja:3
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/Person.jinja:6
 msgid "Find more records by this person"
 msgstr ""
 
@@ -1224,12 +1225,6 @@ msgstr ""
 msgid "Affiliation"
 msgstr ""
 
-msgid "Organizational identifiers"
-msgstr ""
-
-msgid "e.g. ISNI, ROR, ICO."
-msgstr ""
-
 msgid "Choose contributor's role from the list (editor, illustrator...)"
 msgstr ""
 
@@ -1299,6 +1294,12 @@ msgid ""
 "website or database or specify another external source for the resource. "
 msgstr ""
 
+msgid "Fetching files"
+msgstr ""
+
+msgid "Failed to fetch draft's files. Please try refreshing the page."
+msgstr ""
+
 msgid ""
 "File addition, removal or modification are not allowed after you have "
 "published your draft."
@@ -1307,16 +1308,28 @@ msgstr ""
 msgid "If you wish to upload files, you must<1>save</1>your draft first."
 msgstr ""
 
+msgid "Delete file"
+msgstr ""
+
+msgid "File uploaded successfully."
+msgstr ""
+
+msgid "File was not uploaded correctly. Please delete it and try again."
+msgstr ""
+
+msgid "Edit file metadata"
+msgstr ""
+
 msgid "File name"
 msgstr ""
 
 msgid "File size"
 msgstr ""
 
-msgid "Edit file metadata"
+msgid "Status"
 msgstr ""
 
-msgid "Delete file"
+msgid "Delete"
 msgstr ""
 
 msgid "Upload files"
@@ -1385,9 +1398,6 @@ msgstr ""
 msgid "RIV"
 msgstr ""
 
-msgid "IGSN"
-msgstr ""
-
 msgid "ORCID"
 msgstr ""
 
@@ -1413,6 +1423,9 @@ msgid "ROR"
 msgstr ""
 
 msgid "ICO"
+msgstr ""
+
+msgid "Both identifier and identifier type must be filled."
 msgstr ""
 
 msgid "Add identifier"
@@ -1475,16 +1488,10 @@ msgstr ""
 msgid "Please provide an URL in valid format"
 msgstr ""
 
-msgid "Year must be in format YYYY"
+msgid "Year must be a number."
 msgstr ""
 
-msgid "Object identifier"
-msgstr ""
-
-msgid "Object identifiers must be unique"
-msgstr ""
-
-msgid "Object identifiers"
+msgid "Year must be in format YYYY."
 msgstr ""
 
 msgid "Contributors"
@@ -1494,6 +1501,9 @@ msgid "Add contributor"
 msgstr ""
 
 msgid "Edit contributor"
+msgstr ""
+
+msgid "Object identifier"
 msgstr ""
 
 msgid "Persistent identifier/s of object as ISBN, DOI, etc."
@@ -1685,6 +1695,12 @@ msgid "Subjects must be unique"
 msgstr ""
 
 msgid "Series titles must be unique"
+msgstr ""
+
+msgid "Object identifiers must be unique"
+msgstr ""
+
+msgid "Object identifiers"
 msgstr ""
 
 msgid "System identifier"

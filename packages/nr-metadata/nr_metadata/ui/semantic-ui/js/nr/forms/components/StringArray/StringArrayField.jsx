@@ -4,7 +4,11 @@ import { FieldLabel, TextField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
 import { useFormikContext, getIn, FieldArray } from "formik";
 import { Icon, Form } from "semantic-ui-react";
-import { ArrayFieldItem, useShowEmptyValue } from "@js/oarepo_ui";
+import {
+  ArrayFieldItem,
+  useShowEmptyValue,
+  sanitizeInput,
+} from "@js/oarepo_ui";
 
 export const StringArrayField = ({
   fieldPath,
@@ -15,10 +19,12 @@ export const StringArrayField = ({
   helpText,
   labelIcon,
   showEmptyValue,
+  validTags,
   ...uiProps
 }) => {
-  const { values } = useFormikContext();
+  const { values, setFieldValue, setFieldTouched } = useFormikContext();
   useShowEmptyValue(fieldPath, defaultNewValue, showEmptyValue);
+
   return (
     <Form.Field>
       <FieldLabel label={label} icon={labelIcon} htmlFor={fieldPath} />
@@ -33,6 +39,7 @@ export const StringArrayField = ({
                   key={index}
                   indexPath={index}
                   arrayHelpers={arrayHelpers}
+                  fieldPathPrefix={indexPath}
                 >
                   <TextField
                     width={16}
@@ -40,6 +47,14 @@ export const StringArrayField = ({
                     label={`#${index + 1}`}
                     optimized
                     fluid
+                    onBlur={() => {
+                      const cleanedContent = sanitizeInput(
+                        getIn(values, indexPath),
+                        validTags
+                      );
+                      setFieldValue(indexPath, cleanedContent);
+                      setFieldTouched(indexPath, true);
+                    }}
                     {...uiProps}
                   />
                 </ArrayFieldItem>
@@ -73,6 +88,7 @@ StringArrayField.propTypes = {
   labelIcon: PropTypes.string,
   required: PropTypes.bool,
   showEmptyValue: PropTypes.bool,
+  validTags: PropTypes.array,
 };
 
 StringArrayField.defaultProps = {

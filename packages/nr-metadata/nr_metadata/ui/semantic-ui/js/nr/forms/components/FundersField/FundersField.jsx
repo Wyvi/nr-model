@@ -22,12 +22,14 @@ export const FundersField = ({ fieldPath, helpText }) => {
             indexPath={indexPath}
             arrayHelpers={arrayHelpers}
             style={{ display: "block" }}
+            fieldPathPrefix={fieldPathPrefix}
           >
             <TextField
               width={16}
               fieldPath={`${fieldPathPrefix}.projectID`}
               label={i18next.t("Project code")}
               placeholder={i18next.t("Write down project number.")}
+              required
             />
             <TextField
               className="rel-mt-1"
@@ -52,7 +54,6 @@ export const FundersField = ({ fieldPath, helpText }) => {
               label={i18next.t("Funder")}
               optionsListName="funders"
               clearable
-              required
               placeholder={i18next.t(
                 "Start writing the name of the provider and then choose from the list."
               )}

@@ -17,14 +17,14 @@ export const NRDocumentValidationSchema = Yup.object().shape({
     additionalTitles: Yup.array()
       .of(
         Yup.object().shape({
-          title: Yup.object()
-            .shape({
-              lang: Yup.string()
-                .required(requiredMessage)
-                .label(i18next.t("Language")),
-              value: Yup.string().required(requiredMessage),
-            })
-            .label(i18next.t("Title")),
+          title: Yup.object().shape({
+            lang: Yup.string()
+              .required(requiredMessage)
+              .label(i18next.t("Language")),
+            value: Yup.string()
+              .required(requiredMessage)
+              .label(i18next.t("Title")),
+          }),
           titleType: Yup.string()
             .required(requiredMessage)
             .label(i18next.t("Title type")),

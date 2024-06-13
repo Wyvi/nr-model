@@ -6,7 +6,7 @@ import { FileEditWrapper, FileUploadWrapper } from "./FileUploaderWrappers";
 import { useDepositFileApiClient } from "@js/oarepo_ui";
 import { i18next } from "@translations/nr/i18next";
 
-export const EditFileButton = ({ fileName, record }) => {
+export const EditFileButton = ({ fileName, record, allowedFileTypes }) => {
   return (
     <FileEditWrapper
       preactComponent={FileManagementDialog}
@@ -16,7 +16,7 @@ export const EditFileButton = ({ fileName, record }) => {
         locale: i18next.language,
         startEvent: { event: "edit-file", data: { file_key: fileName } },
         modifyExistingFiles: true,
-        allowedFileTypes: ["*/*"],
+        allowedFileTypes: allowedFileTypes,
       }}
     />
   );
@@ -25,9 +25,14 @@ export const EditFileButton = ({ fileName, record }) => {
 EditFileButton.propTypes = {
   fileName: PropTypes.string.isRequired,
   record: PropTypes.object.isRequired,
+  allowedFileTypes: PropTypes.array,
 };
 
-export const UploadFileButton = ({ record, handleFilesUpload }) => {
+export const UploadFileButton = ({
+  record,
+  handleFilesUpload,
+  allowedFileTypes,
+}) => {
   return (
     <FileUploadWrapper
       preactComponent={FileManagementDialog}
@@ -35,10 +40,10 @@ export const UploadFileButton = ({ record, handleFilesUpload }) => {
         config: { record: record },
         autoExtractImagesFromPDFs: false,
         locale: i18next.language,
-        allowedFileTypes: ["*/*"],
+        allowedFileTypes: allowedFileTypes,
         startEvent: null,
-        onSuccessfulUpload: (files) => {
-          handleFilesUpload(files);
+        onCompletedUpload: (result) => {
+          handleFilesUpload();
         },
         allowedMetaFields: [
           {
@@ -55,6 +60,7 @@ export const UploadFileButton = ({ record, handleFilesUpload }) => {
 UploadFileButton.propTypes = {
   record: PropTypes.object.isRequired,
   handleFilesUpload: PropTypes.func.isRequired,
+  allowedFileTypes: PropTypes.array,
 };
 
 export const DeleteFileButton = ({ file, handleFileDeletion }) => {
@@ -67,26 +73,21 @@ export const DeleteFileButton = ({ file, handleFileDeletion }) => {
         setIsDeleting(false);
         if (response.status === 204) handleFileDeletion(file);
       })
-      .catch(() => {
+      .finally(() => {
         setIsDeleting(false);
       });
   };
   return isDeleting ? (
-    <Button disabled style={{ backgroundColor: "transparent" }} type="button">
-      <Icon loading name="spinner" />
-    </Button>
+    <Icon loading name="spinner" />
   ) : (
     <Button
       disabled={isDeleting}
-      style={{ backgroundColor: "transparent" }}
+      className="transparent"
       type="button"
       onClick={handleDelete}
+      aria-label={i18next.t("Delete file")}
     >
-      <Icon
-        aria-hidden="true"
-        name="trash alternate"
-        style={{ margin: 0, opacity: "1" }}
-      />
+      <Icon aria-hidden="true" name="trash alternate" className="m-0" />
     </Button>
   );
 };
