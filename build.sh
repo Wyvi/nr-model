@@ -26,6 +26,7 @@ set -e
 base_dir=$(cd "$(dirname "$0")" && pwd)
 
 MODEL_VERSION=2.0
+PYTHON="${PYTHON:-python3}"
 
 MODEL_BUILDER_VENV="$base_dir/.venv-builder"
 TEST_VENV="$base_dir/.venv-tests"
@@ -174,7 +175,7 @@ create_virtual_environment() {
   if [ -d "$1" ] ; then
     rm -rf "$1"
   fi
-  python3 -m venv "$1"
+  "${PYTHON}" -m venv "$1"
 
   "$1"/bin/pip install -U setuptools pip wheel
 }
