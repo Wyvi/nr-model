@@ -3939,3 +3939,12 @@ msgstr "Stav"
 
 msgid "Fetching files"
 msgstr "Získávání souborů"
+
+msgid "Search in ROR database"
+msgstr "Vyhledávání v databázi ROR"
+
+msgid "Read more."
+msgstr "Přečtěte si více."
+
+msgid "Remove keyword"
+msgstr "Odebrat klíčové slovo"

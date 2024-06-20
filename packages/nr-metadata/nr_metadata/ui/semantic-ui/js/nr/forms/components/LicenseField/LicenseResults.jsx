@@ -6,10 +6,12 @@
 // under the terms of the MIT License; see LICENSE file for more details.
 
 import React from "react";
-import { Item, Header, Radio } from "semantic-ui-react";
+import { Header, List } from "semantic-ui-react";
 import { withState } from "react-searchkit";
 import _get from "lodash/get";
 import { FastField } from "formik";
+import { getTitleFromMultilingualObject } from "@js/oarepo_ui";
+import { i18next } from "@translations/nr/i18next";
 
 export const LicenseResults = withState(
   ({ currentResultsState: results, serializeLicense }) => {
@@ -22,37 +24,42 @@ export const LicenseResults = withState(
     return (
       <FastField name="selectedLicense">
         {({ form: { values, setFieldValue } }) => (
-          <Item.Group>
-            {results.data.hits.map((result) => {
-              const { id, title } = result;
-              return (
-                <Item
-                  key={id}
-                  onClick={() =>
-                    setFieldValue(
-                      "selectedLicense",
-                      serializeLicenseResult(result)
-                    )
-                  }
-                  className="license-item mb-15"
-                >
-                  <Radio
-                    checked={_get(values, "selectedLicense.id") === id}
-                    onChange={() =>
+          <List selection>
+            {results.data.hits
+              .filter((license) => license?.hierarchy?.leaf === true)
+              .map((result) => {
+                const { id, title, description } = result;
+                return (
+                  <List.Item
+                    key={id}
+                    onClick={() =>
                       setFieldValue(
                         "selectedLicense",
                         serializeLicenseResult(result)
                       )
                     }
-                    className="mt-2 mr-5"
-                  />
-                  <Item.Content className="license-item-content">
-                    <Header size="small">{title}</Header>
-                  </Item.Content>
-                </Item>
-              );
-            })}
-          </Item.Group>
+                    className="license-item mb-15"
+                    active={_get(values, "selectedLicense.id", "") === id}
+                  >
+                    <List.Content>
+                      <Header size="small">{title}</Header>
+                      <p>
+                        {getTitleFromMultilingualObject(description)}{" "}
+                        {
+                          <a
+                            href={result?.relatedURI?.URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {i18next.t("Read more.")}
+                          </a>
+                        }
+                      </p>
+                    </List.Content>
+                  </List.Item>
+                );
+              })}
+          </List>
         )}
       </FastField>
     );

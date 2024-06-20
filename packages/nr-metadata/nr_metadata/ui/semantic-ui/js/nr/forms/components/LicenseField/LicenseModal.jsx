@@ -20,7 +20,6 @@ import {
   SearchBar,
   Toggle,
   Pagination,
-  withState,
 } from "react-searchkit";
 import {
   Button,
@@ -41,18 +40,6 @@ const overriddenComponents = {
   "EmptyResults.element": EmptyResultsElement,
 };
 
-const PaginationWrapper = withState(
-  ({
-    currentResultsState: {
-      data: { total },
-    },
-  }) =>
-    total > 25 && (
-      <div className="text-align-center">
-        <Pagination options={{ size: "mini" }} />
-      </div>
-    )
-);
 const LicenseSchema = Yup.object().shape({
   selectedLicense: Yup.object().shape({
     id: Yup.string().required(i18next.t("You must choose one license.")),
@@ -122,7 +109,15 @@ export class LicenseModal extends Component {
                 <ReactSearchKit
                   searchApi={searchApi}
                   urlHandlerApi={{ enabled: false }}
-                  initialQueryState={searchConfig.initialQueryState}
+                  // if someone is just choosing a license, offer him recommended, otherwise if
+                  // license already selected load all, so that it does not happen that they chose
+                  // non recommended license and that it is not visible in the list
+                  initialQueryState={{
+                    ...searchConfig.initialQueryState,
+                    filters: initialLicense?.id
+                      ? [["tags", ""]]
+                      : [["tags", "featured"]],
+                  }}
                 >
                   <Grid>
                     <Grid.Row>
@@ -142,7 +137,11 @@ export class LicenseModal extends Component {
                         />
                       </Grid.Column>
                       <Grid.Column width={8} textAlign="right" floated="right">
-                        <Menu compact size="tiny" className="license-toggler">
+                        <Menu
+                          compact
+                          size="tiny"
+                          className="license-toggler shadowless"
+                        >
                           <Toggle
                             title={i18next.t("Featured")}
                             label="featured"
@@ -173,7 +172,16 @@ export class LicenseModal extends Component {
                           <EmptyResults />
                           <Error />
                           <LicenseResults serializeLicense={serializeLicense} />
-                          <PaginationWrapper />
+                          <div className="centered">
+                            <Pagination
+                              options={{
+                                size: "mini",
+                                showFirst: false,
+                                showLast: false,
+                              }}
+                              showWhenOnlyOnePage={false}
+                            />
+                          </div>
                         </ResultsLoader>
                       </Grid.Column>
                     </Grid.Row>
@@ -194,7 +202,7 @@ export class LicenseModal extends Component {
                 floated="left"
               />
               <Button
-                name="submit"
+                type="submit"
                 onClick={(event) => handleSubmit(event)}
                 primary
                 icon="checkmark"
