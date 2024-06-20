@@ -49,6 +49,7 @@ export const AdditionalTitlesField = ({
       labelIcon="pencil"
       className="additional-titles"
       helpText={helpText}
+      addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;

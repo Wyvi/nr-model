@@ -21,6 +21,7 @@ export const EventsField = ({ fieldPath, helpText, validTags }) => {
       label={i18next.t("Events")}
       labelIcon="pencil"
       helpText={helpText}
+      addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;

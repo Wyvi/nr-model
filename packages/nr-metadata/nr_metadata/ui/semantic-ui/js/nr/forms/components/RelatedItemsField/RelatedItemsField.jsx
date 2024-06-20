@@ -9,7 +9,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { getIn, FieldArray } from "formik";
-import { Button, Form, Label, List, Icon } from "semantic-ui-react";
+import { Form, Label, List, Icon } from "semantic-ui-react";
 import _get from "lodash/get";
 import _truncate from "lodash/truncate";
 import { FieldLabel } from "react-invenio-forms";
@@ -95,10 +95,15 @@ class RelatedItemsFieldForm extends Component {
               addLabel={modal.addLabel}
               editLabel={modal.editLabel}
               trigger={
-                <Button type="button" icon labelPosition="left">
+                <Form.Button
+                  type="button"
+                  icon
+                  labelPosition="left"
+                  className="array-field-add-button"
+                >
                   <Icon name="add" />
                   {addButtonLabel}
-                </Button>
+                </Form.Button>
               }
               validTags={validTags}
             />
