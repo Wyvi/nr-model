@@ -85,6 +85,7 @@ export const IdentifiersField = ({
       helpText={helpText}
       className={className}
       defaultNewValue={defaultNewValue}
+      addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;

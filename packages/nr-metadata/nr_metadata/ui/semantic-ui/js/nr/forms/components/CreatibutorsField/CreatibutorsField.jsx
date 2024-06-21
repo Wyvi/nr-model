@@ -9,7 +9,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { getIn, FieldArray } from "formik";
-import { Button, Form, Label, List, Icon } from "semantic-ui-react";
+import { Form, Label, List, Icon } from "semantic-ui-react";
 import _get from "lodash/get";
 import { FieldLabel } from "react-invenio-forms";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -104,10 +104,15 @@ class CreatibutorsFieldForm extends Component {
               nameTypeHelpText={nameTypeHelpText}
               autocompleteNames={autocompleteNames}
               trigger={
-                <Button type="button" icon labelPosition="left">
+                <Form.Button
+                  type="button"
+                  icon
+                  labelPosition="left"
+                  className="array-field-add-button"
+                >
                   <Icon name="add" />
                   {addButtonLabel}
-                </Button>
+                </Form.Button>
               }
             />
             {creatibutorsError && typeof creatibutorsError == "string" && (
