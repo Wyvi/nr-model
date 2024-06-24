@@ -77,7 +77,6 @@ export class LicenseModal extends Component {
         }}
         onSubmit={this.onSubmit}
         enableReinitialize={true}
-        // validationSchema={LicenseSchema}
         validateOnChange={false}
         validateOnBlur={false}
       >
@@ -88,7 +87,6 @@ export class LicenseModal extends Component {
             trigger={trigger}
             onClose={this.closeModal}
             closeIcon
-            closeOnDimmerClick={false}
           >
             <Modal.Header as="h6" className="pt-10 pb-10">
               <Grid>
@@ -185,19 +183,6 @@ export class LicenseModal extends Component {
                 </ReactSearchKit>
               </OverridableContext.Provider>
             </Modal.Content>
-            <Modal.Actions>
-              <Button
-                name="cancel"
-                onClick={() => {
-                  resetForm();
-                  this.closeModal();
-                }}
-                icon="remove"
-                labelPosition="left"
-                content={i18next.t("Cancel")}
-                floated="left"
-              />
-            </Modal.Actions>
           </Modal>
         )}
       </Formik>
