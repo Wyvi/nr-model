@@ -20,18 +20,8 @@ import {
   SearchBar,
   Toggle,
   Pagination,
-  withState,
 } from "react-searchkit";
-import {
-  Button,
-  Grid,
-  Header,
-  Menu,
-  Modal,
-  Message,
-  Icon,
-} from "semantic-ui-react";
-import * as Yup from "yup";
+import { Grid, Header, Menu, Modal, Message, Icon } from "semantic-ui-react";
 import { LicenseFilter } from "./LicenseFilter";
 import { LicenseResults } from "./LicenseResults";
 import { EmptyResultsElement } from "@js/oarepo_ui";
@@ -40,24 +30,6 @@ const overriddenComponents = {
   "SearchFilters.Toggle": LicenseFilter,
   "EmptyResults.element": EmptyResultsElement,
 };
-
-const PaginationWrapper = withState(
-  ({
-    currentResultsState: {
-      data: { total },
-    },
-  }) =>
-    total > 25 && (
-      <div className="text-align-center">
-        <Pagination options={{ size: "mini" }} />
-      </div>
-    )
-);
-const LicenseSchema = Yup.object().shape({
-  selectedLicense: Yup.object().shape({
-    id: Yup.string().required(i18next.t("You must choose one license.")),
-  }),
-});
 
 export class LicenseModal extends Component {
   state = {
@@ -97,7 +69,6 @@ export class LicenseModal extends Component {
         }}
         onSubmit={this.onSubmit}
         enableReinitialize={true}
-        validationSchema={LicenseSchema}
         validateOnChange={false}
         validateOnBlur={false}
       >
@@ -108,7 +79,6 @@ export class LicenseModal extends Component {
             trigger={trigger}
             onClose={this.closeModal}
             closeIcon
-            closeOnDimmerClick={false}
           >
             <Modal.Header as="h6" className="pt-10 pb-10">
               <Grid>
@@ -122,7 +92,15 @@ export class LicenseModal extends Component {
                 <ReactSearchKit
                   searchApi={searchApi}
                   urlHandlerApi={{ enabled: false }}
-                  initialQueryState={searchConfig.initialQueryState}
+                  // if someone is just choosing a license, offer him recommended, otherwise if
+                  // license already selected load all, so that it does not happen that they chose
+                  // non recommended license and that it is not visible in the list
+                  initialQueryState={{
+                    ...searchConfig.initialQueryState,
+                    filters: initialLicense?.id
+                      ? [["tags", ""]]
+                      : [["tags", "featured"]],
+                  }}
                 >
                   <Grid>
                     <Grid.Row>
@@ -142,7 +120,11 @@ export class LicenseModal extends Component {
                         />
                       </Grid.Column>
                       <Grid.Column width={8} textAlign="right" floated="right">
-                        <Menu compact size="tiny" className="license-toggler">
+                        <Menu
+                          compact
+                          size="tiny"
+                          className="license-toggler shadowless"
+                        >
                           <Toggle
                             title={i18next.t("Featured")}
                             label="featured"
@@ -172,8 +154,20 @@ export class LicenseModal extends Component {
                         <ResultsLoader>
                           <EmptyResults />
                           <Error />
-                          <LicenseResults serializeLicense={serializeLicense} />
-                          <PaginationWrapper />
+                          <LicenseResults
+                            handleSubmit={handleSubmit}
+                            serializeLicense={serializeLicense}
+                          />
+                          <div className="centered">
+                            <Pagination
+                              options={{
+                                size: "mini",
+                                showFirst: false,
+                                showLast: false,
+                              }}
+                              showWhenOnlyOnePage={false}
+                            />
+                          </div>
                         </ResultsLoader>
                       </Grid.Column>
                     </Grid.Row>
@@ -181,27 +175,6 @@ export class LicenseModal extends Component {
                 </ReactSearchKit>
               </OverridableContext.Provider>
             </Modal.Content>
-            <Modal.Actions>
-              <Button
-                name="cancel"
-                onClick={() => {
-                  resetForm();
-                  this.closeModal();
-                }}
-                icon="remove"
-                labelPosition="left"
-                content={i18next.t("Cancel")}
-                floated="left"
-              />
-              <Button
-                name="submit"
-                onClick={(event) => handleSubmit(event)}
-                primary
-                icon="checkmark"
-                labelPosition="left"
-                content={i18next.t("Choose license")}
-              />
-            </Modal.Actions>
           </Modal>
         )}
       </Formik>

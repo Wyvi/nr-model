@@ -1806,3 +1806,12 @@ msgstr ""
 
 msgid "Fetching files"
 msgstr ""
+
+msgid "Search in ROR database"
+msgstr ""
+
+msgid "Read more."
+msgstr ""
+
+msgid "Remove keyword"
+msgstr ""
