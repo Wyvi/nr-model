@@ -30,7 +30,6 @@ import {
   Message,
   Icon,
 } from "semantic-ui-react";
-import * as Yup from "yup";
 import { LicenseFilter } from "./LicenseFilter";
 import { LicenseResults } from "./LicenseResults";
 import { EmptyResultsElement } from "@js/oarepo_ui";
@@ -39,12 +38,6 @@ const overriddenComponents = {
   "SearchFilters.Toggle": LicenseFilter,
   "EmptyResults.element": EmptyResultsElement,
 };
-
-const LicenseSchema = Yup.object().shape({
-  selectedLicense: Yup.object().shape({
-    id: Yup.string().required(i18next.t("You must choose one license.")),
-  }),
-});
 
 export class LicenseModal extends Component {
   state = {
@@ -84,7 +77,7 @@ export class LicenseModal extends Component {
         }}
         onSubmit={this.onSubmit}
         enableReinitialize={true}
-        validationSchema={LicenseSchema}
+        // validationSchema={LicenseSchema}
         validateOnChange={false}
         validateOnBlur={false}
       >
@@ -171,7 +164,10 @@ export class LicenseModal extends Component {
                         <ResultsLoader>
                           <EmptyResults />
                           <Error />
-                          <LicenseResults serializeLicense={serializeLicense} />
+                          <LicenseResults
+                            handleSubmit={handleSubmit}
+                            serializeLicense={serializeLicense}
+                          />
                           <div className="centered">
                             <Pagination
                               options={{
@@ -200,14 +196,6 @@ export class LicenseModal extends Component {
                 labelPosition="left"
                 content={i18next.t("Cancel")}
                 floated="left"
-              />
-              <Button
-                type="submit"
-                onClick={(event) => handleSubmit(event)}
-                primary
-                icon="checkmark"
-                labelPosition="left"
-                content={i18next.t("Choose license")}
               />
             </Modal.Actions>
           </Modal>

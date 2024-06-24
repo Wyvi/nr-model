@@ -14,7 +14,7 @@ import { getTitleFromMultilingualObject } from "@js/oarepo_ui";
 import { i18next } from "@translations/nr/i18next";
 
 export const LicenseResults = withState(
-  ({ currentResultsState: results, serializeLicense }) => {
+  ({ currentResultsState: results, serializeLicense, handleSubmit }) => {
     const serializeLicenseResult =
       serializeLicense ??
       ((result) => ({
@@ -30,12 +30,13 @@ export const LicenseResults = withState(
               return (
                 <List.Item
                   key={id}
-                  onClick={() =>
+                  onClick={() => {
                     setFieldValue(
                       "selectedLicense",
                       serializeLicenseResult(result)
-                    )
-                  }
+                    );
+                    handleSubmit();
+                  }}
                   className="license-item mb-15"
                   active={_get(values, "selectedLicense.id", "") === id}
                 >
