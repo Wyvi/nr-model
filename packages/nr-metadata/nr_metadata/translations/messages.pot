@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-04 21:20+0200\n"
+"POT-Creation-Date: 2024-06-20 10:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1219,6 +1219,9 @@ msgstr ""
 msgid "Start writing name of the institution, then choose from the options."
 msgstr ""
 
+msgid "Search in ROR database"
+msgstr ""
+
 msgid "Add institution name (free text): "
 msgstr ""
 
@@ -1470,6 +1473,9 @@ msgstr ""
 msgid "All"
 msgstr ""
 
+msgid "Read more."
+msgstr ""
+
 msgid "Related items"
 msgstr ""
 
@@ -1569,6 +1575,9 @@ msgid "Items shall be unique"
 msgstr ""
 
 msgid "External subjects (psh, czenas ...)"
+msgstr ""
+
+msgid "Remove keyword"
 msgstr ""
 
 msgid "Subjects"

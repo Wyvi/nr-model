@@ -44,7 +44,7 @@ FileUploadWrapper.propTypes = {
 };
 FileUploadWrapper.defaultProps = {
   uploadWrapperClassName: "ui container centered",
-  uploadButtonClassName: "ui primary button icon left labeled",
+  uploadButtonClassName: "ui button icon left labeled files-upload-button",
 };
 
 export const FileEditWrapper = ({

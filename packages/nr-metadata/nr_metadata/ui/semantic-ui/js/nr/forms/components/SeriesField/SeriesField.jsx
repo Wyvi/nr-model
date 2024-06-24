@@ -15,6 +15,7 @@ export const SeriesField = ({ fieldPath, helpText, validTags }) => {
       label={i18next.t("Series")}
       labelIcon="pencil"
       helpText={helpText}
+      addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
