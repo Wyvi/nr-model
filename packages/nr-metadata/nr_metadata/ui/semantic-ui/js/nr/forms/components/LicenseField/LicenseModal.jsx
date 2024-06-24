@@ -21,15 +21,7 @@ import {
   Toggle,
   Pagination,
 } from "react-searchkit";
-import {
-  Button,
-  Grid,
-  Header,
-  Menu,
-  Modal,
-  Message,
-  Icon,
-} from "semantic-ui-react";
+import { Grid, Header, Menu, Modal, Message, Icon } from "semantic-ui-react";
 import { LicenseFilter } from "./LicenseFilter";
 import { LicenseResults } from "./LicenseResults";
 import { EmptyResultsElement } from "@js/oarepo_ui";
