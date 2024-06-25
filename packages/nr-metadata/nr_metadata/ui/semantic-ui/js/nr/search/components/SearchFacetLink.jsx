@@ -13,7 +13,7 @@ export const SearchFacetLink = ({
 }) => (
   <Popup
     position="top center"
-    content={title}
+    content={`🔎 ${title}`}
     trigger={
       <a
         className={className}

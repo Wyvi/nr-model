@@ -22,8 +22,8 @@ const CreatibutorSearchLink = ({
     className={`${searchField}-link`}
     title={
       nameType === "Personal"
-        ? `🔎 ${i18next.t("Find more records by this person")}`
-        : `🔎 ${i18next.t("Find more records by this organization")}`
+        ? i18next.t("Find more records by this person")
+        : i18next.t("Find more records by this organization")
     }
     label={personName}
   />
