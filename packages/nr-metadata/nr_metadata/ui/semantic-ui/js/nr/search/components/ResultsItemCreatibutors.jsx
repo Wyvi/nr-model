@@ -13,13 +13,18 @@ const CreatibutorSearchLink = ({
   personName = "No name",
   searchField = "creators",
   searchUrl = "/",
+  nameType,
 }) => (
   <SearchFacetLink
     searchUrl={searchUrl}
     searchFacet="syntheticFields_people"
     value={personName}
     className={`${searchField}-link`}
-    title={`${personName}: ${i18next.t("Find more records by this person")}`}
+    title={
+      nameType === "Personal"
+        ? i18next.t("Find more records by this person")
+        : i18next.t("Find more records by this organization")
+    }
     label={personName}
   />
 );
@@ -28,6 +33,11 @@ CreatibutorSearchLink.propTypes = {
   personName: PropTypes.string,
   searchField: PropTypes.string,
   searchUrl: PropTypes.string,
+  nameType: PropTypes.string,
+};
+
+CreatibutorSearchLink.defaultProps = {
+  nameType: "Personal",
 };
 
 const CreatibutorIcons = ({ personName = "No name", identifiers = [] }) =>
@@ -78,7 +88,7 @@ export function ResultsItemCreatibutors({
       <List horizontal className="separated creators inline">
         {creators
           .slice(0, maxCreators)
-          .map(({ fullName, authorityIdentifiers }) => (
+          .map(({ fullName, authorityIdentifiers, nameType }) => (
             <List.Item
               as="span"
               className={`creatibutor-wrap separated ${className}`}
@@ -87,6 +97,7 @@ export function ResultsItemCreatibutors({
               <CreatibutorSearchLink
                 personName={fullName}
                 searchUrl={searchUrl}
+                nameType={nameType}
               />
               <CreatibutorIcons
                 personName={fullName}

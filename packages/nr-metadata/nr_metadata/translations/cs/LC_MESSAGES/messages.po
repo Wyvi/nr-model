@@ -3948,3 +3948,6 @@ msgstr "Přečtěte si více."
 
 msgid "Remove keyword"
 msgstr "Odebrat klíčové slovo"
+
+msgid "Find more records by this organization"
+msgstr "Vyhledat další záznamy této organizace"
