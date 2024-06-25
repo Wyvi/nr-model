@@ -10,7 +10,7 @@ const SubjectElement = ({ searchUrl, subject }) => (
     searchUrl={searchUrl}
     searchFacet="syntheticFields_keywords"
     value={subject.subject.value}
-    title={i18next.t("Find more records with this subject")}
+    title={`🔎 ${i18next.t("Find more records with this subject")}`}
     className="subject-link"
   />
 );

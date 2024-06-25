@@ -11,7 +11,7 @@ export const ResultsItemResourceType = ({
     searchUrl={searchUrl}
     searchFacet="metadata_resourceType"
     value={resourceType.id}
-    title={`${i18next.t("Find all records")} ${i18next.t(
+    title={`🔎 ${i18next.t("Find all records")} ${i18next.t(
       "by this document type"
     )}`}
     label={resourceType.title || "No resource type"}
