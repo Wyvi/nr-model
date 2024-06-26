@@ -9,7 +9,7 @@
 
 import React from "react";
 import { Button, Form, Grid, Header, Modal } from "semantic-ui-react";
-import { Formik } from "formik";
+import { Formik, getIn } from "formik";
 import * as Yup from "yup";
 import { i18next } from "@translations/nr/i18next";
 import { TextField, FieldLabel, GroupField } from "react-invenio-forms";
@@ -24,9 +24,9 @@ import PropTypes from "prop-types";
 import {
   requiredMessage,
   handleValidateAndBlur,
-  sanitizeInput,
+  useSanitizeInput,
 } from "@js/oarepo_ui";
-import { getIn } from "formik";
+import _isEmpty from "lodash/isEmpty";
 
 const RelatedItemsSchema = Yup.object({
   itemTitle: Yup.string().required(requiredMessage).label(i18next.t("Title")),
@@ -60,13 +60,13 @@ export const RelatedItemsModal = ({
   editLabel,
   onRelatedItemChange,
   trigger,
-  validTags,
 }) => {
   const [open, setOpen] = React.useState(false);
   const [action, setAction] = React.useState(initialAction);
   const [saveAndContinueLabel, setSaveAndContinueLabel] = React.useState(
     i18next.t("Save and add another")
   );
+  const { sanitizeInput } = useSanitizeInput();
 
   const openModal = () => {
     setOpen(true);
@@ -84,7 +84,7 @@ export const RelatedItemsModal = ({
 
   const onSubmit = (values, formikBag) => {
     const fieldValue = getIn(values, "itemTitle");
-    const cleanedContent = sanitizeInput(fieldValue, validTags);
+    const cleanedContent = sanitizeInput(fieldValue);
     const updatedValues = { ...values, itemTitle: cleanedContent };
     onRelatedItemChange(updatedValues);
     formikBag.setSubmitting(false);
@@ -107,7 +107,25 @@ export const RelatedItemsModal = ({
 
   return (
     <Formik
-      initialValues={initialRelatedItem || {}}
+      initialValues={
+        !_isEmpty(initialRelatedItem)
+          ? initialRelatedItem
+          : {
+              itemTitle: "",
+              itemCreators: [],
+              itemContributors: [],
+              itemPIDs: [],
+              itemURL: "",
+              itemYear: "",
+              itemVolume: "",
+              itemIssue: "",
+              itemStartPage: "",
+              itemEndPage: "",
+              itemPublisher: "",
+              itemRelationType: {},
+              itemResourceType: {},
+            }
+      }
       onSubmit={onSubmit}
       enableReinitialize
       validationSchema={RelatedItemsSchema}
@@ -361,7 +379,6 @@ RelatedItemsModal.propTypes = {
   editLabel: PropTypes.string,
   onRelatedItemChange: PropTypes.func,
   trigger: PropTypes.node,
-  validTags: PropTypes.array,
 };
 
 RelatedItemsModal.defaultProps = {

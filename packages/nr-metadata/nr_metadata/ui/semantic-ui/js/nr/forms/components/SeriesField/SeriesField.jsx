@@ -2,11 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ArrayField, TextField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
-import { ArrayFieldItem, sanitizeInput } from "@js/oarepo_ui";
+import { ArrayFieldItem, useSanitizeInput } from "@js/oarepo_ui";
 import { useFormikContext, getIn } from "formik";
 
-export const SeriesField = ({ fieldPath, helpText, validTags }) => {
+export const SeriesField = ({ fieldPath, helpText }) => {
   const { values, setFieldValue, setFieldTouched } = useFormikContext();
+
+  const { sanitizeInput } = useSanitizeInput();
 
   return (
     <ArrayField
@@ -32,8 +34,7 @@ export const SeriesField = ({ fieldPath, helpText, validTags }) => {
               required
               onBlur={() => {
                 const cleanedContent = sanitizeInput(
-                  getIn(values, `${fieldPathPrefix}.seriesTitle`),
-                  validTags
+                  getIn(values, `${fieldPathPrefix}.seriesTitle`)
                 );
                 setFieldValue(`${fieldPathPrefix}.seriesTitle`, cleanedContent);
                 setFieldTouched(`${fieldPathPrefix}.seriesTitle`, true);
@@ -54,7 +55,6 @@ export const SeriesField = ({ fieldPath, helpText, validTags }) => {
 SeriesField.propTypes = {
   fieldPath: PropTypes.string.isRequired,
   helpText: PropTypes.string,
-  validTags: PropTypes.array,
 };
 
 SeriesField.defaultProps = {

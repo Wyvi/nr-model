@@ -14,7 +14,6 @@ import _get from "lodash/get";
 import { FieldLabel } from "react-invenio-forms";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
-
 import { CreatibutorsModal } from "./CreatibutorsModal";
 import { CreatibutorsFieldItem } from "./CreatibutorsFieldItem";
 import { i18next } from "@translations/nr/i18next";
@@ -59,7 +58,7 @@ class CreatibutorsFieldForm extends Component {
       error || (creatibutorsList === formikInitialValues && initialError);
 
     return (
-      <DndProvider backend={HTML5Backend}>
+      <DndProvider context={window} backend={HTML5Backend}>
         <Form.Field
           required={required}
           className={creatibutorsError ? "error" : ""}

@@ -50,7 +50,7 @@ export const CreatibutorsFieldItem = ({
       }
 
       if (monitor.isOver({ shallow: true })) {
-        moveCreatibutor(dragIndex, hoverIndex);
+        setTimeout(() => moveCreatibutor(dragIndex, hoverIndex), 20);
         item.index = hoverIndex;
       }
     },

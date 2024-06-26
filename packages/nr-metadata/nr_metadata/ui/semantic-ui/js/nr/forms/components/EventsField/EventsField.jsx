@@ -7,12 +7,14 @@ import { StringArrayField } from "../StringArray/StringArrayField";
 import {
   ArrayFieldItem,
   EDTFDaterangePicker,
-  sanitizeInput,
+  useSanitizeInput,
 } from "@js/oarepo_ui";
 import { useFormikContext, getIn } from "formik";
 
-export const EventsField = ({ fieldPath, helpText, validTags }) => {
+export const EventsField = ({ fieldPath, helpText }) => {
   const { values, setFieldValue, setFieldTouched } = useFormikContext();
+
+  const { sanitizeInput } = useSanitizeInput();
 
   return (
     <ArrayField
@@ -40,8 +42,7 @@ export const EventsField = ({ fieldPath, helpText, validTags }) => {
               placeholder={i18next.t("Write down the main name of the event.")}
               onBlur={() => {
                 const cleanedContent = sanitizeInput(
-                  getIn(values, `${fieldPathPrefix}.eventNameOriginal`),
-                  validTags
+                  getIn(values, `${fieldPathPrefix}.eventNameOriginal`)
                 );
                 setFieldValue(
                   `${fieldPathPrefix}.eventNameOriginal`,
