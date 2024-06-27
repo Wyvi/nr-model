@@ -70,9 +70,11 @@ export const RelatedItemsModal = ({
 
   const openModal = () => {
     setOpen(true);
+    setAction(initialAction);
   };
   const closeModal = () => {
     setOpen(false);
+    setAction(initialAction);
   };
 
   const changeContent = () => {
@@ -92,13 +94,11 @@ export const RelatedItemsModal = ({
     switch (action) {
       case "saveAndContinue":
         closeModal();
-        setAction(initialAction);
         openModal();
         changeContent();
         break;
       case "saveAndClose":
         closeModal();
-        setAction(initialAction);
         break;
       default:
         break;
@@ -162,7 +162,7 @@ export const RelatedItemsModal = ({
               <Grid>
                 <Grid.Column floated="left" width={8}>
                   <Header as="h2">
-                    {action === modalActions.ADD ? addLabel : editLabel}
+                    {initialAction === modalActions.ADD ? addLabel : editLabel}
                   </Header>
                 </Grid.Column>
               </Grid>
@@ -324,6 +324,7 @@ export const RelatedItemsModal = ({
                     }
                     placeholder={i18next.t("Select resource type")}
                     optionsListName="resource-types"
+                    showLeafsOnly
                   />
                 </GroupField>
               </Form>
@@ -340,7 +341,7 @@ export const RelatedItemsModal = ({
                 floated="left"
               />
 
-              {action === modalActions.ADD && (
+              {initialAction === modalActions.ADD && (
                 <Button
                   name="submit"
                   type="submit"

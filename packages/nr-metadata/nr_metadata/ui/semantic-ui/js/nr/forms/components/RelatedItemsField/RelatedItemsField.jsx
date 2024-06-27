@@ -90,6 +90,7 @@ class RelatedItemsFieldForm extends Component {
               );
             })}
             <RelatedItemsModal
+              key="add-related-item-modal"
               onRelatedItemChange={this.handleRelatedItemChange}
               initialAction="add"
               addLabel={modal.addLabel}
@@ -99,7 +100,7 @@ class RelatedItemsFieldForm extends Component {
                   type="button"
                   icon
                   labelPosition="left"
-                  className="array-field-add-button"
+                  className="array-field-add-button inline-block"
                 >
                   <Icon name="add" />
                   {addButtonLabel}
@@ -127,7 +128,7 @@ export class RelatedItemsField extends Component {
     return (
       <FieldArray
         name={fieldPath}
-        component={(formikProps) => (
+        render={(formikProps) => (
           <RelatedItemsFieldForm {...formikProps} {...this.props} />
         )}
       />

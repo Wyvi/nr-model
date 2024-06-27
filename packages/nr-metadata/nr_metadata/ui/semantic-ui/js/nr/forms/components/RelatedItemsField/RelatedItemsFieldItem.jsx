@@ -65,6 +65,7 @@ export const RelatedItemsFieldItem = ({
       >
         <List.Content floated="right">
           <RelatedItemsModal
+            key={`edit-related-item-modal-${index}`}
             addLabel={addLabel}
             editLabel={editLabel}
             onRelatedItemChange={(selectedRelatedItem) => {

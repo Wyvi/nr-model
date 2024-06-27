@@ -2743,7 +2743,7 @@ msgid "Add related item"
 msgstr "Přidat související zdroj"
 
 msgid "Edit related item"
-msgstr "Upravit související položku"
+msgstr "Upravit související zdroj"
 
 msgid "Year must be in format YYYY"
 msgstr "Rok musí být ve formátu RRRR"
