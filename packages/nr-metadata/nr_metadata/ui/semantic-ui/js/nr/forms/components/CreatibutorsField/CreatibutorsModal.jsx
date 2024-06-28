@@ -45,7 +45,6 @@ import {
   getTitleFromMultilingualObject,
   handleValidateAndBlur,
 } from "@js/oarepo_ui";
-import { set } from "lodash";
 
 const ModalActions = {
   ADD: "add",
