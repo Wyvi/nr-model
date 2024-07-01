@@ -26,7 +26,7 @@ export const LicenseResults = withState(
         {({ form: { values, setFieldValue } }) => (
           <List selection>
             {results.data.hits
-              .filter((l) => l.hierarchy.leaf)
+              .filter((l) => l?.hierarchy?.leaf)
               .map((result) => {
                 const { id, title, description } = result;
                 return (
