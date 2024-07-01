@@ -25,39 +25,41 @@ export const LicenseResults = withState(
       <FastField name="selectedLicense">
         {({ form: { values, setFieldValue } }) => (
           <List selection>
-            {results.data.hits.map((result) => {
-              const { id, title, description } = result;
-              return (
-                <List.Item
-                  key={id}
-                  onClick={() => {
-                    setFieldValue(
-                      "selectedLicense",
-                      serializeLicenseResult(result)
-                    );
-                    handleSubmit();
-                  }}
-                  className="license-item mb-15"
-                  active={_get(values, "selectedLicense.id", "") === id}
-                >
-                  <List.Content>
-                    <Header size="small">{title}</Header>
-                    <p>
-                      {getTitleFromMultilingualObject(description)}{" "}
-                      {
-                        <a
-                          href={result?.relatedURI?.URL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {i18next.t("Read more.")}
-                        </a>
-                      }
-                    </p>
-                  </List.Content>
-                </List.Item>
-              );
-            })}
+            {results.data.hits
+              .filter((l) => l.hierarchy.leaf)
+              .map((result) => {
+                const { id, title, description } = result;
+                return (
+                  <List.Item
+                    key={id}
+                    onClick={() => {
+                      setFieldValue(
+                        "selectedLicense",
+                        serializeLicenseResult(result)
+                      );
+                      handleSubmit();
+                    }}
+                    className="license-item mb-15"
+                    active={_get(values, "selectedLicense.id", "") === id}
+                  >
+                    <List.Content>
+                      <Header size="small">{title}</Header>
+                      <p>
+                        {getTitleFromMultilingualObject(description)}{" "}
+                        {
+                          <a
+                            href={result?.relatedURI?.URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {i18next.t("Read more.")}
+                          </a>
+                        }
+                      </p>
+                    </List.Content>
+                  </List.Item>
+                );
+              })}
           </List>
         )}
       </FastField>
