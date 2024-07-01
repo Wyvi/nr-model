@@ -20,6 +20,7 @@ export const StringArrayField = ({
   labelIcon,
   showEmptyValue,
   validTags,
+  addButtonClassName,
   ...uiProps
 }) => {
   const { values, setFieldValue, setFieldTouched } = useFormikContext();
@@ -39,6 +40,7 @@ export const StringArrayField = ({
                   key={index}
                   indexPath={index}
                   arrayHelpers={arrayHelpers}
+                  fieldPathPrefix={indexPath}
                 >
                   <TextField
                     width={16}
@@ -61,6 +63,7 @@ export const StringArrayField = ({
             })}
             {helpText ? <label className="helptext">{helpText}</label> : null}
             <Form.Button
+              className={addButtonClassName}
               type="button"
               icon
               labelPosition="left"
@@ -88,6 +91,7 @@ StringArrayField.propTypes = {
   required: PropTypes.bool,
   showEmptyValue: PropTypes.bool,
   validTags: PropTypes.array,
+  addButtonClassName: PropTypes.string,
 };
 
 StringArrayField.defaultProps = {
@@ -97,4 +101,5 @@ StringArrayField.defaultProps = {
   label: i18next.t("Notes"),
   helpText: i18next.t("Items shall be unique"),
   showEmptyValue: false,
+  addButtonClassName: "array-field-add-button",
 };

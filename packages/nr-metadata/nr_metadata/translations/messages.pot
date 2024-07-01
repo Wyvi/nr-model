@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-21 14:58+0200\n"
+"POT-Creation-Date: 2024-06-25 14:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1219,6 +1219,9 @@ msgstr ""
 msgid "Start writing name of the institution, then choose from the options."
 msgstr ""
 
+msgid "Search in ROR database"
+msgstr ""
+
 msgid "Add institution name (free text): "
 msgstr ""
 
@@ -1294,6 +1297,12 @@ msgid ""
 "website or database or specify another external source for the resource. "
 msgstr ""
 
+msgid "Fetching files"
+msgstr ""
+
+msgid "Failed to fetch draft's files. Please try refreshing the page."
+msgstr ""
+
 msgid ""
 "File addition, removal or modification are not allowed after you have "
 "published your draft."
@@ -1302,16 +1311,28 @@ msgstr ""
 msgid "If you wish to upload files, you must<1>save</1>your draft first."
 msgstr ""
 
+msgid "Delete file"
+msgstr ""
+
+msgid "File uploaded successfully."
+msgstr ""
+
+msgid "File was not uploaded correctly. Please delete it and try again."
+msgstr ""
+
+msgid "Edit file metadata"
+msgstr ""
+
 msgid "File name"
 msgstr ""
 
 msgid "File size"
 msgstr ""
 
-msgid "Edit file metadata"
+msgid "Status"
 msgstr ""
 
-msgid "Delete file"
+msgid "Delete"
 msgstr ""
 
 msgid "Upload files"
@@ -1440,9 +1461,6 @@ msgid ""
 "versions, namely 3.0 Czech and 4.0 International."
 msgstr ""
 
-msgid "You must choose one license."
-msgstr ""
-
 msgid "Search"
 msgstr ""
 
@@ -1450,6 +1468,9 @@ msgid "Featured"
 msgstr ""
 
 msgid "All"
+msgstr ""
+
+msgid "Read more."
 msgstr ""
 
 msgid "Related items"
@@ -1553,6 +1574,9 @@ msgstr ""
 msgid "External subjects (psh, czenas ...)"
 msgstr ""
 
+msgid "Remove keyword"
+msgstr ""
+
 msgid "Subjects"
 msgstr ""
 
@@ -1617,6 +1641,9 @@ msgid "DOI profile"
 msgstr ""
 
 msgid "GND profile"
+msgstr ""
+
+msgid "Find more records by this organization"
 msgstr ""
 
 msgid "Find all records"

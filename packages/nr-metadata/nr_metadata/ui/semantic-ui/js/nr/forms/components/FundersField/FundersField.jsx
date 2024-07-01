@@ -30,6 +30,7 @@ export const FundersField = ({
       label={label}
       helpText={helpText}
       {...(useModelData ? getFieldData(fieldPath).fullRepresentation : {})}
+      addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
@@ -38,6 +39,7 @@ export const FundersField = ({
             indexPath={indexPath}
             arrayHelpers={arrayHelpers}
             style={{ display: "block" }}
+            fieldPathPrefix={fieldPathPrefix}
           >
             <TextField
               width={16}

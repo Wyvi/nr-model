@@ -27,18 +27,18 @@ import {
   sanitizeInput,
   useFieldData,
 } from "@js/oarepo_ui";
-import { getIn } from "formik";
 
 const RelatedItemsSchema = Yup.object({
   itemTitle: Yup.string().required(requiredMessage).label(i18next.t("Title")),
   itemURL: Yup.string().url(i18next.t("Please provide an URL in valid format")),
   itemYear: Yup.number()
     .typeError(i18next.t("Year must be a number."))
-    .test(
-      "len",
-      i18next.t("Year must be in format YYYY."),
-      (val) => val && val.toString().length === 4
-    ),
+    .test("len", i18next.t("Year must be in format YYYY."), (val) => {
+      if (val) {
+        return val.toString().length === 4;
+      }
+      return true;
+    }),
   itemPIDs: IdentifiersValidationSchema,
   itemVolume: Yup.string(),
   itemIssue: Yup.string(),

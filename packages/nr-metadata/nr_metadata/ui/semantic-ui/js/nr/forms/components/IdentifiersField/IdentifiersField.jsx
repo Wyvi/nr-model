@@ -89,11 +89,16 @@ export const IdentifiersField = ({
       className={className}
       defaultNewValue={defaultNewValue}
       {...getFieldData(fieldPath, "pencil").fullRepresentation}
+      addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
         return (
-          <ArrayFieldItem indexPath={indexPath} arrayHelpers={arrayHelpers}>
+          <ArrayFieldItem
+            indexPath={indexPath}
+            arrayHelpers={arrayHelpers}
+            fieldPathPrefix={fieldPathPrefix}
+          >
             <SelectField
               clearable
               width={4}

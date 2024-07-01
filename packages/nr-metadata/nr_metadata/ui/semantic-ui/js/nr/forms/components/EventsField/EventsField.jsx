@@ -30,6 +30,7 @@ export const EventsField = ({
       label={label}
       helpText={helpText}
       {...(useModelData ? getFieldData(fieldPath).fullRepresentation : {})}
+      addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
@@ -38,6 +39,7 @@ export const EventsField = ({
             indexPath={indexPath}
             arrayHelpers={arrayHelpers}
             className={"invenio-group-field events"}
+            fieldPathPrefix={fieldPathPrefix}
           >
             <TextField
               width={16}

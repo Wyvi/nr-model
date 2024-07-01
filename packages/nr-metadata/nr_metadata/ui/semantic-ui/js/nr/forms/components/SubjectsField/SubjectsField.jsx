@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import PropTypes from "prop-types";
-import { Form, Icon, Button, Divider } from "semantic-ui-react";
+import { Form, Icon, Divider } from "semantic-ui-react";
 import { i18next } from "@translations/nr/i18next";
 import { SubjectsModal } from "./SubjectsModal";
 import { useFormikContext, getIn } from "formik";
@@ -73,15 +73,15 @@ export const SubjectsField = ({ fieldPath }) => {
           handleSubjectAdd={handleSubjectAdd}
           fieldPath={fieldPath}
           trigger={
-            <Button
-              className="rel-mt-1"
+            <Form.Button
+              className="array-field-add-button"
               type="button"
               icon
               labelPosition="left"
             >
               <Icon name="add" />
               {i18next.t("Add keywords")}
-            </Button>
+            </Form.Button>
           }
         />
       </div>

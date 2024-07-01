@@ -9,7 +9,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { getIn, useFormikContext } from "formik";
-import { Button, Form, Icon } from "semantic-ui-react";
+import { Form, Icon } from "semantic-ui-react";
 import { LicenseModal } from "./LicenseModal";
 import { LicenseFieldItem } from "./LicenseFieldItem";
 import { i18next } from "@translations/nr/i18next";
@@ -52,16 +52,16 @@ export const LicenseField = ({
         searchConfig={searchConfig}
         initialLicense={license}
         trigger={
-          <Button
+          <Form.Button
+            className="array-field-add-button"
             type="button"
             key="license"
             icon
             labelPosition="left"
-            className="mt-10"
           >
             <Icon name="add" />
             {i18next.t("Choose license")}
-          </Button>
+          </Form.Button>
         }
         handleLicenseChange={handleLicenseChange}
         serializeLicense={serializeLicense}

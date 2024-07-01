@@ -13,11 +13,16 @@ export const GeoLocationsField = ({ fieldPath, helpText }) => {
       label={i18next.t("Geolocation")}
       labelIcon="globe"
       helpText={helpText}
+      addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
         return (
-          <ArrayFieldItem indexPath={indexPath} arrayHelpers={arrayHelpers}>
+          <ArrayFieldItem
+            indexPath={indexPath}
+            arrayHelpers={arrayHelpers}
+            fieldPathPrefix={fieldPathPrefix}
+          >
             <TextField
               width={8}
               fieldPath={`${fieldPathPrefix}.geoLocationPlace`}

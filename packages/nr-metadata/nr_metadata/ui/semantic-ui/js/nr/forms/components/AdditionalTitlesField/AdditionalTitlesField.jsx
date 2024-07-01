@@ -25,6 +25,7 @@ export const AdditionalTitlesField = ({
   label,
   required,
   addButtonLabel,
+  helpText,
   useModelData,
 }) => {
   const { getFieldData } = useFieldData();
@@ -54,15 +55,17 @@ export const AdditionalTitlesField = ({
       required={required}
       fieldPath={fieldPath}
       className="additional-titles"
+      helpText={helpText}
       {...(useModelData ? getFieldData(fieldPath).fullRepresentation : {})}
+      addButtonClassName="array-field-add-button"
     >
-      {({ arrayHelpers, indexPath, array }) => {
+      {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
         return (
           <ArrayFieldItem
             indexPath={indexPath}
-            array={array}
             arrayHelpers={arrayHelpers}
+            fieldPathPrefix={fieldPathPrefix}
           >
             <Form.Field width={12}>
               <I18nTextInputField
@@ -111,6 +114,7 @@ AdditionalTitlesField.propTypes = {
   label: PropTypes.string,
   required: PropTypes.bool,
   useModelData: PropTypes.bool,
+  helpText: PropTypes.string,
 };
 
 AdditionalTitlesField.defaultProps = {

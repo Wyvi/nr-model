@@ -26,7 +26,7 @@ export const LicenseFieldItem = ({ license, fieldPath }) => {
   return (
     <Grid key={license.key}>
       <Grid.Row verticalAlign="middle">
-        <Grid.Column width={12}>
+        <Grid.Column className="rel-mb-1" width={12}>
           {licenseUI?.icon ? (
             <Image
               src={licenseUI.icon}
