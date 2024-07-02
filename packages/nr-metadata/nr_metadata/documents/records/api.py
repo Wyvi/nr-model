@@ -37,7 +37,7 @@ class DocumentsRecord(InvenioRecord):
 
     people = SyntheticSystemField(
         PathSelector("metadata.creators", "metadata.contributors"),
-        filter=lambda x: x.get("type") == "personal",
+        filter=lambda x: x.get("nameType") == "Personal",
         map=lambda x: x.get("fullName"),
         key="syntheticFields.people",
     )
@@ -59,6 +59,20 @@ class DocumentsRecord(InvenioRecord):
     date = SyntheticSystemField(
         selector=FirstItemSelector("metadata.dateModified", "metadata.dateIssued"),
         key="syntheticFields.date",
+    )
+
+    year = SyntheticSystemField(
+        selector=FirstItemSelector("metadata.dateModified", "metadata.dateIssued"),
+        key="syntheticFields.year",
+        filter=lambda x: len(x) >= 10,
+        map=lambda x: x[:4],
+    )
+
+    defenseYear = SyntheticSystemField(
+        selector=PathSelector("metadata.thesis.dateDefended"),
+        key="syntheticFields.defenseYear",
+        filter=lambda x: len(x) >= 10,
+        map=lambda x: x[:4],
     )
 
     relations = RelationsField(

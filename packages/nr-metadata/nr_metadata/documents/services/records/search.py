@@ -101,8 +101,10 @@ class DocumentsSearchOptions(InvenioSearchOptions):
         "metadata_thesis_studyFields": facets.metadata_thesis_studyFields,
         "metadata_version": facets.metadata_version,
         "syntheticFields_date": facets.syntheticFields_date,
+        "syntheticFields_defenseYear": facets.syntheticFields_defenseYear,
         "syntheticFields_institutions": facets.syntheticFields_institutions,
         "syntheticFields_keywords": facets.syntheticFields_keywords,
         "syntheticFields_people": facets.syntheticFields_people,
+        "syntheticFields_year": facets.syntheticFields_year,
         **getattr(InvenioSearchOptions, "facets", {}),
     }

@@ -87,7 +87,7 @@ DocumentModel:
       people: |
         SyntheticSystemField(
             PathSelector("metadata.creators", "metadata.contributors"),
-            filter=lambda x: x.get("type") == "personal",
+            filter=lambda x: x.get("nameType") == "Personal",
             map=lambda x: x.get("fullName"),
             key="syntheticFields.people",
         )
@@ -109,6 +109,21 @@ DocumentModel:
             selector=FirstItemSelector("metadata.dateModified", "metadata.dateIssued"),
             key="syntheticFields.date",
         )
+      year: |
+        SyntheticSystemField(
+            selector=FirstItemSelector("metadata.dateModified", "metadata.dateIssued"),
+            key="syntheticFields.year",
+            filter=lambda x: len(x) >= 10,
+            map=lambda x: x[:4]
+        )
+      defenseYear: |
+        SyntheticSystemField(
+            selector=PathSelector("metadata.thesis.dateDefended"),
+            key="syntheticFields.defenseYear",
+            filter=lambda x: len(x) >= 10,
+            map=lambda x: x[:4]
+        )
+
 
   properties:
     syntheticFields:
@@ -136,12 +151,26 @@ DocumentModel:
           label.cs: Klíčová slova
           label.en: Keywords
         date:
-          type: date
+          type: edtf
           marshmallow:
             read: false
             write: false
           label.cs: Datum poslední změny
           label.en: Updated date
+        year:
+          type: integer
+          marshmallow:
+            read: false
+            write: false
+          label.cs: Rok poslední změny
+          label.en: Updated year
+        defenseYear:
+          type: integer
+          marshmallow:
+              read: false
+              write: false
+          label.cs: Rok obhajoby
+          label.en: Defense year
       marshmallow:
         class: nr_metadata.documents.services.records.schema.NRDocumentSyntheticFieldsSchema
       ui:
