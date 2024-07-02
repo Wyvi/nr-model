@@ -60,70 +60,72 @@ class CreatibutorsFieldForm extends Component {
       error || (creatibutorsList === formikInitialValues && initialError);
 
     return (
-      <DndProvider backend={HTML5Backend}>
-        <Form.Field
-          required={required}
-          className={creatibutorsError ? "error" : ""}
-        >
-          <FieldLabel htmlFor={fieldPath} icon={labelIcon} label={label} />
-          <List>
-            {creatibutorsList.map((value, index) => {
-              const key = `${fieldPath}.${index}`;
-              const identifiersError = creatibutorsError
-                ? creatibutorsError[index]?.authorityIdentifiers
-                : [];
-              const displayName = creatibutorNameDisplay(value);
-              return (
-                <CreatibutorsFieldItem
-                  key={key}
-                  identifiersError={identifiersError}
-                  nameTypeHelpText={nameTypeHelpText}
-                  {...{
-                    displayName,
-                    index,
-                    schema,
-                    compKey: key,
-                    initialCreatibutor: value,
-                    removeCreatibutor: formikArrayRemove,
-                    replaceCreatibutor: formikArrayReplace,
-                    moveCreatibutor: formikArrayMove,
-                    addLabel: modal.addLabel,
-                    editLabel: modal.editLabel,
-                    autocompleteNames: autocompleteNames,
-                  }}
-                />
-              );
-            })}
-            <CreatibutorsModal
-              onCreatibutorChange={this.handleOnContributorChange}
-              initialAction="add"
-              addLabel={modal.addLabel}
-              editLabel={modal.editLabel}
-              schema={schema}
-              nameFieldPlaceholder={nameFieldPlaceholder}
-              lastNameFieldPlaceholder={lastNameFieldPlaceholder}
-              nameTypeHelpText={nameTypeHelpText}
-              autocompleteNames={autocompleteNames}
-              trigger={
-                <Form.Button
-                  type="button"
-                  icon
-                  labelPosition="left"
-                  className="array-field-add-button"
-                >
-                  <Icon name="add" />
-                  {addButtonLabel}
-                </Form.Button>
-              }
-            />
-            {creatibutorsError && typeof creatibutorsError == "string" && (
-              <Label pointing="left" prompt>
-                {creatibutorsError}
-              </Label>
-            )}
-          </List>
-        </Form.Field>
-      </DndProvider>
+      <FieldDataProvider fieldPathPrefix={fieldPathPrefix}>
+        <DndProvider backend={HTML5Backend}>
+          <Form.Field
+            required={required}
+            className={creatibutorsError ? "error" : ""}
+          >
+            <FieldLabel htmlFor={fieldPath} icon={labelIcon} label={label} />
+            <List>
+              {creatibutorsList.map((value, index) => {
+                const key = `${fieldPath}.${index}`;
+                const identifiersError = creatibutorsError
+                  ? creatibutorsError[index]?.authorityIdentifiers
+                  : [];
+                const displayName = creatibutorNameDisplay(value);
+                return (
+                  <CreatibutorsFieldItem
+                    key={key}
+                    identifiersError={identifiersError}
+                    nameTypeHelpText={nameTypeHelpText}
+                    {...{
+                      displayName,
+                      index,
+                      schema,
+                      compKey: key,
+                      initialCreatibutor: value,
+                      removeCreatibutor: formikArrayRemove,
+                      replaceCreatibutor: formikArrayReplace,
+                      moveCreatibutor: formikArrayMove,
+                      addLabel: modal.addLabel,
+                      editLabel: modal.editLabel,
+                      autocompleteNames: autocompleteNames,
+                    }}
+                  />
+                );
+              })}
+              <CreatibutorsModal
+                onCreatibutorChange={this.handleOnContributorChange}
+                initialAction="add"
+                addLabel={modal.addLabel}
+                editLabel={modal.editLabel}
+                schema={schema}
+                nameFieldPlaceholder={nameFieldPlaceholder}
+                lastNameFieldPlaceholder={lastNameFieldPlaceholder}
+                nameTypeHelpText={nameTypeHelpText}
+                autocompleteNames={autocompleteNames}
+                trigger={
+                  <Form.Button
+                    type="button"
+                    icon
+                    labelPosition="left"
+                    className="array-field-add-button"
+                  >
+                    <Icon name="add" />
+                    {addButtonLabel}
+                  </Form.Button>
+                }
+              />
+              {creatibutorsError && typeof creatibutorsError == "string" && (
+                <Label pointing="left" prompt>
+                  {creatibutorsError}
+                </Label>
+              )}
+            </List>
+          </Form.Field>
+        </DndProvider>
+      </FieldDataProvider>
     );
   }
 }

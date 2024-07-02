@@ -360,7 +360,6 @@ export const CreatibutorsModal = ({
       setShowPersonForm(true);
       return;
     }
-
     setShowPersonForm(true);
     const identifiers = selectedSuggestions[0].extra.authorityIdentifiers.map(
       (identifier) => {
@@ -516,7 +515,8 @@ export const CreatibutorsModal = ({
                             autocompleteNames
                           )
                         }
-                        onValueChange={onPersonSearchChange}   {...getFieldData(familyNameFieldPath)
+                        onValueChange={onPersonSearchChange}
+                        {...getFieldData(familyNameFieldPath)
                           .compactRepresentation}
                       />
                     )}
@@ -581,8 +581,12 @@ export const CreatibutorsModal = ({
                           placeholder={i18next.t(
                             "Start writing name of the institution, then choose from the options."
                           )}
-                          externalApiModalTitle={i18next.t("Search in ROR database")}
-                          externalApiButtonContent={i18next.t("Search in ROR database")}
+                          externalApiModalTitle={i18next.t(
+                            "Search in ROR database"
+                          )}
+                          externalApiButtonContent={i18next.t(
+                            "Search in ROR database"
+                          )}
                           externalAuthority
                           multiple
                           clearable
@@ -612,8 +616,12 @@ export const CreatibutorsModal = ({
                       placeholder={i18next.t(
                         "Start writing name of the institution, then choose from the options."
                       )}
-                      externalApiModalTitle={i18next.t("Search in ROR database")}
-                      externalApiButtonContent={i18next.t("Search in ROR database")}
+                      externalApiModalTitle={i18next.t(
+                        "Search in ROR database"
+                      )}
+                      externalApiButtonContent={i18next.t(
+                        "Search in ROR database"
+                      )}
                       externalAuthority
                       clearable
                       selection
