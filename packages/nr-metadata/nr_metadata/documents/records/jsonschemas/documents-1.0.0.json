@@ -888,6 +888,9 @@
                     "type": "string",
                     "format": "date"
                 },
+                "defenseYear": {
+                    "type": "integer"
+                },
                 "institutions": {
                     "type": "object",
                     "properties": {
@@ -936,6 +939,9 @@
                 },
                 "people": {
                     "type": "string"
+                },
+                "year": {
+                    "type": "integer"
                 }
             }
         },
