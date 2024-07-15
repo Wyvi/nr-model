@@ -145,15 +145,44 @@ DocumentModel:
           label.cs: Instituce
           label.en: Institutions
         keywords:
-          type: keyword
+          type: object
           marshmallow:
             read: false
             write: false
+            generate: false
+          ui:
+            marshmallow:
+              read: false
+              write: false
+              generate: false
           label.cs: Klíčová slova
           label.en: Keywords
           facets:
             facet-class: nr_metadata.services.records.facets.KeywordsFacet
             facet: true
+          properties:
+            cs[]:
+              type: keyword
+              facets:
+                facet: false
+              marshmallow:
+                read: false
+                write: false
+              ui:
+                marshmallow:
+                  read: false
+                  write: false
+            en[]:
+              type: keyword
+              facets:
+                facet: false
+              marshmallow:
+                read: false
+                write: false
+              ui:
+                marshmallow:
+                  read: false
+                  write: false
         date:
           type: edtf
           marshmallow:

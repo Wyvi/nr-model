@@ -7099,17 +7099,67 @@
                         }
                     },
                     "keywords": {
-                        "type": "keyword",
-                        "marshmallow": {
-                            "read": false,
-                            "write": false
-                        },
+                        "type": "object",
                         "facets": {
                             "facet-class": "nr_metadata.services.records.facets.KeywordsFacet",
                             "facet": true
                         },
+                        "ui": {
+                            "marshmallow": {
+                                "generate": true,
+                                "read": false,
+                                "write": false,
+                                "class": "nr_metadata.documents.services.records.ui_schema.KeywordsUISchema"
+                            }
+                        },
+                        "marshmallow": {
+                            "generate": true,
+                            "read": false,
+                            "write": false,
+                            "class": "nr_metadata.documents.services.records.schema.KeywordsSchema"
+                        },
                         "label.cs": "Klíčová slova",
-                        "label.en": "Keywords"
+                        "label.en": "Keywords",
+                        "properties": {
+                            "cs": {
+                                "type": "array",
+                                "items": {
+                                    "type": "keyword",
+                                    "marshmallow": {
+                                        "read": false,
+                                        "write": false
+                                    },
+                                    "facets": {
+                                        "facet": false
+                                    },
+                                    "ui": {
+                                        "marshmallow": {
+                                            "read": false,
+                                            "write": false
+                                        }
+                                    }
+                                }
+                            },
+                            "en": {
+                                "type": "array",
+                                "items": {
+                                    "type": "keyword",
+                                    "marshmallow": {
+                                        "read": false,
+                                        "write": false
+                                    },
+                                    "facets": {
+                                        "facet": false
+                                    },
+                                    "ui": {
+                                        "marshmallow": {
+                                            "read": false,
+                                            "write": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "people": {
                         "type": "keyword",

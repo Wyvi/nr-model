@@ -84,8 +84,6 @@ class NRDocumentSyntheticFieldsUISchema(DictOnlySchema):
 
     institutions = ma_fields.Nested(lambda: InstitutionsUISchema())
 
-    keywords = ma_fields.String()
-
     people = ma_fields.String()
 
 
@@ -113,6 +111,11 @@ class InstitutionsUISchema(DictOnlySchema):
     hierarchy = ma_fields.Nested(lambda: HierarchyUISchema())
 
     title = VocabularyI18nStrUIField()
+
+
+class KeywordsUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
 
 
 class NRDegreeGrantorUISchema(DictOnlySchema):
