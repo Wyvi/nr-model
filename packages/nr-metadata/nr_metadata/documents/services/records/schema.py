@@ -105,6 +105,11 @@ class InstitutionsSchema(DictOnlySchema):
     title = i18n_strings
 
 
+class KeywordsSchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+
 class NRDegreeGrantorSchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
