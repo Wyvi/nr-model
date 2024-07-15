@@ -13,6 +13,7 @@ from oarepo_runtime.records.systemfields import (
 
 from nr_metadata.documents.records.dumpers.dumper import DocumentsDumper
 from nr_metadata.documents.records.models import DocumentsMetadata
+from nr_metadata.records.synthetic_fields import KeywordsFieldSelector
 
 
 class DocumentsIdProvider(RecordIdProviderV2):
@@ -37,7 +38,7 @@ class DocumentsRecord(InvenioRecord):
 
     people = SyntheticSystemField(
         PathSelector("metadata.creators", "metadata.contributors"),
-        filter=lambda x: x.get("type") == "personal",
+        filter=lambda x: x.get("nameType") == "Personal",
         map=lambda x: x.get("fullName"),
         key="syntheticFields.people",
     )
@@ -52,13 +53,27 @@ class DocumentsRecord(InvenioRecord):
     )
 
     keywords = SyntheticSystemField(
-        PathSelector("metadata.subjects.subject.value"),
+        selector=KeywordsFieldSelector("metadata.subjects.subject"),
         key="syntheticFields.keywords",
     )
 
     date = SyntheticSystemField(
         selector=FirstItemSelector("metadata.dateModified", "metadata.dateIssued"),
         key="syntheticFields.date",
+    )
+
+    year = SyntheticSystemField(
+        selector=FirstItemSelector("metadata.dateModified", "metadata.dateIssued"),
+        key="syntheticFields.year",
+        filter=lambda x: len(x) >= 4,
+        map=lambda x: x[:4],
+    )
+
+    defenseYear = SyntheticSystemField(
+        selector=PathSelector("metadata.thesis.dateDefended"),
+        key="syntheticFields.defenseYear",
+        filter=lambda x: len(x) >= 4,
+        map=lambda x: x[:4],
     )
 
     relations = RelationsField(

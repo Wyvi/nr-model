@@ -83,11 +83,12 @@ DocumentModel:
       - import: oarepo_runtime.records.systemfields.SyntheticSystemField
       - import: oarepo_runtime.records.systemfields.PathSelector
       - import: oarepo_runtime.records.systemfields.FirstItemSelector
+      - import: nr_metadata.records.synthetic_fields.KeywordsFieldSelector
     fields:
       people: |
         SyntheticSystemField(
             PathSelector("metadata.creators", "metadata.contributors"),
-            filter=lambda x: x.get("type") == "personal",
+            filter=lambda x: x.get("nameType") == "Personal",
             map=lambda x: x.get("fullName"),
             key="syntheticFields.people",
         )
@@ -101,7 +102,7 @@ DocumentModel:
         )
       keywords: |
         SyntheticSystemField(
-            PathSelector("metadata.subjects.subject.value"),
+            selector=KeywordsFieldSelector("metadata.subjects.subject"),
             key="syntheticFields.keywords",
         )
       date: |
@@ -109,6 +110,21 @@ DocumentModel:
             selector=FirstItemSelector("metadata.dateModified", "metadata.dateIssued"),
             key="syntheticFields.date",
         )
+      year: |
+        SyntheticSystemField(
+            selector=FirstItemSelector("metadata.dateModified", "metadata.dateIssued"),
+            key="syntheticFields.year",
+            filter=lambda x: len(x) >= 4,
+            map=lambda x: x[:4]
+        )
+      defenseYear: |
+        SyntheticSystemField(
+            selector=PathSelector("metadata.thesis.dateDefended"),
+            key="syntheticFields.defenseYear",
+            filter=lambda x: len(x) >= 4,
+            map=lambda x: x[:4]
+        )
+
 
   properties:
     syntheticFields:
@@ -129,19 +145,77 @@ DocumentModel:
           label.cs: Instituce
           label.en: Institutions
         keywords:
-          type: keyword
+          type: object
           marshmallow:
             read: false
             write: false
+            generate: false
+          ui:
+            marshmallow:
+              read: false
+              write: false
+              generate: false
           label.cs: Klíčová slova
           label.en: Keywords
+          facets:
+            facet-class: nr_metadata.services.records.facets.KeywordsFacet
+            facet: true
+          properties:
+            cs[]:
+              type: keyword
+              facets:
+                facet: false
+              marshmallow:
+                read: false
+                write: false
+              ui:
+                marshmallow:
+                  read: false
+                  write: false
+            en[]:
+              type: keyword
+              facets:
+                facet: false
+              marshmallow:
+                read: false
+                write: false
+              ui:
+                marshmallow:
+                  read: false
+                  write: false
         date:
-          type: date
+          type: edtf
           marshmallow:
             read: false
             write: false
           label.cs: Datum poslední změny
           label.en: Updated date
+        year:
+          type: edtf
+          marshmallow:
+            read: false
+            write: false
+          ui:
+            marshmallow:
+              read: false
+              write: false
+          label.cs: Rok poslední změny
+          label.en: Updated year
+          facets:
+            facet-class: oarepo_runtime.services.facets.year_histogram.YearAutoHistogramFacet
+        defenseYear:
+          type: edtf
+          marshmallow:
+            read: false
+            write: false
+          ui:
+            marshmallow:
+              read: false
+              write: false
+          label.cs: Rok obhajoby
+          label.en: Defense year
+          facets:
+            facet-class: oarepo_runtime.services.facets.year_histogram.YearAutoHistogramFacet
       marshmallow:
         class: nr_metadata.documents.services.records.schema.NRDocumentSyntheticFieldsSchema
       ui:

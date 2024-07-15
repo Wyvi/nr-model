@@ -2,11 +2,7 @@ import marshmallow as ma
 from marshmallow import fields as ma_fields
 from marshmallow.fields import String
 from oarepo_runtime.services.schema.marshmallow import DictOnlySchema
-from oarepo_runtime.services.schema.ui import (
-    InvenioUISchema,
-    LocalizedDate,
-    LocalizedEDTF,
-)
+from oarepo_runtime.services.schema.ui import InvenioUISchema, LocalizedEDTF
 from oarepo_vocabularies.services.ui_schema import (
     HierarchyUISchema,
     VocabularyI18nStrUIField,
@@ -84,11 +80,9 @@ class NRDocumentSyntheticFieldsUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
-    date = LocalizedDate()
+    date = LocalizedEDTF()
 
     institutions = ma_fields.Nested(lambda: InstitutionsUISchema())
-
-    keywords = ma_fields.String()
 
     people = ma_fields.String()
 
@@ -117,6 +111,11 @@ class InstitutionsUISchema(DictOnlySchema):
     hierarchy = ma_fields.Nested(lambda: HierarchyUISchema())
 
     title = VocabularyI18nStrUIField()
+
+
+class KeywordsUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
 
 
 class NRDegreeGrantorUISchema(DictOnlySchema):

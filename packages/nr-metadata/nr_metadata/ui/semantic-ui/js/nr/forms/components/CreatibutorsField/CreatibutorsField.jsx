@@ -14,7 +14,6 @@ import _get from "lodash/get";
 import { FieldLabel } from "react-invenio-forms";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
-
 import { CreatibutorsModal } from "./CreatibutorsModal";
 import { CreatibutorsFieldItem } from "./CreatibutorsFieldItem";
 import { i18next } from "@translations/nr/i18next";
@@ -59,7 +58,7 @@ class CreatibutorsFieldForm extends Component {
       error || (creatibutorsList === formikInitialValues && initialError);
 
     return (
-      <DndProvider backend={HTML5Backend}>
+      <DndProvider context={window} backend={HTML5Backend}>
         <Form.Field
           required={required}
           className={creatibutorsError ? "error" : ""}
@@ -94,6 +93,7 @@ class CreatibutorsFieldForm extends Component {
               );
             })}
             <CreatibutorsModal
+              key="add-creatibutor-modal"
               onCreatibutorChange={this.handleOnContributorChange}
               initialAction="add"
               addLabel={modal.addLabel}
@@ -108,7 +108,7 @@ class CreatibutorsFieldForm extends Component {
                   type="button"
                   icon
                   labelPosition="left"
-                  className="array-field-add-button"
+                  className="array-field-add-button inline-block"
                 >
                   <Icon name="add" />
                   {addButtonLabel}
@@ -134,7 +134,7 @@ export class CreatibutorsField extends Component {
     return (
       <FieldArray
         name={fieldPath}
-        component={(formikProps) => (
+        render={(formikProps) => (
           <CreatibutorsFieldForm {...formikProps} {...this.props} />
         )}
       />
