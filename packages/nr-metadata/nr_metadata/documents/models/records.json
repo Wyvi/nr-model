@@ -7104,6 +7104,10 @@
                             "read": false,
                             "write": false
                         },
+                        "facets": {
+                            "facet-class": "nr_metadata.services.records.facets.KeywordsFacet",
+                            "facet": true
+                        },
                         "label.cs": "Klíčová slova",
                         "label.en": "Keywords"
                     },

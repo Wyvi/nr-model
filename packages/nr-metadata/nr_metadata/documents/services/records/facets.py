@@ -10,6 +10,8 @@ from oarepo_vocabularies.services.facets import (
     VocabularyFacet,
 )
 
+from nr_metadata.services.records.facets import KeywordsFacet
+
 metadata_abstract_cs = TermsFacet(
     field="metadata.abstract.cs.keyword", label=_("metadata/abstract.label")
 )
@@ -488,7 +490,7 @@ syntheticFields_institutions = HierarchyVocabularyFacet(
     vocabulary="institutions",
 )
 
-syntheticFields_keywords = TermsFacet(
+syntheticFields_keywords = KeywordsFacet(
     field="syntheticFields.keywords", label=_("syntheticFields/keywords.label")
 )
 
