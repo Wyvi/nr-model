@@ -1196,6 +1196,26 @@
                     }
                 }
             },
+            "pid": {
+                "type": "object",
+                "properties": {
+                    "obj_type": {
+                        "type": "keyword",
+                        "ignore_above": 1024
+                    },
+                    "pid_type": {
+                        "type": "keyword",
+                        "ignore_above": 1024
+                    },
+                    "pk": {
+                        "type": "integer"
+                    },
+                    "status": {
+                        "type": "keyword",
+                        "ignore_above": 1024
+                    }
+                }
+            },
             "syntheticFields": {
                 "type": "object",
                 "properties": {
@@ -1204,7 +1224,8 @@
                         "format": "strict_date||yyyy-MM||yyyy"
                     },
                     "defenseYear": {
-                        "type": "integer"
+                        "type": "date",
+                        "format": "strict_date||yyyy-MM||yyyy"
                     },
                     "institutions": {
                         "type": "object",
@@ -1267,7 +1288,8 @@
                         "ignore_above": 1024
                     },
                     "year": {
-                        "type": "integer"
+                        "type": "date",
+                        "format": "strict_date||yyyy-MM||yyyy"
                     }
                 }
             },
