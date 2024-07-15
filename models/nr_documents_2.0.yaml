@@ -151,6 +151,9 @@ DocumentModel:
             write: false
           label.cs: Klíčová slova
           label.en: Keywords
+          facets:
+            facet-class: nr_metadata.services.records.facets.KeywordsFacet
+            facet: true
         date:
           type: edtf
           marshmallow:
