@@ -83,6 +83,7 @@ DocumentModel:
       - import: oarepo_runtime.records.systemfields.SyntheticSystemField
       - import: oarepo_runtime.records.systemfields.PathSelector
       - import: oarepo_runtime.records.systemfields.FirstItemSelector
+      - import: nr_metadata.records.synthetic_fields.KeywordsFieldSelector
     fields:
       people: |
         SyntheticSystemField(
@@ -101,7 +102,7 @@ DocumentModel:
         )
       keywords: |
         SyntheticSystemField(
-            PathSelector("metadata.subjects.subject.value"),
+            selector=KeywordsFieldSelector("metadata.subjects.subject"),
             key="syntheticFields.keywords",
         )
       date: |
@@ -113,14 +114,14 @@ DocumentModel:
         SyntheticSystemField(
             selector=FirstItemSelector("metadata.dateModified", "metadata.dateIssued"),
             key="syntheticFields.year",
-            filter=lambda x: len(x) >= 10,
+            filter=lambda x: len(x) >= 4,
             map=lambda x: x[:4]
         )
       defenseYear: |
         SyntheticSystemField(
             selector=PathSelector("metadata.thesis.dateDefended"),
             key="syntheticFields.defenseYear",
-            filter=lambda x: len(x) >= 10,
+            filter=lambda x: len(x) >= 4,
             map=lambda x: x[:4]
         )
 
@@ -158,19 +159,31 @@ DocumentModel:
           label.cs: Datum poslední změny
           label.en: Updated date
         year:
-          type: integer
+          type: edtf
           marshmallow:
             read: false
             write: false
+          ui:
+            marshmallow:
+              read: false
+              write: false
           label.cs: Rok poslední změny
           label.en: Updated year
+          facets:
+            facet-class: oarepo_runtime.services.facets.year_histogram.YearAutoHistogramFacet
         defenseYear:
-          type: integer
+          type: edtf
           marshmallow:
+            read: false
+            write: false
+          ui:
+            marshmallow:
               read: false
               write: false
           label.cs: Rok obhajoby
           label.en: Defense year
+          facets:
+            facet-class: oarepo_runtime.services.facets.year_histogram.YearAutoHistogramFacet
       marshmallow:
         class: nr_metadata.documents.services.records.schema.NRDocumentSyntheticFieldsSchema
       ui:

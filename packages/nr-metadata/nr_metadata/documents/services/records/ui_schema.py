@@ -82,15 +82,11 @@ class NRDocumentSyntheticFieldsUISchema(DictOnlySchema):
 
     date = LocalizedEDTF()
 
-    defenseYear = ma_fields.Integer()
-
     institutions = ma_fields.Nested(lambda: InstitutionsUISchema())
 
     keywords = ma_fields.String()
 
     people = ma_fields.String()
-
-    year = ma_fields.Integer()
 
 
 class NRThesisUISchema(DictOnlySchema):
