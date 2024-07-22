@@ -62,7 +62,7 @@ CommonMetadata:
       use: "nr-datatypes#NRResourceType"
       required: true
       hint.cs: Vyberte typ zdroje.
-      hint.en: Choose the resource type.
+      hint.en: Choose resource type.
 
     dateAvailable:
       # The date the resource is publicly available in a repository.
@@ -92,7 +92,7 @@ CommonMetadata:
       ^label.cs: "Klíčová slova"
       ^label.en: "Keywords"
       ^help.cs: Zapisujte slova popisující zdroj, zvolte vždy jazyk.
-      ^help.en: Write down words describing the resource, always choose the language.
+      ^help.en: Write down words describing the resource, always choose language.
       #^uniqueItems: true
       ^ui:
         marshmallow:
@@ -203,8 +203,8 @@ CommonMetadata:
       use: "nr-datatypes#NRSeries"
       ^label.cs: Edice
       ^label.en: Series
-      ^help.cs: Zapište název edice/série. Zapište svazek edice/série, pokud je název uveden.
-      ^help.en: Write down the name of the series/edition. Write down the volume of the series/edition if the name is provided.
+      ^help.cs: "Zapište název edice/série. Zapište svazek edice/série, pokud je název uveden."
+      ^help.en: "Write down the name of the series/edition. Write down the volume of the series/edition if the name is provided."
 
     originalRecord:
       # pro harvest

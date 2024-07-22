@@ -16,7 +16,7 @@ NRPerson:
       type: keyword
       required: true
       label.cs: Jméno autora
-      label.en: Author name
+      label.en: "Author's name"
       sample:
         faker: name
     givenName:
@@ -24,19 +24,19 @@ NRPerson:
       label.cs: Jméno
       label.en: Name
       hint.cs: Napište jméno autora.
-      hint.en: Write the author's name.
+      hint.en: "Write the author's name."
     familyName:
       label.cs: Příjmení
       label.en: Last name
       hint.cs: Napište příjmení autora.
-      hint.en: Write the author's last name.
+      hint.en: "Write the author's last name."
       type: keyword
     authorityIdentifiers[]:
       use: "nr-datatypes#NRPersonIdentifier"
       ^label.cs: Identifikátor osoby
       ^label.en: Person identifier
-      ^help.cs: Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816).
-      ^help.en: Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816).
+      ^help.cs: "Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816)."
+      ^help.en: "Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
     affiliations[]:
       type: taxonomy
       vocabulary-type: institutions
@@ -102,8 +102,8 @@ NRPersonIdentifier:
       i18n.key: identifier
       label.cs: Identifikátor
       label.en: Identifier
-      hint.cs: např https://orcid.org/0009-0004-8646-7185 pro ORCID.
-      hint.en: e.g. https://orcid.org/0009-0004-8646-7185 for ORCID.
+      hint.cs: "např https://orcid.org/0009-0004-8646-7185 pro ORCID."
+      hint.en: "e.g. https://orcid.org/0009-0004-8646-7185 for ORCID."
 
     scheme:
       type: keyword
@@ -216,18 +216,18 @@ NRContributor:
         fullName:
           type: keyword
           label.cs: Jméno přispěvatele
-          label.en: Contributor name
+          label.en: "Contributor's name"
         givenName:
           type: keyword
           label.cs: Jméno
           label.en: Name
           hint.cs: Napište jméno přispěvatele.
-          hint.en: Write the contributor's name.
+          hint.en: "Write the contributor's name."
         familyName:
           label.cs: Příjmení
           label.en: Last name
           hint.cs: Napište příjmení přispěvatele.
-          hint.en: Write the contributor's last name.
+          hint.en: "Write the contributor's last name."
     Organizational:
       ui:
         detail: nr_contributor_organization
@@ -241,7 +241,7 @@ NRContributor:
         fullName:
           type: keyword
           label.cs: Jméno přispěvatele
-          label.en: Contributor name
+          label.en: "Contributor's name"
 
   ui:
     detail: contributor
@@ -262,8 +262,8 @@ NRObjectPID:
         faker: isbn13
       label.cs: Identifikátor objektu
       label.en: Object identifier
-      hint.cs: např. 10.1086/679716 pro DOI.
-      hint.en: e.g. 10.1086/679716 for DOI.
+      hint.cs: "např. 10.1086/679716 pro DOI."
+      hint.en: "e.g. 10.1086/679716 for DOI."
     scheme:
       type: keyword
       required: true
@@ -733,8 +733,8 @@ NRAccessRights:
   sample: [open, embargoed, restricted, "metadata only"]
   label.cs: Přístupová práva
   label.en: Access rights
-  hint.cs: Vyberte typ přístupu, zda bude zdroj dostupný otevřeně nebo s omezením.
-  hint.en: Choose access type - if the resource is open or has some restrictions.
+  hint.cs: "Vyberte typ přístupu, zda bude zdroj dostupný otevřeně nebo s omezením."
+  hint.en: "Choose access type - if the resource is open or has some restrictions."
   ui:
     marshmallow:
       class: nr_metadata.common.services.records.ui_schema_datatypes.NRAccessRightsVocabularyUISchema
@@ -772,6 +772,8 @@ NRExternalLocation:
   $id: NRExternalLocation
   label.cs: Externí umístění
   label.en: External location
+  help.cs: "Vložte URL odkaz dalšího umístění zdroje (př. jiný repozitář, databáze, webová stránka)."
+  help.en: "Provide the URL link for another location of the resource (e.g. another repository, database, website)."
   # externí umístění dokumentu (mimo repozitáře), formát URL
   ui:
     detail: external_location
