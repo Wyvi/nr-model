@@ -314,10 +314,12 @@ export const CreatibutorsModal = ({
 
   const openModal = () => {
     setOpen(true);
+    setAction(initialAction);
   };
 
   const closeModal = () => {
     setOpen(false);
+    setAction(initialAction);
   };
 
   const changeContent = () => {
@@ -328,7 +330,8 @@ export const CreatibutorsModal = ({
     }, 2000);
   };
 
-  const displayActionLabel = action === ModalActions.ADD ? addLabel : editLabel;
+  const displayActionLabel =
+    initialAction === ModalActions.ADD ? addLabel : editLabel;
 
   const onSubmit = (values, formikBag) => {
     const isPerson = _get(values, typeFieldPath) === CREATIBUTOR_TYPE.PERSON;
@@ -433,7 +436,7 @@ export const CreatibutorsModal = ({
           >
             <Modal.Header as="h6" className="pt-10 pb-10">
               <Grid>
-                <Grid.Column floated="left" width={4}>
+                <Grid.Column floated="left">
                   <Header as="h2">
                     <ActionLabel />
                   </Header>
@@ -666,7 +669,7 @@ export const CreatibutorsModal = ({
                 content={i18next.t("Cancel")}
                 floated="left"
               />
-              {action === ModalActions.ADD && (
+              {initialAction === ModalActions.ADD && (
                 <Button
                   name="submit"
                   type="submit"

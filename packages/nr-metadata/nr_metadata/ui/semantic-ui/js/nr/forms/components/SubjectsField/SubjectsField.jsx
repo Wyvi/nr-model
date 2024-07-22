@@ -74,7 +74,7 @@ export const SubjectsField = ({ fieldPath }) => {
           fieldPath={fieldPath}
           trigger={
             <Form.Button
-              className="array-field-add-button"
+              className="array-field-add-button rel-mt-1"
               type="button"
               icon
               labelPosition="left"

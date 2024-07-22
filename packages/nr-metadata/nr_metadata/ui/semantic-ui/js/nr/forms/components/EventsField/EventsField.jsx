@@ -7,29 +7,22 @@ import { StringArrayField } from "../StringArray/StringArrayField";
 import {
   ArrayFieldItem,
   EDTFDaterangePicker,
-  sanitizeInput,
+  useSanitizeInput,
   useFieldData,
 } from "@js/oarepo_ui";
 import { useFormikContext, getIn } from "formik";
 
-export const EventsField = ({
-  fieldPath,
-  helpText,
-  validTags,
-  label,
-  useModelData,
-  addButtonLabel,
-}) => {
+export const EventsField = ({ fieldPath, helpText }) => {
   const { values, setFieldValue, setFieldTouched } = useFormikContext();
+
+  const { sanitizeInput } = useSanitizeInput();
   const { getFieldData } = useFieldData();
 
   return (
     <ArrayField
-      addButtonLabel={addButtonLabel}
       fieldPath={fieldPath}
-      label={label}
       helpText={helpText}
-      {...(useModelData ? getFieldData(fieldPath).fullRepresentation : {})}
+      {...getFieldData(fieldPath).fullRepresentation}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
@@ -45,14 +38,11 @@ export const EventsField = ({
               width={16}
               fieldPath={`${fieldPathPrefix}.eventNameOriginal`}
               required
-              {...(useModelData
-                ? getFieldData(`${fieldPathPrefix}.eventNameOriginal`)
-                    .compactRepresentation
-                : {})}
+              {...getFieldData(`${fieldPathPrefix}.eventNameOriginal`)
+                .compactRepresentation}
               onBlur={() => {
                 const cleanedContent = sanitizeInput(
-                  getIn(values, `${fieldPathPrefix}.eventNameOriginal`),
-                  validTags
+                  getIn(values, `${fieldPathPrefix}.eventNameOriginal`)
                 );
                 setFieldValue(
                   `${fieldPathPrefix}.eventNameOriginal`,
@@ -64,18 +54,14 @@ export const EventsField = ({
             <StringArrayField
               width={16}
               fieldPath={`${fieldPathPrefix}.eventNameAlternate`}
-              {...(useModelData
-                ? getFieldData(`${fieldPathPrefix}.eventNameAlternate`)
-                    .compactRepresentation
-                : {})}
+              {...getFieldData(`${fieldPathPrefix}.eventNameAlternate`)
+                .compactRepresentation}
             />
             <EDTFDaterangePicker
               required
               fieldPath={`${fieldPathPrefix}.eventDate`}
-              {...(useModelData
-                ? getFieldData(`${fieldPathPrefix}.eventDate`, "calendar")
-                    .fullRepresentation
-                : {})}
+              {...getFieldData(`${fieldPathPrefix}.eventDate`, "calendar")
+                .fullRepresentation}
             />
             <GroupField>
               <TextField
@@ -91,10 +77,8 @@ export const EventsField = ({
                 fieldPath={`${fieldPathPrefix}.eventLocation.country`}
                 optionsListName="countries"
                 clearable
-                {...(useModelData
-                  ? getFieldData(`${fieldPathPrefix}.eventLocation.country`)
-                      .compactRepresentation
-                  : {})}
+                {...getFieldData(`${fieldPathPrefix}.eventLocation.country`)
+                  .compactRepresentation}
               />
             </GroupField>
           </ArrayFieldItem>

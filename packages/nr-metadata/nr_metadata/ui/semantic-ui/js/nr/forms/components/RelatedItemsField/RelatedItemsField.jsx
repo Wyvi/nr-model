@@ -66,7 +66,7 @@ class RelatedItemsFieldForm extends Component {
 
     return (
       <FieldDataProvider fieldPathPrefix={fieldPathPrefix}>
-        <DndProvider backend={HTML5Backend}>
+        <DndProvider context={window} backend={HTML5Backend}>
           <Form.Field
             required={required}
             className={relatedItemsError ? "error" : ""}
@@ -93,6 +93,7 @@ class RelatedItemsFieldForm extends Component {
                 );
               })}
               <RelatedItemsModal
+                key="add-related-item-modal"
                 onRelatedItemChange={this.handleRelatedItemChange}
                 initialAction="add"
                 addLabel={modal.addLabel}
@@ -102,7 +103,7 @@ class RelatedItemsFieldForm extends Component {
                     type="button"
                     icon
                     labelPosition="left"
-                    className="array-field-add-button"
+                    className="array-field-add-button inline-block"
                   >
                     <Icon name="add" />
                     {addButtonLabel}
@@ -110,6 +111,7 @@ class RelatedItemsFieldForm extends Component {
                 }
                 validTags={validTags}
               />
+
               {relatedItemsError && typeof relatedItemsError == "string" && (
                 <Label pointing="left" prompt>
                   {relatedItemsError}
@@ -130,7 +132,7 @@ export class RelatedItemsField extends Component {
     return (
       <FieldArray
         name={fieldPath}
-        component={(formikProps) => (
+        render={(formikProps) => (
           <RelatedItemsFieldForm {...formikProps} {...this.props} />
         )}
       />

@@ -93,7 +93,7 @@ export const CreatibutorsFieldItem = ({
       >
         <List.Content floated="right">
           <CreatibutorsModal
-            key={compKey}
+            key={`edit-creatibutor-modal-${index}`}
             addLabel={addLabel}
             editLabel={editLabel}
             onCreatibutorChange={(selectedCreatibutor) => {

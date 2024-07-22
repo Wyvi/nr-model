@@ -61,7 +61,7 @@ class CreatibutorsFieldForm extends Component {
 
     return (
       <FieldDataProvider fieldPathPrefix={fieldPathPrefix}>
-        <DndProvider backend={HTML5Backend}>
+        <DndProvider context={window} backend={HTML5Backend}>
           <Form.Field
             required={required}
             className={creatibutorsError ? "error" : ""}
@@ -96,6 +96,7 @@ class CreatibutorsFieldForm extends Component {
                 );
               })}
               <CreatibutorsModal
+                key="add-creatibutor-modal"
                 onCreatibutorChange={this.handleOnContributorChange}
                 initialAction="add"
                 addLabel={modal.addLabel}
@@ -110,7 +111,7 @@ class CreatibutorsFieldForm extends Component {
                     type="button"
                     icon
                     labelPosition="left"
-                    className="array-field-add-button"
+                    className="array-field-add-button inline-block"
                   >
                     <Icon name="add" />
                     {addButtonLabel}
@@ -137,7 +138,7 @@ export class CreatibutorsField extends Component {
     return (
       <FieldArray
         name={fieldPath}
-        component={(formikProps) => (
+        render={(formikProps) => (
           <CreatibutorsFieldForm {...formikProps} {...this.props} />
         )}
       />

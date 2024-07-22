@@ -24,9 +24,10 @@ import PropTypes from "prop-types";
 import {
   requiredMessage,
   handleValidateAndBlur,
-  sanitizeInput,
+  useSanitizeInput,
   useFieldData,
 } from "@js/oarepo_ui";
+import _isEmpty from "lodash/isEmpty";
 
 const RelatedItemsSchema = Yup.object({
   itemTitle: Yup.string().required(requiredMessage).label(i18next.t("Title")),
@@ -60,7 +61,6 @@ export const RelatedItemsModal = ({
   editLabel,
   onRelatedItemChange,
   trigger,
-  validTags,
 }) => {
   const [open, setOpen] = React.useState(false);
   const [action, setAction] = React.useState(initialAction);
@@ -68,12 +68,15 @@ export const RelatedItemsModal = ({
     i18next.t("Save and add another")
   );
   const { getFieldData } = useFieldData();
+  const { sanitizeInput } = useSanitizeInput();
 
   const openModal = () => {
     setOpen(true);
+    setAction(initialAction);
   };
   const closeModal = () => {
     setOpen(false);
+    setAction(initialAction);
   };
 
   const changeContent = () => {
@@ -85,7 +88,7 @@ export const RelatedItemsModal = ({
 
   const onSubmit = (values, formikBag) => {
     const fieldValue = getIn(values, "itemTitle");
-    const cleanedContent = sanitizeInput(fieldValue, validTags);
+    const cleanedContent = sanitizeInput(fieldValue);
     const updatedValues = { ...values, itemTitle: cleanedContent };
     onRelatedItemChange(updatedValues);
     formikBag.setSubmitting(false);
@@ -93,13 +96,11 @@ export const RelatedItemsModal = ({
     switch (action) {
       case "saveAndContinue":
         closeModal();
-        setAction(initialAction);
         openModal();
         changeContent();
         break;
       case "saveAndClose":
         closeModal();
-        setAction(initialAction);
         break;
       default:
         break;
@@ -108,7 +109,25 @@ export const RelatedItemsModal = ({
 
   return (
     <Formik
-      initialValues={initialRelatedItem || {}}
+      initialValues={
+        !_isEmpty(initialRelatedItem)
+          ? initialRelatedItem
+          : {
+              itemTitle: "",
+              itemCreators: [],
+              itemContributors: [],
+              itemPIDs: [],
+              itemURL: "",
+              itemYear: "",
+              itemVolume: "",
+              itemIssue: "",
+              itemStartPage: "",
+              itemEndPage: "",
+              itemPublisher: "",
+              itemRelationType: {},
+              itemResourceType: {},
+            }
+      }
       onSubmit={onSubmit}
       enableReinitialize
       validationSchema={RelatedItemsSchema}
@@ -145,7 +164,7 @@ export const RelatedItemsModal = ({
               <Grid>
                 <Grid.Column floated="left" width={8}>
                   <Header as="h2">
-                    {action === modalActions.ADD ? addLabel : editLabel}
+                    {initialAction === modalActions.ADD ? addLabel : editLabel}
                   </Header>
                 </Grid.Column>
               </Grid>
@@ -317,6 +336,7 @@ export const RelatedItemsModal = ({
                     }
                     placeholder={i18next.t("Select resource type")}
                     optionsListName="resource-types"
+                    showLeafsOnly
                     {...getFieldData("itemResourceType").compactRepresentation}
                   />
                 </GroupField>
@@ -334,7 +354,7 @@ export const RelatedItemsModal = ({
                 floated="left"
               />
 
-              {action === modalActions.ADD && (
+              {initialAction === modalActions.ADD && (
                 <Button
                   name="submit"
                   type="submit"
@@ -373,7 +393,6 @@ RelatedItemsModal.propTypes = {
   editLabel: PropTypes.string,
   onRelatedItemChange: PropTypes.func,
   trigger: PropTypes.node,
-  validTags: PropTypes.array,
 };
 
 RelatedItemsModal.defaultProps = {

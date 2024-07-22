@@ -7,7 +7,7 @@ import { Icon, Form } from "semantic-ui-react";
 import {
   ArrayFieldItem,
   useShowEmptyValue,
-  sanitizeInput,
+  useSanitizeInput,
 } from "@js/oarepo_ui";
 
 export const StringArrayField = ({
@@ -19,12 +19,12 @@ export const StringArrayField = ({
   helpText,
   labelIcon,
   showEmptyValue,
-  validTags,
   addButtonClassName,
   ...uiProps
 }) => {
   const { values, setFieldValue, setFieldTouched } = useFormikContext();
   useShowEmptyValue(fieldPath, defaultNewValue, showEmptyValue);
+  const { sanitizeInput } = useSanitizeInput();
 
   return (
     <Form.Field>
@@ -50,8 +50,7 @@ export const StringArrayField = ({
                     fluid
                     onBlur={() => {
                       const cleanedContent = sanitizeInput(
-                        getIn(values, indexPath),
-                        validTags
+                        getIn(values, indexPath)
                       );
                       setFieldValue(indexPath, cleanedContent);
                       setFieldTouched(indexPath, true);
@@ -90,7 +89,6 @@ StringArrayField.propTypes = {
   labelIcon: PropTypes.string,
   required: PropTypes.bool,
   showEmptyValue: PropTypes.bool,
-  validTags: PropTypes.array,
   addButtonClassName: PropTypes.string,
 };
 
