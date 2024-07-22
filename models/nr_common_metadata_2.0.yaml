@@ -16,11 +16,15 @@ CommonMetadata:
       required: true
       label.cs: Název
       label.en: Title
+      hint.cs: Vyplňte hlavní název zdroje.
+      hint.en: Fill in the main title of the resource.
 
     additionalTitles[]:
       # Additional titles of the object/work such as subtitle, translatedTitle and alternativeTitle.
       ^label.cs: Další názvy
       ^label.en: Additional titles
+      help.cs: Pokud má název další jazykovou variantu, vyplňte ji, zvolte typ názvu a příslušný jazyk, ve kterém je název zapsán.
+      help.en: If the title is given in other languages, choose the type of title and corresponding language.
       #^uniqueItems: true
       properties:
         title:
@@ -45,17 +49,17 @@ CommonMetadata:
       ^required: true
       ^label.cs: Autoři
       ^label.en: Authors
-      use: 'nr-datatypes#NRCreator'
+      use: "nr-datatypes#NRCreator"
 
     contributors[]:
-      use: 'nr-datatypes#NRContributor'
+      use: "nr-datatypes#NRContributor"
       ^label.cs: Přispěvatelé
       ^label.en: Contributors
       #^uniqueItems: true
 
     resourceType:
       # Taxonomy driven typology of objects that's possible to store in the repository
-      use: 'nr-datatypes#NRResourceType'
+      use: "nr-datatypes#NRResourceType"
       required: true
 
     dateAvailable:
@@ -70,17 +74,21 @@ CommonMetadata:
       label.en: Date available
 
     dateIssued:
-      use: 'nr-datatypes#NRDate'
+      use: "nr-datatypes#NRDate"
       sample:
         faker: date
       label.cs: Datum vydání
       label.en: Date issued
+      hint.cs: Zvolte z kalendáře datum, kdy byl zdroj vydan.
+      hint.en: Choose the issuance date from the calendar.
+      help.cs: Datum může být rok, rok a měsíc nebo celé datum.
+      help.en: The date can be a year, year and month or a full date.
 
     subjects[]:
       # subject by vocabularies or free-form keywords created by author(s)
-      use: 'nr-datatypes#NRSubject'
-      ^label.cs: 'Klíčová slova'
-      ^label.en: 'Keywords'
+      use: "nr-datatypes#NRSubject"
+      ^label.cs: "Klíčová slova"
+      ^label.en: "Keywords"
       #^uniqueItems: true
       ^ui:
         marshmallow:
@@ -88,14 +96,14 @@ CommonMetadata:
 
     subjectCategories[]:
       # FRASCATI oborové třídění - může sloužit jako podklad pro oborové filtrování
-      use: 'nr-datatypes#NRSubjectCategory'
+      use: "nr-datatypes#NRSubjectCategory"
       ^label.cs: Oborové třídění
       ^label.en: Subject categories
       #^uniqueItems: true
 
     languages[]:
       # ISO 639-2 B in slug, ISO 639-2 T in alias, ISO 639-1 as Alpha2.
-      use: 'nr-datatypes#NRLanguage'
+      use: "nr-datatypes#NRLanguage"
       ^label.cs: Jazyk
       ^label.en: Language
       #^uniqueItems: true
@@ -106,11 +114,15 @@ CommonMetadata:
       #^uniqueItems: true
       ^label.cs: Poznámky
       ^label.en: Notes
+      help.cs: Prostor pro další informace ke zdroji.
+      help.en: Space for additional information related to the resource.
 
     abstract:
       type: multilingual
       label.cs: Abstrakt
       label.en: Abstract
+      help.cs: Vyberte jazyk abstraktu a zapište nebo vložte text. Abstrakt můžete vložit ve více jazycích.
+      help.en: Choose abstract language and write down the text.Abstract can be provided in multiple languages.
 
     methods:
       type: multilingual
@@ -127,36 +139,38 @@ CommonMetadata:
 
     rights:
       # Any license or copyright information for this resource. Taxonomy field.
-      use: 'nr-datatypes#NRRights'
+      use: "nr-datatypes#NRRights"
       #^uniqueItems: true
 
     accessRights:
       # Taxonomy driven list of possible access to the document - open,
       # embargoed, restirected and metadata only access. Based on COAR
       # vocabulary - http://vocabularies.coar-repositories.org/documentation/access_rights/",
-      use: 'nr-datatypes#NRAccessRights'
+      use: "nr-datatypes#NRAccessRights"
 
     relatedItems[]:
-      use: 'nr-datatypes#NRRelatedItem'
+      use: "nr-datatypes#NRRelatedItem"
       #^uniqueItems: true
-      ^label.cs: 'Vazba na/z dalších zdrojů:'
-      ^label.en: 'Link to/from other resources:'
+      ^label.cs: "Vazba na/z dalších zdrojů:"
+      ^label.en: "Link to/from other resources:"
 
     fundingReferences[]:
-      use: 'nr-datatypes#NRFundingReference'
+      use: "nr-datatypes#NRFundingReference"
       #^uniqueItems: true
-      ^label.cs: 'Projekt nebo financování'
-      ^label.en: 'Funding'
+      ^label.cs: "Projekt nebo financování"
+      ^label.en: "Funding"
 
     version:
       # verze obsahu, nikoliv záznamu. hodnota ve formuláři není editovatelná.
       type: keyword
-      sample: ['1.0', '1.1', '2.0', '2.1', '2.2']
+      sample: ["1.0", "1.1", "2.0", "2.1", "2.2"]
       label.cs: Verze zdroje
       label.en: Resource version
+      hint.cs: Zapište verzi (první, druhá…).
+      hint.en: Write down the version (first, second…).
 
     geoLocations[]:
-      use: 'nr-datatypes#NRGeoLocation'
+      use: "nr-datatypes#NRGeoLocation"
       ^label.cs: Geolokace
       ^label.en: Geolocation
       #^uniqueItems: true
@@ -178,7 +192,7 @@ CommonMetadata:
       # edice; tématicky sdružuje podobné věci, nemusí se jednat o pravou edici,
       # ale tagování/grupování podobných záznamů
       #^uniqueItems: true
-      use: 'nr-datatypes#NRSeries'
+      use: "nr-datatypes#NRSeries"
       ^label.cs: Edice
       ^label.en: Series
 
@@ -194,7 +208,7 @@ CommonMetadata:
 
     objectIdentifiers[]:
       # Persistent identifier/s of object as ISBN, DOI, etc. + assigned by National Repository.
-      use: 'nr-datatypes#NRObjectPID'
+      use: "nr-datatypes#NRObjectPID"
       ^label.cs: Identifikátory objektu
       ^label.en: Object identifiers
       #^uniqueItems: true
@@ -202,13 +216,13 @@ CommonMetadata:
     systemIdentifiers[]:
       # pro harvest
       #^uniqueItems: true
-      use: 'nr-datatypes#NRSystemIdentifier'
+      use: "nr-datatypes#NRSystemIdentifier"
       ^label.cs: Systémové identifikátory
       ^label.en: System identifiers
 
     events[]:
       #^uniqueItems: true
-      use: 'nr-datatypes#NREvent'
+      use: "nr-datatypes#NREvent"
       ^label.cs: Události
       ^label.en: Events
 
@@ -223,4 +237,4 @@ CommonModel:
 
   properties:
     metadata:
-      use: ['nr-common-metadata#CommonMetadata']
+      use: ["nr-common-metadata#CommonMetadata"]
