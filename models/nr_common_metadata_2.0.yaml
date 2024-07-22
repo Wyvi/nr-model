@@ -23,8 +23,8 @@ CommonMetadata:
       # Additional titles of the object/work such as subtitle, translatedTitle and alternativeTitle.
       ^label.cs: Další názvy
       ^label.en: Additional titles
-      help.cs: Pokud má název další jazykovou variantu, vyplňte ji, zvolte typ názvu a příslušný jazyk, ve kterém je název zapsán.
-      help.en: If the title is given in other languages, choose the type of title and corresponding language.
+      ^help.cs: Pokud má název další jazykovou variantu, vyplňte ji, zvolte typ názvu a příslušný jazyk, ve kterém je název zapsán.
+      ^help.en: If the title is given in other languages, choose the type of title and corresponding language.
       #^uniqueItems: true
       properties:
         title:
@@ -61,6 +61,8 @@ CommonMetadata:
       # Taxonomy driven typology of objects that's possible to store in the repository
       use: "nr-datatypes#NRResourceType"
       required: true
+      hint.cs: Vyberte typ zdroje.
+      hint.en: Choose the resource type.
 
     dateAvailable:
       # The date the resource is publicly available in a repository.
@@ -89,6 +91,8 @@ CommonMetadata:
       use: "nr-datatypes#NRSubject"
       ^label.cs: "Klíčová slova"
       ^label.en: "Keywords"
+      ^help.cs: Zapisujte slova popisující zdroj, zvolte vždy jazyk.
+      ^help.en: Write down words describing the resource, always choose the language.
       #^uniqueItems: true
       ^ui:
         marshmallow:
@@ -99,6 +103,8 @@ CommonMetadata:
       use: "nr-datatypes#NRSubjectCategory"
       ^label.cs: Oborové třídění
       ^label.en: Subject categories
+      ^hint.cs: Vyberte název oboru.
+      ^hint.en: Choose subject category.
       #^uniqueItems: true
 
     languages[]:
@@ -114,8 +120,8 @@ CommonMetadata:
       #^uniqueItems: true
       ^label.cs: Poznámky
       ^label.en: Notes
-      help.cs: Prostor pro další informace ke zdroji.
-      help.en: Space for additional information related to the resource.
+      ^help.cs: Prostor pro další informace ke zdroji.
+      ^help.en: Space for additional information related to the resource.
 
     abstract:
       type: multilingual
@@ -153,6 +159,8 @@ CommonMetadata:
       #^uniqueItems: true
       ^label.cs: "Vazba na/z dalších zdrojů:"
       ^label.en: "Link to/from other resources:"
+      ^help.cs: Zapište informace o zdroji, který souvisí se zdrojem, který zde popisujete (např. pokud popisujete článek, sem můžete identifikovat časopis, ve kterém článek vyšel).
+.     ^help.en: Write down information about the resource related to the one you are describing here (e.g. if you are describing an article, you can identify the journal in which the article was published).
 
     fundingReferences[]:
       use: "nr-datatypes#NRFundingReference"
@@ -195,6 +203,8 @@ CommonMetadata:
       use: "nr-datatypes#NRSeries"
       ^label.cs: Edice
       ^label.en: Series
+      ^help.cs: Zapište název edice/série. Zapište svazek edice/série, pokud je název uveden.
+      ^help.en: Write down the name of the series/edition. Write down the volume of the series/edition if the name is provided.
 
     originalRecord:
       # pro harvest
@@ -209,8 +219,10 @@ CommonMetadata:
     objectIdentifiers[]:
       # Persistent identifier/s of object as ISBN, DOI, etc. + assigned by National Repository.
       use: "nr-datatypes#NRObjectPID"
-      ^label.cs: Identifikátory objektu
-      ^label.en: Object identifiers
+      ^label.cs: Identifikátor
+      ^label.en: Identifier
+      ^help.cs: Vyberte typ identifikátoru a zapište jej. Můžete zapsat více identifikátorů.
+      ^help.en: Choose the type of identifier and write it down. You can provide more identifiers.
       #^uniqueItems: true
 
     systemIdentifiers[]:
