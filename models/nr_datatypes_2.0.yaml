@@ -25,11 +25,13 @@ NRPerson:
       label.en: Name
       hint.cs: Napište jméno autora.
       hint.en: "Write the author's name."
+      required: true
     familyName:
       label.cs: Příjmení
       label.en: Last name
       hint.cs: Napište příjmení autora.
       hint.en: "Write the author's last name."
+      required: true
       type: keyword
     authorityIdentifiers[]:
       use: "nr-datatypes#NRPersonIdentifier"
@@ -223,11 +225,13 @@ NRContributor:
           label.en: Name
           hint.cs: Napište jméno přispěvatele.
           hint.en: "Write the contributor's name."
+          required: true
         familyName:
           label.cs: Příjmení
           label.en: Last name
           hint.cs: Napište příjmení přispěvatele.
           hint.en: "Write the contributor's last name."
+          required: true
     Organizational:
       ui:
         detail: nr_contributor_organization
@@ -348,6 +352,7 @@ NRContributorType:
   label.en: Contributor's type
   hint.cs: Vyberte z rolety roli přispěvatele (editor, ilustrátor…).
   hint.en: Choose the role of the contributor (editor, illustrator…).
+  required: true
   ui:
     marshmallow:
       class: nr_metadata.common.services.records.ui_schema_datatypes.NRContributorTypeVocabularyUISchema
