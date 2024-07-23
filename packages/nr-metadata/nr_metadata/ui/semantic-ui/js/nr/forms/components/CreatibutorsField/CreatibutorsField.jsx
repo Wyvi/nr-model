@@ -66,7 +66,7 @@ class CreatibutorsFieldForm extends Component {
             required={required}
             className={creatibutorsError ? "error" : ""}
           >
-            <FieldLabel htmlFor={fieldPath} icon={labelIcon} label={label} />
+            {label}
             <List>
               {creatibutorsList.map((value, index) => {
                 const key = `${fieldPath}.${index}`;

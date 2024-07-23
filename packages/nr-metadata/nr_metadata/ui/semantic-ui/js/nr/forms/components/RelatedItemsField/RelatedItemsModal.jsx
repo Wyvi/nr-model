@@ -174,24 +174,17 @@ export const RelatedItemsModal = ({
                 <TextField
                   autoComplete="off"
                   fieldPath="itemTitle"
-                  required
-                  label={
-                    <FieldLabel
-                      htmlFor={"itemTitle"}
-                      icon="pencil"
-                      label={i18next.t("Title")}
-                    />
-                  }
                   onBlur={() => handleBlur("itemTitle")}
                   {...getFieldData("itemTitle").fullRepresentation}
                 />
                 <CreatibutorsField
-                  label={i18next.t("Creators")}
-                  labelIcon="user"
+                  // label={i18next.t("Creators")}
+                  // labelIcon="user"
                   fieldPath="itemCreators"
                   schema="creators"
                   autocompleteNames="off"
-                  required={false}
+                  // required={false}
+                  {...getFieldData("itemCreators").fullRepresentation}
                   fieldPathPrefix="metadata.relatedItems.0.itemCreators.0"
                 />
                 <CreatibutorsField

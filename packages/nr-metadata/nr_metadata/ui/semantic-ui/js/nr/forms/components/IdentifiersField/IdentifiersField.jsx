@@ -45,7 +45,6 @@ export const IdentifiersValidationSchema = Yup.array().of(
       "Test if both identifier and identifier type are provided",
       i18next.t("Both identifier and identifier type must be filled."),
       (value, context) => {
-        console.log("test");
         if (!value && !context.parent.scheme) return true;
         return !(!value && context.parent.scheme);
       }
@@ -54,7 +53,6 @@ export const IdentifiersValidationSchema = Yup.array().of(
       "Test if both identifier and identifier type are provided",
       i18next.t("Both identifier and identifier type must be filled."),
       (value, context) => {
-        console.log("test");
         if (!value && !context.parent.identifier) return true;
         return !(!value && context.parent.identifier);
       }
@@ -63,13 +61,9 @@ export const IdentifiersValidationSchema = Yup.array().of(
 );
 export const IdentifiersField = ({
   fieldPath,
-  helpText,
+  labelIcon,
   options,
-  label,
-  identifierLabel,
   className,
-  identifierTypePlaceholder,
-  identifierPlaceholder,
   defaultNewValue,
   validateOnBlur,
   ...uiProps
@@ -83,16 +77,15 @@ export const IdentifiersField = ({
     <ArrayField
       addButtonLabel={i18next.t("Add identifier")}
       fieldPath={fieldPath}
-      label={label}
-      labelIcon="pencil"
-      helpText={helpText}
       className={className}
       defaultNewValue={defaultNewValue}
-      {...getFieldData(fieldPath, "pencil").fullRepresentation}
+      {...getFieldData(fieldPath, labelIcon).fullRepresentation}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
+        const schemeFieldPath = `${fieldPathPrefix}.scheme`;
+        const identifierFieldPath = `${fieldPathPrefix}.identifier`;
         return (
           <ArrayFieldItem
             indexPath={indexPath}
@@ -102,36 +95,28 @@ export const IdentifiersField = ({
             <SelectField
               clearable
               width={4}
-              fieldPath={`${fieldPathPrefix}.scheme`}
-              label={i18next.t("Identifier type")}
-              required
+              fieldPath={schemeFieldPath}
               options={options.filter(
                 (o) =>
                   !identifiers.map((i) => i.scheme).includes(o.value) ||
-                  o.value === getIn(values, `${fieldPathPrefix}.scheme`)
+                  o.value === getIn(values, schemeFieldPath)
               )}
               onBlur={
                 validateOnBlur
-                  ? () => handleValidateAndBlur(`${fieldPathPrefix}.scheme`)
-                  : () => setFieldTouched(`${fieldPathPrefix}.scheme`)
+                  ? () => handleValidateAndBlur(schemeFieldPath)
+                  : () => setFieldTouched(schemeFieldPath)
               }
-              placeholder={identifierTypePlaceholder}
               {...uiProps}
-              {...getFieldData(`${fieldPathPrefix}.scheme`)
-                .compactRepresentation}
+              {...getFieldData(schemeFieldPath).compactRepresentation}
             />
             <TextField
-              required
               width={12}
-              fieldPath={`${fieldPathPrefix}.identifier`}
-              placeholder={identifierPlaceholder}
-              label={identifierLabel}
-              {...getFieldData(`${fieldPathPrefix}.identifier`)
-                .compactRepresentation}
+              fieldPath={identifierFieldPath}
+              {...getFieldData(identifierFieldPath).compactRepresentation}
               onBlur={
                 validateOnBlur
-                  ? () => handleValidateAndBlur(`${fieldPathPrefix}.identifier`)
-                  : () => setFieldTouched(`${fieldPathPrefix}.identifier`)
+                  ? () => handleValidateAndBlur(identifierFieldPath)
+                  : () => setFieldTouched(identifierFieldPath)
               }
             />
           </ArrayFieldItem>
@@ -143,22 +128,15 @@ export const IdentifiersField = ({
 
 IdentifiersField.propTypes = {
   fieldPath: PropTypes.string.isRequired,
-  helpText: PropTypes.string,
+  labelIcon: PropTypes.string,
   options: PropTypes.array.isRequired,
-  label: PropTypes.string,
-  identifierLabel: PropTypes.string,
   className: PropTypes.string,
-  identifierTypePlaceholder: PropTypes.string,
-  identifierPlaceholder: PropTypes.string,
   defaultNewValue: PropTypes.object,
   validateOnBlur: PropTypes.bool,
 };
 
 IdentifiersField.defaultProps = {
-  label: i18next.t("Identifier field"),
-  identifierLabel: i18next.t("Identifier"),
-  identifierTypePlaceholder: i18next.t("e.g. ORCID, ISNI or ScopusID."),
-  identifierPlaceholder: i18next.t("e.g. 10.1086/679716 for a DOI"),
+  labelIcon: "pencil",
   defaultNewValue: { scheme: "", identifier: "" },
   validateOnBlur: false,
 };

@@ -22,11 +22,7 @@ export const AdditionalTitlesField = ({
   fieldPath,
   prefillLanguageWithDefaultLocale,
   defaultNewValue,
-  label,
-  required,
   addButtonLabel,
-  helpText,
-  useModelData,
 }) => {
   const { getFieldData } = useFieldData();
 
@@ -51,12 +47,9 @@ export const AdditionalTitlesField = ({
           ? getNewValue(initialValueObj)
           : defaultNewValue
       }
-      label={label}
-      required={required}
       fieldPath={fieldPath}
       className="additional-titles"
-      helpText={helpText}
-      {...(useModelData ? getFieldData(fieldPath).fullRepresentation : {})}
+      {...getFieldData(fieldPath).fullRepresentation}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
@@ -71,32 +64,18 @@ export const AdditionalTitlesField = ({
               <I18nTextInputField
                 fieldPath={`${fieldPathPrefix}.title`}
                 lngFieldWidth={5}
-                label={i18next.t("Title")}
-                required
-                {...(useModelData
-                  ? getFieldData(`${fieldPathPrefix}.title`)
-                      .compactRepresentation
-                  : {})}
               />
             </Form.Field>
             <Form.Field width={4}>
               <SelectField
                 selectOnBlur={false}
                 fieldPath={`${fieldPathPrefix}.titleType`}
-                label={
-                  <label htmlFor={`${fieldPathPrefix}.titleType`}>
-                    {i18next.t("Title type")}
-                  </label>
-                }
-                required
                 optimized
                 options={subtitleTypes}
                 clearable
                 width={16}
-                {...(useModelData
-                  ? getFieldData(`${fieldPathPrefix}.titleType`)
-                      .compactRepresentation
-                  : {})}
+                {...getFieldData(`${fieldPathPrefix}.titleType`)
+                  .compactRepresentation}
               />
             </Form.Field>
           </ArrayFieldItem>
@@ -111,10 +90,6 @@ AdditionalTitlesField.propTypes = {
   prefillLanguageWithDefaultLocale: PropTypes.bool,
   defaultNewValue: PropTypes.object,
   addButtonLabel: PropTypes.string,
-  label: PropTypes.string,
-  required: PropTypes.bool,
-  useModelData: PropTypes.bool,
-  helpText: PropTypes.string,
 };
 
 AdditionalTitlesField.defaultProps = {
@@ -126,8 +101,5 @@ AdditionalTitlesField.defaultProps = {
     },
     titleType: "",
   },
-  label: i18next.t("Additional titles"),
-  required: false,
   addButtonLabel: i18next.t("Add additional title"),
-  useModelData: true,
 };

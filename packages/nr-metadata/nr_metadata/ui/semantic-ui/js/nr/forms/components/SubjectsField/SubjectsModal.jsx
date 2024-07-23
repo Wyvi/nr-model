@@ -4,7 +4,11 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { i18next } from "@translations/nr/i18next";
 import PropTypes from "prop-types";
-import { MultilingualTextInput, requiredMessage } from "@js/oarepo_ui";
+import {
+  MultilingualTextInput,
+  requiredMessage,
+  FieldDataProvider,
+} from "@js/oarepo_ui";
 
 const SubjectsValidationSchema = Yup.object({
   keywords: Yup.array().of(
@@ -37,7 +41,7 @@ export const SubjectsModal = ({ trigger, handleSubjectAdd }) => {
   };
 
   const onSubmit = (values, formikBag) => {
-    const newSubject = { subjectScheme: "keyword", subject: values.keywords };
+    const newSubject = { subjectScheme: "keyword", subject: values.subject };
     handleSubjectAdd(newSubject);
     formikBag.setSubmitting(false);
     formikBag.resetForm();
@@ -101,15 +105,15 @@ export const SubjectsModal = ({ trigger, handleSubjectAdd }) => {
           <Modal.Content>
             <Form className="subjects-modal-fields">
               <Form.Field width={16}>
-                <MultilingualTextInput
-                  fieldPath="keywords"
-                  lngFieldWidth={3}
-                  textFieldLabel={i18next.t("Subject")}
-                  required
-                  showEmptyValue
-                  removeButtonLabelClassName="field-label-class invenio-field-label"
-                  displayFirstInputRemoveButton={false}
-                />
+                <FieldDataProvider fieldPathPrefix="metadata.subjects.0">
+                  <MultilingualTextInput
+                    fieldPath="subject"
+                    lngFieldWidth={3}
+                    showEmptyValue
+                    removeButtonLabelClassName="field-label-class invenio-field-label"
+                    displayFirstInputRemoveButton={false}
+                  />
+                </FieldDataProvider>
               </Form.Field>
             </Form>
           </Modal.Content>
