@@ -256,8 +256,6 @@ export const CreatibutorsModal = ({
   schema,
   onCreatibutorChange,
   trigger,
-  nameFieldPlaceholder,
-  lastNameFieldPlaceholder,
   nameTypeHelpText,
 }) => {
   const [open, setOpen] = useState(false);
@@ -517,7 +515,7 @@ export const CreatibutorsModal = ({
                           )
                         }
                         onValueChange={onPersonSearchChange}
-                        {...getFieldData(familyNameFieldPath)
+                        {...getFieldData({ fieldPath: familyNameFieldPath })
                           .compactRepresentation}
                       />
                     )}
@@ -526,13 +524,13 @@ export const CreatibutorsModal = ({
                         <Form.Group widths="equal">
                           <TextField
                             fieldPath={familyNameFieldPath}
-                            {...getFieldData(familyNameFieldPath)
+                            {...getFieldData({ fieldPath: familyNameFieldPath })
                               .fullRepresentation}
                             onBlur={() => handleBlur(familyNameFieldPath)}
                           />
                           <TextField
                             fieldPath={givenNameFieldPath}
-                            {...getFieldData(givenNameFieldPath)
+                            {...getFieldData({ fieldPath: givenNameFieldPath })
                               .fullRepresentation}
                             onBlur={() => handleBlur(givenNameFieldPath)}
                           />
@@ -558,7 +556,7 @@ export const CreatibutorsModal = ({
                           externalAuthority
                           multiple
                           clearable
-                          {...getFieldData(affiliationsFieldPath)
+                          {...getFieldData({ fieldPath: affiliationsFieldPath })
                             .fullRepresentation}
                         />
                       </div>
@@ -586,7 +584,8 @@ export const CreatibutorsModal = ({
                       deburr
                       required
                       onBlur={() => handleBlur(affiliationFullNameFieldPath)}
-                      {...getFieldData(fullNameFieldPath).fullRepresentation}
+                      {...getFieldData({ fieldPath: fullNameFieldPath })
+                        .fullRepresentation}
                     />
                   </div>
                 )}
@@ -597,7 +596,8 @@ export const CreatibutorsModal = ({
                     clearable
                     optionsListName="contributor-types"
                     onBlur={() => handleBlur(roleFieldPath)}
-                    {...getFieldData(roleFieldPath).fullRepresentation}
+                    {...getFieldData({ fieldPath: roleFieldPath })
+                      .fullRepresentation}
                   />
                 )}
               </Form>
@@ -665,8 +665,6 @@ CreatibutorsModal.propTypes = {
   schema: PropTypes.string,
   onCreatibutorChange: PropTypes.func.isRequired,
   trigger: PropTypes.node,
-  nameFieldPlaceholder: PropTypes.string,
-  lastNameFieldPlaceholder: PropTypes.string,
   nameTypeHelpText: PropTypes.string,
 };
 CreatibutorsModal.defaultProps = {

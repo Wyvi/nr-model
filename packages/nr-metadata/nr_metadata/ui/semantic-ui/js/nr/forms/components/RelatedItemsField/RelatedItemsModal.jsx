@@ -175,162 +175,101 @@ export const RelatedItemsModal = ({
                   autoComplete="off"
                   fieldPath="itemTitle"
                   onBlur={() => handleBlur("itemTitle")}
-                  {...getFieldData("itemTitle").fullRepresentation}
+                  {...getFieldData({ fieldPath: "itemTitle" })
+                    .fullRepresentation}
                 />
                 <CreatibutorsField
-                  // label={i18next.t("Creators")}
-                  // labelIcon="user"
                   fieldPath="itemCreators"
                   schema="creators"
                   autocompleteNames="off"
-                  // required={false}
-                  {...getFieldData("itemCreators").fullRepresentation}
+                  {...getFieldData({ fieldPath: "itemCreators" })
+                    .fullRepresentation}
                   fieldPathPrefix="metadata.relatedItems.0.itemCreators.0"
                 />
                 <CreatibutorsField
-                  label={i18next.t("Contributors")}
                   addButtonLabel={i18next.t("Add contributor")}
                   modal={{
                     addLabel: i18next.t("Add contributor"),
                     editLabel: i18next.t("Edit contributor"),
                   }}
-                  labelIcon="user"
                   fieldPath="itemContributors"
                   schema="contributors"
                   autocompleteNames="off"
                   fieldPathPrefix="metadata.relatedItems.0.itemContributors.0"
+                  {...getFieldData({
+                    fieldPath: "itemContributors",
+                    icon: "user",
+                  }).fullRepresentation}
                 />
 
                 <IdentifiersField
                   className="related-items-identifiers"
                   options={objectIdentifiersSchema}
                   fieldPath="itemPIDs"
-                  identifierLabel={i18next.t("Object identifier")}
-                  label={i18next.t("Identifier")}
-                  helpText={i18next.t(
-                    "Persistent identifier/s of object as ISBN, DOI, etc."
-                  )}
                   validateOnBlur
                 />
                 <TextField
                   autoComplete="off"
                   fieldPath="itemURL"
-                  label={
-                    <FieldLabel
-                      htmlFor={"itemURL"}
-                      icon="pencil"
-                      label={i18next.t("URL")}
-                    />
-                  }
                   onBlur={() => handleBlur("itemURL")}
-                  {...getFieldData("itemURL").fullRepresentation}
+                  {...getFieldData({ fieldPath: "itemURL" }).fullRepresentation}
                 />
                 <GroupField widths="equal">
                   <TextField
                     fieldPath="itemYear"
-                    label={
-                      <FieldLabel
-                        htmlFor={"itemYear"}
-                        icon="pencil"
-                        label={i18next.t("Year")}
-                      />
-                    }
                     onBlur={() => handleBlur("itemYear")}
-                    {...getFieldData("itemYear").compactRepresentation}
+                    {...getFieldData({ fieldPath: "itemYear" })
+                      .compactRepresentation}
                   />
                   <TextField
                     fieldPath="itemVolume"
-                    label={
-                      <FieldLabel
-                        htmlFor={"itemVolume"}
-                        icon="pencil"
-                        label={i18next.t("Volume")}
-                      />
-                    }
                     onBlur={() => handleBlur("itemVolume")}
-                    {...getFieldData("itemVolume").compactRepresentation}
+                    {...getFieldData({ fieldPath: "itemVolume" })
+                      .compactRepresentation}
                   />
                   <TextField
                     fieldPath="itemIssue"
-                    label={
-                      <FieldLabel
-                        htmlFor={"itemIssue"}
-                        icon="pencil"
-                        label={i18next.t("Issue")}
-                      />
-                    }
                     onBlur={() => handleBlur("itemIssue")}
-                    {...getFieldData("itemIssue").compactRepresentation}
+                    {...getFieldData({ fieldPath: "itemIssue" })
+                      .compactRepresentation}
                   />
                   <TextField
                     fieldPath="itemStartPage"
-                    label={
-                      <FieldLabel
-                        htmlFor={"itemStartPage"}
-                        icon="pencil"
-                        label={i18next.t("Start page")}
-                      />
-                    }
                     onBlur={() => handleBlur("itemStartPage")}
-                    {...getFieldData("itemStartPage").compactRepresentation}
+                    {...getFieldData({ fieldPath: "itemStartPage" })
+                      .compactRepresentation}
                   />
                   <TextField
                     fieldPath="itemEndPage"
-                    label={
-                      <FieldLabel
-                        htmlFor={"itemEndPage"}
-                        icon="pencil"
-                        label={i18next.t("End page")}
-                      />
-                    }
                     onBlur={() => handleBlur("itemEndPage")}
-                    {...getFieldData("itemEndPage").compactRepresentation}
+                    {...getFieldData({ fieldPath: "itemEndPage" })
+                      .compactRepresentation}
                   />
                 </GroupField>
                 <TextField
                   width={16}
                   fieldPath="itemPublisher"
-                  label={
-                    <FieldLabel
-                      htmlFor={"itemPublisher"}
-                      icon="pencil"
-                      label={i18next.t("Publisher")}
-                    />
-                  }
                   onBlur={() => handleBlur("itemPublisher")}
-                  {...getFieldData("itemPublisher").fullRepresentation}
+                  {...getFieldData({ fieldPath: "itemPublisher" })
+                    .fullRepresentation}
                 />
                 <GroupField>
                   <LocalVocabularySelectField
                     width={16}
                     fieldPath="itemRelationType"
-                    label={
-                      <FieldLabel
-                        htmlFor={"itemRelationType"}
-                        icon="pencil"
-                        label={i18next.t("Relation type")}
-                      />
-                    }
-                    placeholder={i18next.t("Choose relation type")}
                     clearable
                     optionsListName="item-relation-types"
-                    {...getFieldData("itemRelationType").compactRepresentation}
+                    {...getFieldData({ fieldPath: "itemRelationType" })
+                      .compactRepresentation}
                   />
                   <LocalVocabularySelectField
                     width={16}
                     fieldPath="itemResourceType"
                     clearable
-                    label={
-                      <FieldLabel
-                        htmlFor={"itemResourceType"}
-                        icon="tag"
-                        label={i18next.t("Resource type")}
-                      />
-                    }
-                    placeholder={i18next.t("Select resource type")}
                     optionsListName="resource-types"
                     showLeafsOnly
-                    {...getFieldData("itemResourceType").compactRepresentation}
+                    {...getFieldData({ fieldPath: "itemResourceType" })
+                      .compactRepresentation}
                   />
                 </GroupField>
               </Form>

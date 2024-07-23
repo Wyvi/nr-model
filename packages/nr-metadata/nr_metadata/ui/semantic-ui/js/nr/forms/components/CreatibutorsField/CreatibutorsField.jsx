@@ -11,7 +11,6 @@ import PropTypes from "prop-types";
 import { getIn, FieldArray } from "formik";
 import { Form, Label, List, Icon } from "semantic-ui-react";
 import _get from "lodash/get";
-import { FieldLabel } from "react-invenio-forms";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import { CreatibutorsModal } from "./CreatibutorsModal";
@@ -39,14 +38,11 @@ class CreatibutorsFieldForm extends Component {
       move: formikArrayMove,
       name: fieldPath,
       label,
-      labelIcon,
       schema,
       modal,
       required,
       autocompleteNames,
       addButtonLabel,
-      nameFieldPlaceholder,
-      lastNameFieldPlaceholder,
       nameTypeHelpText,
       fieldPathPrefix,
     } = this.props;
@@ -102,8 +98,6 @@ class CreatibutorsFieldForm extends Component {
                 addLabel={modal.addLabel}
                 editLabel={modal.editLabel}
                 schema={schema}
-                nameFieldPlaceholder={nameFieldPlaceholder}
-                lastNameFieldPlaceholder={lastNameFieldPlaceholder}
                 nameTypeHelpText={nameTypeHelpText}
                 autocompleteNames={autocompleteNames}
                 trigger={
@@ -155,7 +149,6 @@ CreatibutorsFieldForm.propTypes = {
   schema: PropTypes.oneOf(["creators", "contributors"]).isRequired,
   autocompleteNames: PropTypes.oneOf(["search", "search_only", "off"]),
   label: PropTypes.string,
-  labelIcon: PropTypes.string,
   form: PropTypes.object.isRequired,
   remove: PropTypes.func.isRequired,
   replace: PropTypes.func.isRequired,
@@ -163,8 +156,6 @@ CreatibutorsFieldForm.propTypes = {
   push: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   required: PropTypes.bool,
-  nameFieldPlaceholder: PropTypes.string,
-  lastNameFieldPlaceholder: PropTypes.string,
   nameTypeHelpText: PropTypes.string,
   fieldPathPrefix: PropTypes.string,
 };
@@ -172,7 +163,6 @@ CreatibutorsFieldForm.propTypes = {
 CreatibutorsFieldForm.defaultProps = {
   autocompleteNames: "search",
   label: i18next.t("Creators"),
-  labelIcon: "user",
   modal: {
     addLabel: i18next.t("Add creator"),
     editLabel: i18next.t("Edit creator"),
@@ -193,8 +183,6 @@ CreatibutorsField.propTypes = {
   label: PropTypes.string,
   labelIcon: PropTypes.string,
   required: PropTypes.bool,
-  nameFieldPlaceholder: PropTypes.string,
-  lastNameFieldPlaceholder: PropTypes.string,
   nameTypeHelpText: PropTypes.string,
   fieldPathPrefix: PropTypes.string,
 };
@@ -208,7 +196,5 @@ CreatibutorsField.defaultProps = {
     editLabel: i18next.t("Edit creator"),
   },
   addButtonLabel: i18next.t("Add creator"),
-  nameFieldPlaceholder: i18next.t("Write author's name."),
-  lastNameFieldPlaceholder: i18next.t("Write author's last name."),
   fieldPathPrefix: "",
 };

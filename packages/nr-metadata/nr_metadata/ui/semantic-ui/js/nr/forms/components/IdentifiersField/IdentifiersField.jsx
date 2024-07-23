@@ -79,7 +79,7 @@ export const IdentifiersField = ({
       fieldPath={fieldPath}
       className={className}
       defaultNewValue={defaultNewValue}
-      {...getFieldData(fieldPath, labelIcon).fullRepresentation}
+      {...getFieldData({ fieldPath, icon: labelIcon }).fullRepresentation}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
@@ -107,12 +107,14 @@ export const IdentifiersField = ({
                   : () => setFieldTouched(schemeFieldPath)
               }
               {...uiProps}
-              {...getFieldData(schemeFieldPath).compactRepresentation}
+              {...getFieldData({ fieldPath: schemeFieldPath })
+                .compactRepresentation}
             />
             <TextField
               width={12}
               fieldPath={identifierFieldPath}
-              {...getFieldData(identifierFieldPath).compactRepresentation}
+              {...getFieldData({ fieldPath: identifierFieldPath })
+                .compactRepresentation}
               onBlur={
                 validateOnBlur
                   ? () => handleValidateAndBlur(identifierFieldPath)

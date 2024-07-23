@@ -49,7 +49,7 @@ export const AdditionalTitlesField = ({
       }
       fieldPath={fieldPath}
       className="additional-titles"
-      {...getFieldData(fieldPath).fullRepresentation}
+      {...getFieldData({ fieldPath }).fullRepresentation}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
@@ -74,7 +74,7 @@ export const AdditionalTitlesField = ({
                 options={subtitleTypes}
                 clearable
                 width={16}
-                {...getFieldData(`${fieldPathPrefix}.titleType`)
+                {...getFieldData({ fieldPath: `${fieldPathPrefix}.titleType` })
                   .compactRepresentation}
               />
             </Form.Field>

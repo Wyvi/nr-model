@@ -13,7 +13,7 @@ export const FundersField = ({ fieldPath, addButtonLabel }) => {
       addButtonLabel={addButtonLabel}
       defaultNewValue={{}}
       fieldPath={fieldPath}
-      {...getFieldData(fieldPath).fullRepresentation}
+      {...getFieldData({ fieldPath }).fullRepresentation}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
@@ -28,22 +28,23 @@ export const FundersField = ({ fieldPath, addButtonLabel }) => {
             <TextField
               width={16}
               fieldPath={`${fieldPathPrefix}.projectID`}
-              {...getFieldData(`${fieldPathPrefix}.projectID`)
+              {...getFieldData({ fieldPath: `${fieldPathPrefix}.projectID` })
                 .compactRepresentation}
             />
             <TextField
               className="rel-mt-1"
               width={16}
               fieldPath={`${fieldPathPrefix}.projectName`}
-              {...getFieldData(`${fieldPathPrefix}.projectName`)
+              {...getFieldData({ fieldPath: `${fieldPathPrefix}.projectName` })
                 .compactRepresentation}
             />
             <TextField
               className="rel-mt-1"
               width={16}
               fieldPath={`${fieldPathPrefix}.fundingProgram`}
-              {...getFieldData(`${fieldPathPrefix}.fundingProgram`)
-                .compactRepresentation}
+              {...getFieldData({
+                fieldPath: `${fieldPathPrefix}.fundingProgram`,
+              }).compactRepresentation}
             />
             <LocalVocabularySelectField
               className="rel-mt-1"
@@ -51,7 +52,7 @@ export const FundersField = ({ fieldPath, addButtonLabel }) => {
               fieldPath={`${fieldPathPrefix}.funder`}
               optionsListName="funders"
               clearable
-              {...getFieldData(`${fieldPathPrefix}.funder`)
+              {...getFieldData({ fieldPath: `${fieldPathPrefix}.funder` })
                 .compactRepresentation}
             />
           </ArrayFieldItem>

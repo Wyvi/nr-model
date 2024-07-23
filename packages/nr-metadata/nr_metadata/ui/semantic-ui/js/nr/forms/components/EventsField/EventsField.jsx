@@ -19,7 +19,7 @@ export const EventsField = ({ fieldPath }) => {
   return (
     <ArrayField
       fieldPath={fieldPath}
-      {...getFieldData(fieldPath).fullRepresentation}
+      {...getFieldData({ fieldPath }).fullRepresentation}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
@@ -36,7 +36,7 @@ export const EventsField = ({ fieldPath }) => {
             <TextField
               width={16}
               fieldPath={eventNameOriginalFieldPath}
-              {...getFieldData(eventNameOriginalFieldPath)
+              {...getFieldData({ fieldPath: eventNameOriginalFieldPath })
                 .compactRepresentation}
               onBlur={() => {
                 const cleanedContent = sanitizeInput(
@@ -49,20 +49,24 @@ export const EventsField = ({ fieldPath }) => {
             <StringArrayField
               width={16}
               fieldPath={`${fieldPathPrefix}.eventNameAlternate`}
-              {...getFieldData(`${fieldPathPrefix}.eventNameAlternate`)
-                .compactRepresentation}
+              {...getFieldData({
+                fieldPath: `${fieldPathPrefix}.eventNameAlternate`,
+              }).compactRepresentation}
             />
             <EDTFDaterangePicker
               fieldPath={`${fieldPathPrefix}.eventDate`}
-              {...getFieldData(`${fieldPathPrefix}.eventDate`, "calendar")
-                .fullRepresentation}
+              {...getFieldData({
+                fieldPath: `${fieldPathPrefix}.eventDate`,
+                icon: "calendar",
+              }).fullRepresentation}
             />
             <GroupField>
               <TextField
                 width={10}
                 fieldPath={`${fieldPathPrefix}.eventLocation.place`}
-                {...getFieldData(`${fieldPathPrefix}.eventLocation.place`)
-                  .compactRepresentation}
+                {...getFieldData({
+                  fieldPath: `${fieldPathPrefix}.eventLocation.place`,
+                }).compactRepresentation}
               />
               <LocalVocabularySelectField
                 selectOnBlur={false}
@@ -70,8 +74,9 @@ export const EventsField = ({ fieldPath }) => {
                 fieldPath={`${fieldPathPrefix}.eventLocation.country`}
                 optionsListName="countries"
                 clearable
-                {...getFieldData(`${fieldPathPrefix}.eventLocation.country`)
-                  .compactRepresentation}
+                {...getFieldData({
+                  fieldPath: `${fieldPathPrefix}.eventLocation.country`,
+                }).compactRepresentation}
               />
             </GroupField>
           </ArrayFieldItem>
