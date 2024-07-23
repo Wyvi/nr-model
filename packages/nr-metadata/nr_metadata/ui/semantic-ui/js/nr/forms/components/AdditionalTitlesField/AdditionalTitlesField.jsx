@@ -49,7 +49,7 @@ export const AdditionalTitlesField = ({
       }
       fieldPath={fieldPath}
       className="additional-titles"
-      {...getFieldData({ fieldPath }).fullRepresentation}
+      {...getFieldData({ fieldPath }).textRepresentation}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {

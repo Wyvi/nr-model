@@ -79,7 +79,7 @@ export const IdentifiersField = ({
       fieldPath={fieldPath}
       className={className}
       defaultNewValue={defaultNewValue}
-      {...getFieldData({ fieldPath, icon: labelIcon }).fullRepresentation}
+      {...getFieldData({ fieldPath, icon: labelIcon }).textRepresentation}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {

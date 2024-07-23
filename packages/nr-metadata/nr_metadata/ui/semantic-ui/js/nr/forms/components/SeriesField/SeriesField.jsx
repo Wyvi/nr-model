@@ -15,7 +15,7 @@ export const SeriesField = ({ fieldPath }) => {
     <ArrayField
       addButtonLabel={i18next.t("Add series")}
       fieldPath={fieldPath}
-      {...getFieldData({ fieldPath }).fullRepresentation}
+      {...getFieldData({ fieldPath }).textRepresentation}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {

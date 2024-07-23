@@ -19,7 +19,7 @@ export const EventsField = ({ fieldPath }) => {
   return (
     <ArrayField
       fieldPath={fieldPath}
-      {...getFieldData({ fieldPath }).fullRepresentation}
+      {...getFieldData({ fieldPath }).textRepresentation}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
