@@ -5,9 +5,9 @@ import { i18next } from "@translations/nr/i18next";
 import { SubjectsModal } from "./SubjectsModal";
 import { useFormikContext, getIn } from "formik";
 import _difference from "lodash/difference";
-import { FieldLabel } from "react-invenio-forms";
 import { ExternalSubjects } from "./ExternalSubjects";
 import { KeywordSubjects } from "./KeywordSubjects";
+import { useFieldData } from "@js/oarepo_ui";
 
 export const SubjectsField = ({ fieldPath }) => {
   const { values, setFieldValue } = useFormikContext();
@@ -50,13 +50,11 @@ export const SubjectsField = ({ fieldPath }) => {
     },
     [fieldPath, subjects, setFieldValue]
   );
+  const { getFieldData } = useFieldData();
+  const { label } = getFieldData({ fieldPath }).fullRepresentation;
   return (
     <Form.Field className="ui subjects-field">
-      <FieldLabel
-        htmlFor={fieldPath}
-        label={i18next.t("Subjects")}
-        icon="pencil"
-      />
+      {label}
       <ExternalSubjects externalSubjects={externalSubjects} />
       {externalSubjects.length > 0 && (
         <Divider horizontal section>

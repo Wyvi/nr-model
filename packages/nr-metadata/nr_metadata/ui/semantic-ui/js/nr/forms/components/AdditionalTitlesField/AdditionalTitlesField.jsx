@@ -73,6 +73,7 @@ export const AdditionalTitlesField = ({
                 optimized
                 options={subtitleTypes}
                 clearable
+                id={`${fieldPathPrefix}.titleType`}
                 width={16}
                 {...getFieldData({ fieldPath: `${fieldPathPrefix}.titleType` })
                   .compactRepresentation}
