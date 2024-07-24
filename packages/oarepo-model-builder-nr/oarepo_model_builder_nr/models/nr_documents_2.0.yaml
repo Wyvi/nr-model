@@ -5,7 +5,7 @@
 
 NRDocumentMetadata:
   $id: DocumentMetadata
-  extend: ['nr-common-metadata#CommonMetadata']
+  extend: ["nr-common-metadata#CommonMetadata"]
 
   marshmallow:
     class: nr_metadata.documents.services.records.schema.NRDocumentMetadataSchema
@@ -26,7 +26,7 @@ NRDocumentMetadata:
         class: nr_metadata.documents.services.records.schema.NRThesisSchema
       properties:
         dateDefended:
-          use: 'nr-datatypes#NRDate'
+          use: "nr-datatypes#NRDate"
           label.cs: Datum obhajoby
           label.en: Date defended
         defended:
@@ -49,21 +49,24 @@ NRDocumentMetadata:
           ^label.cs: Oblasti studia
           ^label.en: Study fields
     externalLocation:
-      use: 'nr-datatypes#NRExternalLocation'
+      use: "nr-datatypes#NRExternalLocation"
     publishers[]:
       # volný zápis vydavatele
       type: fulltext
       #^uniqueItems: true
       sample:
         faker: company
-      ^label.cs: Vydavatelé
+      ^label.cs: Vydavatel/é
       ^label.en: Publishers
+      ^help.cs: Zapište vydavatele. Můžete zapsat i více vydavatelů.
+      ^help.en: Write the name of the publisher. You can write more publishers.
+
     dateModified:
       # The date of the last update to the resource, not metadata
       #
       # týká se dokumentu/obsahu, nikoliv metadat!!!
       # neukazuje se ve vkládacím formuláři. jen při editaci záznamu!
-      use: 'nr-datatypes#NRDate'
+      use: "nr-datatypes#NRDate"
       sample:
         faker: date
       label.cs: Datum změny zdroje
@@ -124,7 +127,6 @@ DocumentModel:
             filter=lambda x: len(x) >= 4,
             map=lambda x: x[:4]
         )
-
 
   properties:
     syntheticFields:
@@ -223,4 +225,4 @@ DocumentModel:
           class: nr_metadata.documents.services.records.ui_schema.NRDocumentSyntheticFieldsUISchema
 
     metadata:
-      use: ['nr-documents#DocumentMetadata']
+      use: ["nr-documents#DocumentMetadata"]
