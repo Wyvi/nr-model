@@ -122,7 +122,9 @@ class NRContributorOrganizationSchema(DictOnlySchema):
         ma_fields.Nested(lambda: NROrganizationIdentifierSchema())
     )
 
-    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularySchema())
+    contributorType = ma_fields.Nested(
+        lambda: NRContributorTypeVocabularySchema(), required=True
+    )
 
     fullName = ma_fields.String(required=True)
 
@@ -141,13 +143,15 @@ class NRContributorPersonSchema(DictOnlySchema):
         ma_fields.Nested(lambda: NRPersonIdentifierSchema())
     )
 
-    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularySchema())
+    contributorType = ma_fields.Nested(
+        lambda: NRContributorTypeVocabularySchema(), required=True
+    )
 
-    familyName = ma_fields.String()
+    familyName = ma_fields.String(required=True)
 
     fullName = ma_fields.String(required=True)
 
-    givenName = ma_fields.String()
+    givenName = ma_fields.String(required=True)
 
     nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
@@ -195,11 +199,11 @@ class NRPersonSchema(DictOnlySchema):
         ma_fields.Nested(lambda: NRPersonIdentifierSchema())
     )
 
-    familyName = ma_fields.String()
+    familyName = ma_fields.String(required=True)
 
     fullName = ma_fields.String(required=True)
 
-    givenName = ma_fields.String()
+    givenName = ma_fields.String(required=True)
 
     nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
@@ -212,7 +216,9 @@ class NRRelatedItemContributorOrganizationSchema(DictOnlySchema):
         ma_fields.Nested(lambda: NROrganizationIdentifierSchema())
     )
 
-    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularySchema())
+    contributorType = ma_fields.Nested(
+        lambda: NRContributorTypeVocabularySchema(), required=True
+    )
 
     fullName = ma_fields.String(required=True)
 
@@ -231,13 +237,15 @@ class NRRelatedItemContributorPersonSchema(DictOnlySchema):
         ma_fields.Nested(lambda: NRPersonIdentifierSchema())
     )
 
-    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularySchema())
+    contributorType = ma_fields.Nested(
+        lambda: NRContributorTypeVocabularySchema(), required=True
+    )
 
-    familyName = ma_fields.String()
+    familyName = ma_fields.String(required=True)
 
     fullName = ma_fields.String(required=True)
 
-    givenName = ma_fields.String()
+    givenName = ma_fields.String(required=True)
 
     nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
