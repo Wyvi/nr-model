@@ -123,8 +123,6 @@ NRPersonIdentifier:
       i18n.key: identifier_type
       label.cs: Typ identifikátoru
       label.en: Identifier type
-      hint.cs: Identifikátor osoby.
-      hint.en: Person identifier.
       hint.cs: |
         Doporučujeme zadat alespoň jeden z typů identifikátorů.
         Pokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.

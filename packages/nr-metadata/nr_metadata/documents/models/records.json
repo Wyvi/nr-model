@@ -440,6 +440,8 @@
                         },
                         "label.cs": "Abstrakt",
                         "label.en": "Abstract",
+                        "help.cs": "Vyberte jazyk abstraktu a zapište nebo vložte text. Abstrakt můžete vložit ve více jazycích.",
+                        "help.en": "Choose abstract language and write down the text.Abstract can be provided in multiple languages.",
                         "items": {
                             "type": "i18nStr",
                             "marshmallow": {
@@ -499,6 +501,8 @@
                         ],
                         "label.cs": "Přístupová práva",
                         "label.en": "Access rights",
+                        "hint.cs": "Vyberte typ přístupu, zda bude zdroj dostupný otevřeně nebo s omezením.",
+                        "hint.en": "Choose access type - if the resource is open or has some restrictions.",
                         "imports": [
                             {
                                 "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -641,6 +645,8 @@
                         "type": "array",
                         "label.cs": "Další názvy",
                         "label.en": "Additional titles",
+                        "help.cs": "Pokud má název další jazykovou variantu, vyplňte ji, zvolte typ názvu a příslušný jazyk, ve kterém je název zapsán.",
+                        "help.en": "If the title is given in other languages, choose the type of title and corresponding language.",
                         "items": {
                             "type": "object",
                             "ui": {
@@ -726,6 +732,7 @@
                                     "properties": {
                                         "contributorType": {
                                             "type": "vocabulary",
+                                            "required": true,
                                             "properties": {},
                                             "vocabulary-type": "contributor-types",
                                             "ui": {
@@ -748,6 +755,8 @@
                                             },
                                             "label.cs": "Typ přispěvatele",
                                             "label.en": "Contributor's type",
+                                            "hint.cs": "Vyberte z rolety roli přispěvatele (editor, ilustrátor…).",
+                                            "hint.en": "Choose the role of the contributor (editor, illustrator…).",
                                             "imports": [
                                                 {
                                                     "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -782,7 +791,43 @@
                                                 "faker": "name"
                                             },
                                             "label.cs": "Jméno přispěvatele",
-                                            "label.en": "Contributor name"
+                                            "label.en": "Contributor's name"
+                                        },
+                                        "givenName": {
+                                            "type": "keyword",
+                                            "required": true,
+                                            "marshmallow": {
+                                                "read": false,
+                                                "write": false
+                                            },
+                                            "ui": {
+                                                "marshmallow": {
+                                                    "read": false,
+                                                    "write": false
+                                                }
+                                            },
+                                            "label.cs": "Jméno",
+                                            "label.en": "Name",
+                                            "hint.cs": "Napište jméno přispěvatele.",
+                                            "hint.en": "Write the contributor's name."
+                                        },
+                                        "familyName": {
+                                            "type": "keyword",
+                                            "required": true,
+                                            "marshmallow": {
+                                                "read": false,
+                                                "write": false
+                                            },
+                                            "ui": {
+                                                "marshmallow": {
+                                                    "read": false,
+                                                    "write": false
+                                                }
+                                            },
+                                            "label.cs": "Příjmení",
+                                            "label.en": "Last name",
+                                            "hint.cs": "Napište příjmení přispěvatele.",
+                                            "hint.en": "Write the contributor's last name."
                                         },
                                         "nameType": {
                                             "type": "keyword",
@@ -801,32 +846,6 @@
                                             },
                                             "label.cs": "Typ",
                                             "label.en": "Type"
-                                        },
-                                        "givenName": {
-                                            "type": "keyword",
-                                            "marshmallow": {
-                                                "read": false,
-                                                "write": false
-                                            },
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                }
-                                            }
-                                        },
-                                        "familyName": {
-                                            "type": "keyword",
-                                            "marshmallow": {
-                                                "read": false,
-                                                "write": false
-                                            },
-                                            "ui": {
-                                                "marshmallow": {
-                                                    "read": false,
-                                                    "write": false
-                                                }
-                                            }
                                         },
                                         "authorityIdentifiers": {
                                             "type": "array",
@@ -851,6 +870,8 @@
                                                         },
                                                         "label.cs": "Identifikátor",
                                                         "label.en": "Identifier",
+                                                        "hint.cs": "např https://orcid.org/0009-0004-8646-7185 pro ORCID.",
+                                                        "hint.en": "e.g. https://orcid.org/0009-0004-8646-7185 for ORCID.",
                                                         "i18n.key": "identifier"
                                                     },
                                                     "scheme": {
@@ -893,7 +914,11 @@
                                                     "generate": false,
                                                     "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                 }
-                                            }
+                                            },
+                                            "label.cs": "Identifikátor osoby",
+                                            "label.en": "Person identifier",
+                                            "help.cs": "Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816).",
+                                            "help.en": "Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
                                         },
                                         "affiliations": {
                                             "type": "array",
@@ -1009,7 +1034,8 @@
                                                 },
                                                 "label.cs": "Afiliace",
                                                 "label.en": "Affiliation",
-                                                "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
+                                                "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
+                                                "hint.en": "Start typing the name of the institution, then select the institution from the menu.",
                                                 "imports": [
                                                     {
                                                         "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -1048,6 +1074,7 @@
                                     "properties": {
                                         "contributorType": {
                                             "type": "vocabulary",
+                                            "required": true,
                                             "properties": {},
                                             "vocabulary-type": "contributor-types",
                                             "ui": {
@@ -1070,6 +1097,8 @@
                                             },
                                             "label.cs": "Typ přispěvatele",
                                             "label.en": "Contributor's type",
+                                            "hint.cs": "Vyberte z rolety roli přispěvatele (editor, ilustrátor…).",
+                                            "hint.en": "Choose the role of the contributor (editor, illustrator…).",
                                             "imports": [
                                                 {
                                                     "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -1104,7 +1133,9 @@
                                                 "faker": "name"
                                             },
                                             "label.cs": "Jméno přispěvatele",
-                                            "label.en": "Contributor name"
+                                            "label.en": "Contributor's name",
+                                            "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
+                                            "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                         },
                                         "nameType": {
                                             "type": "keyword",
@@ -1343,7 +1374,8 @@
                                         },
                                         "label.cs": "Afiliace",
                                         "label.en": "Affiliation",
-                                        "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
+                                        "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
+                                        "hint.en": "Start typing the name of the institution, then select the institution from the menu.",
                                         "imports": [
                                             {
                                                 "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -1571,6 +1603,7 @@
                                 },
                                 "contributorType": {
                                     "type": "vocabulary",
+                                    "required": true,
                                     "vocabulary-type": "contributor-types",
                                     "ui": {
                                         "marshmallow": {
@@ -1592,6 +1625,8 @@
                                     },
                                     "label.cs": "Typ přispěvatele",
                                     "label.en": "Contributor's type",
+                                    "hint.cs": "Vyberte z rolety roli přispěvatele (editor, ilustrátor…).",
+                                    "hint.en": "Choose the role of the contributor (editor, illustrator…).",
                                     "imports": [
                                         {
                                             "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -1685,6 +1720,7 @@
                                 },
                                 "familyName": {
                                     "type": "keyword",
+                                    "required": true,
                                     "marshmallow": {
                                         "read": false,
                                         "write": false
@@ -1694,7 +1730,11 @@
                                             "read": false,
                                             "write": false
                                         }
-                                    }
+                                    },
+                                    "label.cs": "Příjmení",
+                                    "label.en": "Last name",
+                                    "hint.cs": "Napište příjmení přispěvatele.",
+                                    "hint.en": "Write the contributor's last name."
                                 },
                                 "fullName": {
                                     "type": "keyword",
@@ -1713,10 +1753,13 @@
                                         "faker": "name"
                                     },
                                     "label.cs": "Jméno přispěvatele",
-                                    "label.en": "Contributor name"
+                                    "label.en": "Contributor's name",
+                                    "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
+                                    "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                 },
                                 "givenName": {
                                     "type": "keyword",
+                                    "required": true,
                                     "marshmallow": {
                                         "read": false,
                                         "write": false
@@ -1726,7 +1769,11 @@
                                             "read": false,
                                             "write": false
                                         }
-                                    }
+                                    },
+                                    "label.cs": "Jméno",
+                                    "label.en": "Name",
+                                    "hint.cs": "Napište jméno přispěvatele.",
+                                    "hint.en": "Write the contributor's name."
                                 },
                                 "nameType": {
                                     "type": "keyword",
@@ -1804,10 +1851,11 @@
                                                 "faker": "name"
                                             },
                                             "label.cs": "Jméno autora",
-                                            "label.en": "Author name"
+                                            "label.en": "Author's name"
                                         },
                                         "givenName": {
                                             "type": "keyword",
+                                            "required": true,
                                             "marshmallow": {
                                                 "read": false,
                                                 "write": false
@@ -1817,10 +1865,15 @@
                                                     "read": false,
                                                     "write": false
                                                 }
-                                            }
+                                            },
+                                            "label.cs": "Jméno",
+                                            "label.en": "Name",
+                                            "hint.cs": "Napište jméno autora.",
+                                            "hint.en": "Write the author's name."
                                         },
                                         "familyName": {
                                             "type": "keyword",
+                                            "required": true,
                                             "marshmallow": {
                                                 "read": false,
                                                 "write": false
@@ -1830,7 +1883,11 @@
                                                     "read": false,
                                                     "write": false
                                                 }
-                                            }
+                                            },
+                                            "label.cs": "Příjmení",
+                                            "label.en": "Last name",
+                                            "hint.cs": "Napište příjmení autora.",
+                                            "hint.en": "Write the author's last name."
                                         },
                                         "authorityIdentifiers": {
                                             "type": "array",
@@ -1855,6 +1912,8 @@
                                                         },
                                                         "label.cs": "Identifikátor",
                                                         "label.en": "Identifier",
+                                                        "hint.cs": "např https://orcid.org/0009-0004-8646-7185 pro ORCID.",
+                                                        "hint.en": "e.g. https://orcid.org/0009-0004-8646-7185 for ORCID.",
                                                         "i18n.key": "identifier"
                                                     },
                                                     "scheme": {
@@ -1897,7 +1956,11 @@
                                                     "generate": false,
                                                     "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                 }
-                                            }
+                                            },
+                                            "label.cs": "Identifikátor osoby",
+                                            "label.en": "Person identifier",
+                                            "help.cs": "Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816).",
+                                            "help.en": "Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
                                         },
                                         "affiliations": {
                                             "type": "array",
@@ -2013,7 +2076,8 @@
                                                 },
                                                 "label.cs": "Afiliace",
                                                 "label.en": "Affiliation",
-                                                "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
+                                                "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
+                                                "hint.en": "Start typing the name of the institution, then select the institution from the menu.",
                                                 "imports": [
                                                     {
                                                         "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -2082,7 +2146,9 @@
                                                 "faker": "name"
                                             },
                                             "label.cs": "Jméno autora",
-                                            "label.en": "Author name"
+                                            "label.en": "Author name",
+                                            "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
+                                            "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                         },
                                         "authorityIdentifiers": {
                                             "type": "array",
@@ -2294,7 +2360,8 @@
                                         },
                                         "label.cs": "Afiliace",
                                         "label.en": "Affiliation",
-                                        "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
+                                        "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
+                                        "hint.en": "Start typing the name of the institution, then select the institution from the menu.",
                                         "imports": [
                                             {
                                                 "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -2522,6 +2589,7 @@
                                 },
                                 "familyName": {
                                     "type": "keyword",
+                                    "required": true,
                                     "marshmallow": {
                                         "read": false,
                                         "write": false
@@ -2531,7 +2599,11 @@
                                             "read": false,
                                             "write": false
                                         }
-                                    }
+                                    },
+                                    "label.cs": "Příjmení",
+                                    "label.en": "Last name",
+                                    "hint.cs": "Napište příjmení autora.",
+                                    "hint.en": "Write the author's last name."
                                 },
                                 "fullName": {
                                     "type": "keyword",
@@ -2550,10 +2622,13 @@
                                         "faker": "name"
                                     },
                                     "label.cs": "Jméno autora",
-                                    "label.en": "Author name"
+                                    "label.en": "Author name",
+                                    "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
+                                    "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                 },
                                 "givenName": {
                                     "type": "keyword",
+                                    "required": true,
                                     "marshmallow": {
                                         "read": false,
                                         "write": false
@@ -2563,7 +2638,11 @@
                                             "read": false,
                                             "write": false
                                         }
-                                    }
+                                    },
+                                    "label.cs": "Jméno",
+                                    "label.en": "Name",
+                                    "hint.cs": "Napište jméno autora.",
+                                    "hint.en": "Write the author's name."
                                 },
                                 "nameType": {
                                     "type": "keyword",
@@ -2623,7 +2702,11 @@
                             "faker": "date"
                         },
                         "label.cs": "Datum vydání",
-                        "label.en": "Date issued"
+                        "label.en": "Date issued",
+                        "hint.cs": "Zvolte z kalendáře datum, kdy byl zdroj vydan.",
+                        "hint.en": "Choose the issuance date from the calendar.",
+                        "help.cs": "Datum může být rok, rok a měsíc nebo celé datum.",
+                        "help.en": "The date can be a year, year and month or a full date."
                     },
                     "dateModified": {
                         "type": "edtf",
@@ -2665,7 +2748,11 @@
                                         "write": false
                                     },
                                     "label.cs": "Datum konání akce",
-                                    "label.en": "Event date"
+                                    "label.en": "Event date",
+                                    "hint.cs": "Vyberte časové období (Od - Do).",
+                                    "hint.en": "Choose the time period (From - To).",
+                                    "help.cs": "Vyberte časový interval, ve kterém se událost odehrála.",
+                                    "help.en": "Choose the time interval in which the event took place."
                                 },
                                 "eventLocation": {
                                     "type": "object",
@@ -2705,6 +2792,8 @@
                                             },
                                             "label.cs": "Země",
                                             "label.en": "Country",
+                                            "hint.cs": "Zvolte stát z nabídky.",
+                                            "hint.en": "Choose a country from the menu.",
                                             "imports": [
                                                 {
                                                     "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -2809,8 +2898,10 @@
                                                     "write": false
                                                 }
                                             },
-                                            "label.cs": "Místo",
-                                            "label.en": "Place"
+                                            "label.cs": "Místo konání akce",
+                                            "label.en": "Event location",
+                                            "hint.cs": "Zapište místo konání akce (město).",
+                                            "hint.en": "Write the location of the event (city)."
                                         }
                                     }
                                 },
@@ -2829,7 +2920,9 @@
                                             }
                                         },
                                         "label.cs": "Alternativní název akce",
-                                        "label.en": "Event alternate name"
+                                        "label.en": "Event alternate name",
+                                        "help.cs": "Pokud má akce další známe názvy, uveďte je zde.",
+                                        "help.en": "If the event has other known names, list them here."
                                     }
                                 },
                                 "eventNameOriginal": {
@@ -2846,7 +2939,9 @@
                                         }
                                     },
                                     "label.cs": "Název akce",
-                                    "label.en": "Event name"
+                                    "label.en": "Event name",
+                                    "hint.cs": "Zapište hlavní název akce.",
+                                    "hint.en": "Write the main name of the event."
                                 }
                             }
                         }
@@ -2866,6 +2961,8 @@
                         },
                         "label.cs": "Externí umístění",
                         "label.en": "External location",
+                        "help.cs": "Vložte URL odkaz dalšího umístění zdroje (př. jiný repozitář, databáze, webová stránka).",
+                        "help.en": "Provide the URL link for another location of the resource (e.g. another repository, database, website).",
                         "properties": {
                             "externalLocationNote": {
                                 "type": "fulltext",
@@ -2924,6 +3021,8 @@
                                     },
                                     "label.cs": "Poskytovatel financí",
                                     "label.en": "Funder",
+                                    "hint.cs": "Začněte zapisovat název poskytovatele, následně vyberte z nabídky našeptavače.",
+                                    "hint.en": "Start typing the name of the funder, then select the funder from the menu.",
                                     "imports": [
                                         {
                                             "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -3028,7 +3127,9 @@
                                         }
                                     },
                                     "label.cs": "Výzkumný program",
-                                    "label.en": "Funding program"
+                                    "label.en": "Funding program",
+                                    "hint.cs": "Zapište název výzkumného programu, v rámci kterého byl projekt financován.",
+                                    "hint.en": "Write the name of the research program under which the project was funded."
                                 },
                                 "projectID": {
                                     "type": "keyword",
@@ -3044,7 +3145,9 @@
                                         }
                                     },
                                     "label.cs": "Číslo projektu",
-                                    "label.en": "Project identifier"
+                                    "label.en": "Project identifier",
+                                    "hint.cs": "Zapište kód projektu.",
+                                    "hint.en": "Write the project code."
                                 },
                                 "projectName": {
                                     "type": "fulltext",
@@ -3059,7 +3162,9 @@
                                         }
                                     },
                                     "label.cs": "Název projektu",
-                                    "label.en": "Project name"
+                                    "label.en": "Project name",
+                                    "hint.cs": "Zapište název projektu.",
+                                    "hint.en": "Write the project name."
                                 }
                             }
                         }
@@ -3198,6 +3303,8 @@
                             ],
                             "label.cs": "Jazyk",
                             "label.en": "Language",
+                            "hint.cs": "Vyberte jazyk/jazyky zdroje.",
+                            "hint.en": "Choose the language(s) of the resource.",
                             "imports": [
                                 {
                                     "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -3341,6 +3448,8 @@
                         "type": "array",
                         "label.cs": "Poznámky",
                         "label.en": "Notes",
+                        "help.cs": "Prostor pro další informace ke zdroji.",
+                        "help.en": "Space for additional information related to the resource.",
                         "items": {
                             "type": "fulltext",
                             "marshmallow": {
@@ -3357,8 +3466,10 @@
                     },
                     "objectIdentifiers": {
                         "type": "array",
-                        "label.cs": "Identifikátory objektu",
-                        "label.en": "Object identifiers",
+                        "label.cs": "Identifikátor",
+                        "label.en": "Identifier",
+                        "help.cs": "Vyberte typ identifikátoru a zapište jej. Můžete zapsat více identifikátorů.",
+                        "help.en": "Choose the type of identifier and write it down. You can provide more identifiers.",
                         "items": {
                             "type": "object",
                             "ui": {
@@ -3390,7 +3501,9 @@
                                         "faker": "isbn13"
                                     },
                                     "label.cs": "Identifikátor objektu",
-                                    "label.en": "Object identifier"
+                                    "label.en": "Object identifier",
+                                    "hint.cs": "např. 10.1086/679716 pro DOI.",
+                                    "hint.en": "e.g. 10.1086/679716 for DOI."
                                 },
                                 "scheme": {
                                     "type": "keyword",
@@ -3414,7 +3527,9 @@
                                         }
                                     },
                                     "label.cs": "Typ identifikátoru",
-                                    "label.en": "Identifier type"
+                                    "label.en": "Identifier type",
+                                    "hint.cs": "např. DOI, HANDLE nebo ISBN.",
+                                    "hint.en": "e.g. DOI, HANDLE or ISBN."
                                 }
                             }
                         }
@@ -3439,8 +3554,10 @@
                     },
                     "publishers": {
                         "type": "array",
-                        "label.cs": "Vydavatelé",
+                        "label.cs": "Vydavatel/é",
                         "label.en": "Publishers",
+                        "help.cs": "Zapište vydavatele. Můžete zapsat i více vydavatelů.",
+                        "help.en": "Write the name of the publisher. You can write more publishers.",
                         "items": {
                             "type": "fulltext",
                             "sample": {
@@ -3452,6 +3569,8 @@
                         "type": "array",
                         "label.cs": "Vazba na/z dalších zdrojů:",
                         "label.en": "Link to/from other resources:",
+                        "help.cs": "Zapište informace o zdroji, který souvisí se zdrojem, který zde popisujete (např. pokud popisujete článek, sem můžete identifikovat časopis, ve kterém článek vyšel).",
+                        "help.en": "Write down information about the resource related to the one you are describing here (e.g. if you are describing an article, you can identify the journal in which the article was published).",
                         "items": {
                             "type": "object",
                             "ui": {
@@ -3478,6 +3597,7 @@
                                                 "properties": {
                                                     "contributorType": {
                                                         "type": "vocabulary",
+                                                        "required": true,
                                                         "properties": {},
                                                         "vocabulary-type": "contributor-types",
                                                         "ui": {
@@ -3500,6 +3620,8 @@
                                                         },
                                                         "label.cs": "Typ přispěvatele",
                                                         "label.en": "Contributor's type",
+                                                        "hint.cs": "Vyberte z rolety roli přispěvatele (editor, ilustrátor…).",
+                                                        "hint.en": "Choose the role of the contributor (editor, illustrator…).",
                                                         "imports": [
                                                             {
                                                                 "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -3552,10 +3674,11 @@
                                                             "faker": "name"
                                                         },
                                                         "label.cs": "Jméno autora",
-                                                        "label.en": "Author name"
+                                                        "label.en": "Author's name"
                                                     },
                                                     "givenName": {
                                                         "type": "keyword",
+                                                        "required": true,
                                                         "marshmallow": {
                                                             "read": false,
                                                             "write": false
@@ -3565,10 +3688,15 @@
                                                                 "read": false,
                                                                 "write": false
                                                             }
-                                                        }
+                                                        },
+                                                        "label.cs": "Jméno",
+                                                        "label.en": "Name",
+                                                        "hint.cs": "Napište jméno autora.",
+                                                        "hint.en": "Write the author's name."
                                                     },
                                                     "familyName": {
                                                         "type": "keyword",
+                                                        "required": true,
                                                         "marshmallow": {
                                                             "read": false,
                                                             "write": false
@@ -3578,7 +3706,11 @@
                                                                 "read": false,
                                                                 "write": false
                                                             }
-                                                        }
+                                                        },
+                                                        "label.cs": "Příjmení",
+                                                        "label.en": "Last name",
+                                                        "hint.cs": "Napište příjmení autora.",
+                                                        "hint.en": "Write the author's last name."
                                                     },
                                                     "authorityIdentifiers": {
                                                         "type": "array",
@@ -3603,6 +3735,8 @@
                                                                     },
                                                                     "label.cs": "Identifikátor",
                                                                     "label.en": "Identifier",
+                                                                    "hint.cs": "např https://orcid.org/0009-0004-8646-7185 pro ORCID.",
+                                                                    "hint.en": "e.g. https://orcid.org/0009-0004-8646-7185 for ORCID.",
                                                                     "i18n.key": "identifier"
                                                                 },
                                                                 "scheme": {
@@ -3645,7 +3779,11 @@
                                                                 "generate": false,
                                                                 "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                             }
-                                                        }
+                                                        },
+                                                        "label.cs": "Identifikátor osoby",
+                                                        "label.en": "Person identifier",
+                                                        "help.cs": "Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816).",
+                                                        "help.en": "Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
                                                     },
                                                     "affiliations": {
                                                         "type": "array",
@@ -3761,7 +3899,8 @@
                                                             },
                                                             "label.cs": "Afiliace",
                                                             "label.en": "Affiliation",
-                                                            "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
+                                                            "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
+                                                            "hint.en": "Start typing the name of the institution, then select the institution from the menu.",
                                                             "imports": [
                                                                 {
                                                                     "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -3800,6 +3939,7 @@
                                                 "properties": {
                                                     "contributorType": {
                                                         "type": "vocabulary",
+                                                        "required": true,
                                                         "properties": {},
                                                         "vocabulary-type": "contributor-types",
                                                         "ui": {
@@ -3822,6 +3962,8 @@
                                                         },
                                                         "label.cs": "Typ přispěvatele",
                                                         "label.en": "Contributor's type",
+                                                        "hint.cs": "Vyberte z rolety roli přispěvatele (editor, ilustrátor…).",
+                                                        "hint.en": "Choose the role of the contributor (editor, illustrator…).",
                                                         "imports": [
                                                             {
                                                                 "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -3877,7 +4019,9 @@
                                                             "faker": "name"
                                                         },
                                                         "label.cs": "Jméno autora",
-                                                        "label.en": "Author name"
+                                                        "label.en": "Author name",
+                                                        "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
+                                                        "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                                     },
                                                     "authorityIdentifiers": {
                                                         "type": "array",
@@ -4095,7 +4239,8 @@
                                                     },
                                                     "label.cs": "Afiliace",
                                                     "label.en": "Affiliation",
-                                                    "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
+                                                    "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
+                                                    "hint.en": "Start typing the name of the institution, then select the institution from the menu.",
                                                     "imports": [
                                                         {
                                                             "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -4323,6 +4468,7 @@
                                             },
                                             "contributorType": {
                                                 "type": "vocabulary",
+                                                "required": true,
                                                 "vocabulary-type": "contributor-types",
                                                 "ui": {
                                                     "marshmallow": {
@@ -4344,6 +4490,8 @@
                                                 },
                                                 "label.cs": "Typ přispěvatele",
                                                 "label.en": "Contributor's type",
+                                                "hint.cs": "Vyberte z rolety roli přispěvatele (editor, ilustrátor…).",
+                                                "hint.en": "Choose the role of the contributor (editor, illustrator…).",
                                                 "imports": [
                                                     {
                                                         "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -4437,6 +4585,7 @@
                                             },
                                             "familyName": {
                                                 "type": "keyword",
+                                                "required": true,
                                                 "marshmallow": {
                                                     "read": false,
                                                     "write": false
@@ -4446,7 +4595,11 @@
                                                         "read": false,
                                                         "write": false
                                                     }
-                                                }
+                                                },
+                                                "label.cs": "Příjmení",
+                                                "label.en": "Last name",
+                                                "hint.cs": "Napište příjmení autora.",
+                                                "hint.en": "Write the author's last name."
                                             },
                                             "fullName": {
                                                 "type": "keyword",
@@ -4465,10 +4618,13 @@
                                                     "faker": "name"
                                                 },
                                                 "label.cs": "Jméno autora",
-                                                "label.en": "Author name"
+                                                "label.en": "Author name",
+                                                "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
+                                                "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                             },
                                             "givenName": {
                                                 "type": "keyword",
+                                                "required": true,
                                                 "marshmallow": {
                                                     "read": false,
                                                     "write": false
@@ -4478,7 +4634,11 @@
                                                         "read": false,
                                                         "write": false
                                                     }
-                                                }
+                                                },
+                                                "label.cs": "Jméno",
+                                                "label.en": "Name",
+                                                "hint.cs": "Napište jméno autora.",
+                                                "hint.en": "Write the author's name."
                                             },
                                             "nameType": {
                                                 "type": "keyword",
@@ -4549,10 +4709,11 @@
                                                             "faker": "name"
                                                         },
                                                         "label.cs": "Jméno autora",
-                                                        "label.en": "Author name"
+                                                        "label.en": "Author's name"
                                                     },
                                                     "givenName": {
                                                         "type": "keyword",
+                                                        "required": true,
                                                         "marshmallow": {
                                                             "read": false,
                                                             "write": false
@@ -4562,10 +4723,15 @@
                                                                 "read": false,
                                                                 "write": false
                                                             }
-                                                        }
+                                                        },
+                                                        "label.cs": "Jméno",
+                                                        "label.en": "Name",
+                                                        "hint.cs": "Napište jméno autora.",
+                                                        "hint.en": "Write the author's name."
                                                     },
                                                     "familyName": {
                                                         "type": "keyword",
+                                                        "required": true,
                                                         "marshmallow": {
                                                             "read": false,
                                                             "write": false
@@ -4575,7 +4741,11 @@
                                                                 "read": false,
                                                                 "write": false
                                                             }
-                                                        }
+                                                        },
+                                                        "label.cs": "Příjmení",
+                                                        "label.en": "Last name",
+                                                        "hint.cs": "Napište příjmení autora.",
+                                                        "hint.en": "Write the author's last name."
                                                     },
                                                     "authorityIdentifiers": {
                                                         "type": "array",
@@ -4600,6 +4770,8 @@
                                                                     },
                                                                     "label.cs": "Identifikátor",
                                                                     "label.en": "Identifier",
+                                                                    "hint.cs": "např https://orcid.org/0009-0004-8646-7185 pro ORCID.",
+                                                                    "hint.en": "e.g. https://orcid.org/0009-0004-8646-7185 for ORCID.",
                                                                     "i18n.key": "identifier"
                                                                 },
                                                                 "scheme": {
@@ -4642,7 +4814,11 @@
                                                                 "generate": false,
                                                                 "class": "nr_metadata.schema.identifiers.NRPersonIdentifierSchema"
                                                             }
-                                                        }
+                                                        },
+                                                        "label.cs": "Identifikátor osoby",
+                                                        "label.en": "Person identifier",
+                                                        "help.cs": "Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816).",
+                                                        "help.en": "Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
                                                     },
                                                     "affiliations": {
                                                         "type": "array",
@@ -4758,7 +4934,8 @@
                                                             },
                                                             "label.cs": "Afiliace",
                                                             "label.en": "Affiliation",
-                                                            "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
+                                                            "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
+                                                            "hint.en": "Start typing the name of the institution, then select the institution from the menu.",
                                                             "imports": [
                                                                 {
                                                                     "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -4827,7 +5004,9 @@
                                                             "faker": "name"
                                                         },
                                                         "label.cs": "Jméno autora",
-                                                        "label.en": "Author name"
+                                                        "label.en": "Author name",
+                                                        "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
+                                                        "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                                     },
                                                     "authorityIdentifiers": {
                                                         "type": "array",
@@ -5039,7 +5218,8 @@
                                                     },
                                                     "label.cs": "Afiliace",
                                                     "label.en": "Affiliation",
-                                                    "hint.cs": "Uveďte instituci/instituce, pod jejíž záštitou jste se na tvorbě objektu podíleli.",
+                                                    "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
+                                                    "hint.en": "Start typing the name of the institution, then select the institution from the menu.",
                                                     "imports": [
                                                         {
                                                             "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -5267,6 +5447,7 @@
                                             },
                                             "familyName": {
                                                 "type": "keyword",
+                                                "required": true,
                                                 "marshmallow": {
                                                     "read": false,
                                                     "write": false
@@ -5276,7 +5457,11 @@
                                                         "read": false,
                                                         "write": false
                                                     }
-                                                }
+                                                },
+                                                "label.cs": "Příjmení",
+                                                "label.en": "Last name",
+                                                "hint.cs": "Napište příjmení autora.",
+                                                "hint.en": "Write the author's last name."
                                             },
                                             "fullName": {
                                                 "type": "keyword",
@@ -5295,10 +5480,13 @@
                                                     "faker": "name"
                                                 },
                                                 "label.cs": "Jméno autora",
-                                                "label.en": "Author name"
+                                                "label.en": "Author name",
+                                                "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
+                                                "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                             },
                                             "givenName": {
                                                 "type": "keyword",
+                                                "required": true,
                                                 "marshmallow": {
                                                     "read": false,
                                                     "write": false
@@ -5308,7 +5496,11 @@
                                                         "read": false,
                                                         "write": false
                                                     }
-                                                }
+                                                },
+                                                "label.cs": "Jméno",
+                                                "label.en": "Name",
+                                                "hint.cs": "Napište jméno autora.",
+                                                "hint.en": "Write the author's name."
                                             },
                                             "nameType": {
                                                 "type": "keyword",
@@ -5366,6 +5558,8 @@
                                 },
                                 "itemPIDs": {
                                     "type": "array",
+                                    "help.cs": "Trvalé identifikátory objektu jako ISBN, DOI atd.",
+                                    "help.en": "Permanent object identifiers such as ISBN, DOI, etc.",
                                     "items": {
                                         "type": "object",
                                         "ui": {
@@ -5397,7 +5591,9 @@
                                                     "faker": "isbn13"
                                                 },
                                                 "label.cs": "Identifikátor objektu",
-                                                "label.en": "Object identifier"
+                                                "label.en": "Object identifier",
+                                                "hint.cs": "např. 10.1086/679716 pro DOI.",
+                                                "hint.en": "e.g. 10.1086/679716 for DOI."
                                             },
                                             "scheme": {
                                                 "type": "keyword",
@@ -5421,7 +5617,9 @@
                                                     }
                                                 },
                                                 "label.cs": "Typ identifikátoru",
-                                                "label.en": "Identifier type"
+                                                "label.en": "Identifier type",
+                                                "hint.cs": "např. DOI, HANDLE nebo ISBN.",
+                                                "hint.en": "e.g. DOI, HANDLE or ISBN."
                                             }
                                         }
                                     }
@@ -5465,6 +5663,8 @@
                                     },
                                     "label.cs": "Typ vazby",
                                     "label.en": "Relation type",
+                                    "hint.cs": "Vyberte typ vazby.",
+                                    "hint.en": "Choose the relation type.",
                                     "imports": [
                                         {
                                             "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -5693,7 +5893,6 @@
                                 "itemTitle": {
                                     "type": "fulltext",
                                     "required": true,
-                                    "description": "název propojeného dokumentu",
                                     "marshmallow": {
                                         "read": false,
                                         "write": false
@@ -5705,7 +5904,9 @@
                                         }
                                     },
                                     "label.cs": "Název",
-                                    "label.en": "Title"
+                                    "label.en": "Title",
+                                    "hint.cs": "Název propojeného dokumentu.",
+                                    "hint.en": "Title of the linked document."
                                 },
                                 "itemURL": {
                                     "type": "url",
@@ -5785,6 +5986,8 @@
                             "Diplomová práce",
                             "Dataset"
                         ],
+                        "hint.cs": "Vyberte typ zdroje.",
+                        "hint.en": "Choose resource type.",
                         "label.cs": "Typ zdroje",
                         "label.en": "Resource type",
                         "imports": [
@@ -5909,6 +6112,8 @@
                         ],
                         "label.cs": "Práva/Licence",
                         "label.en": "Rights/Licenses",
+                        "help.cs": "Pokud se k datové sadě váže licence Creative Commons, vyberte příslušnou variantu licence z nabídky. Doporučujeme výběr nejnovějších verzí a to 3.0 Česko a 4.0 International.",
+                        "help.en": "If a Creative Commons license is associated with the resource, select the appropriate license option from the menu. We recommend choosing the latest versions, namely 3.0 Czech and 4.0 International.",
                         "imports": [
                             {
                                 "import": "invenio_vocabularies.records.api.Vocabulary"
@@ -6004,6 +6209,8 @@
                         "type": "array",
                         "label.cs": "Edice",
                         "label.en": "Series",
+                        "help.cs": "Zapište název edice/série. Zapište svazek edice/série, pokud je název uveden.",
+                        "help.en": "Write down the name of the series/edition. Write down the volume of the series/edition if the name is provided.",
                         "items": {
                             "type": "object",
                             "ui": {
@@ -6067,6 +6274,8 @@
                         "type": "array",
                         "label.cs": "Oborové třídění",
                         "label.en": "Subject categories",
+                        "hint.cs": "Vyberte název oboru.",
+                        "hint.en": "Choose subject category.",
                         "items": {
                             "type": "vocabulary",
                             "vocabulary-type": "subject-categories",
@@ -6191,6 +6400,8 @@
                         },
                         "label.cs": "Klíčová slova",
                         "label.en": "Keywords",
+                        "help.cs": "Zapisujte slova popisující zdroj, zvolte vždy jazyk.",
+                        "help.en": "Write down words describing the resource, always choose language.",
                         "items": {
                             "type": "object",
                             "ui": {
@@ -6720,7 +6931,9 @@
                             }
                         },
                         "label.cs": "Název",
-                        "label.en": "Title"
+                        "label.en": "Title",
+                        "hint.cs": "Vyplňte hlavní název zdroje.",
+                        "hint.en": "Fill in the main title of the resource."
                     },
                     "version": {
                         "type": "keyword",
@@ -6742,7 +6955,9 @@
                             "2.2"
                         ],
                         "label.cs": "Verze zdroje",
-                        "label.en": "Resource version"
+                        "label.en": "Resource version",
+                        "hint.cs": "Zapište verzi (první, druhá…).",
+                        "hint.en": "Write down the version (first, second…)."
                     }
                 }
             },

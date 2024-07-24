@@ -73,7 +73,9 @@ class NRContributorOrganizationUISchema(DictOnlySchema):
         ma_fields.Nested(lambda: NROrganizationIdentifierUISchema())
     )
 
-    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularyUISchema())
+    contributorType = ma_fields.Nested(
+        lambda: NRContributorTypeVocabularyUISchema(), required=True
+    )
 
     fullName = ma_fields.String(required=True)
 
@@ -92,13 +94,15 @@ class NRContributorPersonUISchema(DictOnlySchema):
         ma_fields.Nested(lambda: NRPersonIdentifierUISchema())
     )
 
-    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularyUISchema())
+    contributorType = ma_fields.Nested(
+        lambda: NRContributorTypeVocabularyUISchema(), required=True
+    )
 
-    familyName = ma_fields.String()
+    familyName = ma_fields.String(required=True)
 
     fullName = ma_fields.String(required=True)
 
-    givenName = ma_fields.String()
+    givenName = ma_fields.String(required=True)
 
     nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
@@ -115,13 +119,15 @@ class NRContributorUISchema(DictOnlySchema):
         ma_fields.Nested(lambda: NROrganizationIdentifierUISchema())
     )
 
-    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularyUISchema())
+    contributorType = ma_fields.Nested(
+        lambda: NRContributorTypeVocabularyUISchema(), required=True
+    )
 
-    familyName = ma_fields.String()
+    familyName = ma_fields.String(required=True)
 
     fullName = ma_fields.String(required=True)
 
-    givenName = ma_fields.String()
+    givenName = ma_fields.String(required=True)
 
     nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
 
@@ -138,11 +144,11 @@ class NRCreatorUISchema(DictOnlySchema):
         ma_fields.Nested(lambda: NROrganizationIdentifierUISchema())
     )
 
-    familyName = ma_fields.String()
+    familyName = ma_fields.String(required=True)
 
     fullName = ma_fields.String(required=True)
 
-    givenName = ma_fields.String()
+    givenName = ma_fields.String(required=True)
 
     nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
 
@@ -190,11 +196,11 @@ class NRPersonUISchema(DictOnlySchema):
         ma_fields.Nested(lambda: NRPersonIdentifierUISchema())
     )
 
-    familyName = ma_fields.String()
+    familyName = ma_fields.String(required=True)
 
     fullName = ma_fields.String(required=True)
 
-    givenName = ma_fields.String()
+    givenName = ma_fields.String(required=True)
 
     nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
@@ -207,7 +213,9 @@ class NRRelatedItemContributorOrganizationUISchema(DictOnlySchema):
         ma_fields.Nested(lambda: NROrganizationIdentifierUISchema())
     )
 
-    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularyUISchema())
+    contributorType = ma_fields.Nested(
+        lambda: NRContributorTypeVocabularyUISchema(), required=True
+    )
 
     fullName = ma_fields.String(required=True)
 
@@ -226,13 +234,15 @@ class NRRelatedItemContributorPersonUISchema(DictOnlySchema):
         ma_fields.Nested(lambda: NRPersonIdentifierUISchema())
     )
 
-    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularyUISchema())
+    contributorType = ma_fields.Nested(
+        lambda: NRContributorTypeVocabularyUISchema(), required=True
+    )
 
-    familyName = ma_fields.String()
+    familyName = ma_fields.String(required=True)
 
     fullName = ma_fields.String(required=True)
 
-    givenName = ma_fields.String()
+    givenName = ma_fields.String(required=True)
 
     nameType = ma_fields.String(validate=[OneOf(["Personal"])])
 
@@ -249,13 +259,15 @@ class NRRelatedItemContributorUISchema(DictOnlySchema):
         ma_fields.Nested(lambda: NROrganizationIdentifierUISchema())
     )
 
-    contributorType = ma_fields.Nested(lambda: NRContributorTypeVocabularyUISchema())
+    contributorType = ma_fields.Nested(
+        lambda: NRContributorTypeVocabularyUISchema(), required=True
+    )
 
-    familyName = ma_fields.String()
+    familyName = ma_fields.String(required=True)
 
     fullName = ma_fields.String(required=True)
 
-    givenName = ma_fields.String()
+    givenName = ma_fields.String(required=True)
 
     nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
 
@@ -272,11 +284,11 @@ class NRRelatedItemCreatorUISchema(DictOnlySchema):
         ma_fields.Nested(lambda: NROrganizationIdentifierUISchema())
     )
 
-    familyName = ma_fields.String()
+    familyName = ma_fields.String(required=True)
 
     fullName = ma_fields.String(required=True)
 
-    givenName = ma_fields.String()
+    givenName = ma_fields.String(required=True)
 
     nameType = ma_fields.String(validate=[OneOf(["Organizational"])])
 
