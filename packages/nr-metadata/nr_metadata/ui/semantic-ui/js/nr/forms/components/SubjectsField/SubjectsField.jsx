@@ -51,7 +51,7 @@ export const SubjectsField = ({ fieldPath }) => {
     [fieldPath, subjects, setFieldValue]
   );
   const { getFieldData } = useFieldData();
-  const { label } = getFieldData({ fieldPath }).fullRepresentation;
+  const { label, helpText } = getFieldData({ fieldPath }).fullRepresentation;
   return (
     <Form.Field className="ui subjects-field">
       {label}
@@ -70,6 +70,7 @@ export const SubjectsField = ({ fieldPath }) => {
         <SubjectsModal
           handleSubjectAdd={handleSubjectAdd}
           fieldPath={fieldPath}
+          helpText={helpText}
           trigger={
             <Form.Button
               className="array-field-add-button rel-mt-1"

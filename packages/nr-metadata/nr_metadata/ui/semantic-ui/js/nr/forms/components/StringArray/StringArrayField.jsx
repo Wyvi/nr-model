@@ -95,9 +95,6 @@ StringArrayField.propTypes = {
 StringArrayField.defaultProps = {
   addButtonLabel: i18next.t("Add note"),
   defaultNewValue: "",
-  labelIcon: "pencil",
-  label: i18next.t("Notes"),
-  helpText: i18next.t("Items shall be unique"),
   showEmptyValue: false,
   addButtonClassName: "array-field-add-button",
 };

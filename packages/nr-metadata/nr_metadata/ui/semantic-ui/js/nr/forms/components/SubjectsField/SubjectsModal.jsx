@@ -11,7 +11,7 @@ import {
 } from "@js/oarepo_ui";
 
 const SubjectsValidationSchema = Yup.object({
-  keywords: Yup.array().of(
+  subject: Yup.array().of(
     Yup.object().shape({
       lang: Yup.string().required(requiredMessage).label(i18next.t("Language")),
       value: Yup.string().required(requiredMessage).label(i18next.t("Keyword")),
@@ -19,7 +19,7 @@ const SubjectsValidationSchema = Yup.object({
   ),
 });
 
-export const SubjectsModal = ({ trigger, handleSubjectAdd }) => {
+export const SubjectsModal = ({ trigger, handleSubjectAdd, helpText }) => {
   const [open, setOpen] = React.useState(false);
   const [saveAndContinueLabel, setSaveAndContinueLabel] = React.useState(
     i18next.t("Save and add another")
@@ -88,9 +88,7 @@ export const SubjectsModal = ({ trigger, handleSubjectAdd }) => {
               <Grid.Column floated="left" width={8}>
                 <span>{i18next.t("Add keywords")}</span>
                 <Popup
-                  content={i18next.t(
-                    "Write keywords describing the resource, always choose a language."
-                  )}
+                  content={helpText}
                   trigger={
                     <Icon
                       className="rel-ml-1"
@@ -110,7 +108,6 @@ export const SubjectsModal = ({ trigger, handleSubjectAdd }) => {
                     fieldPath="subject"
                     lngFieldWidth={3}
                     showEmptyValue
-                    removeButtonLabelClassName="field-label-class invenio-field-label"
                     displayFirstInputRemoveButton={false}
                   />
                 </FieldDataProvider>
@@ -161,4 +158,5 @@ export const SubjectsModal = ({ trigger, handleSubjectAdd }) => {
 SubjectsModal.propTypes = {
   trigger: PropTypes.node,
   handleSubjectAdd: PropTypes.func.isRequired,
+  helpText: PropTypes.string,
 };

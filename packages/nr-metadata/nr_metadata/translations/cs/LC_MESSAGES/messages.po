@@ -3893,7 +3893,7 @@ msgid "Add keywords"
 msgstr "Přidejte klíčové slovo"
 
 msgid "Keyword"
-msgstr "Klíčová slova "
+msgstr "Klíčové slovo"
 
 msgid "Write keywords describing the resource, always choose a language."
 msgstr "Zapisujte slova popisující zdroj, zvolte vždy jazyk."
