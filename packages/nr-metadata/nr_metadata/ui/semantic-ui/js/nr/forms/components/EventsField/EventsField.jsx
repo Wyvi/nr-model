@@ -9,6 +9,7 @@ import {
   useSanitizeInput,
   useFieldData,
 } from "@js/oarepo_ui";
+import { i18next } from "@translations/nr/i18next";
 import { useFormikContext, getIn } from "formik";
 
 export const EventsField = ({ fieldPath }) => {
@@ -18,8 +19,9 @@ export const EventsField = ({ fieldPath }) => {
   const { getFieldData } = useFieldData();
   return (
     <ArrayField
+      addButtonLabel={i18next.t("Add event")}
       fieldPath={fieldPath}
-      {...getFieldData({ fieldPath }).textRepresentation}
+      {...getFieldData({ fieldPath, fieldRepresentation: "text" })}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
@@ -36,8 +38,10 @@ export const EventsField = ({ fieldPath }) => {
             <TextField
               width={16}
               fieldPath={eventNameOriginalFieldPath}
-              {...getFieldData({ fieldPath: eventNameOriginalFieldPath })
-                .compactRepresentation}
+              {...getFieldData({
+                fieldPath: eventNameOriginalFieldPath,
+                fieldRepresentation: "compact",
+              })}
               onBlur={() => {
                 const cleanedContent = sanitizeInput(
                   getIn(values, eventNameOriginalFieldPath)
@@ -51,14 +55,15 @@ export const EventsField = ({ fieldPath }) => {
               fieldPath={`${fieldPathPrefix}.eventNameAlternate`}
               {...getFieldData({
                 fieldPath: `${fieldPathPrefix}.eventNameAlternate`,
-              }).compactRepresentation}
+                fieldRepresentation: "compact",
+              })}
             />
             <EDTFDaterangePicker
               fieldPath={`${fieldPathPrefix}.eventDate`}
               {...getFieldData({
                 fieldPath: `${fieldPathPrefix}.eventDate`,
                 icon: "calendar",
-              }).fullRepresentation}
+              })}
             />
             <GroupField>
               <TextField
@@ -66,7 +71,8 @@ export const EventsField = ({ fieldPath }) => {
                 fieldPath={`${fieldPathPrefix}.eventLocation.place`}
                 {...getFieldData({
                   fieldPath: `${fieldPathPrefix}.eventLocation.place`,
-                }).compactRepresentation}
+                  fieldRepresentation: "compact",
+                })}
               />
               <LocalVocabularySelectField
                 selectOnBlur={false}
@@ -76,7 +82,8 @@ export const EventsField = ({ fieldPath }) => {
                 clearable
                 {...getFieldData({
                   fieldPath: `${fieldPathPrefix}.eventLocation.country`,
-                }).compactRepresentation}
+                  fieldRepresentation: "compact",
+                })}
               />
             </GroupField>
           </ArrayFieldItem>

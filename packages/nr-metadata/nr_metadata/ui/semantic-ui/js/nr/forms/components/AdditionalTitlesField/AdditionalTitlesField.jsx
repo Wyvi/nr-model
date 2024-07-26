@@ -49,7 +49,7 @@ export const AdditionalTitlesField = ({
       }
       fieldPath={fieldPath}
       className="additional-titles"
-      {...getFieldData({ fieldPath }).textRepresentation}
+      {...getFieldData({ fieldPath, fieldRepresentation: "text" })}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
@@ -75,8 +75,10 @@ export const AdditionalTitlesField = ({
                 clearable
                 id={`${fieldPathPrefix}.titleType`}
                 width={16}
-                {...getFieldData({ fieldPath: `${fieldPathPrefix}.titleType` })
-                  .compactRepresentation}
+                {...getFieldData({
+                  fieldPath: `${fieldPathPrefix}.titleType`,
+                  fieldRepresentation: "compact",
+                })}
               />
             </Form.Field>
           </ArrayFieldItem>

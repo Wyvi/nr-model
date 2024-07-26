@@ -15,7 +15,7 @@ export const SeriesField = ({ fieldPath }) => {
     <ArrayField
       addButtonLabel={i18next.t("Add series")}
       fieldPath={fieldPath}
-      {...getFieldData({ fieldPath }).textRepresentation}
+      {...getFieldData({ fieldPath, fieldRepresentation: "text" })}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
@@ -30,8 +30,10 @@ export const SeriesField = ({ fieldPath }) => {
             <TextField
               width={8}
               fieldPath={seriesTitleFieldPath}
-              {...getFieldData({ fieldPath: seriesTitleFieldPath })
-                .compactRepresentation}
+              {...getFieldData({
+                fieldPath: seriesTitleFieldPath,
+                fieldRepresentation: "compact",
+              })}
               onBlur={() => {
                 const cleanedContent = sanitizeInput(
                   getIn(values, seriesTitleFieldPath)
@@ -43,8 +45,10 @@ export const SeriesField = ({ fieldPath }) => {
             <TextField
               width={8}
               fieldPath={`${fieldPathPrefix}.seriesVolume`}
-              {...getFieldData({ fieldPath: `${fieldPathPrefix}.seriesVolume` })
-                .compactRepresentation}
+              {...getFieldData({
+                fieldPath: `${fieldPathPrefix}.seriesVolume`,
+                fieldRepresentation: "compact",
+              })}
             />
           </ArrayFieldItem>
         );

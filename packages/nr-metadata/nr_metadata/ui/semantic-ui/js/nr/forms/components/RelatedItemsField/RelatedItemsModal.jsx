@@ -175,15 +175,13 @@ export const RelatedItemsModal = ({
                   autoComplete="off"
                   fieldPath="itemTitle"
                   onBlur={() => handleBlur("itemTitle")}
-                  {...getFieldData({ fieldPath: "itemTitle" })
-                    .fullRepresentation}
+                  {...getFieldData({ fieldPath: "itemTitle" })}
                 />
                 <CreatibutorsField
                   fieldPath="itemCreators"
                   schema="creators"
                   autocompleteNames="off"
-                  {...getFieldData({ fieldPath: "itemCreators" })
-                    .fullRepresentation}
+                  {...getFieldData({ fieldPath: "itemCreators" })}
                   fieldPathPrefix="metadata.relatedItems.0.itemCreators.0"
                 />
                 <CreatibutorsField
@@ -199,7 +197,7 @@ export const RelatedItemsModal = ({
                   {...getFieldData({
                     fieldPath: "itemContributors",
                     icon: "user",
-                  }).fullRepresentation}
+                  })}
                 />
 
                 <IdentifiersField
@@ -212,46 +210,55 @@ export const RelatedItemsModal = ({
                   autoComplete="off"
                   fieldPath="itemURL"
                   onBlur={() => handleBlur("itemURL")}
-                  {...getFieldData({ fieldPath: "itemURL" }).fullRepresentation}
+                  {...getFieldData({ fieldPath: "itemURL" })}
                 />
                 <GroupField widths="equal">
                   <TextField
                     fieldPath="itemYear"
                     onBlur={() => handleBlur("itemYear")}
-                    {...getFieldData({ fieldPath: "itemYear" })
-                      .compactRepresentation}
+                    {...getFieldData({
+                      fieldPath: "itemYear",
+                      fieldRepresentation: "compact",
+                    })}
                   />
                   <TextField
                     fieldPath="itemVolume"
                     onBlur={() => handleBlur("itemVolume")}
-                    {...getFieldData({ fieldPath: "itemVolume" })
-                      .compactRepresentation}
+                    {...getFieldData({
+                      fieldPath: "itemVolume",
+                      fieldRepresentation: "compact",
+                    })}
                   />
                   <TextField
                     fieldPath="itemIssue"
                     onBlur={() => handleBlur("itemIssue")}
-                    {...getFieldData({ fieldPath: "itemIssue" })
-                      .compactRepresentation}
+                    {...getFieldData({
+                      fieldPath: "itemIssue",
+                      fieldRepresentation: "compact",
+                    })}
                   />
                   <TextField
                     fieldPath="itemStartPage"
                     onBlur={() => handleBlur("itemStartPage")}
-                    {...getFieldData({ fieldPath: "itemStartPage" })
-                      .compactRepresentation}
+                    {...getFieldData({
+                      fieldPath: "itemStartPage",
+                      fieldRepresentation: "compact",
+                    })}
                   />
                   <TextField
                     fieldPath="itemEndPage"
                     onBlur={() => handleBlur("itemEndPage")}
-                    {...getFieldData({ fieldPath: "itemEndPage" })
-                      .compactRepresentation}
+                    {...getFieldData({
+                      fieldPath: "itemEndPage",
+                      fieldRepresentation: "compact",
+                    })}
                   />
                 </GroupField>
                 <TextField
                   width={16}
                   fieldPath="itemPublisher"
                   onBlur={() => handleBlur("itemPublisher")}
-                  {...getFieldData({ fieldPath: "itemPublisher" })
-                    .fullRepresentation}
+                  {...getFieldData({ fieldPath: "itemPublisher" })}
                 />
                 <GroupField>
                   <LocalVocabularySelectField
@@ -259,8 +266,10 @@ export const RelatedItemsModal = ({
                     fieldPath="itemRelationType"
                     clearable
                     optionsListName="item-relation-types"
-                    {...getFieldData({ fieldPath: "itemRelationType" })
-                      .compactRepresentation}
+                    {...getFieldData({
+                      fieldPath: "itemRelationType",
+                      fieldRepresentation: "compact",
+                    })}
                   />
                   <LocalVocabularySelectField
                     width={16}
@@ -268,8 +277,10 @@ export const RelatedItemsModal = ({
                     clearable
                     optionsListName="resource-types"
                     showLeafsOnly
-                    {...getFieldData({ fieldPath: "itemResourceType" })
-                      .compactRepresentation}
+                    {...getFieldData({
+                      fieldPath: "itemResourceType",
+                      fieldRepresentation: "compact",
+                    })}
                   />
                 </GroupField>
               </Form>

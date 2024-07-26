@@ -51,7 +51,7 @@ export const SubjectsField = ({ fieldPath }) => {
     [fieldPath, subjects, setFieldValue]
   );
   const { getFieldData } = useFieldData();
-  const { label, helpText } = getFieldData({ fieldPath }).fullRepresentation;
+  const { label, helpText } = getFieldData({ fieldPath });
   return (
     <Form.Field className="ui subjects-field">
       {label}
