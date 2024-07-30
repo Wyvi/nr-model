@@ -37,8 +37,15 @@ NRPerson:
       use: "nr-datatypes#NRPersonIdentifier"
       ^label.cs: Identifikátor osoby
       ^label.en: Person identifier
-      ^help.cs: "Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816)."
-      ^help.en: "Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
+      ^help.cs: |
+        Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816). 
+        Doporučujeme zadat alespoň jeden z typů identifikátorů. 
+        Pokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.
+      ^help.en: |
+        Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816). 
+        We recommend providing at least one of the identifier types.
+        If you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.
+
     affiliations[]:
       type: taxonomy
       vocabulary-type: institutions
@@ -101,7 +108,6 @@ NRPersonIdentifier:
       required: true
       sample:
         faker: isbn13
-      i18n.key: identifier
       label.cs: Identifikátor
       label.en: Identifier
       hint.cs: "např https://orcid.org/0009-0004-8646-7185 pro ORCID."
@@ -120,15 +126,11 @@ NRPersonIdentifier:
           institutionalID,
           ISNI,
         ]
-      i18n.key: identifier_type
       label.cs: Typ identifikátoru
       label.en: Identifier type
-      hint.cs: |
-        Doporučujeme zadat alespoň jeden z typů identifikátorů.
-        Pokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.
-      hint.en: |
-        We recommend providing at least one of the identifier types.
-        If you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.
+      hint.cs: "např ORCID, scopusID"
+      hint.en: "e.g. ORCID, scopusID"
+
   ui:
     detail: nr_person_identifier
     marshmallow:
@@ -146,22 +148,15 @@ NROrganizationIdentifier:
       required: true
       sample:
         faker: isbn13
-      i18n.key: identifier
       label.cs: Identifikátor
       label.en: Identifier
     scheme:
       type: keyword
       required: true
       enum: [ISNI, ROR, ICO, DOI]
-      i18n.key: identifier_type
       label.cs: Typ identifikátoru
       label.en: Identifier type
-      hint.cs: |
-        Doporučujeme zadat alespoň jeden z typů identifikátorů.
-        Pokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.
-      hint.en: |
-        We recommend providing at least one of the identifier types.
-        If you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.
+
   ui:
     detail: nr_organization_identifier
     marshmallow:
@@ -425,8 +420,29 @@ NRRelatedItem:
 
     itemPIDs[]:
       use: "nr-datatypes#NRObjectPID"
+      ^label.cs: Identifikátor
+      ^label.en: Identifier
       ^help.cs: Trvalé identifikátory objektu jako ISBN, DOI atd.
       ^help.en: Permanent object identifiers such as ISBN, DOI, etc.
+      properties:
+        identifier:
+          type: keyword
+          required: true
+          sample:
+            faker: isbn13
+          label.cs: Identifikátor objektu
+          label.en: Object identifier
+          hint.cs: "např. 10.1086/679716 pro DOI."
+          hint.en: "e.g. 10.1086/679716 for DOI."
+        scheme:
+          type: keyword
+          required: true
+          enum: [DOI, Handle, ISBN, ISSN, RIV, IGSN]
+          label.cs: Typ identifikátoru
+          label.en: Identifier type
+          hint.cs: např. DOI, HANDLE nebo ISBN.
+          hint.en: e.g. DOI, HANDLE or ISBN.
+
       #^uniqueItems: true
 
     itemURL:
