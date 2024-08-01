@@ -15,7 +15,7 @@
             {% set title = _("Organizations") %}
         {% endif %}
     {% else %}
-        {% set title = _("People/Organizations") %}
+        {% set title =  _("People") ~ "/" ~ _("Organizations")   %}
     {% endif %}
 
     <dt>{{ title }}</dt>
