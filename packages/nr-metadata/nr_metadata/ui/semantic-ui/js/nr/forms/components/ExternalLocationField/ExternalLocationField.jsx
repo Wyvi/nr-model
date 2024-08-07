@@ -7,7 +7,7 @@ import { useFieldData } from "@js/oarepo_ui";
 export const ExternalLocationField = ({ fieldPath }) => {
   const { getFieldData } = useFieldData();
 
-  const { label, helpText } = getFieldData({ fieldPath }).fullRepresentation;
+  const { label, helpText } = getFieldData({ fieldPath });
   return (
     <Form.Field>
       {label}
@@ -15,14 +15,18 @@ export const ExternalLocationField = ({ fieldPath }) => {
         <TextField
           width={8}
           fieldPath={`${fieldPath}.externalLocationURL`}
-          {...getFieldData({ fieldPath: `${fieldPath}.externalLocationURL` })
-            .compactRepresentation}
+          {...getFieldData({
+            fieldPath: `${fieldPath}.externalLocationURL`,
+            fieldRepresentation: "compact",
+          })}
         />
         <TextField
           width={8}
           fieldPath={`${fieldPath}.externalLocationNote`}
-          {...getFieldData({ fieldPath: `${fieldPath}.externalLocationNote` })
-            .compactRepresentation}
+          {...getFieldData({
+            fieldPath: `${fieldPath}.externalLocationNote`,
+            fieldRepresentation: "compact",
+          })}
         />
       </GroupField>
       {helpText && <label className="helptext">{helpText}</label>}

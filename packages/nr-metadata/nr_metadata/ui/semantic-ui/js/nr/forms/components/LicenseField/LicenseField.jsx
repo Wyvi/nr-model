@@ -29,7 +29,7 @@ export const LicenseField = ({
     label: modelLabel,
     helpText: modelHelpText,
     required: modelRequired,
-  } = getFieldData({ fieldPath, icon: "drivers license" }).fullRepresentation;
+  } = getFieldData({ fieldPath, icon: "drivers license" });
   const { values, setFieldValue } = useFormikContext();
   const license = getIn(values, fieldPath, {})?.id
     ? getIn(values, fieldPath, {})

@@ -515,8 +515,10 @@ export const CreatibutorsModal = ({
                           )
                         }
                         onValueChange={onPersonSearchChange}
-                        {...getFieldData({ fieldPath: familyNameFieldPath })
-                          .compactRepresentation}
+                        {...getFieldData({
+                          fieldPath: familyNameFieldPath,
+                          fieldRepresentation: "compact",
+                        })}
                       />
                     )}
                     {showPersonForm && (
@@ -524,14 +526,14 @@ export const CreatibutorsModal = ({
                         <Form.Group widths="equal">
                           <TextField
                             fieldPath={familyNameFieldPath}
-                            {...getFieldData({ fieldPath: familyNameFieldPath })
-                              .fullRepresentation}
+                            {...getFieldData({
+                              fieldPath: familyNameFieldPath,
+                            })}
                             onBlur={() => handleBlur(familyNameFieldPath)}
                           />
                           <TextField
                             fieldPath={givenNameFieldPath}
-                            {...getFieldData({ fieldPath: givenNameFieldPath })
-                              .fullRepresentation}
+                            {...getFieldData({ fieldPath: givenNameFieldPath })}
                             onBlur={() => handleBlur(givenNameFieldPath)}
                           />
                         </Form.Group>
@@ -556,8 +558,9 @@ export const CreatibutorsModal = ({
                           externalAuthority
                           multiple
                           clearable
-                          {...getFieldData({ fieldPath: affiliationsFieldPath })
-                            .fullRepresentation}
+                          {...getFieldData({
+                            fieldPath: affiliationsFieldPath,
+                          })}
                         />
                       </div>
                     )}
@@ -584,8 +587,7 @@ export const CreatibutorsModal = ({
                       deburr
                       required
                       onBlur={() => handleBlur(affiliationFullNameFieldPath)}
-                      {...getFieldData({ fieldPath: fullNameFieldPath })
-                        .fullRepresentation}
+                      {...getFieldData({ fieldPath: fullNameFieldPath })}
                     />
                   </div>
                 )}
@@ -596,8 +598,7 @@ export const CreatibutorsModal = ({
                     clearable
                     optionsListName="contributor-types"
                     onBlur={() => handleBlur(roleFieldPath)}
-                    {...getFieldData({ fieldPath: roleFieldPath })
-                      .fullRepresentation}
+                    {...getFieldData({ fieldPath: roleFieldPath })}
                   />
                 )}
               </Form>

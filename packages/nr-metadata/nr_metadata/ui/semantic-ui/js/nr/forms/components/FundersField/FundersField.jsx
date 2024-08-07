@@ -13,7 +13,7 @@ export const FundersField = ({ fieldPath, addButtonLabel }) => {
       addButtonLabel={addButtonLabel}
       defaultNewValue={{}}
       fieldPath={fieldPath}
-      {...getFieldData({ fieldPath }).textRepresentation}
+      {...getFieldData({ fieldPath, fieldRepresentation: "text" })}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
@@ -28,15 +28,19 @@ export const FundersField = ({ fieldPath, addButtonLabel }) => {
             <TextField
               width={16}
               fieldPath={`${fieldPathPrefix}.projectID`}
-              {...getFieldData({ fieldPath: `${fieldPathPrefix}.projectID` })
-                .compactRepresentation}
+              {...getFieldData({
+                fieldPath: `${fieldPathPrefix}.projectID`,
+                fieldRepresentation: "compact",
+              })}
             />
             <TextField
               className="rel-mt-1"
               width={16}
               fieldPath={`${fieldPathPrefix}.projectName`}
-              {...getFieldData({ fieldPath: `${fieldPathPrefix}.projectName` })
-                .compactRepresentation}
+              {...getFieldData({
+                fieldPath: `${fieldPathPrefix}.projectName`,
+                fieldRepresentation: "compact",
+              })}
             />
             <TextField
               className="rel-mt-1"
@@ -44,7 +48,8 @@ export const FundersField = ({ fieldPath, addButtonLabel }) => {
               fieldPath={`${fieldPathPrefix}.fundingProgram`}
               {...getFieldData({
                 fieldPath: `${fieldPathPrefix}.fundingProgram`,
-              }).compactRepresentation}
+                fieldRepresentation: "compact",
+              })}
             />
             <LocalVocabularySelectField
               className="rel-mt-1"
@@ -52,8 +57,10 @@ export const FundersField = ({ fieldPath, addButtonLabel }) => {
               fieldPath={`${fieldPathPrefix}.funder`}
               optionsListName="funders"
               clearable
-              {...getFieldData({ fieldPath: `${fieldPathPrefix}.funder` })
-                .compactRepresentation}
+              {...getFieldData({
+                fieldPath: `${fieldPathPrefix}.funder`,
+                fieldRepresentation: "compact",
+              })}
             />
           </ArrayFieldItem>
         );
