@@ -1,3 +1,4 @@
+from nr_metadata.data.records.api import DataRecord
 from nr_metadata.data.resources.records.config import DataResourceConfig
 from nr_metadata.data.resources.records.resource import DataResource
 from nr_metadata.data.services.records.config import DataServiceConfig
@@ -13,3 +14,6 @@ DATA_RECORD_SERVICE_CONFIG = DataServiceConfig
 
 
 DATA_RECORD_SERVICE_CLASS = DataService
+
+
+OAREPO_PRIMARY_RECORD_SERVICE = {DataRecord: "data"}

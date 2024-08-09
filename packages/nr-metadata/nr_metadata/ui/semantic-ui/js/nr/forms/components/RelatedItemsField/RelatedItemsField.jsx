@@ -18,6 +18,7 @@ import { DndProvider } from "react-dnd";
 import { RelatedItemsModal } from "./RelatedItemsModal";
 import { RelatedItemsFieldItem } from "./RelatedItemsFieldItem";
 import { i18next } from "@translations/nr/i18next";
+import { FieldDataProvider } from "@js/oarepo_ui";
 
 const relatedItemNameDisplay = (value) => {
   const name = _get(value, `itemTitle`);
@@ -51,7 +52,7 @@ class RelatedItemsFieldForm extends Component {
       addButtonLabel,
       required,
       helpText,
-      validTags,
+      fieldPathPrefix,
     } = this.props;
 
     const relatedItemsList = getIn(values, fieldPath, []);
@@ -63,60 +64,61 @@ class RelatedItemsFieldForm extends Component {
       error || (relatedItemsList === formikInitialValues && initialError);
 
     return (
-      <DndProvider context={window} backend={HTML5Backend}>
-        <Form.Field
-          required={required}
-          className={relatedItemsError ? "error" : ""}
-        >
-          <FieldLabel htmlFor={fieldPath} icon={labelIcon} label={label} />
-          <label className="helptext">{helpText}</label>
-          <List>
-            {relatedItemsList.map((value, index) => {
-              const key = `${fieldPath}.${index}`;
-              const displayName = relatedItemNameDisplay(value);
-              return (
-                <RelatedItemsFieldItem
-                  key={key}
-                  displayName={displayName}
-                  index={index}
-                  compKey={key}
-                  initialRelatedItem={value}
-                  removeRelatedItem={formikArrayRemove}
-                  replaceRelatedItem={formikArrayReplace}
-                  moveRelatedItem={formikArrayMove}
-                  addLabel={modal.addLabel}
-                  editLabel={modal.editLabel}
-                />
-              );
-            })}
-            <RelatedItemsModal
-              key="add-related-item-modal"
-              onRelatedItemChange={this.handleRelatedItemChange}
-              initialAction="add"
-              addLabel={modal.addLabel}
-              editLabel={modal.editLabel}
-              trigger={
-                <Form.Button
-                  type="button"
-                  icon
-                  labelPosition="left"
-                  className="array-field-add-button inline-block"
-                >
-                  <Icon name="add" />
-                  {addButtonLabel}
-                </Form.Button>
-              }
-              validTags={validTags}
-            />
+      <FieldDataProvider fieldPathPrefix={fieldPathPrefix}>
+        <DndProvider context={window} backend={HTML5Backend}>
+          <Form.Field
+            required={required}
+            className={relatedItemsError ? "error" : ""}
+          >
+            <FieldLabel htmlFor={fieldPath} icon={labelIcon} label={label} />
+            <label className="helptext">{helpText}</label>
+            <List>
+              {relatedItemsList.map((value, index) => {
+                const key = `${fieldPath}.${index}`;
+                const displayName = relatedItemNameDisplay(value);
+                return (
+                  <RelatedItemsFieldItem
+                    key={key}
+                    displayName={displayName}
+                    index={index}
+                    compKey={key}
+                    initialRelatedItem={value}
+                    removeRelatedItem={formikArrayRemove}
+                    replaceRelatedItem={formikArrayReplace}
+                    moveRelatedItem={formikArrayMove}
+                    addLabel={modal.addLabel}
+                    editLabel={modal.editLabel}
+                  />
+                );
+              })}
+              <RelatedItemsModal
+                key="add-related-item-modal"
+                onRelatedItemChange={this.handleRelatedItemChange}
+                initialAction="add"
+                addLabel={modal.addLabel}
+                editLabel={modal.editLabel}
+                trigger={
+                  <Form.Button
+                    type="button"
+                    icon
+                    labelPosition="left"
+                    className="array-field-add-button inline-block"
+                  >
+                    <Icon name="add" />
+                    {addButtonLabel}
+                  </Form.Button>
+                }
+              />
 
-            {relatedItemsError && typeof relatedItemsError == "string" && (
-              <Label pointing="left" prompt>
-                {relatedItemsError}
-              </Label>
-            )}
-          </List>
-        </Form.Field>
-      </DndProvider>
+              {relatedItemsError && typeof relatedItemsError == "string" && (
+                <Label pointing="left" prompt>
+                  {relatedItemsError}
+                </Label>
+              )}
+            </List>
+          </Form.Field>
+        </DndProvider>
+      </FieldDataProvider>
     );
   }
 }
@@ -152,7 +154,7 @@ RelatedItemsFieldForm.propTypes = {
   push: PropTypes.func.isRequired,
   required: PropTypes.bool,
   helpText: PropTypes.string,
-  validTags: PropTypes.array,
+  fieldPathPrefix: PropTypes.string,
 };
 
 RelatedItemsFieldForm.defaultProps = {
@@ -165,6 +167,7 @@ RelatedItemsFieldForm.defaultProps = {
   helpText: i18next.t(
     "Write down information about a resource related to the resource being described (i.e. if you are describing an article, here you can identify a magazine in which the article was published)."
   ),
+  fieldPathPrefix: "metadata.relatedItems.0",
 };
 
 RelatedItemsField.propTypes = {
@@ -178,7 +181,7 @@ RelatedItemsField.propTypes = {
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   labelIcon: PropTypes.string,
   required: PropTypes.bool,
-  validTags: PropTypes.array,
+  fieldPathPrefix: PropTypes.string,
 };
 
 RelatedItemsField.defaultProps = {
@@ -189,4 +192,5 @@ RelatedItemsField.defaultProps = {
     editLabel: i18next.t("Edit related item"),
   },
   addButtonLabel: i18next.t("Add related item"),
+  fieldPathPrefix: "metadata.relatedItems.0",
 };

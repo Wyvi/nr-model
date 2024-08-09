@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ArrayField, SelectField, TextField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
-import { ArrayFieldItem, useValidateOnBlur } from "@js/oarepo_ui";
+import { ArrayFieldItem, useFieldData, useValidateOnBlur } from "@js/oarepo_ui";
 import { useFormikContext, getIn } from "formik";
 import * as Yup from "yup";
 
@@ -61,18 +61,15 @@ export const IdentifiersValidationSchema = Yup.array().of(
 );
 export const IdentifiersField = ({
   fieldPath,
-  helpText,
+  labelIcon,
   options,
-  label,
-  identifierLabel,
   className,
-  identifierTypePlaceholder,
-  identifierPlaceholder,
   defaultNewValue,
   validateOnBlur,
   ...uiProps
 }) => {
   const { setFieldTouched, values } = useFormikContext();
+  const { getFieldData } = useFieldData();
   const identifiers = getIn(values, fieldPath, []);
   const handleValidateAndBlur = useValidateOnBlur();
 
@@ -80,15 +77,19 @@ export const IdentifiersField = ({
     <ArrayField
       addButtonLabel={i18next.t("Add identifier")}
       fieldPath={fieldPath}
-      label={label}
-      labelIcon="pencil"
-      helpText={helpText}
       className={className}
       defaultNewValue={defaultNewValue}
+      {...getFieldData({
+        fieldPath,
+        icon: labelIcon,
+        fieldRepresentation: "text",
+      })}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
+        const schemeFieldPath = `${fieldPathPrefix}.scheme`;
+        const identifierFieldPath = `${fieldPathPrefix}.identifier`;
         return (
           <ArrayFieldItem
             indexPath={indexPath}
@@ -98,32 +99,34 @@ export const IdentifiersField = ({
             <SelectField
               clearable
               width={4}
-              fieldPath={`${fieldPathPrefix}.scheme`}
-              label={i18next.t("Identifier type")}
-              required
+              fieldPath={schemeFieldPath}
               options={options.filter(
                 (o) =>
                   !identifiers.map((i) => i.scheme).includes(o.value) ||
-                  o.value === getIn(values, `${fieldPathPrefix}.scheme`)
+                  o.value === getIn(values, schemeFieldPath)
               )}
               onBlur={
                 validateOnBlur
-                  ? () => handleValidateAndBlur(`${fieldPathPrefix}.scheme`)
-                  : () => setFieldTouched(`${fieldPathPrefix}.scheme`)
+                  ? () => handleValidateAndBlur(schemeFieldPath)
+                  : () => setFieldTouched(schemeFieldPath)
               }
-              placeholder={identifierTypePlaceholder}
               {...uiProps}
+              {...getFieldData({
+                fieldPath: schemeFieldPath,
+                fieldRepresentation: "compact",
+              })}
             />
             <TextField
-              required
               width={12}
-              fieldPath={`${fieldPathPrefix}.identifier`}
-              placeholder={identifierPlaceholder}
-              label={identifierLabel}
+              fieldPath={identifierFieldPath}
+              {...getFieldData({
+                fieldPath: identifierFieldPath,
+                fieldRepresentation: "compact",
+              })}
               onBlur={
                 validateOnBlur
-                  ? () => handleValidateAndBlur(`${fieldPathPrefix}.identifier`)
-                  : () => setFieldTouched(`${fieldPathPrefix}.identifier`)
+                  ? () => handleValidateAndBlur(identifierFieldPath)
+                  : () => setFieldTouched(identifierFieldPath)
               }
             />
           </ArrayFieldItem>
@@ -135,22 +138,15 @@ export const IdentifiersField = ({
 
 IdentifiersField.propTypes = {
   fieldPath: PropTypes.string.isRequired,
-  helpText: PropTypes.string,
+  labelIcon: PropTypes.string,
   options: PropTypes.array.isRequired,
-  label: PropTypes.string,
-  identifierLabel: PropTypes.string,
   className: PropTypes.string,
-  identifierTypePlaceholder: PropTypes.string,
-  identifierPlaceholder: PropTypes.string,
   defaultNewValue: PropTypes.object,
   validateOnBlur: PropTypes.bool,
 };
 
 IdentifiersField.defaultProps = {
-  label: i18next.t("Identifier field"),
-  identifierLabel: i18next.t("Identifier"),
-  identifierTypePlaceholder: i18next.t("e.g. ORCID, ISNI or ScopusID."),
-  identifierPlaceholder: i18next.t("e.g. 10.1086/679716 for a DOI"),
+  labelIcon: "pencil",
   defaultNewValue: { scheme: "", identifier: "" },
   validateOnBlur: false,
 };

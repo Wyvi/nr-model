@@ -9,21 +9,27 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { getIn, useFormikContext } from "formik";
-import { FieldLabel } from "react-invenio-forms";
 import { Form, Icon } from "semantic-ui-react";
 import { LicenseModal } from "./LicenseModal";
 import { LicenseFieldItem } from "./LicenseFieldItem";
 import { i18next } from "@translations/nr/i18next";
+import { useFieldData } from "@js/oarepo_ui";
 
 export const LicenseField = ({
   label,
-  labelIcon,
   fieldPath,
   required,
   searchConfig,
   serializeLicense,
   helpText,
 }) => {
+  const { getFieldData } = useFieldData();
+
+  const {
+    label: modelLabel,
+    helpText: modelHelpText,
+    required: modelRequired,
+  } = getFieldData({ fieldPath, icon: "drivers license" });
   const { values, setFieldValue } = useFormikContext();
   const license = getIn(values, fieldPath, {})?.id
     ? getIn(values, fieldPath, {})
@@ -32,9 +38,9 @@ export const LicenseField = ({
     setFieldValue(fieldPath, { id: selectedLicense.id });
   };
   return (
-    <Form.Field required={required}>
-      <FieldLabel htmlFor={fieldPath} icon={labelIcon} label={label} />
-      <label className="helptext">{helpText}</label>
+    <Form.Field required={required ?? modelRequired}>
+      {label ?? modelLabel}
+      <label className="helptext">{helpText ?? modelHelpText}</label>
       {license && (
         <LicenseFieldItem
           key={license.id}
@@ -65,8 +71,7 @@ export const LicenseField = ({
 };
 
 LicenseField.propTypes = {
-  label: PropTypes.string,
-  labelIcon: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   fieldPath: PropTypes.string.isRequired,
   required: PropTypes.bool,
   searchConfig: PropTypes.object.isRequired,
@@ -75,7 +80,6 @@ LicenseField.propTypes = {
 };
 
 LicenseField.defaultProps = {
-  labelIcon: "drivers license",
   label: i18next.t("License"),
   serializeLicense: undefined,
   required: false,
