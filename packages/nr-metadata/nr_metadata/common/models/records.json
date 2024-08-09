@@ -264,17 +264,6 @@
             "extensions": [],
             "imports": []
         },
-        "multilingual-dumper": {
-            "generate": true,
-            "module": "nr_metadata.common.records.dumpers.multilingual",
-            "class": "nr_metadata.common.records.dumpers.multilingual.MultilingualSearchDumperExt",
-            "base-classes": [
-                "oarepo_runtime.records.dumpers.multilingual_dumper.MultilingualDumper"
-            ],
-            "extra-code": "",
-            "extensions": [],
-            "imports": []
-        },
         "mapping": {
             "generate": true,
             "alias": "common",
@@ -1856,8 +1845,8 @@
                                             "sample": {
                                                 "faker": "name"
                                             },
-                                            "label.cs": "Jméno autora",
-                                            "label.en": "Author name",
+                                            "label.cs": "Organizace",
+                                            "label.en": "Organization",
                                             "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
                                             "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                         },
@@ -2256,8 +2245,8 @@
                                     "sample": {
                                         "faker": "name"
                                     },
-                                    "label.cs": "Jméno autora",
-                                    "label.en": "Author name",
+                                    "label.cs": "Organizace",
+                                    "label.en": "Organization",
                                     "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
                                     "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                 },
@@ -2305,7 +2294,7 @@
                     },
                     "events": {
                         "type": "array",
-                        "label.cs": "Události",
+                        "label.cs": "Související akce",
                         "label.en": "Events",
                         "items": {
                             "type": "object",
@@ -2326,7 +2315,7 @@
                                 "eventDate": {
                                     "type": "edtf-interval",
                                     "required": true,
-                                    "label.cs": "Datum konání akce",
+                                    "label.cs": "Datum akce",
                                     "label.en": "Event date",
                                     "hint.cs": "Vyberte časové období (Od - Do).",
                                     "hint.en": "Choose the time period (From - To).",
@@ -3328,8 +3317,8 @@
                                                         "sample": {
                                                             "faker": "name"
                                                         },
-                                                        "label.cs": "Jméno autora",
-                                                        "label.en": "Author name",
+                                                        "label.cs": "Organizace",
+                                                        "label.en": "Organization",
                                                         "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
                                                         "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                                     },
@@ -3841,8 +3830,8 @@
                                                 "sample": {
                                                     "faker": "name"
                                                 },
-                                                "label.cs": "Jméno autora",
-                                                "label.en": "Author name",
+                                                "label.cs": "Organizace",
+                                                "label.en": "Organization",
                                                 "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
                                                 "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                             },
@@ -4121,8 +4110,8 @@
                                                         "sample": {
                                                             "faker": "name"
                                                         },
-                                                        "label.cs": "Jméno autora",
-                                                        "label.en": "Author name",
+                                                        "label.cs": "Organizace",
+                                                        "label.en": "Organization",
                                                         "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
                                                         "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                                     },
@@ -4521,8 +4510,8 @@
                                                 "sample": {
                                                     "faker": "name"
                                                 },
-                                                "label.cs": "Jméno autora",
-                                                "label.en": "Author name",
+                                                "label.cs": "Organizace",
+                                                "label.en": "Organization",
                                                 "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
                                                 "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                             },
