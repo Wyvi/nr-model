@@ -84,8 +84,8 @@ NROrganization:
     fullName:
       type: keyword
       required: true
-      label.cs: Jméno autora
-      label.en: Author name
+      label.cs: Organizace
+      label.en: Organization
       hint.cs: Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.
       hint.en: Start typing the name of the institution, then select the institution from the menu.
       sample:
@@ -697,7 +697,7 @@ NREvent:
       # rozsah konání akce/konference -  date or range.
       use: "nr-datatypes#NRDateOrRange"
       required: true
-      label.cs: Datum konání akce
+      label.cs: Datum akce
       label.en: Event date
       hint.cs: Vyberte časové období (Od - Do).
       hint.en: Choose the time period (From - To).
