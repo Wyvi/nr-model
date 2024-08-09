@@ -4,10 +4,14 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { i18next } from "@translations/nr/i18next";
 import PropTypes from "prop-types";
-import { MultilingualTextInput, requiredMessage } from "@js/oarepo_ui";
+import {
+  MultilingualTextInput,
+  requiredMessage,
+  FieldDataProvider,
+} from "@js/oarepo_ui";
 
 const SubjectsValidationSchema = Yup.object({
-  keywords: Yup.array().of(
+  subject: Yup.array().of(
     Yup.object().shape({
       lang: Yup.string().required(requiredMessage).label(i18next.t("Language")),
       value: Yup.string().required(requiredMessage).label(i18next.t("Keyword")),
@@ -15,7 +19,7 @@ const SubjectsValidationSchema = Yup.object({
   ),
 });
 
-export const SubjectsModal = ({ trigger, handleSubjectAdd }) => {
+export const SubjectsModal = ({ trigger, handleSubjectAdd, helpText }) => {
   const [open, setOpen] = React.useState(false);
   const [saveAndContinueLabel, setSaveAndContinueLabel] = React.useState(
     i18next.t("Save and add another")
@@ -37,7 +41,7 @@ export const SubjectsModal = ({ trigger, handleSubjectAdd }) => {
   };
 
   const onSubmit = (values, formikBag) => {
-    const newSubject = { subjectScheme: "keyword", subject: values.keywords };
+    const newSubject = { subjectScheme: "keyword", subject: values.subject };
     handleSubjectAdd(newSubject);
     formikBag.setSubmitting(false);
     formikBag.resetForm();
@@ -84,9 +88,7 @@ export const SubjectsModal = ({ trigger, handleSubjectAdd }) => {
               <Grid.Column floated="left" width={8}>
                 <span>{i18next.t("Add keywords")}</span>
                 <Popup
-                  content={i18next.t(
-                    "Write keywords describing the resource, always choose a language."
-                  )}
+                  content={helpText}
                   trigger={
                     <Icon
                       className="rel-ml-1"
@@ -101,15 +103,14 @@ export const SubjectsModal = ({ trigger, handleSubjectAdd }) => {
           <Modal.Content>
             <Form className="subjects-modal-fields">
               <Form.Field width={16}>
-                <MultilingualTextInput
-                  fieldPath="keywords"
-                  lngFieldWidth={3}
-                  textFieldLabel={i18next.t("Subject")}
-                  required
-                  showEmptyValue
-                  removeButtonLabelClassName="field-label-class invenio-field-label"
-                  displayFirstInputRemoveButton={false}
-                />
+                <FieldDataProvider fieldPathPrefix="metadata.subjects.0">
+                  <MultilingualTextInput
+                    fieldPath="subject"
+                    lngFieldWidth={3}
+                    showEmptyValue
+                    displayFirstInputRemoveButton={false}
+                  />
+                </FieldDataProvider>
               </Form.Field>
             </Form>
           </Modal.Content>
@@ -157,4 +158,5 @@ export const SubjectsModal = ({ trigger, handleSubjectAdd }) => {
 SubjectsModal.propTypes = {
   trigger: PropTypes.node,
   handleSubjectAdd: PropTypes.func.isRequired,
+  helpText: PropTypes.string,
 };

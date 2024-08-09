@@ -264,6 +264,17 @@
             "extensions": [],
             "imports": []
         },
+        "multilingual-dumper": {
+            "generate": true,
+            "module": "nr_metadata.common.records.dumpers.multilingual",
+            "class": "nr_metadata.common.records.dumpers.multilingual.MultilingualSearchDumperExt",
+            "base-classes": [
+                "oarepo_runtime.records.dumpers.multilingual_dumper.MultilingualDumper"
+            ],
+            "extra-code": "",
+            "extensions": [],
+            "imports": []
+        },
         "mapping": {
             "generate": true,
             "alias": "common",
@@ -420,6 +431,16 @@
                         },
                         "items": {
                             "type": "i18nStr",
+                            "multilingual": {
+                                "lang_def": {
+                                    "label.cs": "Jazyk",
+                                    "label.en": "Language"
+                                },
+                                "value_def": {
+                                    "label.cs": "Text",
+                                    "label.en": "Text"
+                                }
+                            },
                             "marshmallow": {
                                 "class": null,
                                 "field-class": "oarepo_runtime.services.schema.i18n.I18nStrField",
@@ -440,10 +461,16 @@
                                     "type": "keyword",
                                     "mapping": {
                                         "ignore_above": 256
-                                    }
+                                    },
+                                    "required": true,
+                                    "label.cs": "Jazyk",
+                                    "label.en": "Language"
                                 },
                                 "value": {
-                                    "type": "fulltext+keyword"
+                                    "type": "fulltext+keyword",
+                                    "required": true,
+                                    "label.cs": "Text",
+                                    "label.en": "Text"
                                 }
                             }
                         }
@@ -581,6 +608,16 @@
                         },
                         "items": {
                             "type": "i18nStr",
+                            "multilingual": {
+                                "lang_def": {
+                                    "label.cs": "Jazyk",
+                                    "label.en": "Language"
+                                },
+                                "value_def": {
+                                    "label.cs": "Text",
+                                    "label.en": "Text"
+                                }
+                            },
                             "marshmallow": {
                                 "class": null,
                                 "field-class": "oarepo_runtime.services.schema.i18n.I18nStrField",
@@ -601,10 +638,16 @@
                                     "type": "keyword",
                                     "mapping": {
                                         "ignore_above": 256
-                                    }
+                                    },
+                                    "required": true,
+                                    "label.cs": "Jazyk",
+                                    "label.en": "Language"
                                 },
                                 "value": {
-                                    "type": "fulltext+keyword"
+                                    "type": "fulltext+keyword",
+                                    "required": true,
+                                    "label.cs": "Text",
+                                    "label.en": "Text"
                                 }
                             }
                         }
@@ -652,10 +695,16 @@
                                             "type": "keyword",
                                             "mapping": {
                                                 "ignore_above": 256
-                                            }
+                                            },
+                                            "required": true,
+                                            "label.cs": "Jazyk",
+                                            "label.en": "Language"
                                         },
                                         "value": {
-                                            "type": "fulltext+keyword"
+                                            "type": "fulltext+keyword",
+                                            "required": true,
+                                            "label.cs": "Text",
+                                            "label.en": "Text"
                                         }
                                     }
                                 },
@@ -2809,6 +2858,16 @@
                         },
                         "items": {
                             "type": "i18nStr",
+                            "multilingual": {
+                                "lang_def": {
+                                    "label.cs": "Jazyk",
+                                    "label.en": "Language"
+                                },
+                                "value_def": {
+                                    "label.cs": "Text",
+                                    "label.en": "Text"
+                                }
+                            },
                             "marshmallow": {
                                 "class": null,
                                 "field-class": "oarepo_runtime.services.schema.i18n.I18nStrField",
@@ -2829,10 +2888,16 @@
                                     "type": "keyword",
                                     "mapping": {
                                         "ignore_above": 256
-                                    }
+                                    },
+                                    "required": true,
+                                    "label.cs": "Jazyk",
+                                    "label.en": "Language"
                                 },
                                 "value": {
-                                    "type": "fulltext+keyword"
+                                    "type": "fulltext+keyword",
+                                    "required": true,
+                                    "label.cs": "Text",
+                                    "label.en": "Text"
                                 }
                             }
                         }
@@ -5261,6 +5326,16 @@
                                     },
                                     "items": {
                                         "type": "i18nStr",
+                                        "multilingual": {
+                                            "lang_def": {
+                                                "label.cs": "Jazyk",
+                                                "label.en": "Language"
+                                            },
+                                            "value_def": {
+                                                "label.cs": "Text",
+                                                "label.en": "Text"
+                                            }
+                                        },
                                         "marshmallow": {
                                             "class": null,
                                             "field-class": "oarepo_runtime.services.schema.i18n.I18nStrField",
@@ -5281,10 +5356,16 @@
                                                 "type": "keyword",
                                                 "mapping": {
                                                     "ignore_above": 256
-                                                }
+                                                },
+                                                "required": true,
+                                                "label.cs": "Jazyk",
+                                                "label.en": "Language"
                                             },
                                             "value": {
-                                                "type": "fulltext+keyword"
+                                                "type": "fulltext+keyword",
+                                                "required": true,
+                                                "label.cs": "Text",
+                                                "label.en": "Text"
                                             }
                                         }
                                     }
@@ -5367,6 +5448,16 @@
                         },
                         "items": {
                             "type": "i18nStr",
+                            "multilingual": {
+                                "lang_def": {
+                                    "label.cs": "Jazyk",
+                                    "label.en": "Language"
+                                },
+                                "value_def": {
+                                    "label.cs": "Text",
+                                    "label.en": "Text"
+                                }
+                            },
                             "marshmallow": {
                                 "class": null,
                                 "field-class": "oarepo_runtime.services.schema.i18n.I18nStrField",
@@ -5387,10 +5478,16 @@
                                     "type": "keyword",
                                     "mapping": {
                                         "ignore_above": 256
-                                    }
+                                    },
+                                    "required": true,
+                                    "label.cs": "Jazyk",
+                                    "label.en": "Language"
                                 },
                                 "value": {
-                                    "type": "fulltext+keyword"
+                                    "type": "fulltext+keyword",
+                                    "required": true,
+                                    "label.cs": "Text",
+                                    "label.en": "Text"
                                 }
                             }
                         }
