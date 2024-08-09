@@ -9,12 +9,12 @@ class NRIdentifierUISchema(ma.Schema):
     )
     identifier = ma.fields.String(required=True)
 
-    @ma.post_dump
-    def add_url(self, value, **kwargs):
-        url = to_url(value["identifier"], value["scheme"].lower(), url_scheme="https")
-        if url:
-            value["url"] = url
-        return value
+    # @ma.post_dump
+    # def add_url(self, value, **kwargs):
+    #     url = to_url(value["identifier"], value["scheme"].lower(), url_scheme="https")
+    #     if url:
+    #         value["url"] = url
+    #     return value
 
 
 class NRObjectIdentifierUISchema(NRIdentifierUISchema):
@@ -65,7 +65,6 @@ class NROrganizationIdentifierUISchema(NRIdentifierUISchema):
         validate=[
             validate.OneOf(
                 [
-
                     "ISNI",
                     "ROR",
                     "ICO",
@@ -89,7 +88,6 @@ class NRPersonIdentifierUISchema(NRIdentifierUISchema):
                     "vedidk",
                     "institutionalID",
                     "ISNI",
-
                 ]
             )
         ],

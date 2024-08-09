@@ -26,7 +26,7 @@ const relatedItemNameDisplay = (value) => {
   return (
     <span>
       {name}
-      <a style={{ paddingLeft: "3rem" }} href={URL}>
+      <a className="rel-ml-3" href={URL}>
         {URL && _truncate(URL, { length: 40, omission: "..." })}
       </a>
     </span>
@@ -62,7 +62,7 @@ class RelatedItemsFieldForm extends Component {
     const initialError = getIn(initialErrors, fieldPath, null);
     const relatedItemsError =
       error || (relatedItemsList === formikInitialValues && initialError);
-
+    console.log("related items rendered");
     return (
       <FieldDataProvider fieldPathPrefix={fieldPathPrefix}>
         <DndProvider context={window} backend={HTML5Backend}>
@@ -78,10 +78,10 @@ class RelatedItemsFieldForm extends Component {
                 const displayName = relatedItemNameDisplay(value);
                 return (
                   <RelatedItemsFieldItem
+                    fieldPath={fieldPath}
                     key={key}
                     displayName={displayName}
                     index={index}
-                    compKey={key}
                     initialRelatedItem={value}
                     removeRelatedItem={formikArrayRemove}
                     replaceRelatedItem={formikArrayReplace}

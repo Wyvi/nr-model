@@ -66,20 +66,17 @@ class CreatibutorsFieldForm extends Component {
             <List>
               {creatibutorsList.map((value, index) => {
                 const key = `${fieldPath}.${index}`;
-                const identifiersError = creatibutorsError
-                  ? creatibutorsError[index]?.authorityIdentifiers
-                  : [];
+
                 const displayName = creatibutorNameDisplay(value);
                 return (
                   <CreatibutorsFieldItem
                     key={key}
-                    identifiersError={identifiersError}
                     nameTypeHelpText={nameTypeHelpText}
                     {...{
                       displayName,
                       index,
                       schema,
-                      compKey: key,
+                      fieldPath: fieldPath,
                       initialCreatibutor: value,
                       removeCreatibutor: formikArrayRemove,
                       replaceCreatibutor: formikArrayReplace,
