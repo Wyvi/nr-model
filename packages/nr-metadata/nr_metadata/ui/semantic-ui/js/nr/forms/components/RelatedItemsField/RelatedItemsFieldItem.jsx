@@ -12,10 +12,10 @@ import { useDrag, useDrop } from "react-dnd";
 import { Button, List, Ref } from "semantic-ui-react";
 import { RelatedItemsModal } from "./RelatedItemsModal";
 import PropTypes from "prop-types";
-import { NestedError } from "@nr/forms";
+import { NestedErrors } from "@nr/forms";
 
 export const RelatedItemsFieldItem = ({
-  fieldPath,
+  compKey,
   index,
   replaceRelatedItem,
   removeRelatedItem,
@@ -28,13 +28,11 @@ export const RelatedItemsFieldItem = ({
   const dropRef = React.useRef(null);
   // eslint-disable-next-line no-unused-vars
   const [_, drag, preview] = useDrag({
-    item: { index, type: "relatedItem" },
+    item: { index, type: "creatibutor" },
   });
-  const compKey = `${fieldPath}.${index}`;
-
   const [{ hidden }, drop] = useDrop({
-    accept: "relatedItem",
-    drop(item, monitor) {
+    accept: "creatibutor",
+    hover(item, monitor) {
       if (!dropRef.current) {
         return;
       }
@@ -47,8 +45,6 @@ export const RelatedItemsFieldItem = ({
       }
 
       if (monitor.isOver({ shallow: true })) {
-        console.log(dragIndex, hoverIndex);
-        console.log(item);
         moveRelatedItem(dragIndex, hoverIndex);
         item.index = hoverIndex;
       }
@@ -57,6 +53,7 @@ export const RelatedItemsFieldItem = ({
       hidden: monitor.isOver({ shallow: true }),
     }),
   });
+
   // Initialize the ref explicitely
   drop(dropRef);
   return (
@@ -102,14 +99,14 @@ export const RelatedItemsFieldItem = ({
             </List.Content>
           </Ref>
         </List.Item>
-        <NestedError fieldPath={fieldPath} index={index} />
+        <NestedErrors fieldPath={compKey} />
       </React.Fragment>
     </Ref>
   );
 };
 
 RelatedItemsFieldItem.propTypes = {
-  fieldPath: PropTypes.string.isRequired,
+  compKey: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   replaceRelatedItem: PropTypes.func.isRequired,
   removeRelatedItem: PropTypes.func.isRequired,

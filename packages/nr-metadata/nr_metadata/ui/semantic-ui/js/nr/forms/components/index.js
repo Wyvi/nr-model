@@ -11,4 +11,4 @@ export * from "./CreatibutorsField";
 export * from "./RelatedItemsField";
 export * from "./FileUploader";
 export * from "./LicenseField";
-export * from "./NestedError";
+export * from "./NestedErrors";

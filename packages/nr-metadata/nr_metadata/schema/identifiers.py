@@ -10,16 +10,14 @@ class NRIdentifierSchema(ma.Schema):
     )
     identifier = ma.fields.String(required=True)
 
-    @ma.pre_load
+    @ma.post_load
     def normalize_identifier(self, value, *args, **kwargs):
         try:
             value["identifier"] = normalize_pid(
                 value["identifier"], value["scheme"].lower()
             )
         except:
-            raise ValidationError(
-                f"Invalid {value['scheme']} value {value['identifier']}"
-            )
+            raise ValidationError(f"Invalid {value['scheme']} value {value['identifier']}")
 
         return value
 
@@ -74,13 +72,13 @@ class NRSystemIdentifierSchema(NRIdentifierSchema):
         ],
     )
 
-
 class NROrganizationIdentifierSchema(NRIdentifierSchema):
     scheme = ma.fields.String(
         required=True,
         validate=[
             validate.OneOf(
                 [
+
                     "ISNI",
                     "ROR",
                     "ICO",
@@ -89,7 +87,6 @@ class NROrganizationIdentifierSchema(NRIdentifierSchema):
             )
         ],
     )
-
 
 class NRPersonIdentifierSchema(NRIdentifierSchema):
     scheme = ma.fields.String(
@@ -104,6 +101,7 @@ class NRPersonIdentifierSchema(NRIdentifierSchema):
                     "vedidk",
                     "institutionalID",
                     "ISNI",
+
                 ]
             )
         ],

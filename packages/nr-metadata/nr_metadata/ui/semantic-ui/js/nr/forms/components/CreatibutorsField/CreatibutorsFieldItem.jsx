@@ -14,10 +14,10 @@ import { Button, Label, List, Ref } from "semantic-ui-react";
 import { CreatibutorsModal } from "./CreatibutorsModal";
 import PropTypes from "prop-types";
 import { useFormConfig } from "@js/oarepo_ui";
-import { NestedError } from "@nr/forms";
+import { NestedErrors } from "@nr/forms";
 
 export const CreatibutorsFieldItem = ({
-  fieldPath,
+  compKey,
   index,
   replaceCreatibutor,
   removeCreatibutor,
@@ -31,7 +31,6 @@ export const CreatibutorsFieldItem = ({
   nameTypeHelpText,
 }) => {
   const dropRef = React.useRef(null);
-  const compKey = `${fieldPath}.${index}`;
   // eslint-disable-next-line no-unused-vars
   const [_, drag, preview] = useDrag({
     item: { index, type: "creatibutor" },
@@ -165,14 +164,14 @@ export const CreatibutorsFieldItem = ({
             </List.Content>
           </Ref>
         </List.Item>
-        <NestedError fieldPath={fieldPath} index={index} />
+        <NestedErrors fieldPath={compKey} />
       </React.Fragment>
     </Ref>
   );
 };
 
 CreatibutorsFieldItem.propTypes = {
-  fieldPath: PropTypes.string.isRequired,
+  compKey: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   replaceCreatibutor: PropTypes.func.isRequired,
   removeCreatibutor: PropTypes.func.isRequired,

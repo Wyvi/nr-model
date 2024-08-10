@@ -51,7 +51,6 @@ export const LicenseResults = withState(
                             href={result?.relatedURI?.URL}
                             target="_blank"
                             rel="noopener noreferrer"
-                            onClick={(event) => event.stopPropagation()}
                           >
                             {i18next.t("Read more.")}
                           </a>

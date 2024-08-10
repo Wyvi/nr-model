@@ -76,7 +76,7 @@ class CreatibutorsFieldForm extends Component {
                       displayName,
                       index,
                       schema,
-                      fieldPath: fieldPath,
+                      compKey: key,
                       initialCreatibutor: value,
                       removeCreatibutor: formikArrayRemove,
                       replaceCreatibutor: formikArrayReplace,

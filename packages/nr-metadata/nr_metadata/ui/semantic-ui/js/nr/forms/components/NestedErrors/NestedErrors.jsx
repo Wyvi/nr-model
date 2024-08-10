@@ -4,14 +4,14 @@ import { Label } from "semantic-ui-react";
 import { useFieldData } from "@js/oarepo_ui";
 import PropTypes from "prop-types";
 
-export const NestedError = ({ fieldPath, index }) => {
+export const NestedErrors = ({ fieldPath }) => {
   const { errors } = useFormikContext();
   const beValidationErrors = getIn(errors, "BEvalidationErrors", {});
-  const relatedItemErrorPaths = beValidationErrors?.errorPaths?.filter(
-    (errorPath) => errorPath.startsWith(`${fieldPath}.${index}`)
+  const nestedErrorPaths = beValidationErrors?.errorPaths?.filter((errorPath) =>
+    errorPath.startsWith(fieldPath)
   );
 
-  const relatedItemErrors = relatedItemErrorPaths?.map((errorPath) => {
+  const nestedErrors = nestedErrorPaths?.map((errorPath) => {
     return {
       errorMessage: getIn(errors, errorPath, ""),
       errorPath,
@@ -20,11 +20,10 @@ export const NestedError = ({ fieldPath, index }) => {
   const { getFieldData } = useFieldData();
 
   return (
-    relatedItemErrors?.length > 0 &&
-    relatedItemErrors.some((error) => Boolean(error.errorMessage)) && (
+    nestedErrors?.length > 0 && (
       <React.Fragment>
         <Label className="rel-mb-1 mt-0" prompt pointing="above">
-          {relatedItemErrors.map(({ errorMessage, errorPath }, index) => (
+          {nestedErrors.map(({ errorMessage, errorPath }, index) => (
             <p key={index}>{`${
               getFieldData({
                 fieldPath: errorPath,
@@ -40,7 +39,6 @@ export const NestedError = ({ fieldPath, index }) => {
   );
 };
 
-NestedError.propTypes = {
-  fieldPath: PropTypes.string,
-  index: PropTypes.number,
+NestedErrors.propTypes = {
+  fieldPath: PropTypes.string.isRequired,
 };

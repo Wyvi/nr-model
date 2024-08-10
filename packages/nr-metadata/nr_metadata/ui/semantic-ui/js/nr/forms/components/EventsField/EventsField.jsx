@@ -94,8 +94,8 @@ export const EventsField = ({ fieldPath }) => {
             </GroupField>
             {eventLocationError && (
               <React.Fragment>
-                <Label className="rel-mb-1 mt-0" prompt pointing="above">
-                  {eventLocationError.messages[0]}
+                <Label className="rel-mb-1 mt-0 ml-5" prompt pointing="above">
+                  {eventLocationError.messages.join(" ")}
                 </Label>
                 <br />
               </React.Fragment>

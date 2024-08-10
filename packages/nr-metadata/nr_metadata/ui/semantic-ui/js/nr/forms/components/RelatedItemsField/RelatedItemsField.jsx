@@ -62,7 +62,6 @@ class RelatedItemsFieldForm extends Component {
     const initialError = getIn(initialErrors, fieldPath, null);
     const relatedItemsError =
       error || (relatedItemsList === formikInitialValues && initialError);
-    console.log("related items rendered");
     return (
       <FieldDataProvider fieldPathPrefix={fieldPathPrefix}>
         <DndProvider context={window} backend={HTML5Backend}>
@@ -78,7 +77,7 @@ class RelatedItemsFieldForm extends Component {
                 const displayName = relatedItemNameDisplay(value);
                 return (
                   <RelatedItemsFieldItem
-                    fieldPath={fieldPath}
+                    compKey={key}
                     key={key}
                     displayName={displayName}
                     index={index}
