@@ -48,24 +48,26 @@ export const LicenseField = ({
           fieldPath={fieldPath}
         />
       )}
-      <LicenseModal
-        searchConfig={searchConfig}
-        initialLicense={license}
-        trigger={
-          <Form.Button
-            className="array-field-add-button"
-            type="button"
-            key="license"
-            icon
-            labelPosition="left"
-          >
-            <Icon name="add" />
-            {i18next.t("Choose license")}
-          </Form.Button>
-        }
-        handleLicenseChange={handleLicenseChange}
-        serializeLicense={serializeLicense}
-      />
+      {!license && (
+        <LicenseModal
+          searchConfig={searchConfig}
+          initialLicense={license}
+          trigger={
+            <Form.Button
+              className="array-field-add-button"
+              type="button"
+              key="license"
+              icon
+              labelPosition="left"
+            >
+              <Icon name="add" />
+              {i18next.t("Choose license")}
+            </Form.Button>
+          }
+          handleLicenseChange={handleLicenseChange}
+          serializeLicense={serializeLicense}
+        />
+      )}
     </Form.Field>
   );
 };

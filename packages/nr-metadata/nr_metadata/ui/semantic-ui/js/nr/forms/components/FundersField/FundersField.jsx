@@ -75,5 +75,5 @@ FundersField.propTypes = {
 };
 
 FundersField.defaultProps = {
-  addButtonLabel: i18next.t("Add funder"),
+  addButtonLabel: i18next.t("Add project/financing information"),
 };
