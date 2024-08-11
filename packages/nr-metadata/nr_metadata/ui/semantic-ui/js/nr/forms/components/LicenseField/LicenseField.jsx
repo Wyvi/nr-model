@@ -41,14 +41,13 @@ export const LicenseField = ({
     <Form.Field required={required ?? modelRequired}>
       {label ?? modelLabel}
       <label className="helptext">{helpText ?? modelHelpText}</label>
-      {license && (
+      {license ? (
         <LicenseFieldItem
           key={license.id}
           license={license}
           fieldPath={fieldPath}
         />
-      )}
-      {!license && (
+      ) : (
         <LicenseModal
           searchConfig={searchConfig}
           initialLicense={license}
