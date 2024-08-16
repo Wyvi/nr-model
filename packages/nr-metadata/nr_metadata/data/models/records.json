@@ -151,6 +151,10 @@
             "module": "nr_metadata.data.proxies",
             "generate": true
         },
+        "translations": {
+            "module": "nr_metadata.data.translations",
+            "alias": "data"
+        },
         "json-schema-settings": {
             "generate": true,
             "alias": "data",
@@ -248,10 +252,6 @@
                 "\"object_key\"": "\"ui\"",
                 "\"identity\"": "{{ flask.g{g.identity} }}"
             }
-        },
-        "translations": {
-            "module": "nr_metadata.data.translations",
-            "alias": "data"
         },
         "multilingual-dumper": {
             "generate": true,
@@ -890,8 +890,7 @@
                                                         "label.cs": "Identifikátor",
                                                         "label.en": "Identifier",
                                                         "hint.cs": "např https://orcid.org/0009-0004-8646-7185 pro ORCID.",
-                                                        "hint.en": "e.g. https://orcid.org/0009-0004-8646-7185 for ORCID.",
-                                                        "i18n.key": "identifier"
+                                                        "hint.en": "e.g. https://orcid.org/0009-0004-8646-7185 for ORCID."
                                                     },
                                                     "scheme": {
                                                         "type": "keyword",
@@ -917,9 +916,8 @@
                                                         },
                                                         "label.cs": "Typ identifikátoru",
                                                         "label.en": "Identifier type",
-                                                        "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                        "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                        "i18n.key": "identifier_type"
+                                                        "hint.cs": "např ORCID, scopusID",
+                                                        "hint.en": "e.g. ORCID, scopusID"
                                                     }
                                                 },
                                                 "ui": {
@@ -936,8 +934,8 @@
                                             },
                                             "label.cs": "Identifikátor osoby",
                                             "label.en": "Person identifier",
-                                            "help.cs": "Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816).",
-                                            "help.en": "Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
+                                            "help.cs": "Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816). \nDoporučujeme zadat alespoň jeden z typů identifikátorů. \nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                            "help.en": "Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816). \nWe recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n"
                                         },
                                         "affiliations": {
                                             "type": "array",
@@ -1199,8 +1197,7 @@
                                                             "faker": "isbn13"
                                                         },
                                                         "label.cs": "Identifikátor",
-                                                        "label.en": "Identifier",
-                                                        "i18n.key": "identifier"
+                                                        "label.en": "Identifier"
                                                     },
                                                     "scheme": {
                                                         "type": "keyword",
@@ -1222,10 +1219,7 @@
                                                             }
                                                         },
                                                         "label.cs": "Typ identifikátoru",
-                                                        "label.en": "Identifier type",
-                                                        "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                        "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                        "i18n.key": "identifier_type"
+                                                        "label.en": "Identifier type"
                                                     }
                                                 },
                                                 "ui": {
@@ -1589,8 +1583,7 @@
                                                     "faker": "isbn13"
                                                 },
                                                 "label.cs": "Identifikátor",
-                                                "label.en": "Identifier",
-                                                "i18n.key": "identifier"
+                                                "label.en": "Identifier"
                                             },
                                             "scheme": {
                                                 "type": "keyword",
@@ -1612,10 +1605,7 @@
                                                     }
                                                 },
                                                 "label.cs": "Typ identifikátoru",
-                                                "label.en": "Identifier type",
-                                                "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                "i18n.key": "identifier_type"
+                                                "label.en": "Identifier type"
                                             }
                                         }
                                     }
@@ -1932,8 +1922,7 @@
                                                         "label.cs": "Identifikátor",
                                                         "label.en": "Identifier",
                                                         "hint.cs": "např https://orcid.org/0009-0004-8646-7185 pro ORCID.",
-                                                        "hint.en": "e.g. https://orcid.org/0009-0004-8646-7185 for ORCID.",
-                                                        "i18n.key": "identifier"
+                                                        "hint.en": "e.g. https://orcid.org/0009-0004-8646-7185 for ORCID."
                                                     },
                                                     "scheme": {
                                                         "type": "keyword",
@@ -1959,9 +1948,8 @@
                                                         },
                                                         "label.cs": "Typ identifikátoru",
                                                         "label.en": "Identifier type",
-                                                        "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                        "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                        "i18n.key": "identifier_type"
+                                                        "hint.cs": "např ORCID, scopusID",
+                                                        "hint.en": "e.g. ORCID, scopusID"
                                                     }
                                                 },
                                                 "ui": {
@@ -1978,8 +1966,8 @@
                                             },
                                             "label.cs": "Identifikátor osoby",
                                             "label.en": "Person identifier",
-                                            "help.cs": "Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816).",
-                                            "help.en": "Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
+                                            "help.cs": "Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816). \nDoporučujeme zadat alespoň jeden z typů identifikátorů. \nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                            "help.en": "Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816). \nWe recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n"
                                         },
                                         "affiliations": {
                                             "type": "array",
@@ -2164,8 +2152,8 @@
                                             "sample": {
                                                 "faker": "name"
                                             },
-                                            "label.cs": "Jméno autora",
-                                            "label.en": "Author name",
+                                            "label.cs": "Organizace",
+                                            "label.en": "Organization",
                                             "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
                                             "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                         },
@@ -2191,8 +2179,7 @@
                                                             "faker": "isbn13"
                                                         },
                                                         "label.cs": "Identifikátor",
-                                                        "label.en": "Identifier",
-                                                        "i18n.key": "identifier"
+                                                        "label.en": "Identifier"
                                                     },
                                                     "scheme": {
                                                         "type": "keyword",
@@ -2214,10 +2201,7 @@
                                                             }
                                                         },
                                                         "label.cs": "Typ identifikátoru",
-                                                        "label.en": "Identifier type",
-                                                        "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                        "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                        "i18n.key": "identifier_type"
+                                                        "label.en": "Identifier type"
                                                     }
                                                 },
                                                 "ui": {
@@ -2575,8 +2559,7 @@
                                                     "faker": "isbn13"
                                                 },
                                                 "label.cs": "Identifikátor",
-                                                "label.en": "Identifier",
-                                                "i18n.key": "identifier"
+                                                "label.en": "Identifier"
                                             },
                                             "scheme": {
                                                 "type": "keyword",
@@ -2598,10 +2581,7 @@
                                                     }
                                                 },
                                                 "label.cs": "Typ identifikátoru",
-                                                "label.en": "Identifier type",
-                                                "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                "i18n.key": "identifier_type"
+                                                "label.en": "Identifier type"
                                             }
                                         }
                                     }
@@ -2640,8 +2620,8 @@
                                     "sample": {
                                         "faker": "name"
                                     },
-                                    "label.cs": "Jméno autora",
-                                    "label.en": "Author name",
+                                    "label.cs": "Organizace",
+                                    "label.en": "Organization",
                                     "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
                                     "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                 },
@@ -2759,7 +2739,7 @@
                     },
                     "events": {
                         "type": "array",
-                        "label.cs": "Události",
+                        "label.cs": "Související akce",
                         "label.en": "Events",
                         "items": {
                             "type": "object",
@@ -2788,7 +2768,7 @@
                                         "read": false,
                                         "write": false
                                     },
-                                    "label.cs": "Datum konání akce",
+                                    "label.cs": "Datum akce",
                                     "label.en": "Event date",
                                     "hint.cs": "Vyberte časové období (Od - Do).",
                                     "hint.en": "Choose the time period (From - To).",
@@ -3196,7 +3176,6 @@
                             "properties": {
                                 "geoLocationPlace": {
                                     "type": "keyword",
-                                    "description": "Free description of the location; ie. Atlantic Ocean",
                                     "marshmallow": {
                                         "read": false,
                                         "write": false
@@ -3206,7 +3185,8 @@
                                             "read": false,
                                             "write": false
                                         }
-                                    }
+                                    },
+                                    "description": "Free description of the location; ie. Atlantic Ocean"
                                 },
                                 "geoLocationPoint": {
                                     "type": "object",
@@ -4010,8 +3990,7 @@
                                                                     "label.cs": "Identifikátor",
                                                                     "label.en": "Identifier",
                                                                     "hint.cs": "např https://orcid.org/0009-0004-8646-7185 pro ORCID.",
-                                                                    "hint.en": "e.g. https://orcid.org/0009-0004-8646-7185 for ORCID.",
-                                                                    "i18n.key": "identifier"
+                                                                    "hint.en": "e.g. https://orcid.org/0009-0004-8646-7185 for ORCID."
                                                                 },
                                                                 "scheme": {
                                                                     "type": "keyword",
@@ -4037,9 +4016,8 @@
                                                                     },
                                                                     "label.cs": "Typ identifikátoru",
                                                                     "label.en": "Identifier type",
-                                                                    "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                                    "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                                    "i18n.key": "identifier_type"
+                                                                    "hint.cs": "např ORCID, scopusID",
+                                                                    "hint.en": "e.g. ORCID, scopusID"
                                                                 }
                                                             },
                                                             "ui": {
@@ -4056,8 +4034,8 @@
                                                         },
                                                         "label.cs": "Identifikátor osoby",
                                                         "label.en": "Person identifier",
-                                                        "help.cs": "Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816).",
-                                                        "help.en": "Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
+                                                        "help.cs": "Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816). \nDoporučujeme zadat alespoň jeden z typů identifikátorů. \nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                                        "help.en": "Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816). \nWe recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n"
                                                     },
                                                     "affiliations": {
                                                         "type": "array",
@@ -4292,8 +4270,8 @@
                                                         "sample": {
                                                             "faker": "name"
                                                         },
-                                                        "label.cs": "Jméno autora",
-                                                        "label.en": "Author name",
+                                                        "label.cs": "Organizace",
+                                                        "label.en": "Organization",
                                                         "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
                                                         "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                                     },
@@ -4319,8 +4297,7 @@
                                                                         "faker": "isbn13"
                                                                     },
                                                                     "label.cs": "Identifikátor",
-                                                                    "label.en": "Identifier",
-                                                                    "i18n.key": "identifier"
+                                                                    "label.en": "Identifier"
                                                                 },
                                                                 "scheme": {
                                                                     "type": "keyword",
@@ -4342,10 +4319,7 @@
                                                                         }
                                                                     },
                                                                     "label.cs": "Typ identifikátoru",
-                                                                    "label.en": "Identifier type",
-                                                                    "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                                    "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                                    "i18n.key": "identifier_type"
+                                                                    "label.en": "Identifier type"
                                                                 }
                                                             },
                                                             "ui": {
@@ -4709,8 +4683,7 @@
                                                                 "faker": "isbn13"
                                                             },
                                                             "label.cs": "Identifikátor",
-                                                            "label.en": "Identifier",
-                                                            "i18n.key": "identifier"
+                                                            "label.en": "Identifier"
                                                         },
                                                         "scheme": {
                                                             "type": "keyword",
@@ -4732,10 +4705,7 @@
                                                                 }
                                                             },
                                                             "label.cs": "Typ identifikátoru",
-                                                            "label.en": "Identifier type",
-                                                            "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                            "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                            "i18n.key": "identifier_type"
+                                                            "label.en": "Identifier type"
                                                         }
                                                     }
                                                 }
@@ -4891,8 +4861,8 @@
                                                 "sample": {
                                                     "faker": "name"
                                                 },
-                                                "label.cs": "Jméno autora",
-                                                "label.en": "Author name",
+                                                "label.cs": "Organizace",
+                                                "label.en": "Organization",
                                                 "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
                                                 "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                             },
@@ -5045,8 +5015,7 @@
                                                                     "label.cs": "Identifikátor",
                                                                     "label.en": "Identifier",
                                                                     "hint.cs": "např https://orcid.org/0009-0004-8646-7185 pro ORCID.",
-                                                                    "hint.en": "e.g. https://orcid.org/0009-0004-8646-7185 for ORCID.",
-                                                                    "i18n.key": "identifier"
+                                                                    "hint.en": "e.g. https://orcid.org/0009-0004-8646-7185 for ORCID."
                                                                 },
                                                                 "scheme": {
                                                                     "type": "keyword",
@@ -5072,9 +5041,8 @@
                                                                     },
                                                                     "label.cs": "Typ identifikátoru",
                                                                     "label.en": "Identifier type",
-                                                                    "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                                    "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                                    "i18n.key": "identifier_type"
+                                                                    "hint.cs": "např ORCID, scopusID",
+                                                                    "hint.en": "e.g. ORCID, scopusID"
                                                                 }
                                                             },
                                                             "ui": {
@@ -5091,8 +5059,8 @@
                                                         },
                                                         "label.cs": "Identifikátor osoby",
                                                         "label.en": "Person identifier",
-                                                        "help.cs": "Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816).",
-                                                        "help.en": "Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
+                                                        "help.cs": "Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816). \nDoporučujeme zadat alespoň jeden z typů identifikátorů. \nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
+                                                        "help.en": "Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816). \nWe recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n"
                                                     },
                                                     "affiliations": {
                                                         "type": "array",
@@ -5277,8 +5245,8 @@
                                                         "sample": {
                                                             "faker": "name"
                                                         },
-                                                        "label.cs": "Jméno autora",
-                                                        "label.en": "Author name",
+                                                        "label.cs": "Organizace",
+                                                        "label.en": "Organization",
                                                         "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
                                                         "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                                     },
@@ -5304,8 +5272,7 @@
                                                                         "faker": "isbn13"
                                                                     },
                                                                     "label.cs": "Identifikátor",
-                                                                    "label.en": "Identifier",
-                                                                    "i18n.key": "identifier"
+                                                                    "label.en": "Identifier"
                                                                 },
                                                                 "scheme": {
                                                                     "type": "keyword",
@@ -5327,10 +5294,7 @@
                                                                         }
                                                                     },
                                                                     "label.cs": "Typ identifikátoru",
-                                                                    "label.en": "Identifier type",
-                                                                    "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                                    "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                                    "i18n.key": "identifier_type"
+                                                                    "label.en": "Identifier type"
                                                                 }
                                                             },
                                                             "ui": {
@@ -5688,8 +5652,7 @@
                                                                 "faker": "isbn13"
                                                             },
                                                             "label.cs": "Identifikátor",
-                                                            "label.en": "Identifier",
-                                                            "i18n.key": "identifier"
+                                                            "label.en": "Identifier"
                                                         },
                                                         "scheme": {
                                                             "type": "keyword",
@@ -5711,10 +5674,7 @@
                                                                 }
                                                             },
                                                             "label.cs": "Typ identifikátoru",
-                                                            "label.en": "Identifier type",
-                                                            "hint.cs": "Doporučujeme zadat alespoň jeden z typů identifikátorů.\nPokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n",
-                                                            "hint.en": "We recommend providing at least one of the identifier types.\nIf you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.\n",
-                                                            "i18n.key": "identifier_type"
+                                                            "label.en": "Identifier type"
                                                         }
                                                     }
                                                 }
@@ -5753,8 +5713,8 @@
                                                 "sample": {
                                                     "faker": "name"
                                                 },
-                                                "label.cs": "Jméno autora",
-                                                "label.en": "Author name",
+                                                "label.cs": "Organizace",
+                                                "label.en": "Organization",
                                                 "hint.cs": "Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.",
                                                 "hint.en": "Start typing the name of the institution, then select the institution from the menu."
                                             },
@@ -5832,6 +5792,8 @@
                                 },
                                 "itemPIDs": {
                                     "type": "array",
+                                    "label.cs": "Identifikátor",
+                                    "label.en": "Identifier",
                                     "help.cs": "Trvalé identifikátory objektu jako ISBN, DOI atd.",
                                     "help.en": "Permanent object identifiers such as ISBN, DOI, etc.",
                                     "items": {
@@ -5916,7 +5878,6 @@
                                 "itemRelationType": {
                                     "type": "vocabulary",
                                     "vocabulary-type": "item-relation-types",
-                                    "description": "typ vztahu k původnímu popisovanému dok.",
                                     "ui": {
                                         "marshmallow": {
                                             "class": "nr_metadata.common.services.records.ui_schema_datatypes.NRItemRelationTypeVocabularyUISchema",
@@ -5935,6 +5896,7 @@
                                         "unknown": "INCLUDE",
                                         "generate": true
                                     },
+                                    "description": "typ vztahu k původnímu popisovanému dok.",
                                     "label.cs": "Typ vazby",
                                     "label.en": "Relation type",
                                     "hint.cs": "Vyberte typ vazby.",
