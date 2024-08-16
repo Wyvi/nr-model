@@ -235,7 +235,7 @@ CommonMetadata:
     events[]:
       #^uniqueItems: true
       use: "nr-datatypes#NREvent"
-      ^label.cs: Události
+      ^label.cs: Související akce
       ^label.en: Events
 
 CommonModel:
