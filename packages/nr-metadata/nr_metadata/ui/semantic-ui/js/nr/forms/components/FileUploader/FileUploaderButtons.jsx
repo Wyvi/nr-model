@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Icon } from "semantic-ui-react";
-import FileManagementDialog from "@oarepo/file-manager";
 import { FileEditWrapper, FileUploadWrapper } from "./FileUploaderWrappers";
 import { useDepositFileApiClient } from "@js/oarepo_ui";
 import { i18next } from "@translations/nr/i18next";
@@ -9,7 +8,6 @@ import { i18next } from "@translations/nr/i18next";
 export const EditFileButton = ({ fileName, record, allowedFileTypes }) => {
   return (
     <FileEditWrapper
-      preactComponent={FileManagementDialog}
       props={{
         config: { record: record },
         autoExtractImagesFromPDFs: false,
@@ -35,7 +33,6 @@ export const UploadFileButton = ({
 }) => {
   return (
     <FileUploadWrapper
-      preactComponent={FileManagementDialog}
       props={{
         config: { record: record },
         autoExtractImagesFromPDFs: false,
