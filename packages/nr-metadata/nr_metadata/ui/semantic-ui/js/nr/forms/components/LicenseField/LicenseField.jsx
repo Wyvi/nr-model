@@ -46,6 +46,9 @@ export const LicenseField = ({
           key={license.id}
           license={license}
           fieldPath={fieldPath}
+          searchConfig={searchConfig}
+          handleLicenseChange={handleLicenseChange}
+          serializeLicense={serializeLicense}
         />
       ) : (
         <LicenseModal
