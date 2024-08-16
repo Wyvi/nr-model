@@ -1818,3 +1818,14 @@ msgstr ""
 
 msgid "Find more records by this organization"
 msgstr ""
+
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:484
+msgid "syntheticFields/defenseYear.label"
+msgstr ""
+
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:502
+msgid "syntheticFields/year.label"
+msgstr ""
+
+msgid "Add project/financing information"
+msgstr ""

@@ -41,31 +41,35 @@ export const LicenseField = ({
     <Form.Field required={required ?? modelRequired}>
       {label ?? modelLabel}
       <label className="helptext">{helpText ?? modelHelpText}</label>
-      {license && (
+      {license ? (
         <LicenseFieldItem
           key={license.id}
           license={license}
           fieldPath={fieldPath}
+          searchConfig={searchConfig}
+          handleLicenseChange={handleLicenseChange}
+          serializeLicense={serializeLicense}
+        />
+      ) : (
+        <LicenseModal
+          searchConfig={searchConfig}
+          initialLicense={license}
+          trigger={
+            <Form.Button
+              className="array-field-add-button"
+              type="button"
+              key="license"
+              icon
+              labelPosition="left"
+            >
+              <Icon name="add" />
+              {i18next.t("Choose license")}
+            </Form.Button>
+          }
+          handleLicenseChange={handleLicenseChange}
+          serializeLicense={serializeLicense}
         />
       )}
-      <LicenseModal
-        searchConfig={searchConfig}
-        initialLicense={license}
-        trigger={
-          <Form.Button
-            className="array-field-add-button"
-            type="button"
-            key="license"
-            icon
-            labelPosition="left"
-          >
-            <Icon name="add" />
-            {i18next.t("Choose license")}
-          </Form.Button>
-        }
-        handleLicenseChange={handleLicenseChange}
-        serializeLicense={serializeLicense}
-      />
     </Form.Field>
   );
 };
