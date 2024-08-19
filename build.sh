@@ -36,7 +36,7 @@ MODEL_BUILDER_TEST_VENV="$base_dir/.venv-builder-tests"
 # for debugging, set this to the local package dir
 NO_CLEAR="$1"
 
-OAREPO_VERSION=${OAREPO_VERSION:-11}
+OAREPO_VERSION=${OAREPO_VERSION:-12}
 OAREPO_VERSION_MAX=$((OAREPO_VERSION+1))
 
 # region commands
