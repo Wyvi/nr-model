@@ -1,0 +1,5 @@
+{#def isLast=False, label  #}
+{% if content %}
+<span><strong>{{label}}: </strong></span><span>{{content}}</span>
+<Separator isLast={isLast}></Separator>
+{% endif %}

@@ -1,48 +1,108 @@
 {#def relatedItems, search_link #}
-<dl class='detail-subfields'>
-    {% for ri in relatedItems %}
-    <Field label={_('metadata/relatedItems/itemTitle.label')}>{{ri.itemTitle}}</Field>
-    
-    <dt>{{ _('metadata/relatedItems/itemCreators.label') }}</dt>
-    <dd>
-        <div class="ui list">
-        {% for person in ri.itemCreators %}
-            <div class="item">
-                <Person person={person} search_link={search_link} searchFacet="syntheticFields_people"></Person>
-            </div>
-        {% endfor %}
-        </div>
-    </dd>
-    <dt>{{_('metadata/relatedItems/itemContributors.label')}}</dt>
-    <dd>
-        <div class="ui list">
-        {% for fullName, matches in ri.itemContributors | groupby('fullName') %}
-            <div class="item">
-                {% set roles= matches |  map(attribute='role') | select('defined') | list %}
-                <Person person={matches[0]} search_link={search_link} searchFacet="syntheticFields_people" roles={roles}></Person>
-            </div>
-        {% endfor %}
-        </div>
-    </dd>
-    <Field label={_('metadata/relatedItems/itemPIDs.label')}><NrObjectPid pids={ri.itemPIDs}></NrObjectPid></Field>
-    <dt>{{_('metadata/relatedItems/itemURL.label')}}</dt>
-    <dd>
-        <URL className="ui" label= data={{"label":ri.itemURL, "href": ri.itemURL}}></URL>
-    </dd>
-    <Field label={_('metadata/relatedItems/itemYear.label')}>{{ri.itemYear}}</Field>
-    <Field label={_('metadata/relatedItems/itemVolume.label')}>{{ri.itemVolume}}</Field>
-
-<Field label={_('metadata/relatedItems/itemIssue.label')}>{{ri.itemIssue}}</Field>
-<Field label={_('metadata/relatedItems/itemVolume.label')}>{{ri.itemVolume}}</Field>
-<Field label={_('metadata/relatedItems/itemStartPage.label')}>{{ri.itemStartPage}}</Field>
-<Field label={_('metadata/relatedItems/itemEndPage.label')}>{{ri.itemEndPage}}</Field>
-<Field label={_('metadata/relatedItems/itemPublisher.label')}>{{ri.itemPublisher}}</Field>
-<Field label={_('metadata/relatedItems/itemRelationType.label')}>
-    <VocabularyItem vocabulary={ri.itemRelationType} vocabulary_type="item-relation-types"></VocabularyItem>
-</Field>
-<Field label={_('metadata/relatedItems/itemResourceType.label')}>
-    <VocabularyItem vocabulary={ri.itemResourceType} search_link={search_link} searchFacet="metadata_resourceType" vocabulary_type="resource-types"></VocabularyItem>
-</Field>
-
+{% set ordered_all_items = [
+    "itemTitle",
+    "itemCreators",
+    "itemContributors",
+    "itemPIDs",
+    "itemURL",
+    "itemYear",
+    "itemVolume",
+    "itemIssue",
+    "itemStartPage",
+    "itemEndPage",
+    "itemPublisher",
+    "itemRelationType",
+    "itemResourceType"
+] %}
+{% for ri in relatedItems %}
+    {% set current_keys = ri.keys() %}
+    {% set ordered_current_keys = [] %}
+    {% for item in ordered_all_items %}
+        {% if item in current_keys %}
+            {{ordered_current_keys.append(item) or "" }}
+        {% endif %}
     {% endfor %}
-</dl>
+    {% set last_key = ordered_current_keys[-1] %}
+    
+        <p class="ui separated rel-mb-2">
+    
+        {% if ri.itemTitle %}
+            <SeparatedProperty label={_('metadata/relatedItems/itemTitle.label')}  isLast={"itemTitle"!=last_key}>{{ri.itemTitle}}</SeparatedProperty>
+        {% endif %}
+        
+        {% if ri.itemCreators %}
+            <SeparatedProperty label={_('metadata/relatedItems/itemCreators.label')} isLast={"itemCreators"!=last_key}>
+                {% for person in ri.itemCreators %}
+                {% set person_dict = person | to_dict %}
+                {% set fullName = person_dict.fullName %}
+                    <span>{{fullName}}</span>
+                    {% if not loop.last %}<span class="single separator"></span>{% endif %}
+                {% endfor %} 
+            </SeparatedProperty>
+        {% endif %}
+        {% if ri.itemContributors %}
+            <SeparatedProperty label={_('metadata/relatedItems/itemContributors.label')} isLast={"itemContributors"!=last_key}>
+                {% for person in ri.itemContributors %}
+                {% set person_dict = person | to_dict %}
+                {% set fullName = person_dict.fullName %}
+                    <span>{{fullName}}</span>
+                    {% if not loop.last %}<span class="single separator"></span>{% endif %}
+                {% endfor %} 
+           </SeparatedProperty>
+         {% endif %}
+
+        {% if ri.itemPIDs %}
+            <SeparatedProperty label={_('metadata/relatedItems/itemPIDs.label')} isLast={"itemPIDs"!=last_key}>
+                {% for pid in ri.itemPIDs %}
+
+                        <{{ 'a href={url} target="_blank"'.format(url=pid.url) if pid.url else 'span' }} >
+                            {{pid.identifier}}
+                        </{{ 'a' if pid.url else 'span'}}>
+                {% endfor %}
+            </SeparatedProperty>
+        {% endif %}
+
+               
+        {% if ri.itemURL %}
+        <SeparatedProperty label={_('metadata/relatedItems/itemURL.label')} isLast={"itemURL"!=last_key}>
+           <a href="{{ri.itemURL}}" target="_blank">{{ri.itemURL}}</a>
+        </SeparatedProperty>
+        {% endif %}
+        
+        {% if ri.itemYear %}
+            <SeparatedProperty label={_('metadata/relatedItems/itemYear.label')} isLast={"itemYear"!=last_key}>{{ri.itemYear}}</SeparatedProperty>
+        {% endif %}
+
+        {% if ri.itemVolume %}
+        <SeparatedProperty label={_('metadata/relatedItems/itemVolume.label')} isLast={"itemVolume"!=last_key}>{{ri.itemVolume}}</SeparatedProperty>
+        {% endif %}
+        
+        {% if ri.itemIssue %}
+        <SeparatedProperty label={_('metadata/relatedItems/itemIssue.label')} isLast={"itemIssue"!=last_key}>{{ri.itemIssue}}</SeparatedProperty>
+        {% endif %}
+
+        {% if ri.itemStartPage %}
+        <SeparatedProperty label={_('metadata/relatedItems/itemStartPage.label')} isLast={"itemStartPage"!=last_key}>{{ri.itemStartPage}}</SeparatedProperty>
+        {% endif %}
+        {% if ri.itemEndPage %}
+        <SeparatedProperty label={_('metadata/relatedItems/itemEndPage.label')} isLast={"itemEndPage"!=last_key}>{{ri.itemEndPage}}</SeparatedProperty>
+        {% endif %}
+
+        {% if ri.itemPublisher %}
+        <SeparatedProperty label={_('metadata/relatedItems/itemPublisher.label')} isLast={"itemPublisher"!=last_key}>{{ri.itemPublisher}}</SeparatedProperty>
+        {% endif %}
+    
+        {% if ri.itemRelationType %}
+        <SeparatedProperty label={_('metadata/relatedItems/itemRelationType.label')} isLast={"itemRelationType"!=last_key}>
+            <VocabularyItem  vocabulary={ri.itemRelationType} vocabulary_type="item-relation-types"></VocabularyItem>
+        </SeparatedProperty>
+        {% endif %}
+        
+        {% if ri.itemResourceType %}
+        <SeparatedProperty label={_('metadata/relatedItems/itemResourceType.label')} isLast={"itemResourceType"==last_key}>
+            <VocabularyItem search_link={search_link} vocabulary={ri.itemResourceType} vocabulary_type="resource-types" searchFacet="metadata_resourceType"></VocabularyItem>
+        </SeparatedProperty>
+        {% endif %}
+    </p>
+{% endfor %}
+
