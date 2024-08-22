@@ -62,7 +62,6 @@
         {% if ri.itemPIDs %}
             <SeparatedProperty label={_('metadata/relatedItems/itemPIDs.label')} isLast={True}>
                 {% for pid in ri.itemPIDs %}
-
                         <{{ 'a href={url} target="_blank"'.format(url=pid.url) if pid.url else 'span' }} >
                             {{pid.scheme}} {{pid.identifier}}
                         </{{ 'a' if pid.url else 'span'}}>
