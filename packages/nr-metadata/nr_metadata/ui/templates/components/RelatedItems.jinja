@@ -39,7 +39,7 @@
                 {% set person_dict = person | to_dict %}
                 {% set fullName = person_dict.fullName %}
                     <span>{{fullName}}</span>
-                    {% if not loop.last %}<Separator ui={{"separator_class": "single separator"}}/>{% endif %}
+                    {% if not loop.last %}<span class="single separator"></span>{% endif %}
                 {% endfor %} 
             </SeparatedProperty>
             {% if  not ri.itemContributors%}
@@ -53,7 +53,7 @@
                 {% set person_dict = person | to_dict %}
                 {% set fullName = person_dict.fullName %}
                     <span>{{fullName}}</span>
-                    {% if not loop.last %}<Separator ui={{"separator_class": "single separator"}}/>{% endif %}
+                    {% if not loop.last %}<span class="single separator"></span>{% endif %}
                 {% endfor %} 
            </SeparatedProperty>
            <br>
@@ -70,7 +70,7 @@
                                 <i class="copy icon"></i>
                             </button>
                         {% endif %}
-                        {% if not loop.last %}<Separator ui={{"separator_class": "single separator"}}/>{% endif %}
+                        {% if not loop.last %}<span class="single separator"></span>{% endif %}
                 {% endfor %}
             </SeparatedProperty>
             <br>
