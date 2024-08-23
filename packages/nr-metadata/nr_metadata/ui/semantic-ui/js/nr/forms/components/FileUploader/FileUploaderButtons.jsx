@@ -5,13 +5,15 @@ import { FileEditWrapper, FileUploadWrapper } from "./FileUploaderWrappers";
 import { useDepositFileApiClient } from "@js/oarepo_ui";
 import { i18next } from "@translations/nr/i18next";
 
+const LOCALE = i18next.language === "cs" ? "cs_CZ" : i18next.language === "en" ? "en_US" : i18next.language;
+
 export const EditFileButton = ({ fileName, record, allowedFileTypes }) => {
   return (
     <FileEditWrapper
       props={{
         config: { record: record },
         autoExtractImagesFromPDFs: false,
-        locale: i18next.language,
+        locale: LOCALE,
         startEvent: { event: "edit-file", data: { file_key: fileName } },
         modifyExistingFiles: true,
         allowedFileTypes: allowedFileTypes,
@@ -36,7 +38,7 @@ export const UploadFileButton = ({
       props={{
         config: { record: record },
         autoExtractImagesFromPDFs: false,
-        locale: i18next.language,
+        locale: LOCALE,
         allowedFileTypes: allowedFileTypes,
         startEvent: null,
         onCompletedUpload: (result) => {
