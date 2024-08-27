@@ -10,6 +10,8 @@ export const IconIdentifier = ({ link, linkTitle, icon, alt }) => {
       aria-label={linkTitle}
       title={linkTitle}
       key={link}
+      target="_blank"
+      rel="noopener noreferrer"
     >
       <img className="inline-id-icon ml-5" src={icon} alt={alt} />
     </a>
