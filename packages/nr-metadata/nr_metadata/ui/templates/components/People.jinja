@@ -5,7 +5,6 @@
 
 <div class="ui double separated">
    <div role="list" class="ui horizontal separated creatibutors list">
-
             {% for person in creators %}
                 <Person person={person} search_link={search_link} searchFacet="syntheticFields_people"></Person>
             {% endfor %}
@@ -14,9 +13,11 @@
         <div class="double separator"></div>
             <div role="list" class="ui horizontal separated creatibutors list">
 
-                {% for fullName, matches in contributors | groupby('fullName') %}
-                  {% set roles= matches |  map(attribute='role') | select('defined') | list %}
-                  <Person person={matches[0]} search_link={search_link} searchFacet="syntheticFields_people" roles ={roles}></Person>
+                {% for contributor in contributors%}
+                  {% if contributor.contributorType.title %}
+                    {% set role = contributor.contributorType.title %}
+                  {% endif %}
+                  <Person person={contributor} search_link={search_link} searchFacet="syntheticFields_people" role={role}></Person>
 
                 {% endfor %}
             </div>

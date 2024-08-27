@@ -38,7 +38,13 @@
                 {% for person in ri.itemCreators %}
                 {% set person_dict = person | to_dict %}
                 {% set fullName = person_dict.fullName %}
+                {% set identifiers = person_dict.authorityIdentifiers%}
                     <span>{{fullName}}</span>
+                    {% if identifiers %}
+                        {% for identifier in identifiers%}
+                            <IdentifierBadge identifier={identifier} creatibutorName={fullName} />
+                        {% endfor %}
+                    {% endif%}
                     {% if not loop.last %}<span class="single separator"></span>{% endif %}
                 {% endfor %} 
             </SeparatedProperty>
@@ -52,7 +58,17 @@
                 {% for person in ri.itemContributors %}
                 {% set person_dict = person | to_dict %}
                 {% set fullName = person_dict.fullName %}
+                {% set identifiers = person_dict.authorityIdentifiers%}
+                {% set role = person_dict.contributorType%}
                     <span>{{fullName}}</span>
+                    {% if identifiers %}
+                    {% for identifier in identifiers%}
+                        <IdentifierBadge identifier={identifier} creatibutorName={fullName} />
+                    {% endfor %}
+                    {% endif%}    
+                    {% if role.title %}
+                        ({{role.title}})
+                    {% endif %}
                     {% if not loop.last %}<span class="single separator"></span>{% endif %}
                 {% endfor %} 
            </SeparatedProperty>
