@@ -11,9 +11,10 @@ import {
 } from "@js/oarepo_ui";
 import { i18next } from "@translations/nr/i18next";
 import { useFormikContext, getIn } from "formik";
+import { Label } from "semantic-ui-react";
 
 export const EventsField = ({ fieldPath }) => {
-  const { values, setFieldValue, setFieldTouched } = useFormikContext();
+  const { values, setFieldValue, setFieldTouched, errors } = useFormikContext();
 
   const { sanitizeInput } = useSanitizeInput();
   const { getFieldData } = useFieldData();
@@ -27,6 +28,11 @@ export const EventsField = ({ fieldPath }) => {
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
         const eventNameOriginalFieldPath = `${fieldPathPrefix}.eventNameOriginal`;
+
+        const beValidationErrors = getIn(errors, "BEvalidationErrors", {});
+        const eventLocationError = beValidationErrors?.errors?.find(
+          (e) => e.field === `${fieldPathPrefix}.eventLocation`
+        );
 
         return (
           <ArrayFieldItem
@@ -86,6 +92,14 @@ export const EventsField = ({ fieldPath }) => {
                 })}
               />
             </GroupField>
+            {eventLocationError && (
+              <React.Fragment>
+                <Label className="rel-mb-1 mt-0 ml-5" prompt pointing="above">
+                  {eventLocationError.messages.join(" ")}
+                </Label>
+                <br />
+              </React.Fragment>
+            )}
           </ArrayFieldItem>
         );
       }}
