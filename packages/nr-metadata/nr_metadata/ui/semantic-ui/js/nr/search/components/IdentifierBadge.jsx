@@ -110,7 +110,6 @@ export const IdentifierBadge = ({ identifier, creatibutorName }) => {
           alt="CZENAS logo"
         />
       );
-
     case "vedidk":
       return (
         <IconIdentifier
@@ -120,7 +119,6 @@ export const IdentifierBadge = ({ identifier, creatibutorName }) => {
           alt="VEDIDK logo"
         />
       );
-
     case "institutionalid":
       return (
         <IconIdentifier
@@ -130,7 +128,6 @@ export const IdentifierBadge = ({ identifier, creatibutorName }) => {
           alt="Institutional ID logo"
         />
       );
-
     case "ico":
       return (
         <IconIdentifier
