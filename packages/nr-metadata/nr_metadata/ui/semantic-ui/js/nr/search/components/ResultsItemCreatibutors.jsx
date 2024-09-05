@@ -37,7 +37,7 @@ CreatibutorSearchLink.defaultProps = {
   nameType: "Personal",
 };
 
-const CreatibutorIdentifier = ({
+export const CreatibutorIdentifier = ({
   identifiers = [],
   creatibutorName = "No name",
 }) => {

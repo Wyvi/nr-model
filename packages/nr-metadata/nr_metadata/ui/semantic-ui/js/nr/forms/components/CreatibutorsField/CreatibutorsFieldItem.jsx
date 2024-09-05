@@ -15,6 +15,7 @@ import { CreatibutorsModal } from "./CreatibutorsModal";
 import PropTypes from "prop-types";
 import { useFormConfig } from "@js/oarepo_ui";
 import { NestedErrors } from "@nr/forms";
+import { CreatibutorIdentifier } from "@nr/search";
 
 export const CreatibutorsFieldItem = ({
   compKey,
@@ -76,7 +77,11 @@ export const CreatibutorsFieldItem = ({
       )
     );
   };
-
+  const authorityIdentifiers = _get(
+    initialCreatibutor,
+    "authorityIdentifiers",
+    []
+  );
   // Initialize the ref explicitely
   drop(dropRef);
   return (
@@ -123,41 +128,10 @@ export const CreatibutorsFieldItem = ({
             <List.Content>
               <List.Description>
                 <span className="creatibutor">
-                  {_get(initialCreatibutor, "authorityIdentifiers", []).some(
-                    (identifier) => identifier.scheme === "orcid"
-                  ) && (
-                    <img
-                      alt="ORCID logo"
-                      className="inline-id-icon mr-5"
-                      src="/static/images/identifiers/orcid-og-image.png"
-                      width="16"
-                      height="16"
-                    />
-                  )}
-                  {/* TODO: provide logo assets for this ID schemes */}
-                  {/* {_get(initialCreatibutor, "authorityIdentifiers", []).some(
-                (identifier) => identifier.scheme === "ror"
-              ) && (
-                <img
-                  alt="ROR logo"
-                  className="inline-id-icon mr-5"
-                  src="/static/images/ror-icon.svg"
-                  width="16"
-                  height="16"
-                />
-              )}
-              {_get(initialCreatibutor, "authorityIdentifiers", []).some(
-                (identifier) => identifier.scheme === "gnd"
-              ) && (
-                <img
-                  alt="GND logo"
-                  className="inline-id-icon mr-5"
-                  src="/static/images/gnd-icon.svg"
-                  width="16"
-                  height="16"
-                />
-              )} */}
                   {displayName}
+                  <span className="mr-5 ml-5">
+                    <CreatibutorIdentifier identifiers={authorityIdentifiers} />
+                  </span>
                   {renderRole(initialCreatibutor?.contributorType)}
                 </span>
               </List.Description>
