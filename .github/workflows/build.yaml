@@ -19,13 +19,13 @@ jobs:
       matrix:
         python-version: ["3.10" ]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
       - name: Cache pip
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           # This path is specific to Ubuntu
           path: ~/.cache/pip
@@ -57,13 +57,13 @@ jobs:
         run: ./build.sh
 
       - name: Archive production nr-metadata artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nr_metadata_dist
           path: packages/nr-metadata/dist
 
       - name: Archive production omb-nr artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: omb_nr_dist
           path: packages/oarepo-model-builder-nr/dist
@@ -76,13 +76,13 @@ jobs:
           .venv-tests/bin/pip freeze >>requirements.txt
 
       - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist
 
       - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: requirements.txt
           path: requirements.txt
