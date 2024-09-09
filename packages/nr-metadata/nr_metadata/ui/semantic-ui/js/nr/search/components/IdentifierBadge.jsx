@@ -88,7 +88,7 @@ export const IdentifierBadge = ({ identifier, creatibutorName }) => {
         <IconIdentifier
           link={`https://doi.org/{value}`}
           badgeTitle={`${creatibutorName}: ${i18next.t("DOI profile")}`}
-          icon="/static/images/identifiers/id.png"
+          icon="/static/images/identifiers/DOI_logo.svg"
           alt="DOI logo"
         />
       );
