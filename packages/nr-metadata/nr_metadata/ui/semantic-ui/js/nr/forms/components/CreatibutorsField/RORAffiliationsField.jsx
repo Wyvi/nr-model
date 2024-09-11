@@ -1,8 +1,7 @@
 import * as React from "react";
 
 import { RORInstitutionResult } from "../RORInstitutionResult";
-import { VocabularyRemoteSelectField } from "@js/oarepo_vocabularies";
-import { Button, Icon } from "semantic-ui-react";
+import { VocabularyRemoteSelectField, VocabularyRemoteSelectModalTrigger } from "@js/oarepo_vocabularies";
 import { useFieldData } from "@js/oarepo_ui";
 import { i18next } from "@translations/nr/i18next";
 
@@ -29,15 +28,7 @@ export const RORAffiliationsField = ({
       }
       closeOnDimmerClick={true}
       triggerButton={
-        <Button
-          className="array-field-add-button"
-          type="button"
-          icon
-          labelPosition="left"
-        >
-          <Icon name="add" />
-          {i18next.t(`Choose affiliation${multiple ? "s" : ""}`)}
-        </Button>
+        <VocabularyRemoteSelectModalTrigger label={i18next.t(`Choose affiliation${multiple ? "s" : ""}`)} />
       }
       {...getFieldData({
         fieldPath: fieldPath,
