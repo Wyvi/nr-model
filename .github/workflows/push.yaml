@@ -17,12 +17,12 @@ jobs:
     needs: build
     steps:
       - name: Use built nr-metadata artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: nr_metadata_dist
           path: nr_metadata_dist
       - name: Use built omb-nr artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: omb_nr_dist
           path: omb_nr_dist
