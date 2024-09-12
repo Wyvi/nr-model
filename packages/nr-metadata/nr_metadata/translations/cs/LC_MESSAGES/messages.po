@@ -3962,3 +3962,11 @@ msgstr ""
 
 msgid "Add project/financing information"
 msgstr "Přidat projekt/informaci o financování"
+
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:15
+#: nr_metadata/translations/jinjax_messages.jinja:15
+msgid "Pages"
+msgstr ""
+
+msgid "Add external location"
+msgstr "Přidat externí umístění"
