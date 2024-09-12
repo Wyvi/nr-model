@@ -2,10 +2,11 @@ import * as React from "react";
 
 import { List, Label, Header, Icon } from "semantic-ui-react";
 import _join from "lodash/join";
+import { getTitleFromMultilingualObject } from "@js/oarepo_ui";
 
 export const RORInstitutionResult = ({ result, handleSelect = () => {} }) => {
 
-  const { id, relatedURI, props } = result;
+  const { title, relatedURI, props } = result;
 
   const uriLinks =
     relatedURI &&
@@ -25,7 +26,7 @@ export const RORInstitutionResult = ({ result, handleSelect = () => {} }) => {
       );
     });
 
-  const propValues = _join(Object.values(props), ", ");
+  const propValues = _join(Object.values(props).filter(prop => prop && prop !== ""), ", ");
 
   const onSelect = (result) => {
     // TODO: here you can convert the result to internal format
@@ -40,7 +41,7 @@ export const RORInstitutionResult = ({ result, handleSelect = () => {} }) => {
     >
       <List.Content>
         <Header className="mb-5" size="small">
-          {id} {uriLinks}
+          {getTitleFromMultilingualObject(title)} {uriLinks}
         </Header>
         <List.Description>{propValues}</List.Description>
       </List.Content>
