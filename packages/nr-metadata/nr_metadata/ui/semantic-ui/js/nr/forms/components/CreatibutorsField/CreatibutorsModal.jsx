@@ -562,6 +562,12 @@ export const CreatibutorsModal = ({
                       fieldPath={affiliationFullNameFieldPath}
                       onBlur={() => handleBlur(affiliationFullNameFieldPath)}
                       {...getFieldData({ fieldPath: fullNameFieldPath })}
+                      modalHeader={
+                        getFieldData({
+                          fieldPath: fullNameFieldPath,
+                          fieldRepresentation: "text",
+                        }).label
+                      }
                     />
                   </div>
                 )}

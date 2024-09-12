@@ -4,7 +4,7 @@ import { List, Label, Header, Icon } from "semantic-ui-react";
 import _join from "lodash/join";
 import { getTitleFromMultilingualObject } from "@js/oarepo_ui";
 
-export const RORInstitutionResult = ({ result, handleSelect = () => {} }) => {
+export const RORInstitutionResult = ({ result, handleSelect = () => {}, selected }) => {
 
   const { title, relatedURI, props } = result;
 
@@ -30,14 +30,14 @@ export const RORInstitutionResult = ({ result, handleSelect = () => {} }) => {
 
   const onSelect = (result) => {
     // TODO: here you can convert the result to internal format
-    handleSelect(result);
+    handleSelect(result, selected);
   };
 
   return (
     <List.Item
       onClick={() => onSelect(result)}
       className="search-external-result-item"
-      //   active={true}
+      active={selected}
     >
       <List.Content>
         <Header className="mb-5" size="small">
