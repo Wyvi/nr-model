@@ -130,14 +130,12 @@ const serializeCreatibutor = (submittedCreatibutor, isCreator, isPerson) => {
       affiliationFullNameFieldPath,
       ""
     );
-
+    const orgFullName = getTitleFromMultilingualObject(affiliation.title) ??
+    (affiliation.id ?? typeof affiliation === "string" ? affiliation : i18next.t("Unknown item"));
     return {
       nameType,
-      fullName:
-        getTitleFromMultilingualObject(affiliation?.title) ||
-        affiliation?.name ||
-        affiliation,
-      ...(!isCreator && { contributorType } && { contributorType }),
+      fullName: orgFullName,
+      ...(!isCreator && {contributorType} && {contributorType}),
     };
   }
 };
