@@ -1305,7 +1305,7 @@ msgstr "Typ identifikátoru"
 msgid "identifier_type.hint"
 msgstr ""
 "Doporučujeme zadat alespoň jeden z typů identifikátorů.\n"
-"Pokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.\n"
+"Pokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz."
 
 msgid "identifier_type.help"
 msgstr ""
@@ -3968,3 +3968,9 @@ msgstr "Přidat projekt/informaci o financování"
 #: nr_metadata/translations/jinjax_messages.jinja:11
 msgid "Pages"
 msgstr ""
+
+msgid "Choose affiliation"
+msgstr "Vybrat afiliaci"
+
+msgid "Choose affiliations"
+msgstr "Vybrat afiliace"

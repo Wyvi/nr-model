@@ -1847,3 +1847,9 @@ msgstr ""
 #: nr_metadata/translations/jinjax_messages.jinja:11
 msgid "Pages"
 msgstr ""
+
+msgid "Choose affiliation"
+msgstr ""
+
+msgid "Choose affiliations"
+msgstr ""

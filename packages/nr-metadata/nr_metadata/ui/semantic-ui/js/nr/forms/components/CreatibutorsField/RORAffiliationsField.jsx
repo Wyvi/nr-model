@@ -28,7 +28,7 @@ export const RORAffiliationsField = ({
       }
       closeOnDimmerClick={true}
       triggerButton={
-        <VocabularyRemoteSelectModalTrigger label={i18next.t(`Choose affiliation${multiple ? "s" : ""}`)} />
+        <VocabularyRemoteSelectModalTrigger label={multiple? i18next.t( 'Choose affiliations') : i18next.t('Choose affiliation')} />
       }
       {...getFieldData({
         fieldPath: fieldPath,

@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-10 19:26+0200\n"
+"POT-Creation-Date: 2024-09-12 12:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.15.0\n"
 
 #: /Users/miroslavbauer/Code/github.com/Narodni-repozitar/nr-model/packages/nr-metadata/nr_metadata/common/services/records/facets.py:13
 #: /Users/miroslavbauer/Code/github.com/Narodni-repozitar/nr-model/packages/nr-metadata/nr_metadata/common/services/records/facets.py:17
@@ -1232,6 +1232,12 @@ msgid "Choose if the author is a person or an organization."
 msgstr ""
 
 msgid "Couldn't find your person? You can <2>create a new entry</2>."
+msgstr ""
+
+msgid "Choose affiliations"
+msgstr ""
+
+msgid "Choose affiliation"
 msgstr ""
 
 msgid "Add event"
