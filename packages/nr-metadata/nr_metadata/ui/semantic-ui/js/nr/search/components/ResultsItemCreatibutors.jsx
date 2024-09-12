@@ -95,7 +95,7 @@ export function ResultsItemCreatibutors({
                 nameType={nameType}
               />
               <CreatibutorIdentifier
-                personName={fullName}
+                creatibutorName={fullName}
                 identifiers={authorityIdentifiers}
               />
             </List.Item>

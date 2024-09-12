@@ -130,7 +130,10 @@ export const CreatibutorsFieldItem = ({
                 <span className="creatibutor">
                   {displayName}
                   <span className="mr-5 ml-5">
-                    <CreatibutorIdentifier identifiers={authorityIdentifiers} />
+                    <CreatibutorIdentifier
+                      identifiers={authorityIdentifiers}
+                      creatibutorName={initialCreatibutor?.fullName}
+                    />
                   </span>
                   {renderRole(initialCreatibutor?.contributorType)}
                 </span>
