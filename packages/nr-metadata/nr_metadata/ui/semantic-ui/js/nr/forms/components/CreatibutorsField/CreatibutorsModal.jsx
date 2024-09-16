@@ -45,6 +45,7 @@ import {
   handleValidateAndBlur,
   useFieldData,
 } from "@js/oarepo_ui";
+import { RORAffiliationsField } from "./RORAffiliationsField";
 
 const ModalActions = {
   ADD: "add",
@@ -129,14 +130,12 @@ const serializeCreatibutor = (submittedCreatibutor, isCreator, isPerson) => {
       affiliationFullNameFieldPath,
       ""
     );
-
+    const orgFullName = getTitleFromMultilingualObject(affiliation.title) ??
+    (affiliation.id ?? typeof affiliation === "string" ? affiliation : i18next.t("Unknown item"));
     return {
       nameType,
-      fullName:
-        getTitleFromMultilingualObject(affiliation?.title) ||
-        affiliation?.name ||
-        affiliation,
-      ...(!isCreator && { contributorType } && { contributorType }),
+      fullName: orgFullName,
+      ...(!isCreator && {contributorType} && {contributorType}),
     };
   }
 };
@@ -546,21 +545,9 @@ export const CreatibutorsModal = ({
                             validateOnBlur
                           />
                         </Form.Group>
-                        <VocabularySelectField
-                          type="institutions"
+                        <RORAffiliationsField
+                          multiple={true}
                           fieldPath={affiliationsFieldPath}
-                          externalApiModalTitle={i18next.t(
-                            "Search in ROR database"
-                          )}
-                          externalApiButtonContent={i18next.t(
-                            "Search in ROR database"
-                          )}
-                          externalAuthority
-                          multiple
-                          clearable
-                          {...getFieldData({
-                            fieldPath: affiliationsFieldPath,
-                          })}
                         />
                       </div>
                     )}
@@ -569,25 +556,16 @@ export const CreatibutorsModal = ({
                 {_get(values, typeFieldPath) ===
                   CREATIBUTOR_TYPE.ORGANIZATION && (
                   <div>
-                    <VocabularySelectField
-                      additionLabel={i18next.t(
-                        "Add institution name (free text): "
-                      )}
-                      type="institutions"
+                    <RORAffiliationsField
                       fieldPath={affiliationFullNameFieldPath}
-                      externalApiModalTitle={i18next.t(
-                        "Search in ROR database"
-                      )}
-                      externalApiButtonContent={i18next.t(
-                        "Search in ROR database"
-                      )}
-                      externalAuthority
-                      clearable
-                      selection
-                      deburr
-                      required
                       onBlur={() => handleBlur(affiliationFullNameFieldPath)}
                       {...getFieldData({ fieldPath: fullNameFieldPath })}
+                      modalHeader={
+                        getFieldData({
+                          fieldPath: fullNameFieldPath,
+                          fieldRepresentation: "text",
+                        }).label
+                      }
                     />
                   </div>
                 )}

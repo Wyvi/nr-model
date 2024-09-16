@@ -66,7 +66,6 @@ class CreatibutorsFieldForm extends Component {
             <List>
               {creatibutorsList.map((value, index) => {
                 const key = `${fieldPath}.${index}`;
-
                 const displayName = creatibutorNameDisplay(value);
                 return (
                   <CreatibutorsFieldItem

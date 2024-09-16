@@ -184,8 +184,8 @@
             ],
             "extra-code": "",
             "extensions": [
-                "{{nr_metadata.common.records.dumpers.edtf.CommonEDTFIntervalDumperExt}}()",
-                "{{nr_metadata.common.records.dumpers.multilingual.MultilingualSearchDumperExt}}()"
+                "{{nr_metadata.common.records.dumpers.multilingual.MultilingualSearchDumperExt}}()",
+                "{{nr_metadata.common.records.dumpers.edtf.CommonEDTFIntervalDumperExt}}()"
             ],
             "imports": []
         },
@@ -216,7 +216,7 @@
                 "invenio_records_resources.services.RecordServiceConfig{InvenioRecordServiceConfig}"
             ],
             "components": [
-                "{{invenio_records_resources.services.records.components.DataComponent}}"
+                "{{oarepo_runtime.services.components.CustomFieldsComponent}}"
             ],
             "additional-args": []
         },
@@ -252,6 +252,17 @@
         "translations": {
             "module": "nr_metadata.common.translations",
             "alias": "common"
+        },
+        "multilingual-dumper": {
+            "generate": true,
+            "module": "nr_metadata.common.records.dumpers.multilingual",
+            "class": "nr_metadata.common.records.dumpers.multilingual.MultilingualSearchDumperExt",
+            "base-classes": [
+                "oarepo_runtime.records.dumpers.multilingual_dumper.MultilingualDumper"
+            ],
+            "extra-code": "",
+            "extensions": [],
+            "imports": []
         },
         "mapping": {
             "generate": true,
@@ -305,17 +316,6 @@
                 "oarepo_runtime.services.results.RecordItem"
             ],
             "components": [],
-            "imports": []
-        },
-        "multilingual-dumper": {
-            "generate": true,
-            "module": "nr_metadata.common.records.dumpers.multilingual",
-            "class": "nr_metadata.common.records.dumpers.multilingual.MultilingualSearchDumperExt",
-            "base-classes": [
-                "oarepo_runtime.records.dumpers.multilingual_dumper.MultilingualDumper"
-            ],
-            "extra-code": "",
-            "extensions": [],
             "imports": []
         },
         "sortable": [],
@@ -493,7 +493,7 @@
                         "hint.en": "Choose access type - if the resource is open or has some restrictions.",
                         "imports": [
                             {
-                                "import": "invenio_vocabularies.records.api.Vocabulary"
+                                "import": "oarepo_vocabularies.records.api.Vocabulary"
                             }
                         ],
                         "model": "vocabularies",
@@ -747,7 +747,7 @@
                                             "hint.en": "Choose the role of the contributor (editor, illustrator…).",
                                             "imports": [
                                                 {
-                                                    "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                    "import": "oarepo_vocabularies.records.api.Vocabulary"
                                                 }
                                             ],
                                             "model": "vocabularies",
@@ -960,7 +960,7 @@
                                                 "hint.en": "Start typing the name of the institution, then select the institution from the menu.",
                                                 "imports": [
                                                     {
-                                                        "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                        "import": "oarepo_vocabularies.records.api.Vocabulary"
                                                     }
                                                 ],
                                                 "model": "vocabularies",
@@ -1013,7 +1013,7 @@
                                             "hint.en": "Choose the role of the contributor (editor, illustrator…).",
                                             "imports": [
                                                 {
-                                                    "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                    "import": "oarepo_vocabularies.records.api.Vocabulary"
                                                 }
                                             ],
                                             "model": "vocabularies",
@@ -1232,7 +1232,7 @@
                                         "hint.en": "Start typing the name of the institution, then select the institution from the menu.",
                                         "imports": [
                                             {
-                                                "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                "import": "oarepo_vocabularies.records.api.Vocabulary"
                                             }
                                         ],
                                         "model": "vocabularies",
@@ -1455,7 +1455,7 @@
                                     "hint.en": "Choose the role of the contributor (editor, illustrator…).",
                                     "imports": [
                                         {
-                                            "import": "invenio_vocabularies.records.api.Vocabulary"
+                                            "import": "oarepo_vocabularies.records.api.Vocabulary"
                                         }
                                     ],
                                     "model": "vocabularies",
@@ -1800,7 +1800,7 @@
                                                 "hint.en": "Start typing the name of the institution, then select the institution from the menu.",
                                                 "imports": [
                                                     {
-                                                        "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                        "import": "oarepo_vocabularies.records.api.Vocabulary"
                                                     }
                                                 ],
                                                 "model": "vocabularies",
@@ -2032,7 +2032,7 @@
                                         "hint.en": "Start typing the name of the institution, then select the institution from the menu.",
                                         "imports": [
                                             {
-                                                "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                "import": "oarepo_vocabularies.records.api.Vocabulary"
                                             }
                                         ],
                                         "model": "vocabularies",
@@ -2362,7 +2362,7 @@
                                             "hint.en": "Choose a country from the menu.",
                                             "imports": [
                                                 {
-                                                    "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                    "import": "oarepo_vocabularies.records.api.Vocabulary"
                                                 }
                                             ],
                                             "model": "vocabularies",
@@ -2525,7 +2525,7 @@
                                     "hint.en": "Start typing the name of the funder, then select the funder from the menu.",
                                     "imports": [
                                         {
-                                            "import": "invenio_vocabularies.records.api.Vocabulary"
+                                            "import": "oarepo_vocabularies.records.api.Vocabulary"
                                         }
                                     ],
                                     "model": "vocabularies",
@@ -2742,7 +2742,7 @@
                             "hint.en": "Choose the language(s) of the resource.",
                             "imports": [
                                 {
-                                    "import": "invenio_vocabularies.records.api.Vocabulary"
+                                    "import": "oarepo_vocabularies.records.api.Vocabulary"
                                 }
                             ],
                             "model": "vocabularies",
@@ -3027,7 +3027,7 @@
                                                         "hint.en": "Choose the role of the contributor (editor, illustrator…).",
                                                         "imports": [
                                                             {
-                                                                "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                                "import": "oarepo_vocabularies.records.api.Vocabulary"
                                                             }
                                                         ],
                                                         "model": "vocabularies",
@@ -3240,7 +3240,7 @@
                                                             "hint.en": "Start typing the name of the institution, then select the institution from the menu.",
                                                             "imports": [
                                                                 {
-                                                                    "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                                    "import": "oarepo_vocabularies.records.api.Vocabulary"
                                                                 }
                                                             ],
                                                             "model": "vocabularies",
@@ -3293,7 +3293,7 @@
                                                         "hint.en": "Choose the role of the contributor (editor, illustrator…).",
                                                         "imports": [
                                                             {
-                                                                "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                                "import": "oarepo_vocabularies.records.api.Vocabulary"
                                                             }
                                                         ],
                                                         "model": "vocabularies",
@@ -3512,7 +3512,7 @@
                                                     "hint.en": "Start typing the name of the institution, then select the institution from the menu.",
                                                     "imports": [
                                                         {
-                                                            "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                            "import": "oarepo_vocabularies.records.api.Vocabulary"
                                                         }
                                                     ],
                                                     "model": "vocabularies",
@@ -3735,7 +3735,7 @@
                                                 "hint.en": "Choose the role of the contributor (editor, illustrator…).",
                                                 "imports": [
                                                     {
-                                                        "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                        "import": "oarepo_vocabularies.records.api.Vocabulary"
                                                     }
                                                 ],
                                                 "model": "vocabularies",
@@ -4073,7 +4073,7 @@
                                                             "hint.en": "Start typing the name of the institution, then select the institution from the menu.",
                                                             "imports": [
                                                                 {
-                                                                    "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                                    "import": "oarepo_vocabularies.records.api.Vocabulary"
                                                                 }
                                                             ],
                                                             "model": "vocabularies",
@@ -4305,7 +4305,7 @@
                                                     "hint.en": "Start typing the name of the institution, then select the institution from the menu.",
                                                     "imports": [
                                                         {
-                                                            "import": "invenio_vocabularies.records.api.Vocabulary"
+                                                            "import": "oarepo_vocabularies.records.api.Vocabulary"
                                                         }
                                                     ],
                                                     "model": "vocabularies",
@@ -4644,7 +4644,7 @@
                                     "hint.en": "Choose the relation type.",
                                     "imports": [
                                         {
-                                            "import": "invenio_vocabularies.records.api.Vocabulary"
+                                            "import": "oarepo_vocabularies.records.api.Vocabulary"
                                         }
                                     ],
                                     "model": "vocabularies",
@@ -4759,7 +4759,7 @@
                                     "label.en": "Resource type",
                                     "imports": [
                                         {
-                                            "import": "invenio_vocabularies.records.api.Vocabulary"
+                                            "import": "oarepo_vocabularies.records.api.Vocabulary"
                                         }
                                     ],
                                     "model": "vocabularies",
@@ -4911,7 +4911,7 @@
                         "label.en": "Resource type",
                         "imports": [
                             {
-                                "import": "invenio_vocabularies.records.api.Vocabulary"
+                                "import": "oarepo_vocabularies.records.api.Vocabulary"
                             }
                         ],
                         "model": "vocabularies",
@@ -5031,7 +5031,7 @@
                         "help.en": "If a Creative Commons license is associated with the resource, select the appropriate license option from the menu. We recommend choosing the latest versions, namely 3.0 Czech and 4.0 International.",
                         "imports": [
                             {
-                                "import": "invenio_vocabularies.records.api.Vocabulary"
+                                "import": "oarepo_vocabularies.records.api.Vocabulary"
                             }
                         ],
                         "model": "vocabularies",
@@ -5194,7 +5194,7 @@
                             "label.en": "Subject categories",
                             "imports": [
                                 {
-                                    "import": "invenio_vocabularies.records.api.Vocabulary"
+                                    "import": "oarepo_vocabularies.records.api.Vocabulary"
                                 }
                             ],
                             "model": "vocabularies",

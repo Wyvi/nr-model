@@ -3,13 +3,13 @@ from invenio_records.systemfields import ConstantField
 from invenio_records_resources.records.api import Record as InvenioRecord
 from invenio_records_resources.records.systemfields import IndexField
 from invenio_records_resources.records.systemfields.pid import PIDField, PIDFieldContext
-from invenio_vocabularies.records.api import Vocabulary
 from oarepo_runtime.records.relations import PIDRelation, RelationsField
 from oarepo_runtime.records.systemfields import (
     FirstItemSelector,
     PathSelector,
     SyntheticSystemField,
 )
+from oarepo_vocabularies.records.api import Vocabulary
 
 from nr_metadata.documents.records.dumpers.dumper import DocumentsDumper
 from nr_metadata.documents.records.models import DocumentsMetadata

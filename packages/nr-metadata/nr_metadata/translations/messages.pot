@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-12 14:43+0200\n"
+"POT-Creation-Date: 2024-09-16 22:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1175,6 +1175,9 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
+msgid "Unknown item"
+msgstr ""
+
 msgid "Save and add another"
 msgstr ""
 
@@ -1202,12 +1205,6 @@ msgstr ""
 msgid "Search for persons by name, identifier, or affiliation..."
 msgstr ""
 
-msgid "Search in ROR database"
-msgstr ""
-
-msgid "Add institution name (free text): "
-msgstr ""
-
 msgid "Cancel"
 msgstr ""
 
@@ -1220,7 +1217,16 @@ msgstr ""
 msgid "Couldn't find your person? You can <2>create a new entry</2>."
 msgstr ""
 
+msgid "Choose affiliations"
+msgstr ""
+
+msgid "Choose affiliation"
+msgstr ""
+
 msgid "Add event"
+msgstr ""
+
+msgid "Remove field"
 msgstr ""
 
 msgid "Add external location"
