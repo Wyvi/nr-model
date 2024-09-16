@@ -1,10 +1,39 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { TextField, GroupField } from "react-invenio-forms";
-import { Form, Icon } from "semantic-ui-react";
-import { useFieldData } from "@js/oarepo_ui";
+import { TextField } from "react-invenio-forms";
+import { Form, Icon, Button } from "semantic-ui-react";
+import { useFieldData, ArrayFieldItem } from "@js/oarepo_ui";
 import { i18next } from "@translations/nr/i18next";
 import { useFormikContext, getIn } from "formik";
+
+const RemoveButton = ({
+  handleClick,
+  removeButtonId,
+  onMouseEnter,
+  onMouseLeave,
+}) => (
+  <Button
+    aria-label={i18next.t("Remove field")}
+    className="close-btn"
+    type="button"
+    icon
+    id={removeButtonId}
+    onClick={() => {
+      handleClick();
+    }}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+  >
+    <Icon name="close" />
+  </Button>
+);
+
+RemoveButton.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+  removeButtonId: PropTypes.string.isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
+};
 
 export const ExternalLocationField = ({ fieldPath }) => {
   const { getFieldData } = useFieldData();
@@ -20,7 +49,17 @@ export const ExternalLocationField = ({ fieldPath }) => {
     <Form.Field>
       {label}
       {showInput && (
-        <GroupField>
+        <ArrayFieldItem
+          removeButton={RemoveButton}
+          removeButtonProps={{
+            "aria-label": i18next.t("Remove field"),
+            className: "close-btn",
+            type: "button",
+            removeButtonId: `${fieldPath}.remove-button`,
+            handleClick: () => setShowInput(false),
+          }}
+          fieldPathPrefix={`${fieldPath}`}
+        >
           <TextField
             width={8}
             fieldPath={`${fieldPath}.externalLocationURL`}
@@ -37,7 +76,7 @@ export const ExternalLocationField = ({ fieldPath }) => {
               fieldRepresentation: "compact",
             })}
           />
-        </GroupField>
+        </ArrayFieldItem>
       )}
       {helpText && <label className="helptext">{helpText}</label>}
       {!showInput && (
