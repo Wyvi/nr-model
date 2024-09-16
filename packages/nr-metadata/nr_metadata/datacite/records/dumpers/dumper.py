@@ -9,4 +9,4 @@ from nr_metadata.datacite.records.dumpers.multilingual import (
 class DataciteDumper(SearchDumper):
     """DataciteRecord opensearch dumper."""
 
-    extensions = [DataciteEDTFIntervalDumperExt(), MultilingualSearchDumperExt()]
+    extensions = [MultilingualSearchDumperExt(), DataciteEDTFIntervalDumperExt()]
