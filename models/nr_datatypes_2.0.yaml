@@ -21,29 +21,29 @@ NRPerson:
         faker: name
     givenName:
       type: keyword
-      label.cs: Jméno
-      label.en: Name
-      hint.cs: Napište jméno autora.
-      hint.en: "Write the author's name."
+      label.cs: Křestní jméno
+      label.en: Given Name
+      hint.cs: Uveďte jméno autora.
+      hint.en: "Fill in the author's given name."
       required: true
     familyName:
       label.cs: Příjmení
-      label.en: Last name
-      hint.cs: Napište příjmení autora.
-      hint.en: "Write the author's last name."
+      label.en: Family Name
+      hint.cs: Uveďte příjmení autora.
+      hint.en: "Fill in the author's family name."
       required: true
       type: keyword
     authorityIdentifiers[]:
       use: "nr-datatypes#NRPersonIdentifier"
       ^label.cs: Identifikátor osoby
-      ^label.en: Person identifier
+      ^label.en: Person Identifier
       ^help.cs: |
-        Vyberte z nabídky typ identifikátoru. Napište identifikátor bez předpony (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816). 
-        Doporučujeme zadat alespoň jeden z typů identifikátorů. 
+        Vyberte z nabídky typ identifikátoru. Uveďte hodnotu identifikátoru (tj. https://orcid.org/0009-0004-8646-7185 nebo jk01051816). 
+        Doporučujeme zadat alespoň jeden z typů identifikátorů, ideálně ORCID iD. 
         Pokud potřebujete rozšířit nabídku typů identifikátorů, kontaktujte nás na support@narodni-repozitar.cz.
       ^help.en: |
-        Choose the identifier type from the menu. Write the identifier without a prefix (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816). 
-        We recommend providing at least one of the identifier types.
+        Choose the identifier type from the menu. Fill in the identifier value (e.g. https://orcid.org/0009-0004-8646-7185 or jk01051816). 
+        We recommend providing at least one of the identifier types, ideally ORCID iD.
         If you need to expand the range of identifier types, contact us at support@narodni-repozitar.cz.
 
     affiliations[]:
@@ -128,8 +128,8 @@ NRPersonIdentifier:
         ]
       label.cs: Typ identifikátoru
       label.en: Identifier type
-      hint.cs: "např ORCID, scopusID"
-      hint.en: "e.g. ORCID, scopusID"
+      hint.cs: "Identifikátor osoby"
+      hint.en: "Person identifier"
 
   ui:
     detail: nr_person_identifier
@@ -212,18 +212,19 @@ NRContributor:
           type: keyword
           label.cs: Jméno přispěvatele
           label.en: "Contributor's name"
+          required: true
         givenName:
           type: keyword
-          label.cs: Jméno
-          label.en: Name
-          hint.cs: Napište jméno přispěvatele.
-          hint.en: "Write the contributor's name."
+          label.cs: Křestní jméno
+          label.en: Given Name
+          hint.cs: Uveďte křestní jméno přispěvatele.
+          hint.en: "Fill in the contributor's given name."
           required: true
         familyName:
           label.cs: Příjmení
-          label.en: Last name
-          hint.cs: Napište příjmení přispěvatele.
-          hint.en: "Write the contributor's last name."
+          label.en: Family name
+          hint.cs: Uveďte příjmení přispěvatele.
+          hint.en: "Fill in the contributor's family name."
           required: true
     Organizational:
       ui:
@@ -237,8 +238,10 @@ NRContributor:
           use: "nr-datatypes#NRContributorType"
         fullName:
           type: keyword
-          label.cs: Jméno přispěvatele
-          label.en: "Contributor's name"
+          label.cs: Organizace
+          label.en: Organization
+          hint.cs: Začněte zapisovat název instituce, následně zvolte instituci z nabídky našeptavače.
+          hint.en: Start typing the name of the institution, then select the institution from the menu.
 
   ui:
     detail: contributor
@@ -297,10 +300,10 @@ NRLocation:
     place:
       type: keyword
       required: true
-      label.cs: Místo konání akce
-      label.en: Event location
-      hint.cs: Zapište místo konání akce (město).
-      hint.en: Write the location of the event (city).
+      label.cs: Lokace
+      label.en: Location
+      hint.cs: Uveďte místo, které má vazbu k danému objektu/akci (př. město).
+      hint.en: Fill in the location related to the object or the event (i.e. city).
     country:
       use: "nr-datatypes#NRCountry"
   ui:
@@ -316,7 +319,7 @@ NRCountry:
   vocabulary-type: countries
   label.cs: Země
   label.en: Country
-  hint.cs: Zvolte stát z nabídky.
+  hint.cs: Vyberte stát z nabídky.
   hint.en: Choose a country from the menu.
   ui:
     marshmallow:
@@ -344,9 +347,9 @@ NRContributorType:
   $id: NRContributorType
   type: vocabulary
   vocabulary-type: contributor-types
-  label.cs: Typ přispěvatele
-  label.en: Contributor's type
-  hint.cs: Vyberte z rolety roli přispěvatele (editor, ilustrátor…).
+  label.cs: Role přispěvatele
+  label.en: Contributor's role
+  hint.cs: Vyberte roli přispěvatele z nabídky (editor, ilustrátor…).
   hint.en: Choose the role of the contributor (editor, illustrator…).
   required: true
   ui:
@@ -357,8 +360,8 @@ NRContributorType:
 
 NRRelatedItem:
   $id: NRRelatedItem
-  label.cs: "Vazba na/z dalších zdrojů:"
-  label.en: "Link to/from other resources:"
+  label.cs: "Vazba na související zdroj:"
+  label.en: "Link to related resource:"
   description: linkdata, propojení přidružených dokumentů a datasetů.
   ui:
     detail: related_item
@@ -370,8 +373,8 @@ NRRelatedItem:
     itemTitle:
       label.cs: Název
       label.en: Title
-      hint.cs: Název propojeného dokumentu.
-      hint.en: Title of the linked document.
+      hint.cs: Název souvisejícího zdroje.
+      hint.en: Title of the related resource.
       type: fulltext
       required: true
 
@@ -426,7 +429,7 @@ NRRelatedItem:
       ^label.cs: Identifikátor
       ^label.en: Identifier
       ^help.cs: Trvalé identifikátory objektu jako ISBN, DOI atd.
-      ^help.en: Permanent object identifiers such as ISBN, DOI, etc.
+      ^help.en: Persistent object identifiers such as ISBN, DOI, etc.
       properties:
         identifier:
           type: keyword
@@ -454,31 +457,37 @@ NRRelatedItem:
         faker: url
       label.cs: URL
       label.en: URL
+      hint.cs: Uveďte URL adresu souvisejícího zdroje, ze které je dostupný.
+      hint.en: Fill in URL of related resource from which is available.
 
     itemYear:
       type: integer
-      label.cs: Rok
-      label.en: Year
+      label.cs: Rok vydání
+      label.en: Publication Year
 
     itemVolume:
       type: keyword
       label.cs: Ročník
       label.en: Volume
+      hint.cs: Uvádějte pouze pokud se jedná o časopis nebo sborník.
+      hint.en: Fill in only if related item is journal or conference proceedings.
 
     itemIssue:
       type: keyword
       label.cs: Číslo
       label.en: Issue
+      hint.cs: Uvádějte pouze pokud se jedná o časopis nebo sborník.
+      hint.en: Fill in only if related item is journal or conference proceedings.
 
     itemStartPage:
       type: keyword
       label.cs: Počáteční strana
-      label.en: Start page
+      label.en: Start Page
 
     itemEndPage:
       type: keyword
       label.cs: Poslední strana
-      label.en: End page
+      label.en: End Page
 
     itemPublisher:
       type: keyword
@@ -491,8 +500,8 @@ NRRelatedItem:
       vocabulary-type: item-relation-types
       label.cs: Typ vazby
       label.en: Relation type
-      hint.cs: Vyberte typ vazby.
-      hint.en: Choose the relation type.
+      hint.cs: Vyberte typ vazby mezi popisovaným a souvisejícím zdrojem.
+      hint.en: Choose the relation type between described and related resource.
       ui:
         marshmallow:
           class: nr_metadata.common.services.records.ui_schema_datatypes.NRItemRelationTypeVocabularyUISchema
@@ -518,8 +527,8 @@ NRResourceType:
 
 NRFundingReference:
   $id: NRFundingReference
-  label.cs: "Projekt nebo financování"
-  label.en: "Funding"
+  label.cs: "Grant a financování"
+  label.en: "Funding Reference"
   # informace o přidruženém projektu
   #
   # MIGRACE NUŠL - protože v datech NUŠL hrozný stav v polích pro poskytovatele.
@@ -536,21 +545,21 @@ NRFundingReference:
       type: keyword
       required: true
       label.cs: Číslo projektu
-      label.en: Project identifier
-      hint.cs: Zapište kód projektu.
-      hint.en: Write the project code.
+      label.en: Award number
+      hint.cs: Uveďte kód/číslo projektu.
+      hint.en: Fill in the award number.
     projectName:
       type: fulltext
       label.cs: Název projektu
-      label.en: Project name
-      hint.cs: Zapište název projektu.
-      hint.en: Write the project name.
+      label.en: Award Title
+      hint.cs: Uveďte název projektu.
+      hint.en: Fill in the award title.
     fundingProgram:
       type: fulltext
       label.cs: Výzkumný program
       label.en: Funding program
-      hint.cs: Zapište název výzkumného programu, v rámci kterého byl projekt financován.
-      hint.en: Write the name of the research program under which the project was funded.
+      hint.cs: Uveďte název výzkumného programu, v rámci kterého byl projekt financován.
+      hint.en: Fill in the name of the research program under which the award was funded.
     funder:
       use: "nr-datatypes#NRFunder"
 
@@ -593,7 +602,7 @@ NRSubjectCategory:
   type: vocabulary
   vocabulary-type: subject-categories
   label.cs: Oborové třídění
-  label.en: Subject categories
+  label.en: Subject Categories
   ui:
     marshmallow:
       class: nr_metadata.common.services.records.ui_schema_datatypes.NRSubjectCategoryVocabularyUISchema
@@ -684,15 +693,15 @@ NREvent:
       type: fulltext
       required: true
       label.cs: Název akce
-      label.en: Event name
-      hint.cs: Zapište hlavní název akce.
-      hint.en: Write the main name of the event.
+      label.en: Event Name
+      hint.cs: Uveďte hlavní název akce (např. konference).
+      hint.en: Fill in the main name of the event (i.e. conference).
 
     eventNameAlternate[]:
       # zkrácená forma názvu akce nebo překladu. měla by fungovat jako alias pro vyhledávání
       type: fulltext
       label.cs: Alternativní název akce
-      label.en: Event alternate name
+      label.en: Event Alternate Name
       help.cs: Pokud má akce další známe názvy, uveďte je zde.
       help.en: If the event has other known names, list them here.
 
@@ -700,12 +709,10 @@ NREvent:
       # rozsah konání akce/konference -  date or range.
       use: "nr-datatypes#NRDateOrRange"
       required: true
-      label.cs: Datum akce
-      label.en: Event date
-      hint.cs: Vyberte časové období (Od - Do).
-      hint.en: Choose the time period (From - To).
-      help.cs: Vyberte časový interval, ve kterém se událost odehrála.
-      help.en: Choose the time interval in which the event took place.
+      label.cs: Datum konání akce
+      label.en: Event Date
+      hint.cs: Vyberte časový interval (Od - Do), ve kterém se událost odehrála.
+      hint.en: Choose the time period (From - To) in which the event took place.
 
     eventLocation:
       use: "nr-datatypes#NRLocation"
@@ -738,10 +745,10 @@ NRRights:
     - "CC BY-ND"
     - "CC BY-NC-SA"
     - "CC BY-NC-ND"
-  label.cs: Práva/Licence
-  label.en: Rights/Licenses
-  help.cs: Pokud se k datové sadě váže licence Creative Commons, vyberte příslušnou variantu licence z nabídky. Doporučujeme výběr nejnovějších verzí a to 3.0 Česko a 4.0 International.
-  help.en: If a Creative Commons license is associated with the resource, select the appropriate license option from the menu. We recommend choosing the latest versions, namely 3.0 Czech and 4.0 International.
+  label.cs: Licence
+  label.en: Licenses
+  help.cs: Pokud se k popisovanému zdroji váže licence Creative Commons, vyberte příslušnou variantu z nabídky. Doporučujeme výběr nejnovější verze 4.0 International.
+  help.en: If a Creative Commons license is associated with the resource, select the appropriate license option from the menu. We recommend choosing the latest version, namely 4.0 International.
   ui:
     marshmallow:
       class: nr_metadata.common.services.records.ui_schema_datatypes.NRRightsVocabularyUISchema
@@ -782,19 +789,21 @@ NRSeries:
       # našeptávač již uložených hodnot
       sample: ["series A", "series B", "series C"]
       label.cs: Název edice
-      label.en: Series title
+      label.en: Series Title
+      help.cs: Tématicky sdružuje podobné zdroje k sobě.
+      help.en: Thematically groups similar resources together.
 
     seriesVolume:
       type: keyword
       sample: ["1", "2", "3", "4"]
       label.cs: Svazek edice
-      label.en: Series volume
+      label.en: Series Volume
 
 NRExternalLocation:
   $id: NRExternalLocation
   label.cs: Externí umístění
-  label.en: External location
-  help.cs: "Vložte URL odkaz dalšího umístění zdroje (př. jiný repozitář, databáze, webová stránka)."
+  label.en: External Location
+  help.cs: "Vložte URL adresu dalšího umístění zdroje (př. jiný repozitář, databáze, webová stránka)."
   help.en: "Provide the URL link for another location of the resource (e.g. another repository, database, website)."
   # externí umístění dokumentu (mimo repozitáře), formát URL
   ui:
@@ -810,7 +819,7 @@ NRExternalLocation:
       sample:
         faker: url
       label.cs: Externí umístění zdroje
-      label.en: Resource external location
+      label.en: Resource External Location
 
     externalLocationNote:
       type: fulltext
