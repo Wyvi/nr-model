@@ -40,11 +40,7 @@
                 {% set fullName = person_dict.fullName %}
                 {% set identifiers = person_dict.authorityIdentifiers%}
                     <span>{{fullName}}</span>
-                    {% if identifiers %}
-                        {% for identifier in identifiers%}
-                            <IdentifierBadge identifier={identifier} creatibutorName={fullName} />
-                        {% endfor %}
-                    {% endif%}
+                    <CreatibutorIdentifier identifiers={identifiers} creatibutorName={fullName} />
                     {% if not loop.last %}<span class="single separator"></span>{% endif %}
                 {% endfor %} 
             </SeparatedProperty>
@@ -61,11 +57,7 @@
                 {% set identifiers = person_dict.authorityIdentifiers%}
                 {% set role = person_dict.contributorType%}
                     <span>{{fullName}}</span>
-                    {% if identifiers %}
-                    {% for identifier in identifiers%}
-                        <IdentifierBadge identifier={identifier} creatibutorName={fullName} />
-                    {% endfor %}
-                    {% endif%}    
+                    <CreatibutorIdentifier identifiers={identifiers} creatibutorName={fullName} />   
                     {% if role.title %}
                         ({{role.title}})
                     {% endif %}

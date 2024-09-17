@@ -1,7 +1,7 @@
 import React from "react";
 import { List } from "semantic-ui-react";
 import { DoubleSeparator } from "./DoubleSeparator";
-import { IconPersonIdentifier } from "./IconPersonIdentifier";
+import { IdentifierBadge } from "./IdentifierBadge";
 import { SearchFacetLink } from "./SearchFacetLink";
 import { i18next } from "@translations/nr/i18next";
 import PropTypes from "prop-types";
@@ -37,17 +37,31 @@ CreatibutorSearchLink.defaultProps = {
   nameType: "Personal",
 };
 
-const CreatibutorIcons = ({ personName = "No name", identifiers = [] }) =>
-  identifiers.map((i) => (
-    <IconPersonIdentifier
-      key={`${i.scheme}:${i.identifier}`}
-      identifier={i}
-      personName={personName}
-    />
-  ));
+export const CreatibutorIdentifier = ({
+  identifiers = [],
+  creatibutorName = "No name",
+}) => {
+  if (identifiers.length === 0) {
+    return null;
+  }
 
-CreatibutorIcons.propTypes = {
-  personName: PropTypes.string,
+  const selectedIdentifier =
+    identifiers.find(
+      (identifier) =>
+        identifier.scheme.toLowerCase() === "orcid" ||
+        identifier.scheme.toLowerCase() === "ror"
+    ) || identifiers[0];
+
+  return (
+    <IdentifierBadge
+      identifier={selectedIdentifier}
+      creatibutorName={creatibutorName}
+    />
+  );
+};
+
+CreatibutorIdentifier.propTypes = {
+  creatibutorName: PropTypes.string,
   identifiers: PropTypes.array,
 };
 
@@ -75,8 +89,8 @@ export function ResultsItemCreatibutors({
                 searchUrl={searchUrl}
                 nameType={nameType}
               />
-              <CreatibutorIcons
-                personName={fullName}
+              <CreatibutorIdentifier
+                creatibutorName={fullName}
                 identifiers={authorityIdentifiers}
               />
             </List.Item>
@@ -97,8 +111,8 @@ export function ResultsItemCreatibutors({
                 searchUrl={searchUrl}
                 searchField="contributors"
               />
-              <CreatibutorIcons
-                personName={fullName}
+              <CreatibutorIdentifier
+                creatibutorName={fullName}
                 identifiers={authorityIdentifiers}
               />
               {contributorType?.title && (

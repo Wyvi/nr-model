@@ -11,11 +11,7 @@
 <div role="listitem" class="item creatibutor-wrap separated">
     <div class="content">
         <SearchLink data={data}  searchFacet={searchFacet} search_link={search_link}></SearchLink>
-        {% if person_dict.authorityIdentifiers%}
-            {% for identifier in person_dict.authorityIdentifiers%}
-                <IdentifierBadge identifier={identifier} creatibutorName={person_dict.fullName} />
-            {% endfor %}
-        {% endif %}
+                <CreatibutorIdentifier identifiers={person_dict.authorityIdentifiers} creatibutorName={person_dict.fullName} />
         {%- if role -%}
             ({{role}})
         {%- endif -%}
