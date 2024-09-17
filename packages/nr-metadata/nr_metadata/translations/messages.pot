@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-16 22:22+0200\n"
+"POT-Creation-Date: 2024-09-17 15:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -199,6 +199,7 @@ msgstr ""
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:180
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:179
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:4
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/FundingReference.jinja:9
 #: nr_metadata/translations/jinjax_messages.jinja:4
 msgid "metadata/fundingReferences/funder.label"
 msgstr ""
@@ -207,6 +208,7 @@ msgstr ""
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:186
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:185
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:1
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/FundingReference.jinja:6
 #: nr_metadata/translations/jinjax_messages.jinja:1
 msgid "metadata/fundingReferences/projectID.label"
 msgstr ""
@@ -368,6 +370,7 @@ msgstr ""
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:327
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:320
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:16
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:144
 #: nr_metadata/translations/jinjax_messages.jinja:16
 msgid "metadata/relatedItems/itemEndPage.label"
 msgstr ""
@@ -376,6 +379,7 @@ msgstr ""
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:332
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:325
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:14
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:134
 #: nr_metadata/translations/jinjax_messages.jinja:14
 msgid "metadata/relatedItems/itemIssue.label"
 msgstr ""
@@ -396,6 +400,7 @@ msgstr ""
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:347
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:340
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:18
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:154
 #: nr_metadata/translations/jinjax_messages.jinja:18
 msgid "metadata/relatedItems/itemPublisher.label"
 msgstr ""
@@ -404,6 +409,7 @@ msgstr ""
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:352
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:345
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:10
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:106
 #: nr_metadata/translations/jinjax_messages.jinja:10
 msgid "metadata/relatedItems/itemRelationType.label"
 msgstr ""
@@ -412,6 +418,7 @@ msgstr ""
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:358
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:351
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:11
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:115
 #: nr_metadata/translations/jinjax_messages.jinja:11
 msgid "metadata/relatedItems/itemResourceType.label"
 msgstr ""
@@ -420,6 +427,7 @@ msgstr ""
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:364
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:357
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:17
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:148
 #: nr_metadata/translations/jinjax_messages.jinja:17
 msgid "metadata/relatedItems/itemStartPage.label"
 msgstr ""
@@ -428,6 +436,7 @@ msgstr ""
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:369
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:362
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:9
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:96
 #: nr_metadata/translations/jinjax_messages.jinja:9
 msgid "metadata/relatedItems/itemURL.label"
 msgstr ""
@@ -436,6 +445,7 @@ msgstr ""
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:374
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:367
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:13
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:128
 #: nr_metadata/translations/jinjax_messages.jinja:13
 msgid "metadata/relatedItems/itemVolume.label"
 msgstr ""
@@ -444,6 +454,7 @@ msgstr ""
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:379
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:372
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:12
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:122
 #: nr_metadata/translations/jinjax_messages.jinja:12
 msgid "metadata/relatedItems/itemYear.label"
 msgstr ""
@@ -464,6 +475,7 @@ msgstr ""
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:393
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:386
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:19
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/NrSeries.jinja:5
 #: nr_metadata/translations/jinjax_messages.jinja:19
 msgid "metadata/series/seriesTitle.label"
 msgstr ""
@@ -472,6 +484,7 @@ msgstr ""
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/data/services/records/facets.py:397
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:390
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:20
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/NrSeries.jinja:6
 #: nr_metadata/translations/jinjax_messages.jinja:20
 msgid "metadata/series/seriesVolume.label"
 msgstr ""
@@ -1098,36 +1111,43 @@ msgid "syntheticFields/year.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:2
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/FundingReference.jinja:7
 #: nr_metadata/translations/jinjax_messages.jinja:2
 msgid "metadata/fundingReferences/projectName.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:3
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/FundingReference.jinja:8
 #: nr_metadata/translations/jinjax_messages.jinja:3
 msgid "metadata/fundingReferences/fundingProgram.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:5
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:30
 #: nr_metadata/translations/jinjax_messages.jinja:5
 msgid "metadata/relatedItems/itemTitle.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:6
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:37
 #: nr_metadata/translations/jinjax_messages.jinja:6
 msgid "metadata/relatedItems/itemCreators.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:7
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:57
 #: nr_metadata/translations/jinjax_messages.jinja:7
 msgid "metadata/relatedItems/itemContributors.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:8
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:79
 #: nr_metadata/translations/jinjax_messages.jinja:8
 msgid "metadata/relatedItems/itemPIDs.label"
 msgstr ""
 
 #: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:15
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:140
 #: nr_metadata/translations/jinjax_messages.jinja:15
 msgid "Pages"
 msgstr ""
