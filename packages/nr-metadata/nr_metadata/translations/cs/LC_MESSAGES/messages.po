@@ -3974,3 +3974,12 @@ msgstr "Vybrat afiliaci"
 
 msgid "Choose affiliations"
 msgstr "Vybrat afiliace"
+
+msgid "Unknown item"
+msgstr ""
+
+msgid "Remove field"
+msgstr ""
+
+msgid "Add external location"
+msgstr "Přidat externí umístění"
