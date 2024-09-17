@@ -44,18 +44,13 @@ export const CreatibutorIdentifier = ({
   if (identifiers.length === 0) {
     return null;
   }
-  let selectedIdentifier = null;
 
-  identifiers.forEach((identifier) => {
-    const currentScheme = identifier.scheme.toLowerCase();
-    if (currentScheme === "orcid" || currentScheme === "ror") {
-      selectedIdentifier = identifier;
-    }
-  });
-
-  if (!selectedIdentifier) {
-    selectedIdentifier = identifiers[0];
-  }
+  const selectedIdentifier =
+    identifiers.find(
+      (identifier) =>
+        identifier.scheme.toLowerCase() === "orcid" ||
+        identifier.scheme.toLowerCase() === "ror"
+    ) || identifiers[0];
 
   return (
     <IdentifierBadge
@@ -117,7 +112,7 @@ export function ResultsItemCreatibutors({
                 searchField="contributors"
               />
               <CreatibutorIdentifier
-                personName={fullName}
+                creatibutorName={fullName}
                 identifiers={authorityIdentifiers}
               />
               {contributorType?.title && (
