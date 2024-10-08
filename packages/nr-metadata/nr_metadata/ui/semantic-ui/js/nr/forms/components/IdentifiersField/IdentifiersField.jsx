@@ -98,7 +98,7 @@ export const IdentifiersField = ({
           >
             <SelectField
               clearable
-              width={4}
+              width={5}
               fieldPath={schemeFieldPath}
               options={options.filter(
                 (o) =>
@@ -117,7 +117,7 @@ export const IdentifiersField = ({
               })}
             />
             <TextField
-              width={12}
+              width={11}
               fieldPath={identifierFieldPath}
               {...getFieldData({
                 fieldPath: identifierFieldPath,
