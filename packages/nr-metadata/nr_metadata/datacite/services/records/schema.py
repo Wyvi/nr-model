@@ -69,6 +69,8 @@ class NRDataCiteMetadataSchema(Schema):
 
     relatedItems = ma_fields.List(ma_fields.Nested(lambda: RelatedItemSchema()))
 
+    resourceType = ma_fields.Nested(lambda: ResourceTypeSchema())
+
     rightsList = ma_fields.List(ma_fields.Nested(lambda: RightsSchema()))
 
     schemaVersion = ma_fields.String()
@@ -78,8 +80,6 @@ class NRDataCiteMetadataSchema(Schema):
     subjects = ma_fields.List(ma_fields.Nested(lambda: SubjectSchema()))
 
     titles = ma_fields.List(ma_fields.Nested(lambda: TitleSchema()))
-
-    types = ma_fields.List(ma_fields.Nested(lambda: ResourceTypeSchema()))
 
     url = ma_fields.String()
 

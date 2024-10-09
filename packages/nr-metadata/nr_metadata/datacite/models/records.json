@@ -1969,6 +1969,66 @@
                             }
                         }
                     },
+                    "resourceType": {
+                        "type": "object",
+                        "ui": {
+                            "marshmallow": {
+                                "class": "nr_metadata.datacite.services.records.ui_schema_datatypes.ResourceTypeUISchema",
+                                "generate": true
+                            }
+                        },
+                        "marshmallow": {
+                            "class": "nr_metadata.datacite.services.records.schema_datatypes.ResourceTypeSchema",
+                            "generate": true
+                        },
+                        "label.cs": "Typ zdroje",
+                        "label.en": "Resource type",
+                        "properties": {
+                            "resourceType": {
+                                "type": "keyword",
+                                "label.cs": "Typ zdroje",
+                                "label.en": "Resource type"
+                            },
+                            "resourceTypeGeneral": {
+                                "type": "keyword",
+                                "required": true,
+                                "enum": [
+                                    "Audiovisual",
+                                    "Book",
+                                    "BookChapter",
+                                    "Collection",
+                                    "ComputationalNotebook",
+                                    "ConferencePaper",
+                                    "ConferenceProceeding",
+                                    "DataPaper",
+                                    "Dataset",
+                                    "Dissertation",
+                                    "Event",
+                                    "Image",
+                                    "Instrument",
+                                    "InteractiveResource",
+                                    "Journal",
+                                    "JournalArticle",
+                                    "Model",
+                                    "OutputManagementPlan",
+                                    "PeerReview",
+                                    "PhysicalObject",
+                                    "Preprint",
+                                    "Report",
+                                    "Service",
+                                    "Software",
+                                    "Sound",
+                                    "Standard",
+                                    "StudyRegistration",
+                                    "Text",
+                                    "Workflow",
+                                    "Other"
+                                ],
+                                "label.cs": "Obecný typ zdroje",
+                                "label.en": "General resource type"
+                            }
+                        }
+                    },
                     "rightsList": {
                         "type": "array",
                         "label.cs": "Práva",
@@ -2127,71 +2187,6 @@
                                     ],
                                     "label.cs": "Typ názvu",
                                     "label.en": "Title type"
-                                }
-                            }
-                        }
-                    },
-                    "types": {
-                        "type": "array",
-                        "label.cs": "Typy zdroje",
-                        "label.en": "Resource types",
-                        "items": {
-                            "type": "object",
-                            "ui": {
-                                "marshmallow": {
-                                    "class": "nr_metadata.datacite.services.records.ui_schema_datatypes.ResourceTypeUISchema",
-                                    "generate": true
-                                }
-                            },
-                            "marshmallow": {
-                                "class": "nr_metadata.datacite.services.records.schema_datatypes.ResourceTypeSchema",
-                                "generate": true
-                            },
-                            "label.cs": "Typ zdroje",
-                            "label.en": "Resource type",
-                            "properties": {
-                                "resourceType": {
-                                    "type": "keyword",
-                                    "label.cs": "Typ zdroje",
-                                    "label.en": "Resource type"
-                                },
-                                "resourceTypeGeneral": {
-                                    "type": "keyword",
-                                    "required": true,
-                                    "enum": [
-                                        "Audiovisual",
-                                        "Book",
-                                        "BookChapter",
-                                        "Collection",
-                                        "ComputationalNotebook",
-                                        "ConferencePaper",
-                                        "ConferenceProceeding",
-                                        "DataPaper",
-                                        "Dataset",
-                                        "Dissertation",
-                                        "Event",
-                                        "Image",
-                                        "Instrument",
-                                        "InteractiveResource",
-                                        "Journal",
-                                        "JournalArticle",
-                                        "Model",
-                                        "OutputManagementPlan",
-                                        "PeerReview",
-                                        "PhysicalObject",
-                                        "Preprint",
-                                        "Report",
-                                        "Service",
-                                        "Software",
-                                        "Sound",
-                                        "Standard",
-                                        "StudyRegistration",
-                                        "Text",
-                                        "Workflow",
-                                        "Other"
-                                    ],
-                                    "label.cs": "Obecný typ zdroje",
-                                    "label.en": "General resource type"
                                 }
                             }
                         }
