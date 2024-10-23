@@ -95,14 +95,22 @@ DocumentModel:
             map=lambda x: x.get("fullName"),
             key="syntheticFields.people",
         )
-      institutions: |
+      organizations: |
         SyntheticSystemField(
-            PathSelector(
-                  "metadata.creators.affiliations", 
-                  "metadata.contributors.affiliations", 
-                  "metadata.thesis.degreeGrantors"),
-            key="syntheticFields.institutions",
+            MultiSelector(
+                FilteredSelector(
+                    PathSelector("metadata.creators", "metadata.contributors"),
+                    filter=lambda x: x["nameType"] == "Personal",
+                    projection="affiliations",
+                ),
+                FilteredSelector(
+                    PathSelector("metadata.creators", "metadata.contributors"),
+                    filter=lambda x: x["nameType"] == "Organizational",
+                ),
+            ),
+            key="syntheticFields.organizations",
         )
+
       keywords: |
         SyntheticSystemField(
             selector=KeywordsFieldSelector("metadata.subjects.subject"),
@@ -138,7 +146,7 @@ DocumentModel:
             write: false
           label.cs: Lidé
           label.en: People
-        institutions:
+        organizations:
           type: taxonomy
           vocabulary-type: institutions
           marshmallow:
