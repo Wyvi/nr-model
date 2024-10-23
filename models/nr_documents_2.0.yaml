@@ -85,6 +85,8 @@ DocumentModel:
     imports:
       - import: oarepo_runtime.records.systemfields.SyntheticSystemField
       - import: oarepo_runtime.records.systemfields.PathSelector
+      - import: oarepo_runtime.records.systemfields.FilteredSelector
+      - import: oarepo_runtime.records.systemfields.MultiSelector
       - import: oarepo_runtime.records.systemfields.FirstItemSelector
       - import: nr_metadata.records.synthetic_fields.KeywordsFieldSelector
     fields:
