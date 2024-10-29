@@ -5,7 +5,9 @@ from invenio_records_resources.records.systemfields import IndexField
 from invenio_records_resources.records.systemfields.pid import PIDField, PIDFieldContext
 from oarepo_runtime.records.relations import PIDRelation, RelationsField
 from oarepo_runtime.records.systemfields import (
+    FilteredSelector,
     FirstItemSelector,
+    MultiSelector,
     PathSelector,
     SyntheticSystemField,
 )
@@ -43,13 +45,19 @@ class DocumentsRecord(InvenioRecord):
         key="syntheticFields.people",
     )
 
-    institutions = SyntheticSystemField(
-        PathSelector(
-            "metadata.creators.affiliations",
-            "metadata.contributors.affiliations",
-            "metadata.thesis.degreeGrantors",
+    organizations = SyntheticSystemField(
+        MultiSelector(
+            FilteredSelector(
+                PathSelector("metadata.creators", "metadata.contributors"),
+                filter=lambda x: x["nameType"] == "Personal",
+                projection="affiliations",
+            ),
+            FilteredSelector(
+                PathSelector("metadata.creators", "metadata.contributors"),
+                filter=lambda x: x["nameType"] == "Organizational",
+            ),
         ),
-        key="syntheticFields.institutions",
+        key="syntheticFields.organizations",
     )
 
     keywords = SyntheticSystemField(
@@ -167,8 +175,8 @@ class DocumentsRecord(InvenioRecord):
             keys=["id", "title", "hierarchy"],
             pid_field=Vocabulary.pid.with_type_ctx("institutions"),
         ),
-        institutions=PIDRelation(
-            "syntheticFields.institutions",
+        organizations=PIDRelation(
+            "syntheticFields.organizations",
             keys=["id", "title", "hierarchy"],
             pid_field=Vocabulary.pid.with_type_ctx("institutions"),
         ),

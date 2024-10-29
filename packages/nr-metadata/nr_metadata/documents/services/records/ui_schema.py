@@ -82,7 +82,7 @@ class NRDocumentSyntheticFieldsUISchema(DictOnlySchema):
 
     date = LocalizedEDTF()
 
-    institutions = ma_fields.Nested(lambda: InstitutionsUISchema())
+    organizations = ma_fields.Nested(lambda: OrganizationsUISchema())
 
     people = ma_fields.String()
 
@@ -100,7 +100,12 @@ class NRThesisUISchema(DictOnlySchema):
     studyFields = ma_fields.List(ma_fields.String())
 
 
-class InstitutionsUISchema(DictOnlySchema):
+class KeywordsUISchema(DictOnlySchema):
+    class Meta:
+        unknown = ma.RAISE
+
+
+class NRDegreeGrantorUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
 
@@ -113,12 +118,7 @@ class InstitutionsUISchema(DictOnlySchema):
     title = VocabularyI18nStrUIField()
 
 
-class KeywordsUISchema(DictOnlySchema):
-    class Meta:
-        unknown = ma.RAISE
-
-
-class NRDegreeGrantorUISchema(DictOnlySchema):
+class OrganizationsUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.INCLUDE
 
