@@ -909,7 +909,24 @@
                     "type": "string",
                     "format": "date"
                 },
-                "institutions": {
+                "keywords": {
+                    "type": "object",
+                    "properties": {
+                        "cs": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "en": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "organizations": {
                     "type": "object",
                     "properties": {
                         "id": {
@@ -949,23 +966,6 @@
                         },
                         "@v": {
                             "type": "string"
-                        }
-                    }
-                },
-                "keywords": {
-                    "type": "object",
-                    "properties": {
-                        "cs": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "en": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
                         }
                     }
                 },
