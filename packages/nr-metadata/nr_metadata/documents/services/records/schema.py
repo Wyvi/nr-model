@@ -120,15 +120,4 @@ class NRDocumentSyntheticFieldsSchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
 
-
-class OrganizationsSchema(DictOnlySchema):
-    class Meta:
-        unknown = ma.INCLUDE
-
-    _id = String(data_key="id", attribute="id")
-
-    _version = String(data_key="@v", attribute="@v")
-
-    hierarchy = ma_fields.Nested(lambda: HierarchySchema())
-
-    title = i18n_strings
+    organizations = ma_fields.String()
