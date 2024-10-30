@@ -488,10 +488,9 @@ syntheticFields_keywords = KeywordsFacet(
     field="syntheticFields.keywords", label=_("syntheticFields/keywords.label")
 )
 
-syntheticFields_organizations = HierarchyVocabularyFacet(
+syntheticFields_organizations = TermsFacet(
     field="syntheticFields.organizations",
     label=_("syntheticFields/organizations.label"),
-    vocabulary="institutions",
 )
 
 syntheticFields_people = TermsFacet(

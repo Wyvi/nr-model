@@ -76,17 +76,6 @@ class NRDocumentMetadataUISchema(NRCommonMetadataUISchema):
     thesis = ma_fields.Nested(lambda: NRThesisUISchema())
 
 
-class NRDocumentSyntheticFieldsUISchema(DictOnlySchema):
-    class Meta:
-        unknown = ma.RAISE
-
-    date = LocalizedEDTF()
-
-    organizations = ma_fields.Nested(lambda: OrganizationsUISchema())
-
-    people = ma_fields.String()
-
-
 class NRThesisUISchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
@@ -118,14 +107,12 @@ class NRDegreeGrantorUISchema(DictOnlySchema):
     title = VocabularyI18nStrUIField()
 
 
-class OrganizationsUISchema(DictOnlySchema):
+class NRDocumentSyntheticFieldsUISchema(DictOnlySchema):
     class Meta:
-        unknown = ma.INCLUDE
+        unknown = ma.RAISE
 
-    _id = String(data_key="id", attribute="id")
+    date = LocalizedEDTF()
 
-    _version = String(data_key="@v", attribute="@v")
+    organizations = ma_fields.String()
 
-    hierarchy = ma_fields.Nested(lambda: HierarchyUISchema())
-
-    title = VocabularyI18nStrUIField()
+    people = ma_fields.String()
