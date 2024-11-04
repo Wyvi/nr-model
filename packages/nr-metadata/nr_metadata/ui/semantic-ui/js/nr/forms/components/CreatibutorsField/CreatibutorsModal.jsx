@@ -23,7 +23,6 @@ import {
   TextField,
   RadioField,
   RemoteSelectField,
-  FieldLabel,
 } from "react-invenio-forms";
 import * as Yup from "yup";
 import _get from "lodash/get";
@@ -44,7 +43,9 @@ import {
 import {
   getTitleFromMultilingualObject,
   handleValidateAndBlur,
+  useFieldData,
 } from "@js/oarepo_ui";
+import { RORAffiliationsField } from "./RORAffiliationsField";
 
 const ModalActions = {
   ADD: "add",
@@ -129,14 +130,12 @@ const serializeCreatibutor = (submittedCreatibutor, isCreator, isPerson) => {
       affiliationFullNameFieldPath,
       ""
     );
-
+    const orgFullName = getTitleFromMultilingualObject(affiliation.title) ??
+    (affiliation.id ?? typeof affiliation === "string" ? affiliation : i18next.t("Unknown item"));
     return {
       nameType,
-      fullName:
-        getTitleFromMultilingualObject(affiliation?.title) ||
-        affiliation?.name ||
-        affiliation,
-      ...(!isCreator && { contributorType } && { contributorType }),
+      fullName: orgFullName,
+      ...(!isCreator && {contributorType} && {contributorType}),
     };
   }
 };
@@ -256,8 +255,6 @@ export const CreatibutorsModal = ({
   schema,
   onCreatibutorChange,
   trigger,
-  nameFieldPlaceholder,
-  lastNameFieldPlaceholder,
   nameTypeHelpText,
 }) => {
   const [open, setOpen] = useState(false);
@@ -269,6 +266,8 @@ export const CreatibutorsModal = ({
     autocompleteNames !== NamesAutocompleteOptions.SEARCH_ONLY ||
       !_isEmpty(initialCreatibutor)
   );
+
+  const { getFieldData } = useFieldData();
 
   const namesAutocompleteRef = createRef();
   const isCreator = schema === "creators";
@@ -360,7 +359,6 @@ export const CreatibutorsModal = ({
       setShowPersonForm(true);
       return;
     }
-
     setShowPersonForm(true);
     const identifiers = selectedSuggestions[0].extra.authorityIdentifiers.map(
       (identifier) => {
@@ -479,8 +477,8 @@ export const CreatibutorsModal = ({
                     content={nameTypeHelpText}
                     trigger={
                       <Icon
+                        className="text size huge"
                         name="question circle outline"
-                        style={{ fontSize: "1rem", paddingLeft: "0.5rem" }}
                       ></Icon>
                     }
                   />
@@ -505,7 +503,6 @@ export const CreatibutorsModal = ({
                         noQueryMessage={i18next.t(
                           "Search for persons by name, identifier, or affiliation..."
                         )}
-                        required={false}
                         // Disable UI-side filtering of search results
                         search={(options) => options}
                         suggestionAPIUrl="/api/names"
@@ -517,36 +514,25 @@ export const CreatibutorsModal = ({
                           )
                         }
                         onValueChange={onPersonSearchChange}
-                        ref={namesAutocompleteRef}
+                        {...getFieldData({
+                          fieldPath: familyNameFieldPath,
+                          fieldRepresentation: "compact",
+                        })}
                       />
                     )}
                     {showPersonForm && (
                       <div>
                         <Form.Group widths="equal">
                           <TextField
-                            label={
-                              <FieldLabel
-                                htmlFor={familyNameFieldPath}
-                                icon="pencil"
-                                label={i18next.t("Family name")}
-                              />
-                            }
-                            placeholder={lastNameFieldPlaceholder}
                             fieldPath={familyNameFieldPath}
-                            required
+                            {...getFieldData({
+                              fieldPath: familyNameFieldPath,
+                            })}
                             onBlur={() => handleBlur(familyNameFieldPath)}
                           />
                           <TextField
-                            label={
-                              <FieldLabel
-                                htmlFor={givenNameFieldPath}
-                                icon="pencil"
-                                label={i18next.t("Given names")}
-                              />
-                            }
-                            placeholder={nameFieldPlaceholder}
                             fieldPath={givenNameFieldPath}
-                            required
+                            {...getFieldData({ fieldPath: givenNameFieldPath })}
                             onBlur={() => handleBlur(givenNameFieldPath)}
                           />
                         </Form.Group>
@@ -555,37 +541,13 @@ export const CreatibutorsModal = ({
                             className="modal-identifiers-field"
                             options={personIdentifiersSchema}
                             fieldPath={identifiersFieldPath}
-                            label={i18next.t("Personal identifier")}
-                            helpText={i18next.t(
-                              "Choose from the menu identifier type. Write the identifier without prefix (i.e. https://orcid.org/0009-0004-8646-7185 or jk01051816)."
-                            )}
                             selectOnBlur={false}
-                            placeholder={i18next.t("Personal identifier")}
                             validateOnBlur
                           />
                         </Form.Group>
-                        <VocabularySelectField
-                          type="institutions"
-                          label={
-                            <FieldLabel
-                              htmlFor={affiliationsFieldPath}
-                              icon=""
-                              label={i18next.t("Affiliations")}
-                            />
-                          }
+                        <RORAffiliationsField
+                          multiple={true}
                           fieldPath={affiliationsFieldPath}
-                          placeholder={i18next.t(
-                            "Start writing name of the institution, then choose from the options."
-                          )}
-                          externalApiModalTitle={i18next.t(
-                            "Search in ROR database"
-                          )}
-                          externalApiButtonContent={i18next.t(
-                            "Search in ROR database"
-                          )}
-                          externalAuthority
-                          multiple
-                          clearable
                         />
                       </div>
                     )}
@@ -594,55 +556,27 @@ export const CreatibutorsModal = ({
                 {_get(values, typeFieldPath) ===
                   CREATIBUTOR_TYPE.ORGANIZATION && (
                   <div>
-                    <VocabularySelectField
-                      additionLabel={i18next.t(
-                        "Add institution name (free text): "
-                      )}
-                      type="institutions"
-                      label={
-                        <FieldLabel
-                          htmlFor={affiliationFullNameFieldPath}
-                          icon=""
-                          label={i18next.t("Affiliation")}
-                        />
-                      }
+                    <RORAffiliationsField
                       fieldPath={affiliationFullNameFieldPath}
-                      placeholder={i18next.t(
-                        "Start writing name of the institution, then choose from the options."
-                      )}
-                      externalApiModalTitle={i18next.t(
-                        "Search in ROR database"
-                      )}
-                      externalApiButtonContent={i18next.t(
-                        "Search in ROR database"
-                      )}
-                      externalAuthority
-                      clearable
-                      selection
-                      deburr
-                      required
                       onBlur={() => handleBlur(affiliationFullNameFieldPath)}
+                      {...getFieldData({ fieldPath: fullNameFieldPath })}
+                      modalHeader={
+                        getFieldData({
+                          fieldPath: fullNameFieldPath,
+                          fieldRepresentation: "text",
+                        }).label
+                      }
                     />
                   </div>
                 )}
                 {!isCreator && (
                   <LocalVocabularySelectField
                     type="contributor-types"
-                    placeholder={i18next.t(
-                      "Choose contributor's role from the list (editor, illustrator...)"
-                    )}
                     fieldPath={roleFieldPath}
-                    label={
-                      <FieldLabel
-                        htmlFor={roleFieldPath}
-                        icon=""
-                        label={i18next.t("Role")}
-                      />
-                    }
                     clearable
                     optionsListName="contributor-types"
-                    required
                     onBlur={() => handleBlur(roleFieldPath)}
+                    {...getFieldData({ fieldPath: roleFieldPath })}
                   />
                 )}
               </Form>
@@ -710,8 +644,6 @@ CreatibutorsModal.propTypes = {
   schema: PropTypes.string,
   onCreatibutorChange: PropTypes.func.isRequired,
   trigger: PropTypes.node,
-  nameFieldPlaceholder: PropTypes.string,
-  lastNameFieldPlaceholder: PropTypes.string,
   nameTypeHelpText: PropTypes.string,
 };
 CreatibutorsModal.defaultProps = {

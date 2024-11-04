@@ -12,6 +12,7 @@ import { useDrag, useDrop } from "react-dnd";
 import { Button, List, Ref } from "semantic-ui-react";
 import { RelatedItemsModal } from "./RelatedItemsModal";
 import PropTypes from "prop-types";
+import { NestedErrors } from "@nr/forms";
 
 export const RelatedItemsFieldItem = ({
   compKey,
@@ -57,45 +58,49 @@ export const RelatedItemsFieldItem = ({
   drop(dropRef);
   return (
     <Ref innerRef={dropRef} key={compKey}>
-      <List.Item
-        key={compKey}
-        className={
-          hidden ? "deposit-drag-listitem hidden" : "deposit-drag-listitem"
-        }
-      >
-        <List.Content floated="right">
-          <RelatedItemsModal
-            key={`edit-related-item-modal-${index}`}
-            addLabel={addLabel}
-            editLabel={editLabel}
-            onRelatedItemChange={(selectedRelatedItem) => {
-              replaceRelatedItem(index, selectedRelatedItem);
-            }}
-            initialRelatedItem={initialRelatedItem}
-            initialAction="edit"
-            trigger={
-              <Button size="mini" primary type="button">
-                {i18next.t("Edit")}
-              </Button>
-            }
-          />
-          <Button
-            size="mini"
-            type="button"
-            onClick={() => removeRelatedItem(index)}
-          >
-            {i18next.t("Remove")}
-          </Button>
-        </List.Content>
-        <Ref innerRef={drag}>
-          <List.Icon name="bars" className="drag-anchor" />
-        </Ref>
-        <Ref innerRef={preview}>
-          <List.Content>
-            <List.Description>{displayName}</List.Description>
+      <React.Fragment>
+        <List.Item
+          id={compKey}
+          key={compKey}
+          className={
+            hidden ? "deposit-drag-listitem hidden" : "deposit-drag-listitem"
+          }
+        >
+          <List.Content floated="right">
+            <RelatedItemsModal
+              key={`edit-related-item-modal-${index}`}
+              addLabel={addLabel}
+              editLabel={editLabel}
+              onRelatedItemChange={(selectedRelatedItem) => {
+                replaceRelatedItem(index, selectedRelatedItem);
+              }}
+              initialRelatedItem={initialRelatedItem}
+              initialAction="edit"
+              trigger={
+                <Button size="mini" primary type="button">
+                  {i18next.t("Edit")}
+                </Button>
+              }
+            />
+            <Button
+              size="mini"
+              type="button"
+              onClick={() => removeRelatedItem(index)}
+            >
+              {i18next.t("Remove")}
+            </Button>
           </List.Content>
-        </Ref>
-      </List.Item>
+          <Ref innerRef={drag}>
+            <List.Icon name="bars" className="drag-anchor" />
+          </Ref>
+          <Ref innerRef={preview}>
+            <List.Content>
+              <List.Description>{displayName}</List.Description>
+            </List.Content>
+          </Ref>
+        </List.Item>
+        <NestedErrors fieldPath={compKey} />
+      </React.Fragment>
     </Ref>
   );
 };

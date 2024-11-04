@@ -1818,3 +1818,47 @@ msgstr ""
 
 msgid "Find more records by this organization"
 msgstr ""
+
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:484
+msgid "syntheticFields/defenseYear.label"
+msgstr ""
+
+#: /home/dusanst/Projects/nr-model/packages/nr-metadata/nr_metadata/documents/services/records/facets.py:502
+msgid "syntheticFields/year.label"
+msgstr ""
+
+msgid "Add project/financing information"
+msgstr ""
+
+#: /Users/miroslavbauer/Code/github.com/Narodni-repozitar/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:2
+#: /Users/miroslavbauer/Code/github.com/Narodni-repozitar/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:37
+#: nr_metadata/translations/jinjax_messages.jinja:2
+msgid "metadata/relatedItems/itemCreators.label"
+msgstr ""
+
+#: /Users/miroslavbauer/Code/github.com/Narodni-repozitar/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:3
+#: /Users/miroslavbauer/Code/github.com/Narodni-repozitar/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:57
+#: nr_metadata/translations/jinjax_messages.jinja:3
+msgid "metadata/relatedItems/itemContributors.label"
+msgstr ""
+
+#: /Users/miroslavbauer/Code/github.com/Narodni-repozitar/nr-model/packages/nr-metadata/nr_metadata/translations/jinjax_messages.jinja:11
+#: /Users/miroslavbauer/Code/github.com/Narodni-repozitar/nr-model/packages/nr-metadata/nr_metadata/ui/templates/components/RelatedItems.jinja:140
+#: nr_metadata/translations/jinjax_messages.jinja:11
+msgid "Pages"
+msgstr ""
+
+msgid "Choose affiliation"
+msgstr ""
+
+msgid "Choose affiliations"
+msgstr ""
+
+msgid "Unknown item"
+msgstr ""
+
+msgid "Remove field"
+msgstr ""
+
+msgid "Add external location"
+msgstr ""

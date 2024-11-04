@@ -1,3 +1,4 @@
+from nr_metadata.documents.records.api import DocumentsRecord
 from nr_metadata.documents.resources.records.config import DocumentsResourceConfig
 from nr_metadata.documents.resources.records.resource import DocumentsResource
 from nr_metadata.documents.services.records.config import DocumentsServiceConfig
@@ -13,3 +14,6 @@ DOCUMENTS_RECORD_SERVICE_CONFIG = DocumentsServiceConfig
 
 
 DOCUMENTS_RECORD_SERVICE_CLASS = DocumentsService
+
+
+OAREPO_PRIMARY_RECORD_SERVICE = {DocumentsRecord: "documents"}

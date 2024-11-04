@@ -65,7 +65,6 @@ class NROrganizationIdentifierUISchema(NRIdentifierUISchema):
         validate=[
             validate.OneOf(
                 [
-
                     "ISNI",
                     "ROR",
                     "ICO",
@@ -89,7 +88,6 @@ class NRPersonIdentifierUISchema(NRIdentifierUISchema):
                     "vedidk",
                     "institutionalID",
                     "ISNI",
-
                 ]
             )
         ],

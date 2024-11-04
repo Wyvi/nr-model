@@ -1,6 +1,6 @@
 export * from "./DoubleSeparator";
 export * from "./ResultsItemCreatibutors";
-export * from "./IconPersonIdentifier";
+export * from "./IdentifierBadge";
 export * from "./MultipleSearchBarElement";
 export * from "./ResultsItemAccessStatus";
 export * from "./ResultsItemLicense";

@@ -3,7 +3,7 @@ from invenio_records_resources.services import (
     RecordServiceConfig as InvenioRecordServiceConfig,
 )
 from invenio_records_resources.services import pagination_links
-from invenio_records_resources.services.records.components import DataComponent
+from oarepo_runtime.services.components import CustomFieldsComponent
 from oarepo_runtime.services.config.service import PermissionsPresetsConfigMixin
 
 from nr_metadata.data.records.api import DataRecord
@@ -37,7 +37,7 @@ class DataServiceConfig(PermissionsPresetsConfigMixin, InvenioRecordServiceConfi
     components = [
         *PermissionsPresetsConfigMixin.components,
         *InvenioRecordServiceConfig.components,
-        DataComponent,
+        CustomFieldsComponent,
     ]
 
     model = "nr_metadata.data"

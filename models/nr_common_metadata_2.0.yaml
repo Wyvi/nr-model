@@ -16,15 +16,15 @@ CommonMetadata:
       required: true
       label.cs: Název
       label.en: Title
-      hint.cs: Vyplňte hlavní název zdroje.
+      hint.cs: Uveďte hlavní název zdroje.
       hint.en: Fill in the main title of the resource.
 
     additionalTitles[]:
       # Additional titles of the object/work such as subtitle, translatedTitle and alternativeTitle.
       ^label.cs: Další názvy
-      ^label.en: Additional titles
-      ^help.cs: Pokud má název další jazykovou variantu, vyplňte ji, zvolte typ názvu a příslušný jazyk, ve kterém je název zapsán.
-      ^help.en: If the title is given in other languages, choose the type of title and corresponding language.
+      ^label.en: Additional Titles
+      ^help.cs: Pokud existují další názvy zdroje, uveďte je. Vyberte typ a jazyk.
+      ^help.en: If the resource is given any additional titles, choose the type of title and corresponding language.
       #^uniqueItems: true
       properties:
         title:
@@ -33,8 +33,8 @@ CommonMetadata:
         titleType:
           type: keyword
           required: true
-          label.cs: Druh názvu
-          label.en: Title type
+          label.cs: Typ názvu
+          label.en: Title Type
           enum: [translatedTitle, alternativeTitle, subtitle, other]
       marshmallow:
         class: nr_metadata.common.services.records.schema_common.AdditionalTitlesSchema
@@ -73,26 +73,26 @@ CommonMetadata:
       sample:
         faker: date
       label.cs: Datum zveřejnění
-      label.en: Date available
+      label.en: Date Available
 
     dateIssued:
       use: "nr-datatypes#NRDate"
       sample:
         faker: date
       label.cs: Datum vydání
-      label.en: Date issued
-      hint.cs: Zvolte z kalendáře datum, kdy byl zdroj vydan.
+      label.en: Date Issued
+      hint.cs: Zvolte z kalendáře datum, kdy byl zdroj vydán.
       hint.en: Choose the issuance date from the calendar.
-      help.cs: Datum může být rok, rok a měsíc nebo celé datum.
-      help.en: The date can be a year, year and month or a full date.
+      help.cs: Datum může být rok, rok a měsíc nebo celé datum. V záhlaví kalendáře můžete zvolit typ data.
+      help.en: The date can be a year, year and month or a full date. In the calendar header select type of date.
 
     subjects[]:
       # subject by vocabularies or free-form keywords created by author(s)
       use: "nr-datatypes#NRSubject"
       ^label.cs: "Klíčová slova"
       ^label.en: "Keywords"
-      ^help.cs: Zapisujte slova popisující zdroj, zvolte vždy jazyk.
-      ^help.en: Write down words describing the resource, always choose language.
+      ^help.cs: Zapisujte slova popisující zdroj, zvolte vždy jazyk. Zapisujte klíčová slova jednotlivě.
+      ^help.en: Write down words describing the resource, always choose language. Write the keywords one by one.
       #^uniqueItems: true
       ^ui:
         marshmallow:
@@ -102,7 +102,7 @@ CommonMetadata:
       # FRASCATI oborové třídění - může sloužit jako podklad pro oborové filtrování
       use: "nr-datatypes#NRSubjectCategory"
       ^label.cs: Oborové třídění
-      ^label.en: Subject categories
+      ^label.en: Subject Categories
       ^hint.cs: Vyberte název oboru.
       ^hint.en: Choose subject category.
       #^uniqueItems: true
@@ -128,12 +128,14 @@ CommonMetadata:
       label.cs: Abstrakt
       label.en: Abstract
       help.cs: Vyberte jazyk abstraktu a zapište nebo vložte text. Abstrakt můžete vložit ve více jazycích.
-      help.en: Choose abstract language and write down the text.Abstract can be provided in multiple languages.
+      help.en: Choose abstract language and write down the text. Abstract can be provided in multiple languages.
 
     methods:
       type: multilingual
       label.cs: Metodologie
       label.en: Methods
+      help.cs: Vyberte jazyk a zapište nebo vložte text. Metodologii můžete popsat ve více jazycích.
+      help.en: Choose language and write down the text. Methods can be described in multiple languages.
 
     technicalInfo:
       # detailed information that may be associated with
@@ -141,7 +143,10 @@ CommonMetadata:
       # or system.(may contain HTML)
       type: multilingual
       label.cs: Technické informace
-      label.en: Technical information
+      label.en: Technical Information
+      help.cs: Vyberte jazyk a zapište nebo vložte text. Technické informace můžete poskytnout ve více jazycích.
+      help.en: Choose language and write down the text. Technical information can be provided in multiple languages.
+
 
     rights:
       # Any license or copyright information for this resource. Taxonomy field.
@@ -157,16 +162,16 @@ CommonMetadata:
     relatedItems[]:
       use: "nr-datatypes#NRRelatedItem"
       #^uniqueItems: true
-      ^label.cs: "Vazba na/z dalších zdrojů:"
-      ^label.en: "Link to/from other resources:"
+      ^label.cs: "Vazba na související zdroje"
+      ^label.en: "Link to related resources"
       ^help.cs: Zapište informace o zdroji, který souvisí se zdrojem, který zde popisujete (např. pokud popisujete článek, sem můžete identifikovat časopis, ve kterém článek vyšel).
       ^help.en: Write down information about the resource related to the one you are describing here (e.g. if you are describing an article, you can identify the journal in which the article was published).
 
     fundingReferences[]:
       use: "nr-datatypes#NRFundingReference"
       #^uniqueItems: true
-      ^label.cs: "Projekt nebo financování"
-      ^label.en: "Funding"
+      ^label.cs: "Granty a financování"
+      ^label.en: "Funding References"
 
     version:
       # verze obsahu, nikoliv záznamu. hodnota ve formuláři není editovatelná.
@@ -219,10 +224,10 @@ CommonMetadata:
     objectIdentifiers[]:
       # Persistent identifier/s of object as ISBN, DOI, etc. + assigned by National Repository.
       use: "nr-datatypes#NRObjectPID"
-      ^label.cs: Identifikátor
-      ^label.en: Identifier
-      ^help.cs: Vyberte typ identifikátoru a zapište jej. Můžete zapsat více identifikátorů.
-      ^help.en: Choose the type of identifier and write it down. You can provide more identifiers.
+      ^label.cs: Identifikátory
+      ^label.en: Identifiers
+      ^help.cs: Vyberte typ identifikátoru a zapište jej. Můžete zapsat více typů identifikátorů.
+      ^help.en: Choose the type of identifier and write it down. You can provide more identifiers types.
       #^uniqueItems: true
 
     systemIdentifiers[]:
@@ -235,7 +240,7 @@ CommonMetadata:
     events[]:
       #^uniqueItems: true
       use: "nr-datatypes#NREvent"
-      ^label.cs: Události
+      ^label.cs: Související akce
       ^label.en: Events
 
 CommonModel:

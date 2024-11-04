@@ -28,7 +28,7 @@ export const StringArrayField = ({
 
   return (
     <Form.Field>
-      <FieldLabel label={label} icon={labelIcon} htmlFor={fieldPath} />
+      <FieldLabel label={label} />
       <FieldArray
         name={fieldPath}
         render={(arrayHelpers) => (
@@ -60,7 +60,7 @@ export const StringArrayField = ({
                 </ArrayFieldItem>
               );
             })}
-            <label className="helptext">{helpText}</label>
+            {helpText ? <label className="helptext">{helpText}</label> : null}
             <Form.Button
               className={addButtonClassName}
               type="button"
@@ -95,9 +95,6 @@ StringArrayField.propTypes = {
 StringArrayField.defaultProps = {
   addButtonLabel: i18next.t("Add note"),
   defaultNewValue: "",
-  labelIcon: "pencil",
-  label: i18next.t("Notes"),
-  helpText: i18next.t("Items shall be unique"),
   showEmptyValue: false,
   addButtonClassName: "array-field-add-button",
 };

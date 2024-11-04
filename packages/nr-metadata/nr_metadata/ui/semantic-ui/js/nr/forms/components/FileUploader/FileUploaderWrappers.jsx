@@ -1,43 +1,37 @@
-import React, { useEffect, useRef } from "react";
-import { h, render } from "preact";
+import React from "react";
 import PropTypes from "prop-types";
 import { i18next } from "@translations/nr/i18next";
+import FileManagementDialog from "@oarepo/file-manager";
 
 export const FileUploadWrapper = ({
-  preactComponent,
   uploadWrapperClassName,
   uploadButtonClassName,
   props,
 }) => {
-  const preactCompRef = useRef();
-  useEffect(() => {
-    render(
-      h(preactComponent, {
-        TriggerComponent: ({ onClick, ...props }) => {
-          return h(
-            "button",
-            {
-              className: uploadButtonClassName,
-              onClick: onClick,
-              type: "button",
-              ariaLabel: i18next.t("Upload files"),
-              ...props,
-            },
-            i18next.t("Upload files"),
-            h("i", { "aria-hidden": "true", className: "upload icon" })
-          );
-        },
-        ...props,
-      }),
-      preactCompRef.current
-    );
-  }, []);
+  const TriggerComponent = ({ onClick, ...props }) => (
+    <button
+      className={uploadButtonClassName}
+      onClick={onClick}
+      type="button"
+      aria-label={i18next.t("Upload files")}
+      {...props}
+    >
+      {i18next.t("Upload files")}
+      <i aria-hidden="true" className="upload icon" />
+    </button>
+  );
 
-  return <div ref={preactCompRef} className={uploadWrapperClassName} />;
+  return (
+    <div className={uploadWrapperClassName}>
+      <FileManagementDialog 
+        TriggerComponent={TriggerComponent}
+        {...props}
+      />
+    </div>
+  );
 };
 
 FileUploadWrapper.propTypes = {
-  preactComponent: PropTypes.elementType.isRequired,
   uploadWrapperClassName: PropTypes.string,
   uploadButtonClassName: PropTypes.string,
   props: PropTypes.object,
@@ -48,43 +42,33 @@ FileUploadWrapper.defaultProps = {
 };
 
 export const FileEditWrapper = ({
-  preactComponent,
   editWrapperClassName,
   editButtonClassName,
   props,
 }) => {
-  const preactCompRef = useRef();
-  useEffect(() => {
-    render(
-      h(preactComponent, {
-        TriggerComponent: ({ onClick, ...props }) => {
-          return h(
-            "button",
-            {
-              className: editButtonClassName,
-              onClick: onClick,
-              ...props,
-              ariaLabel: i18next.t("Edit file"),
-              type: "button",
-            },
-            h("i", {
-              "aria-hidden": "true",
-              className: "pencil icon",
-              style: { margin: "0", opacity: "1" },
-            })
-          );
-        },
-        ...props,
-      }),
-      preactCompRef.current
-    );
-  });
+  const TriggerComponent = ({ onClick, ...props }) => (
+    <button
+      className={editButtonClassName}
+      onClick={onClick}
+      {...props}
+      aria-label={i18next.t("Edit file")}
+      type="button"
+    >
+      <i aria-hidden="true" className="pencil icon" style={{ margin: "0", opacity: "1" }} />
+    </button>
+  );
 
-  return <div ref={preactCompRef} className={editWrapperClassName} />;
+  return (
+    <div className={editWrapperClassName}>
+      <FileManagementDialog
+        TriggerComponent={TriggerComponent}
+        {...props}
+      />
+    </div>
+  );
 };
 
 FileEditWrapper.propTypes = {
-  preactComponent: PropTypes.elementType.isRequired,
   editWrapperClassName: PropTypes.string,
   editButtonClassName: PropTypes.string,
   props: PropTypes.object,

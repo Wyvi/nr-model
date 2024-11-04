@@ -2,25 +2,25 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ArrayField, TextField } from "react-invenio-forms";
 import { i18next } from "@translations/nr/i18next";
-import { ArrayFieldItem, useSanitizeInput } from "@js/oarepo_ui";
+import { ArrayFieldItem, useFieldData, useSanitizeInput } from "@js/oarepo_ui";
 import { useFormikContext, getIn } from "formik";
 
-export const SeriesField = ({ fieldPath, helpText }) => {
+export const SeriesField = ({ fieldPath }) => {
   const { values, setFieldValue, setFieldTouched } = useFormikContext();
 
   const { sanitizeInput } = useSanitizeInput();
+  const { getFieldData } = useFieldData();
 
   return (
     <ArrayField
       addButtonLabel={i18next.t("Add series")}
       fieldPath={fieldPath}
-      label={i18next.t("Series")}
-      labelIcon="pencil"
-      helpText={helpText}
+      {...getFieldData({ fieldPath, fieldRepresentation: "text" })}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
+        const seriesTitleFieldPath = `${fieldPathPrefix}.seriesTitle`;
         return (
           <ArrayFieldItem
             indexPath={indexPath}
@@ -29,21 +29,26 @@ export const SeriesField = ({ fieldPath, helpText }) => {
           >
             <TextField
               width={8}
-              fieldPath={`${fieldPathPrefix}.seriesTitle`}
-              label={i18next.t("Series title")}
-              required
+              fieldPath={seriesTitleFieldPath}
+              {...getFieldData({
+                fieldPath: seriesTitleFieldPath,
+                fieldRepresentation: "compact",
+              })}
               onBlur={() => {
                 const cleanedContent = sanitizeInput(
-                  getIn(values, `${fieldPathPrefix}.seriesTitle`)
+                  getIn(values, seriesTitleFieldPath)
                 );
-                setFieldValue(`${fieldPathPrefix}.seriesTitle`, cleanedContent);
-                setFieldTouched(`${fieldPathPrefix}.seriesTitle`, true);
+                setFieldValue(seriesTitleFieldPath, cleanedContent);
+                setFieldTouched(seriesTitleFieldPath, true);
               }}
             />
             <TextField
               width={8}
               fieldPath={`${fieldPathPrefix}.seriesVolume`}
-              label={i18next.t("Series volume")}
+              {...getFieldData({
+                fieldPath: `${fieldPathPrefix}.seriesVolume`,
+                fieldRepresentation: "compact",
+              })}
             />
           </ArrayFieldItem>
         );
@@ -54,11 +59,4 @@ export const SeriesField = ({ fieldPath, helpText }) => {
 
 SeriesField.propTypes = {
   fieldPath: PropTypes.string.isRequired,
-  helpText: PropTypes.string,
-};
-
-SeriesField.defaultProps = {
-  helpText: i18next.t(
-    "Write down the name of the edition and write down the volume if name is provided."
-  ),
 };

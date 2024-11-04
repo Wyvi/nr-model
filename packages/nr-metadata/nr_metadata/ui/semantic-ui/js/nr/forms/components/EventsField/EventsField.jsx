@@ -1,32 +1,39 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ArrayField, TextField, GroupField } from "react-invenio-forms";
-import { i18next } from "@translations/nr/i18next";
 import { LocalVocabularySelectField } from "@js/oarepo_vocabularies";
 import { StringArrayField } from "../StringArray/StringArrayField";
 import {
   ArrayFieldItem,
   EDTFDaterangePicker,
   useSanitizeInput,
+  useFieldData,
 } from "@js/oarepo_ui";
+import { i18next } from "@translations/nr/i18next";
 import { useFormikContext, getIn } from "formik";
+import { Label } from "semantic-ui-react";
 
-export const EventsField = ({ fieldPath, helpText }) => {
-  const { values, setFieldValue, setFieldTouched } = useFormikContext();
+export const EventsField = ({ fieldPath }) => {
+  const { values, setFieldValue, setFieldTouched, errors } = useFormikContext();
 
   const { sanitizeInput } = useSanitizeInput();
-
+  const { getFieldData } = useFieldData();
   return (
     <ArrayField
       addButtonLabel={i18next.t("Add event")}
       fieldPath={fieldPath}
-      label={i18next.t("Events")}
-      labelIcon="pencil"
-      helpText={helpText}
+      {...getFieldData({ fieldPath, fieldRepresentation: "text" })}
       addButtonClassName="array-field-add-button"
     >
       {({ arrayHelpers, indexPath }) => {
         const fieldPathPrefix = `${fieldPath}.${indexPath}`;
+        const eventNameOriginalFieldPath = `${fieldPathPrefix}.eventNameOriginal`;
+
+        const beValidationErrors = getIn(errors, "BEvalidationErrors", {});
+        const eventLocationError = beValidationErrors?.errors?.find(
+          (e) => e.field === `${fieldPathPrefix}.eventLocation`
+        );
+
         return (
           <ArrayFieldItem
             indexPath={indexPath}
@@ -36,57 +43,64 @@ export const EventsField = ({ fieldPath, helpText }) => {
           >
             <TextField
               width={16}
-              fieldPath={`${fieldPathPrefix}.eventNameOriginal`}
-              label={i18next.t("Event name")}
-              required
-              placeholder={i18next.t("Write down the main name of the event.")}
+              fieldPath={eventNameOriginalFieldPath}
+              {...getFieldData({
+                fieldPath: eventNameOriginalFieldPath,
+                fieldRepresentation: "compact",
+              })}
               onBlur={() => {
                 const cleanedContent = sanitizeInput(
-                  getIn(values, `${fieldPathPrefix}.eventNameOriginal`)
+                  getIn(values, eventNameOriginalFieldPath)
                 );
-                setFieldValue(
-                  `${fieldPathPrefix}.eventNameOriginal`,
-                  cleanedContent
-                );
-                setFieldTouched(`${fieldPathPrefix}.eventNameOriginal`, true);
+                setFieldValue(eventNameOriginalFieldPath, cleanedContent);
+                setFieldTouched(eventNameOriginalFieldPath, true);
               }}
             />
             <StringArrayField
               width={16}
               fieldPath={`${fieldPathPrefix}.eventNameAlternate`}
-              label={i18next.t("Event alternate name")}
+              {...getFieldData({
+                fieldPath: `${fieldPathPrefix}.eventNameAlternate`,
+                fieldRepresentation: "compact",
+              })}
               addButtonLabel={i18next.t("Add event alternate name")}
-              helpText={i18next.t(
-                "If event has other known names, write them here."
-              )}
             />
             <EDTFDaterangePicker
-              required
               fieldPath={`${fieldPathPrefix}.eventDate`}
-              label={i18next.t("Event date")}
+              {...getFieldData({
+                fieldPath: `${fieldPathPrefix}.eventDate`,
+                icon: "calendar",
+              })}
             />
             <GroupField>
               <TextField
                 width={10}
                 fieldPath={`${fieldPathPrefix}.eventLocation.place`}
-                label={i18next.t("Place")}
-                placeholder={i18next.t("Write down the place of the event.")}
-                required
+                {...getFieldData({
+                  fieldPath: `${fieldPathPrefix}.eventLocation.place`,
+                  fieldRepresentation: "compact",
+                })}
               />
               <LocalVocabularySelectField
                 selectOnBlur={false}
                 width={6}
                 fieldPath={`${fieldPathPrefix}.eventLocation.country`}
-                label={
-                  <label htmlFor={`${fieldPathPrefix}.eventLocation.country`}>
-                    {i18next.t("Country")}
-                  </label>
-                }
                 optionsListName="countries"
                 clearable
-                placeholder={i18next.t("Choose country from the list.")}
+                {...getFieldData({
+                  fieldPath: `${fieldPathPrefix}.eventLocation.country`,
+                  fieldRepresentation: "compact",
+                })}
               />
             </GroupField>
+            {eventLocationError && (
+              <React.Fragment>
+                <Label className="rel-mb-1 mt-0 ml-5" prompt pointing="above">
+                  {eventLocationError.messages.join(" ")}
+                </Label>
+                <br />
+              </React.Fragment>
+            )}
           </ArrayFieldItem>
         );
       }}
@@ -96,5 +110,4 @@ export const EventsField = ({ fieldPath, helpText }) => {
 
 EventsField.propTypes = {
   fieldPath: PropTypes.string.isRequired,
-  helpText: PropTypes.string,
 };

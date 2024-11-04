@@ -5,7 +5,10 @@ from marshmallow import fields as ma_fields
 from marshmallow.fields import String
 from marshmallow_utils.fields import TrimmedString
 from oarepo_runtime.services.schema.marshmallow import BaseRecordSchema, DictOnlySchema
-from oarepo_runtime.services.schema.validation import CachedMultilayerEDTFValidator
+from oarepo_runtime.services.schema.validation import (
+    CachedMultilayerEDTFValidator,
+    validate_identifier,
+)
 from oarepo_vocabularies.services.schema import HierarchySchema
 
 from nr_metadata.common.services.records.schema_common import (
@@ -59,7 +62,10 @@ class NRDocumentMetadataSchema(NRCommonMetadataSchema):
     geoLocations = ma_fields.List(ma_fields.Nested(lambda: NRGeoLocationSchema()))
 
     objectIdentifiers = ma_fields.List(
-        ma_fields.Nested(lambda: NRObjectIdentifierSchema())
+        ma_fields.Nested(
+            lambda: NRObjectIdentifierSchema(),
+            validate=[lambda value: validate_identifier(value)],
+        )
     )
 
     publishers = ma_fields.List(ma_fields.String())
@@ -92,19 +98,6 @@ class NRThesisSchema(DictOnlySchema):
     studyFields = ma_fields.List(ma_fields.String())
 
 
-class InstitutionsSchema(DictOnlySchema):
-    class Meta:
-        unknown = ma.INCLUDE
-
-    _id = String(data_key="id", attribute="id")
-
-    _version = String(data_key="@v", attribute="@v")
-
-    hierarchy = ma_fields.Nested(lambda: HierarchySchema())
-
-    title = i18n_strings
-
-
 class KeywordsSchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
@@ -126,3 +119,5 @@ class NRDegreeGrantorSchema(DictOnlySchema):
 class NRDocumentSyntheticFieldsSchema(DictOnlySchema):
     class Meta:
         unknown = ma.RAISE
+
+    organizations = ma_fields.String()

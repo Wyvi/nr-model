@@ -12,8 +12,15 @@ import { i18next } from "@translations/nr/i18next";
 import PropTypes from "prop-types";
 import { useFormikContext } from "formik";
 import { useFormConfig } from "@js/oarepo_ui";
+import { LicenseModal } from "./LicenseModal";
 
-export const LicenseFieldItem = ({ license, fieldPath }) => {
+export const LicenseFieldItem = ({
+  license,
+  fieldPath,
+  searchConfig,
+  handleLicenseChange,
+  serializeLicense,
+}) => {
   const { setFieldValue } = useFormikContext();
   const {
     formConfig: {
@@ -40,6 +47,17 @@ export const LicenseFieldItem = ({ license, fieldPath }) => {
           <span className="inline-block pt-10">{licenseUI?.text}</span>
         </Grid.Column>
         <Grid.Column textAlign="right" width={4}>
+          <LicenseModal
+            searchConfig={searchConfig}
+            initialLicense={license}
+            trigger={
+              <Button size="mini" type="button" primary className="mb-5">
+                {i18next.t("Edit")}
+              </Button>
+            }
+            handleLicenseChange={handleLicenseChange}
+            serializeLicense={serializeLicense}
+          />
           <Button
             size="mini"
             type="button"
@@ -58,4 +76,7 @@ export const LicenseFieldItem = ({ license, fieldPath }) => {
 LicenseFieldItem.propTypes = {
   license: PropTypes.object.isRequired,
   fieldPath: PropTypes.string.isRequired,
+  searchConfig: PropTypes.object.isRequired,
+  handleLicenseChange: PropTypes.func.isRequired,
+  serializeLicense: PropTypes.func.isRequired,
 };
