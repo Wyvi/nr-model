@@ -1,7 +1,6 @@
 {#def metadata, search_link #}
-{% set metadata_dict = metadata | to_dict %}
-{% set creators = metadata_dict['creators'] if metadata_dict['creators']  else [] %}
-{% set contributors = metadata_dict['contributors'] if metadata_dict['contributors']  else [] %}
+{% set creators = metadata.creators if metadata.creators  else [] %}
+{% set contributors = metadata.contributors if metadata.contributors  else [] %}
 {% set all_creatibutors = creators + contributors %}
 
 {% if all_creatibutors %}
@@ -23,15 +22,17 @@
         <div class="ui double separated">
             <div role="list" class="ui horizontal separated creatibutors list">
                 {% for creatibutor in creators %}
-                    <Creatibutor creatibutor={creatibutor} search_link={search_link} searchFacet="syntheticFields_people"></Creatibutor>
+                    <Creatibutor creatibutor={creatibutor} search_link={search_link}></Creatibutor>
                 {% endfor %}
             </div>
             {% if contributors %}
                 <div class="double separator"></div>
                 <div role="list" class="ui horizontal separated creatibutors list">
-                    {% for fullName, matches in contributors | groupby('fullName') %}
-                        {% set roles = matches | map(attribute='role') | select('defined') | list %}
-                        <Creatibutor creatibutor={matches[0]} search_link={search_link} searchFacet="syntheticFields_people" roles={roles}></Creatibutor>
+                    {% for contributor in contributors%}
+                        {% if contributor.contributorType.title %}
+                            {% set role = contributor.contributorType.title %}
+                        {% endif %}
+                        <Creatibutor person={contributor} search_link={search_link} role={role}></Creatibutor>
                     {% endfor %}
                 </div>
             {% endif %}
