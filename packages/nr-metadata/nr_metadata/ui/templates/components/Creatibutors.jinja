@@ -26,13 +26,15 @@
                 {% endfor %}
             </div>
             {% if contributors %}
-                <div class="double separator"></div>
+                {% if creators %}
+                    <div class="double separator"></div>
+                {% endif %}
                 <div role="list" class="ui horizontal separated creatibutors list">
                     {% for contributor in contributors%}
                         {% if contributor.contributorType.title %}
                             {% set role = contributor.contributorType.title %}
                         {% endif %}
-                        <Creatibutor person={contributor} search_link={search_link} role={role}></Creatibutor>
+                        <Creatibutor creatibutor={contributor} search_link={search_link} role={role}></Creatibutor>
                     {% endfor %}
                 </div>
             {% endif %}
